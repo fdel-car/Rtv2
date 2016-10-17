@@ -1,0 +1,7 @@
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/kube/42homebrewfix/master/install.sh)"
+brew update
+brew install gtk+3
+# Paste the line below in your .zshrc #
+export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
+# Add `pkg-config --cflags gtk+-3.0` to create the objects
+# Add `pkg-config --libs gtk+-3.0` to link the lib
