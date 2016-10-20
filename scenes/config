@@ -42,7 +42,7 @@ scene
 			materiel
 			{
 				brillance:1,
-				reflection:1,
+				reflection:0.8,
 				transparence:0.4,
 				color:34;23;0,
 				texture:pierre.bmp
@@ -58,7 +58,7 @@ scene
 			materiel
 			{
 				brillance:0,
-				reflection:1,
+				reflection:1.0,
 				transparence:0,
 				color:45;125;255,
 				texture:NULL
