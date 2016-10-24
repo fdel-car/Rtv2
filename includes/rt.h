@@ -15,6 +15,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define SQ(x) ((x) * (x))
+# define NUM_THREAD 8
 
 # include <stdlib.h>
 # include <gtk/gtk.h>
@@ -24,5 +25,6 @@
 # include "types.h"
 # include "color.h"
 # include "parser.h"
+# include "raytracing.h"
 
 #endif

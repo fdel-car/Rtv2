@@ -24,15 +24,23 @@ t_mater load_material(char **t)
     return (new);
 }
 
+void set_func(t_obj *o)
+{
+	if (o->type == SPHERE)
+		o->func = &intersect_sphere;
+	if (o->type == PLANE)
+		o->func = &intersect_plane;
+}
+
 void    load_object(char **t)
 {
     t_obj *new;
     int     n;
 
-    n = 1;
     new = malloc(sizeof(t_obj));
+	new->next = NULL;
     new->name = ft_strdup(*t);
-    if (ft_sii(t[n], "{"))
+    if ((n = 1) && ft_sii(t[n], "{"))
       while (t[++n] && !ft_sii(t[n], "{"))
       {
         if (ft_sii(t[n], "pos:"))
@@ -41,13 +49,14 @@ void    load_object(char **t)
           new->dir = read_vec(get_after(t[n], "dir:"));
         if (ft_sii(t[n], "rayon:"))
           new->rayon = ft_atof(get_after(t[n], "rayon:"));
-        // if (ft_sii(t[n], "type:"))
-        //   new.type = get_type(get_after(t[n], "type:"));
+        if (ft_sii(t[n], "type:"))
+          new->type = get_type(get_after(t[n], "type:"));
         if (ft_sii(t[n], "normal:"))
-          new->norm = read_vec(get_after(t[n], "normal:"));
+          new->norm = vec_norm(read_vec(get_after(t[n], "normal:")));
         if (ft_sii(t[n], "materiel"))
           new->mater = load_material(&(t[n]));
       }
+	set_func(new);
     push_obj(new);
 }
 
@@ -58,6 +67,7 @@ void    load_light(char **t)
 
     n = 1;
     new = malloc(sizeof(t_light));
+	new->next = NULL;
     new->name = ft_strdup(*t);
     if (ft_sii(t[n], "{"))
       while (t[++n] && !ft_sii(t[n], "{"))

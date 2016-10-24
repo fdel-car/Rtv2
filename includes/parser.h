@@ -15,26 +15,22 @@
 
 # include <fcntl.h>
 
-//init elems
-t_mater   init_mater(void);
+t_mater		init_mater(void);
+char		*clean_line(char *s);
+void		load_file(char *scene_file);
+void		load_elems(char **t, unsigned char type);
+void		load_camera(char **t);
+int			ft_sii(char *s, char *e);
+char		*get_after(char *s, char *a);
+t_vect		read_vec(char *data);
+t_color		read_color(char *data);
+void		ctab_free(char **t);
+void		push_obj(t_obj *new);
+void		push_lgt(t_light *new);
+e_type		get_type(char *type);
 
-//utils
-char      *clean_line(char *s);
-
-void      load_file(char *scene_file);
-void      load_elems(char **t, unsigned char type);
-void      load_camera(char **t);
-int       ft_sii(char *s, char *e);// return if e is in s
-char      *get_after(char *s, char *a);//return the substring of s wich is after the substring a
-t_vect    read_vec(char *data);
-t_color   read_color(char *data);
-void      ctab_free(char **t);
-
-void      push_obj(t_obj *new);
-void      push_lgt(t_light *new);
-
-void       print_lgt();
-void       print_obj();
-
+// print
+void		print_lgt();
+void		print_obj();
 
 #endif

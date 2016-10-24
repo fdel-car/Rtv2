@@ -1,5 +1,17 @@
 # include "rt.h"
 
+e_type get_type(char *type)
+{
+	e_type t;
+
+	t = NONE;
+	!ft_strcmp(type, "sphere") ? t = SPHERE : 0;
+	!ft_strcmp(type, "cone") ? t = CONE : 0;
+	!ft_strcmp(type, "cylinder") ? t = CYLINDER : 0;
+	!ft_strcmp(type, "plane") ? t = PLANE : 0;
+	return (t);
+}
+
 t_color  read_color(char *data)
 {
   t_color new;

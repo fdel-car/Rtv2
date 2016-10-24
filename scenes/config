@@ -2,64 +2,56 @@ scene
 {
 	global_illumination:0
 	iter_reflection:2
+	name:test_scene
 	camera
 	{
-		pos:1;1;1
-		dir:1;1;1
+		position:1;1;1
+		direction:1;1;1
 	}
 	lights
 	{
 		light_1
 		{
-			pos:23;21;0
-			rayon:1
-			type:multi_dir
-			color:0;255;0
-			intensity:0.6
-			blur:0
-		}
-		light_2
-		{
-			pos:11;0;-2,
-			rayon:1.5,
-			type:single_dir
-			color:154;122;0
-			intensity:1.0
-			blur:1
+		pos:10;2;-6
+		rayon:2.0
+		type:multi_dir
+		color:0;0;255
+		intensity:0.4
+		blur:0
 		}
 	}
 	objects
 	{
 		sphere_1
 		{
-			type:sphere
 			pos:2;2;3
-			dir:NULL
+			direction:NULL
 			normal:NULL
-			rayon:2
+			rayon:4
+			type:sphere
 			materiel
 			{
 				brillance:1
 				reflection:0.8
 				transparence:0.4
-				color:34;23;0
+				color:155;155;0
 				texture:pierre.bmp
 			}
 		}
 		plan_1
 		{
-			type:plan
-			pos:5;2;4
-			dir:0;0;1
-			normal:2;0;0
-			rayon:NULL
+			pos:-2;-1;3
+			direction:NULL
+			normal:0;1;0
+			rayon:0
+			type:plane
 			materiel
 			{
-				brillance:0
-				reflection:1.0
-				transparence:0
-				color:45;125;255
-				texture:NULL
+				brillance:1
+				reflection:0.8
+				transparence:0.4
+				color:255;0;0
+				texture:pierre.bmp
 			}
 		}
 	}

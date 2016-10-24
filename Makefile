@@ -14,14 +14,9 @@ NAME = rtv2
 
 SRCS = $(shell find src -type f -name "*.c")
 
-OBJS = color.o\
-			elems.init.o\
-			main.o\
-			parse.elems.o\
-			push.elems.o\
-			parse.file.o\
-			parse.utils.o\
-			print.elems.o
+OBJS =	color.o elems.init.o main.o parse.elems.o push.elems.o parse.file.o \
+		parse.utils.o print.elems.o vector.o vector2.o vector3.o intersect.o \
+		raytracing.o get_norm.o
 
 CFLAGS = -Wall -Wextra -Werror
 

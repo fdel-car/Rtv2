@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   get_norm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/24 15:41:29 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/24 15:41:32 by fdel-car         ###   ########.fr       */
+/*   Created: 2016/10/24 15:35:21 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/10/24 15:35:23 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "rt.h"
 
-t_vect		vec_new(float x, float y, float z);
-t_color		color_new(int r, int g, int b);
-t_color		color_mult(t_color color, float value);
-t_color		color_add(t_color u, t_color v);
-t_color		color_sub(t_color u, t_color v);
+t_vect		get_norm(t_data ray)
+{
+	t_vect n;
 
-#endif
+	n = vec_new(0, 0, 0);
+	if (ray.obj_hit->type == SPHERE)
+		n = vec_norm(vec_sub(ray.hit_point, ray.obj_hit->pos));
+	if (ray.obj_hit->type == PLANE)
+		n = ray.obj_hit->norm;//vec_sub(ray.obj_hit->dir, ray.obj_hit->dir);
+	return (n);
+}

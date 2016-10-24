@@ -10,7 +10,8 @@ void print_obj()
   {
     printf("name: %s\n", c->name);
     printf("pos: %f %f %f\n", c->pos.x, c->pos.y, c->pos.z);
-    printf("----\n");
+    printf("rayon: %f\n", c->rayon);
+	printf("color: %d %d %d\n", c->mater.color.r, c->mater.color.g, c->mater.color.b);
 
     c = c->next;
   }
