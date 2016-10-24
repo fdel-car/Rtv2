@@ -22,7 +22,6 @@ void	put_pixel(int x, int y, t_color color)
 	g_env.pixels[pos + 2] = color.b;
 }
 
-
 void	launch_thread(void)
 {
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);
@@ -59,6 +58,9 @@ int		main(int argc, char **argv)
 		g_env.limits[iter] = x_column * iter;
 		iter++;
 	}
+	// probleme au parsing de la pos de la camera
+	// printf("pos :%f, %f, %f\n", g_env.scene.cam.pos.x, g_env.scene.cam.pos.y, g_env.scene.cam.pos.z);
+	g_env.scene.cam.pos = vec_new(0, 0, -10);
 	init_view();
 	g_env.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(g_env.win), "Raytracer");

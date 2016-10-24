@@ -5,8 +5,8 @@ scene
 	name:test_scene
 	camera
 	{
-		position:1;1;1
-		direction:1;1;1
+		pos:0;1;0
+		dir:0.6;0.2;1
 	}
 	lights
 	{
@@ -24,7 +24,7 @@ scene
 	{
 		sphere_1
 		{
-			pos:2;2;3
+			pos:2;3;3
 			direction:NULL
 			normal:NULL
 			rayon:4
@@ -40,7 +40,7 @@ scene
 		}
 		plan_1
 		{
-			pos:-2;-1;3
+			pos:0;-1;3
 			direction:NULL
 			normal:0;1;0
 			rayon:0

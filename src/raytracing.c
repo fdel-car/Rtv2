@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raytracing.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/10/24 17:53:13 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 t_data	intersect_obj(t_data ray)
@@ -21,22 +33,17 @@ t_data	intersect_obj(t_data ray)
 	return (ray);
 }
 
-void	init_view()
+void	init_view(void)
 {
-	t_vect look_at;
-
-	g_env.scene.cam.pos = vec_new(0, 0, -10);
-	look_at = vec_new(0, 0, 10);
 	g_env.scene.cam.up = vec_new(0, 1, 0);
 	g_env.scene.cam.view_d = 1.5;
 	g_env.scene.cam.view_h = 1.4;
 	g_env.scene.cam.view_w = 2.4;
-	g_env.scene.cam.dir = vec_norm(vec_sub(look_at, g_env.scene.cam.pos));
 	g_env.scene.cam.x_ind = g_env.scene.cam.view_w / (float)WIDTH;
 	g_env.scene.cam.y_ind = g_env.scene.cam.view_h / (float)HEIGHT;
 }
 
-t_color compute_light(t_data ray)
+t_color	compute_light(t_data ray)
 {
 	t_color c;
 	t_color cl;
