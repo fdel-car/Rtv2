@@ -12,14 +12,10 @@
 
 #include "rt.h"
 
-t_vect		get_norm(t_data ray)
+void	get_norm(t_data *ray)
 {
-	t_vect n;
-
-	n = vec_new(0, 0, 0);
-	if (ray.obj_hit->type == SPHERE)
-		n = vec_norm(vec_sub(ray.hit_point, ray.obj_hit->pos));
-	if (ray.obj_hit->type == PLANE)
-		n = ray.obj_hit->norm;//vec_sub(ray.obj_hit->dir, ray.obj_hit->dir);
-	return (n);
+	if ((ray->obj_hit)->type == SPHERE)
+		ray->norm = vec_norm(vec_sub(ray->hit_point, (ray->obj_hit)->pos));
+	if ((ray->obj_hit)->type == PLANE)
+		ray->norm = (ray->obj_hit)->norm;
 }

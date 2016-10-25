@@ -5,18 +5,27 @@ scene
 	name:test_scene
 	camera
 	{
-		pos:0;1;0
-		dir:0.6;0.2;1
+		pos:10;0;-10
+		dir:-1;0;3
 	}
 	lights
 	{
 		light_1
 		{
-		pos:10;2;-6
+		pos:-4;0;-12
 		rayon:2.0
 		type:multi_dir
 		color:0;0;255
 		intensity:0.4
+		blur:0
+		}
+		light_1
+		{
+		pos:16;0;-12
+		rayon:2.0
+		type:multi_dir
+		color:255;55;0
+		intensity:0.2
 		blur:0
 		}
 	}
@@ -24,34 +33,64 @@ scene
 	{
 		sphere_1
 		{
-			pos:2;3;3
+			pos:2;-4;12
 			direction:NULL
 			normal:NULL
 			rayon:4
 			type:sphere
 			materiel
 			{
-				brillance:1
+				brillance:42
 				reflection:0.8
 				transparence:0.4
-				color:155;155;0
-				texture:pierre.bmp
+				color:155;155;155
+				texture:NULL
+			}
+		}
+		sphere_2
+		{
+			pos:0;-4;10
+			direction:NULL
+			normal:NULL
+			rayon:3
+			type:sphere
+			materiel
+			{
+				brillance:82
+				reflection:0.8
+				transparence:0.4
+				color:0;255;0
+				texture:NULL
 			}
 		}
 		plan_1
 		{
-			pos:0;-1;3
+			pos:0;0;20
+			direction:NULL
+			normal:0;0;-1
+			rayon:0
+			type:plane
+			materiel
+			{
+				reflection:0.8
+				transparence:0.4
+				color:125;55;125
+				texture:NULL
+			}
+		}
+		plan_2
+		{
+			pos:0;-6;0
 			direction:NULL
 			normal:0;1;0
 			rayon:0
 			type:plane
 			materiel
 			{
-				brillance:1
 				reflection:0.8
 				transparence:0.4
-				color:255;0;0
-				texture:pierre.bmp
+				color:255;255;255
+				texture:NULL
 			}
 		}
 	}

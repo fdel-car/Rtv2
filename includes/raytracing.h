@@ -25,11 +25,11 @@ t_vect		rot_x(float theta, t_vect u);
 t_vect		rot_y(float theta, t_vect u);
 t_vect		rot_z(float theta, t_vect u);
 t_vect		rot_any(t_vect u, t_vect a, float theta);
-t_vect		get_norm(t_data ray);
-float		dotp_vec_norm(t_vect u, t_vect v);
+float		vec_dotp(t_vect u, t_vect v);
 float		dist_p(t_vect u, t_vect v);
 void		*raytracing(void *arg);
 void		put_pixel(int x, int y, t_color color);
+void		get_norm(t_data *ray);
 void		init_view();
 
 #endif

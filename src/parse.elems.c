@@ -23,7 +23,7 @@ t_mater	load_material(char **t)
 		while (t[++n] && !ft_sii(t[n], "{"))
 		{
 			if (ft_sii(t[n], "brillance:"))
-				new.shiny = ft_atoi(get_after(t[n], "brillance:"));
+				new.shiny = ft_atof(get_after(t[n], "brillance:"));
 			if (ft_sii(t[n], "reflection:"))
 				new.int_refl = ft_atof(get_after(t[n], "reflection:"));
 			if (ft_sii(t[n], "transparence:"))

@@ -38,8 +38,8 @@ float	intersect_plane(t_obj *obj, t_data ray)
 {
 	float solut;
 
-	solut = -dotp_vec_norm(vec_sub(ray.orig, obj->pos), obj->norm) /
-	dotp_vec_norm(obj->norm, ray.dir);
+	solut = -vec_dotp(vec_sub(ray.orig, obj->pos), obj->norm) /
+	vec_dotp(obj->norm, ray.dir);
 	if (solut > 0)
 		return (solut);
 	return (-1);

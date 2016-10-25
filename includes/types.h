@@ -45,7 +45,7 @@ typedef struct		s_cam
 
 typedef struct		s_mater
 {
-	gboolean		shiny;
+	float			shiny;
 	float			int_refl;
 	float			int_trans;
 	t_color			color;

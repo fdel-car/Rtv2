@@ -43,26 +43,61 @@ void	init_view(void)
 	g_env.scene.cam.y_ind = g_env.scene.cam.view_h / (float)HEIGHT;
 }
 
-t_color	compute_light(t_data ray)
+t_color	diffuse_lighting(t_data *ray)
 {
-	t_color c;
-	t_color cl;
+	t_color	c;
 	t_light	*l;
 	t_vect	light;
 	float	cos;
 
-	// return ((ray.obj_hit)->mater.color);
-	c = color_new(0, 0, 0);
-	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	l = g_env.scene.lgt;
-	ray.norm = get_norm(ray);
-	light = vec_norm(vec_sub(l->pos, ray.hit_point));
-	cos = dotp_vec_norm(light, ray.norm);
-	cl = color_mult(l->color, l->intensity);
-	if (cos > 0)
-		c = color_mult((ray.obj_hit)->mater.color, cos);
-	c = color_add(c, color_mult((ray.obj_hit)->mater.color, 0.2));
-	// c = color_mult(color_add(c, cl), 0.5);
+	c = color_mult((ray->obj_hit)->mater.color, 0.15);
+	ray->hit_point = vec_add(ray->orig, vec_mult(ray->dir, ray->solut));
+	get_norm(ray);
+	while (l)
+	{
+		light = vec_norm(vec_sub(l->pos, ray->hit_point));
+		cos = vec_dotp(light, ray->norm);
+		if (cos > 0)
+		{
+			c = color_add(color_add(c, color_mult(l->color, l->intensity * cos))
+			, color_mult((ray->obj_hit)->mater.color, l->intensity * cos));
+		}
+		l = l->next;
+	}
+	return (c);
+}
+
+t_color	specular_lighting(t_data *ray)
+{
+	t_color	c;
+	t_light	*l;
+	t_vect	light;
+	t_vect	refl;
+
+	c = color_new(0, 0 ,0);
+	l = g_env.scene.lgt;
+	while (l)
+	{
+		light = vec_norm(vec_sub(l->pos, ray->hit_point));
+		refl = vec_norm(vec_sub(vec_mult(vec_mult(ray->norm,
+		vec_dotp(ray->norm, light)), 2.0), light));
+		if (vec_dotp(light, refl) > 0 && (ray->obj_hit)->type != PLANE)
+		{
+			c = color_add(c, color_mult(l->color,
+			powf(vec_dotp(light, refl), (ray->obj_hit)->mater.shiny)));
+		}
+		l = l->next;
+	}
+	return (c);
+}
+
+t_color	compute_light(t_data ray)
+{
+	t_color c;
+
+	c = diffuse_lighting(&ray);
+	c = color_add(c, specular_lighting(&ray));
 	return (c);
 }
 

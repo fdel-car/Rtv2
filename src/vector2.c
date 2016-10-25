@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-float	dotp_vec_norm(t_vect u, t_vect v)
+float	vec_dotp(t_vect u, t_vect v)
 {
 	float ret;
 
