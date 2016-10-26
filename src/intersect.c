@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/08/21 14:33:10 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:56:11 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 		t1 = (-b + delta) / (2.0 * a);
 		t2 = (-b - delta) / (2.0 * a);
 		solut = t1 > t2 ? t2 : t1;
-		if (solut > 0.0)
+		if (solut > EPSILON)
 			return (solut);
 	}
 	return (-1);
@@ -40,7 +40,7 @@ float	intersect_plane(t_obj *obj, t_data ray)
 
 	solut = -vec_dotp(vec_sub(ray.orig, obj->pos), obj->norm) /
 	vec_dotp(obj->norm, ray.dir);
-	if (solut > 0)
+	if (solut > EPSILON)
 		return (solut);
 	return (-1);
 }

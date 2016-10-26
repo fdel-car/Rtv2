@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/24 15:43:12 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:59:29 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYTRACING_H
 # define RAYTRACING_H
+# define EPSILON 0.001
 
 float		intersect_sphere(t_obj *obj, t_data ray);
 float		intersect_plane(t_obj *obj, t_data ray);
