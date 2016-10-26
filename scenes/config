@@ -5,18 +5,18 @@ scene
 	name:test_scene
 	camera
 	{
-		pos:10;0;-10
-		dir:-1;0;3
+		pos:0;0;-10
+		dir:0;0;1
 	}
 	lights
 	{
-		light_1
+		light_2
 		{
-		pos:14;0;-12
+		pos:-4;2;-12
 		rayon:2.0
 		type:multi_dir
-		color:250;250;0
-		intensity:0.4
+		color:255;0;0
+		intensity:0.2
 		blur:0
 		}
 		light_2
@@ -24,8 +24,8 @@ scene
 		pos:16;0;-12
 		rayon:2.0
 		type:multi_dir
-		color:255;55;250
-		intensity:0.2
+		color:0;55;250
+		intensity:0.6
 		blur:0
 		}
 	}
@@ -43,7 +43,7 @@ scene
 				brillance:42
 				reflection:0.8
 				transparence:0.4
-				color:155;155;155
+				color:155;155;0
 				texture:NULL
 			}
 		}
@@ -59,7 +59,7 @@ scene
 				brillance:82
 				reflection:0.8
 				transparence:0.4
-				color:0;255;0
+				color:0;155;0
 				texture:NULL
 			}
 		}
@@ -74,7 +74,7 @@ scene
 			{
 				reflection:0.8
 				transparence:0.4
-				color:125;55;125
+				color:125;125;125
 				texture:NULL
 			}
 		}

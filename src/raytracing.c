@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-t_data	intersect_obj(t_data ray)
+t_data		intersect_obj(t_data ray)
 {
 	t_obj	*obj;
 	float	tmp;
@@ -33,7 +33,7 @@ t_data	intersect_obj(t_data ray)
 	return (ray);
 }
 
-void	init_view(void)
+void		init_view(void)
 {
 	g_env.scene.cam.up = vec_new(0, 1, 0);
 	g_env.scene.cam.view_d = 1.5;
@@ -43,15 +43,14 @@ void	init_view(void)
 	g_env.scene.cam.y_ind = g_env.scene.cam.view_h / (float)HEIGHT;
 }
 
-t_color	diffuse_lighting(t_data *ray, t_light *l)
+t_color		diffuse_lighting(t_data *ray, t_light *l)
 {
 	t_color	c;
-	t_vect	light;
 	float	cos;
 
-	c = color_new(0, 0 ,0);
-	light = vec_norm(vec_sub(l->pos, ray->hit_point));
-	cos = vec_dotp(light, ray->norm);
+	c = color_new(0, 0, 0);
+	ray->light = vec_norm(vec_sub(l->pos, ray->hit_point));
+	cos = vec_dotp(ray->light, ray->norm);
 	if (cos > 0)
 	{
 		c = color_add(color_add(c, color_mult(l->color, l->intensity * cos))
@@ -60,20 +59,17 @@ t_color	diffuse_lighting(t_data *ray, t_light *l)
 	return (c);
 }
 
-t_color	specular_lighting(t_data *ray, t_light	*l)
+t_color		specular_lighting(t_data *ray, t_light *l)
 {
 	t_color	c;
-	t_vect	light;
-	t_vect	refl;
 
-	c = color_new(0, 0 ,0);
-	light = vec_norm(vec_sub(l->pos, ray->hit_point));
-	refl = vec_norm(vec_sub(vec_mult(vec_mult(ray->norm,
-	vec_dotp(ray->norm, light)), 2.0), light));
-	if (vec_dotp(light, refl) > 0 && (ray->obj_hit)->type != PLANE)
+	c = color_new(0, 0, 0);
+	ray->refl = vec_norm(vec_sub(vec_mult(vec_mult(ray->norm,
+	vec_dotp(ray->norm, ray->light)), 2.0), ray->light));
+	if (vec_dotp(ray->light, ray->refl) > 0 && (ray->obj_hit)->type != PLANE)
 	{
 		c = color_add(c, color_mult(l->color,
-		powf(vec_dotp(light, refl), (ray->obj_hit)->mater.shiny)));
+		powf(vec_dotp(ray->light, ray->refl), (ray->obj_hit)->mater.shiny)));
 	}
 	return (c);
 }
@@ -94,14 +90,14 @@ gboolean	is_shadowed(t_light *l, t_data *ray)
 	return (TRUE);
 }
 
-t_color	compute_light(t_data ray)
+t_color		compute_light(t_data ray)
 {
-	t_color c;
-	t_light *l;
-	gboolean sh;
+	t_color		c;
+	t_light		*l;
+	gboolean	sh;
 
 	l = g_env.scene.lgt;
-	c = color_mult(ray.obj_hit->mater.color, 0.2);
+	c = color_mult(ray.obj_hit->mater.color, 0.15);
 	while (l)
 	{
 		sh = is_shadowed(l, &ray);
@@ -112,11 +108,10 @@ t_color	compute_light(t_data ray)
 		}
 		l = l->next;
 	}
-	// c = color_mult(c, 1 / (float)i);
 	return (c);
 }
 
-void	render_ray(t_data ray, int x, int y)
+void		render_ray(t_data ray, int x, int y)
 {
 	t_color color;
 
@@ -129,7 +124,7 @@ void	render_ray(t_data ray, int x, int y)
 		put_pixel(x, y, color_new(0, 0, 0));
 }
 
-void	*raytracing(void *arg)
+void		*raytracing(void *arg)
 {
 	int		*tmp;
 	int		x, x_max, y;

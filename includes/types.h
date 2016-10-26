@@ -61,6 +61,8 @@ typedef struct		s_data
 	t_vect			dir;
 	t_vect			orig;
 	t_vect			norm;
+	t_vect			light;
+	t_vect			refl;
 }					t_data;
 
 typedef struct		s_obj
