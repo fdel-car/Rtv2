@@ -16,19 +16,34 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 	return (c);
 }
 
-t_color		cast_reflection(t_data *ray)
+t_color		reflection_lighting(t_data *ray)
 {
+	t_data	refl;
 	t_color	c;
-	t_data rfl;
 
 	c = color_new(0, 0, 0);
-	rfl.orig = ray->hit_point;
-	rfl.dir = vec_mult(ray->norm, -2.0 * vec_dotp(ray->dir, ray->norm));
-	rfl.dir = vec_add(ray->dir, rfl.dir);
-	if (g_env.scene.iter_refl-- > 0)
-		c = render_ray(intersect_obj(rfl));
+	refl.dir = vec_mult(ray->norm, -2.0 * vec_dotp(ray->dir, ray->norm));
+	refl.dir = vec_add(ray->dir, refl.dir);
+	refl.orig = ray->hit_point;
+	refl = intersect_obj(refl);
+	if (refl.solut != -1)
+		c = color_mult(refl.obj_hit->mater.color, 0.2);
 	return (c);
 }
+
+// t_color		cast_reflection(t_data *ray)
+// {
+// 	t_color	c;
+// 	t_data rfl;
+//
+// 	c = color_new(0, 0, 0);
+// 	rfl.orig = ray->hit_point;
+// 	rfl.dir = vec_mult(ray->norm, -2.0 * vec_dotp(ray->dir, ray->norm));
+// 	rfl.dir = vec_add(ray->dir, rfl.dir);
+// 	if (g_env.scene.iter_refl-- > 0)
+// 		c = render_ray(intersect_obj(rfl));
+// 	return (c);
+// }
 
 t_color		specular_lighting(t_data *ray, t_light *l)
 {
@@ -72,8 +87,8 @@ t_color		compute_light(t_data ray)
 	while (l)
 	{
 		sh = is_shadowed(l, &ray);
-		// if (ray.obj_hit->mater.int_refl > 0)
-		// 	c = color_add(c, cast_reflection(&ray));
+		if (ray.obj_hit->mater.int_refl > 0)
+			c = color_add(c, reflection_lighting(&ray));
 		if (sh != FALSE)
 		{
 			c = color_add(c, diffuse_lighting(&ray, l));
