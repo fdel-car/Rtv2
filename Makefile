@@ -6,7 +6,7 @@
 #    By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/28 17:56:29 by fdel-car          #+#    #+#              #
-#    Updated: 2016/10/22 16:32:26 by vde-la-s         ###   ########.fr        #
+#    Updated: 2016/10/28 12:02:24 by vde-la-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = $(shell find src -type f -name "*.c")
 
 OBJS =	color.o elems.init.o main.o parse.elems.o push.elems.o parse.file.o \
 		parse.utils.o print.elems.o vector.o vector2.o vector3.o intersect.o \
-		raytracing.o get_norm.o
+		raytracing.o get_norm.o render.ray.o
 
 CFLAGS = -Wall -Wextra -Werror
 
