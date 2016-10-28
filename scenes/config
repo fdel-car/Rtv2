@@ -12,19 +12,19 @@ scene
 	{
 		light_2
 		{
-		pos:-4;2;-12
+		pos:-4;13;-12
 		rayon:2.0
 		type:multi_dir
-		color:255;0;0
+		color:130;130;130
 		intensity:0.2
 		blur:0
 		}
 		light_2
 		{
-		pos:16;0;-12
+		pos:4;13;-12
 		rayon:2.0
 		type:multi_dir
-		color:0;55;250
+		color:130;130;130
 		intensity:0.6
 		blur:0
 		}
@@ -33,23 +33,23 @@ scene
 	{
 		sphere_1
 		{
-			pos:4;-1;12
+			pos:5;-1;12
 			direction:NULL
 			normal:NULL
-			rayon:4
+			rayon:3
 			type:sphere
 			materiel
 			{
 				brillance:42
-				reflection:0.8
+				reflection:1
 				transparence:0.4
-				color:155;155;0
+				color:0;198;9
 				texture:NULL
 			}
 		}
 		sphere_2
 		{
-			pos:-5;-1;10
+			pos:0;-4;16
 			direction:NULL
 			normal:NULL
 			rayon:3
@@ -57,24 +57,41 @@ scene
 			materiel
 			{
 				brillance:82
-				reflection:0.8
+				reflection:0.5
 				transparence:0.4
-				color:0;155;0
+				color:0;149;198
 				texture:NULL
 			}
 		}
-		plan_1
+		sphere_2
 		{
-			pos:0;0;20
+			pos:0;4;16
 			direction:NULL
-			normal:0;0;-1
-			rayon:0
-			type:plane
+			normal:NULL
+			rayon:3
+			type:sphere
 			materiel
 			{
-				reflection:0.8
+				brillance:82
+				reflection:0.5
 				transparence:0.4
-				color:125;125;125
+				color:198;192;0
+				texture:NULL
+			}
+		}
+		sphere_3
+		{
+			pos:-5;-1;12
+			direction:NULL
+			normal:NULL
+			rayon:3
+			type:sphere
+			materiel
+			{
+				brillance:42
+				reflection:1
+				transparence:0.4
+				color:198;0;0
 				texture:NULL
 			}
 		}
@@ -87,9 +104,9 @@ scene
 			type:plane
 			materiel
 			{
-				reflection:0.8
+				reflection:0.4
 				transparence:0.4
-				color:255;255;255
+				color:73;0;76
 				texture:NULL
 			}
 		}

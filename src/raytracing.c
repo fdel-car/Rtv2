@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/28 12:54:27 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:51:36 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ void		*raytracing(void *arg)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			g_env.scene.iter_refl = 1;
 			view_point = vec_sub(vec_add(g_env.scene.cam.up_left,
 			vec_mult(g_env.scene.cam.right,
 			g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
 			g_env.scene.cam.y_ind * y));
 			ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
-			put_pixel(x, y, render_ray(intersect_obj(ray)));
+			put_pixel(x, y, render_ray(intersect_obj(ray), g_env.scene.iter_refl));
 			y++;
 		}
 		x++;

@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/28 12:12:36 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:52:34 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 # define EPSILON 0.001
 
 t_data		intersect_obj(t_data ray);
-t_color		render_ray(t_data ray);
+t_color		render_ray(t_data ray, int r_max);
 float		intersect_sphere(t_obj *obj, t_data ray);
 float		intersect_plane(t_obj *obj, t_data ray);
-t_color		compute_light(t_data ray);
+t_color		compute_light(t_data ray, int r_max);
 t_vect		vec_new(float x, float y, float z);
 t_vect		cross_pr(t_vect u, t_vect v);
 t_vect		vec_mult(t_vect u, float value);
