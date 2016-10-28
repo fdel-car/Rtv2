@@ -68,15 +68,15 @@ t_color		compute_light(t_data ray)
 	return (c);
 }
 
-void		render_ray(t_data ray, int x, int y)
+t_color		render_ray(t_data ray)
 {
 	t_color color;
 
 	if (ray.solut != -1 && ray.obj_hit)
 	{
 		color = compute_light(ray);
-		put_pixel(x, y, color);
 	}
 	else
-		put_pixel(x, y, color_new(0, 0, 0));
+		color = color_new(0, 0, 0);
+	return (color);
 }
