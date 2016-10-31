@@ -64,7 +64,7 @@ void		*raytracing(void *arg)
 			g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
 			g_env.scene.cam.y_ind * y));
 			ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
-			put_pixel(x, y, render_ray(intersect_obj(ray), g_env.scene.iter_refl));
+			put_pixel(x, y, render_ray(intersect_obj(ray)));
 			y++;
 		}
 		x++;

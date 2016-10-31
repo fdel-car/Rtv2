@@ -1,7 +1,7 @@
 scene
 {
 	global_illumination:0
-	iter_reflection:2
+	iter_reflection:4
 	name:test_scene
 	camera
 	{
@@ -40,9 +40,9 @@ scene
 			type:sphere
 			materiel
 			{
-				brillance:42
+				brillance:0
 				reflection:1
-				transparence:0.4
+				transparence:0.6
 				color:0;198;9
 				texture:NULL
 			}
@@ -57,7 +57,7 @@ scene
 			materiel
 			{
 				brillance:82
-				reflection:0.5
+				reflection:0
 				transparence:0.4
 				color:0;149;198
 				texture:NULL
@@ -72,9 +72,9 @@ scene
 			type:sphere
 			materiel
 			{
-				brillance:0
-				reflection:0.8
-				transparence:0.4
+				brillance:82
+				reflection:1
+				transparence:0.6
 				color:198;192;0
 				texture:NULL
 			}
@@ -88,8 +88,8 @@ scene
 			type:sphere
 			materiel
 			{
-				brillance:42
-				reflection:1
+				brillance:0
+				reflection:0
 				transparence:0.4
 				color:198;0;0
 				texture:NULL
@@ -104,7 +104,7 @@ scene
 			type:plane
 			materiel
 			{
-				reflection:0.4
+				reflection:1
 				transparence:0.4
 				color:73;0;76
 				texture:NULL
