@@ -22,6 +22,7 @@ void	print_obj(void)
 	{
 		printf("name: %s\n", c->name);
 		printf("pos: %f %f %f\n", c->pos.x, c->pos.y, c->pos.z);
+		printf("dir: %f %f %f\n", c->dir.x, c->dir.y, c->dir.z);
 		printf("rayon: %f\n", c->rayon);
 		printf("color: %d %d %d\n", c->mater.color.r, c->mater.color.g,
 		c->mater.color.b);

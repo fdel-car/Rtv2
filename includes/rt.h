@@ -12,8 +12,8 @@
 
 #ifndef RT_H
 # define RT_H
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 720
+# define HEIGHT 480
 # define SQ(x) ((x) * (x))
 # define NUM_THREAD 8
 

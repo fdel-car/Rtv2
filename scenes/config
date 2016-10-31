@@ -34,7 +34,7 @@ scene
 		sphere_1
 		{
 			pos:5;-1;12
-			direction:NULL
+			dir:NULL
 			normal:NULL
 			rayon:3
 			type:sphere
@@ -50,7 +50,7 @@ scene
 		sphere_2
 		{
 			pos:0;-4;16
-			direction:NULL
+			dir:NULL
 			normal:NULL
 			rayon:3
 			type:sphere
@@ -63,26 +63,26 @@ scene
 				texture:NULL
 			}
 		}
-		sphere_2
+		sphere_3
 		{
 			pos:0;4;16
-			direction:NULL
+			dir:NULL
 			normal:NULL
 			rayon:3
 			type:sphere
 			materiel
 			{
-				brillance:82
-				reflection:0.5
+				brillance:0
+				reflection:0.8
 				transparence:0.4
 				color:198;192;0
 				texture:NULL
 			}
 		}
-		sphere_3
+		sphere_4
 		{
 			pos:-5;-1;12
-			direction:NULL
+			dir:NULL
 			normal:NULL
 			rayon:3
 			type:sphere
@@ -95,10 +95,10 @@ scene
 				texture:NULL
 			}
 		}
-		plan_2
+		plan_1
 		{
 			pos:0;-6;0
-			direction:NULL
+			dir:NULL
 			normal:0;1;0
 			rayon:0
 			type:plane
@@ -107,6 +107,38 @@ scene
 				reflection:0.4
 				transparence:0.4
 				color:73;0;76
+				texture:NULL
+			}
+		}
+		cylinder_1
+		{
+			pos:0;2;18
+			dir:4;1;1
+			normal:NULL
+			rayon:2
+			type:cylinder
+			materiel
+			{
+				brillance:102
+				reflection:0.4
+				transparence:0.4
+				color:205;150;0
+				texture:NULL
+			}
+		}
+		cylinder_2
+		{
+			pos:16;0;12
+			dir:-1;8;-1
+			normal:NULL
+			rayon:3
+			type:cylinder
+			materiel
+			{
+				brillance:102
+				reflection:0.4
+				transparence:0.4
+				color:0;88;166
 				texture:NULL
 			}
 		}

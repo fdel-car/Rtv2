@@ -42,6 +42,8 @@ void	set_func(t_obj *o)
 		o->func = &intersect_sphere;
 	if (o->type == PLANE)
 		o->func = &intersect_plane;
+	if (o->type == CYLINDER)
+		o->func = &intersect_cylinder;
 }
 
 void	load_object(char **t)
@@ -58,7 +60,7 @@ void	load_object(char **t)
 			if (ft_sii(t[n], "pos:"))
 				new->pos = read_vec(get_after(t[n], "pos:"));
 			if (ft_sii(t[n], "dir:"))
-				new->dir = read_vec(get_after(t[n], "dir:"));
+				new->dir = vec_norm(read_vec(get_after(t[n], "dir:")));
 			if (ft_sii(t[n], "rayon:"))
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
 			if (ft_sii(t[n], "type:"))

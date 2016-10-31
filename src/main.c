@@ -43,6 +43,7 @@ void	launch_thread(void)
 		pthread_join(g_env.thread[g_env.id_thread], NULL);
 		g_env.id_thread++;
 	}
+	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
 }
 
 int		main(int argc, char **argv)
@@ -64,8 +65,8 @@ int		main(int argc, char **argv)
 	gtk_window_set_position(GTK_WINDOW(g_env.win), GTK_WIN_POS_CENTER);
 	g_signal_connect(G_OBJECT(g_env.win), "delete-event",
 	G_CALLBACK(gtk_main_quit), NULL);
-	g_signal_connect(G_OBJECT(g_env.win), "key_press_event",
-	G_CALLBACK(launch_thread), NULL);
+	g_signal_connect(G_OBJECT(g_env.win), "key-press-event",
+	G_CALLBACK(key_event), NULL);
 	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
 	g_env.img = gtk_image_new_from_pixbuf(g_env.pix);
 	g_env.box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);

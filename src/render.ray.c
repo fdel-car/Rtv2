@@ -39,7 +39,7 @@ t_color		specular_lighting(t_data *ray, t_light *l)
 	c = color_new(0, 0, 0);
 	ray->refl = vec_norm(vec_sub(vec_mult(vec_mult(ray->norm,
 	vec_dotp(ray->norm, ray->light)), 2.0), ray->light));
-	if (vec_dotp(ray->light, ray->refl) > 0 && (ray->obj_hit)->type != PLANE)
+	if (vec_dotp(ray->light, ray->refl) > 0 && (ray->obj_hit)->mater.shiny != 0)
 	{
 		c = color_add(c, color_mult(l->color,
 		powf(vec_dotp(ray->light, ray->refl), (ray->obj_hit)->mater.shiny)));
