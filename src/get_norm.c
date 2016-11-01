@@ -28,6 +28,27 @@ void	norm_cylinder(t_data *ray)
 	ray->norm = vec_norm(ray->norm);
 }
 
+void	norm_cone(t_data *ray)
+{
+	float	t;
+	float	beta;
+	t_vect	dir;
+
+	dir = (ray->obj_hit)->dir;
+	beta = vec_dotp(vec_norm(vec_sub(ray->hit_point, (ray->obj_hit)->pos)), dir);
+	if ((acos(beta) * 180.0 / M_PI) > 90.0)
+	{
+		dir = vec_mult(dir, -1);
+		beta = vec_dotp(vec_norm(vec_sub(ray->hit_point, (ray->obj_hit)->pos)),
+		dir);
+	}
+	t = (dist_p((ray->obj_hit)->pos, ray->hit_point) * sin(beta)) / sin(1.5708 +
+	beta);
+	dir = vec_mult(dir, t);
+	dir = vec_add((ray->obj_hit)->pos, dir);
+	ray->norm = vec_norm(vec_sub(ray->hit_point, dir));
+}
+
 void	get_norm(t_data *ray)
 {
 	if ((ray->obj_hit)->type == SPHERE)
@@ -36,4 +57,6 @@ void	get_norm(t_data *ray)
 		ray->norm = (ray->obj_hit)->norm;
 	if ((ray->obj_hit)->type == CYLINDER)
 		norm_cylinder(ray);
+	if ((ray->obj_hit)->type == CONE)
+		norm_cone(ray);
 }

@@ -1,11 +1,11 @@
 scene
 {
 	global_illumination:0
-	iter_reflection:4
+	iter_reflection:2
 	name:test_scene
 	camera
 	{
-		pos:0;0;-10
+		pos:0;0;-20
 		dir:0;0;1
 	}
 	lights
@@ -132,6 +132,7 @@ scene
 			dir:-1;8;-1
 			normal:NULL
 			rayon:3
+			alpha:0
 			type:cylinder
 			materiel
 			{
@@ -139,6 +140,23 @@ scene
 				reflection:0.4
 				transparence:0.4
 				color:0;88;166
+				texture:NULL
+			}
+		}
+		cone_1
+		{
+			pos:-10;2;14
+			dir:0;2;1
+			normal:NULL
+			rayon:0
+			alpha:30
+			type:cone
+			materiel
+			{
+				brillance:102
+				reflection:0.4
+				transparence:0.4
+				color:155;126;125
 				texture:NULL
 			}
 		}

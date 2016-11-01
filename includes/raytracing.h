@@ -12,13 +12,14 @@
 
 #ifndef RAYTRACING_H
 # define RAYTRACING_H
-# define EPSILON 0.001
+# define EPSILON 0.01
 
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
 t_data		intersect_obj(t_data ray);
 t_color		render_ray(t_data ray);
 float		intersect_sphere(t_obj *obj, t_data ray);
 float		intersect_cylinder(t_obj *obj, t_data ray);
+float		intersect_cone(t_obj *obj, t_data ray);
 float		intersect_plane(t_obj *obj, t_data ray);
 t_color		compute_light(t_data ray, int r_max);
 t_vect		vec_new(float x, float y, float z);

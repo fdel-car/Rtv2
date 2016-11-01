@@ -73,6 +73,7 @@ typedef struct		s_obj
 	t_vect			dir;
 	t_vect			norm;
 	float			rayon;
+	float			alpha;
 	t_mater			mater;
 	float			(*func)(struct s_obj *obj, t_data ray);
 	void			*next;

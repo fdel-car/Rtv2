@@ -34,6 +34,10 @@ void		rotate_cam(int keyval)
 		g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir,
 		g_env.scene.cam.right);
 	}
+	if (keyval == 65451)
+		g_env.scene.iter_refl++;
+	if (keyval == 65453 && g_env.scene.iter_refl > 0)
+		g_env.scene.iter_refl--;
 }
 
 gboolean	key_event(GtkWidget *win, GdkEventKey *event)

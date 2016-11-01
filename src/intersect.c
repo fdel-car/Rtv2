@@ -45,6 +45,31 @@ float	intersect_plane(t_obj *obj, t_data ray)
 	return (-1);
 }
 
+float	intersect_cone(t_obj *obj, t_data ray)
+{
+	float	a, b, c, delta, t1, t2, solut;
+	t_vect	tmp;
+
+	tmp = vec_sub(ray.orig, obj->pos);
+	a = vec_dotp(ray.dir, ray.dir) - ((1.0 + SQ(obj->alpha)) *
+	SQ(vec_dotp(ray.dir, obj->dir)));
+	b = 2.0 * (vec_dotp(ray.dir, tmp) - ((1.0 + SQ(obj->alpha))
+	* vec_dotp(ray.dir, obj->dir) * vec_dotp(tmp, obj->dir)));
+	c = vec_dotp(tmp, tmp) - ((1.0 + SQ(obj->alpha)) *
+	SQ(vec_dotp(tmp, obj->dir)));
+	delta = SQ(b) - 4.0 * a * c;
+	if (delta >= 0.0)
+	{
+		delta = sqrt(delta);
+		t1 = (-b + delta) / (2.0 * a);
+		t2 = (-b - delta) / (2.0 * a);
+		solut = t1 < t2 && t1 > EPSILON ? t1 : t2;
+		if (solut > EPSILON)
+			return (solut);
+	}
+	return (-1);
+}
+
 float	intersect_cylinder(t_obj *obj, t_data ray)
 {
 	float	a, b, c, delta, t1, t2, solut;

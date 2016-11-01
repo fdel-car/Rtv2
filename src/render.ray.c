@@ -48,8 +48,6 @@ gboolean	is_shadowed(t_light *l, t_data *ray)
 	t_data sh;
 	t_vect tmp;
 
-	ray->hit_point = vec_add(ray->orig, vec_mult(ray->dir, ray->solut));
-	get_norm(ray);
 	sh.orig = l->pos;
 	sh.dir = vec_norm(vec_sub(ray->hit_point, l->pos));
 	sh = intersect_obj(sh);
@@ -80,7 +78,9 @@ t_color		compute_light(t_data ray, int iter_refl)
 	gboolean	sh;
 
 	l = g_env.scene.lgt;
-	c = color_mult(ray.obj_hit->mater.color, 0.15);
+	c = color_mult(ray.obj_hit->mater.color, 0.2);
+	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
+	get_norm(&ray);
 	while (l)
 	{
 		sh = is_shadowed(l, &ray);
