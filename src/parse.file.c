@@ -49,6 +49,9 @@ void	parse_scene(char **t)
 		if (ft_sii(t[n], "objects") && t[n + 2])
 			load_elems(&(t[n + 2]), 'o');
 	}
+	g_env.scene.anti_alia = log(g_env.scene.anti_alia) / log(2);
+	g_env.scene.anti_alia = g_env.scene.anti_alia >= 32 ?
+	32 : g_env.scene.anti_alia;
 }
 
 void	load_scene(char **t)

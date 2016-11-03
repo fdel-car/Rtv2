@@ -12,6 +12,13 @@
 
 #include "rt.h"
 
+void		save_img(int keyval)
+{
+	if (keyval == 65421)
+		gdk_pixbuf_save (g_env.pix, "saves/rtv2.jpeg", "jpeg", NULL,
+		"quality", "100", NULL);
+}
+
 void		rotate_cam(int keyval)
 {
 	if (keyval == 65361)
@@ -60,6 +67,8 @@ gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
 		rot_any(g_env.scene.cam.dir, g_env.scene.cam.right, 90));
 	rotate_cam(event->keyval);
-	launch_thread();
+	save_img(event->keyval);
+	if (event->keyval == 65293)
+		launch_thread();
 	return (TRUE);
 }

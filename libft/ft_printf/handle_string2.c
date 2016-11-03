@@ -45,9 +45,6 @@ int		ft_precision_str(char const *fl, va_list ap, t_print *gl)
 
 int		ft_width_str(char const *fl, va_list ap, t_print *gl)
 {
-	int temp;
-
-	temp = gl->f;
 	if (ft_isdigit(fl[gl->l - gl->f]))
 	{
 		while (ft_isdigit(fl[gl->l - gl->f]))
