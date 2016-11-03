@@ -20,6 +20,8 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 	c = color_new(0, 0, 0);
 	ray->light = vec_norm(vec_sub(l->pos, ray->hit_point));
 	cos = vec_dotp(ray->light, ray->norm);
+	if (cos < 0 && (ray->obj_hit)->type == PLANE)
+		cos *= -1;
 	if (cos > 0)
 	{
 		c = color_add(color_add(c, color_mult(l->color, l->intensity * cos))
@@ -34,7 +36,7 @@ t_color		specular_lighting(t_data *ray, t_light *l)
 
 	c = color_new(0, 0, 0);
 	ray->refl = vec_norm(vec_sub(vec_mult(vec_mult(ray->norm,
-						vec_dotp(ray->norm, ray->light)), 2.0), ray->light));
+	vec_dotp(ray->norm, ray->light)), 2.0), ray->light));
 	if (vec_dotp(ray->light, ray->refl) > 0)
 	{
 		c = color_add(c, color_mult(l->color,

@@ -36,6 +36,9 @@ void	parse_scene(char **t)
 		if (ft_sii(t[n], "global_illumination:"))
 			g_env.scene.gl_illum = ft_atoi(get_after(t[n],
 			"global_illumination:"));
+		if (ft_sii(t[n], "anti_aliasing:"))
+			g_env.scene.anti_alia = ft_atoi(get_after(t[n],
+			"anti_aliasing:"));
 		if (ft_sii(t[n], "iter_reflection:"))
 			g_env.scene.iter_refl = ft_atoi(get_after(t[n],
 			"iter_reflection:"));

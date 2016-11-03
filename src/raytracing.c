@@ -43,11 +43,46 @@ void		init_view(void)
 	g_env.scene.cam.y_ind = g_env.scene.cam.view_h / (float)HEIGHT;
 }
 
+t_color		init_ray(float x, float y, t_data ray)
+{
+	t_vect	view_point;
+
+	view_point = vec_sub(vec_add(g_env.scene.cam.up_left,
+	vec_mult(g_env.scene.cam.right,
+	g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
+	g_env.scene.cam.y_ind * y));
+	ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
+	return (render_ray(intersect_obj(ray)));
+}
+
+void		super_sample(float x, float y, t_data ray)
+{
+	float	ax;
+	float	ay;
+	float	aa_ind;
+	t_color	c;
+
+	ax = x;
+	ay = y;
+	aa_ind = 1.0 / g_env.scene.anti_alia;
+	c = color_new(0, 0, 0);
+	while (ax < x + 1.0)
+	{
+		while (ay < y + 1.0)
+		{
+			c = color_stack(c, init_ray(ax, ay, ray));
+			ay += aa_ind;
+		}
+		ax += aa_ind;
+	}
+	c = color_mult(c, (1.0 / (float)g_env.scene.anti_alia));
+	put_pixel(x, y, c);
+}
+
 void		*raytracing(void *arg)
 {
 	int		*tmp;
 	int		x, x_max, y;
-	t_vect	view_point;
 	t_data	ray;
 
 	tmp = (int *)arg;
@@ -59,12 +94,10 @@ void		*raytracing(void *arg)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			view_point = vec_sub(vec_add(g_env.scene.cam.up_left,
-			vec_mult(g_env.scene.cam.right,
-			g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
-			g_env.scene.cam.y_ind * y));
-			ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
-			put_pixel(x, y, render_ray(intersect_obj(ray)));
+			if (g_env.scene.anti_alia > 1)
+				super_sample(x, y, ray);
+			else
+				put_pixel(x, y, init_ray(x, y, ray));
 			y++;
 		}
 		x++;

@@ -54,6 +54,16 @@ t_color		color_add(t_color u, t_color v)
 	return (rgb);
 }
 
+t_color		color_stack(t_color u, t_color v)
+{
+	t_color rgb;
+
+	rgb.r = u.r + v.r;
+	rgb.g = u.g + v.g;
+	rgb.b = u.b + v.b;
+	return (rgb);
+}
+
 t_color		color_sub(t_color u, t_color v)
 {
 	t_color rgb;

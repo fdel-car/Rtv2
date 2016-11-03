@@ -95,6 +95,7 @@ typedef struct		s_light
 typedef struct		s_scene
 {
 	gboolean		gl_illum;
+	int				anti_alia;
 	int				iter_refl;
 	char			*name;
 	t_cam			cam;
