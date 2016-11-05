@@ -113,9 +113,12 @@ typedef struct		s_env
 	GtkWidget		*win;
 	GtkWidget		*img;
 	GtkWidget		*prev;
+	GtkWidget		*toggle_prev;
+	GtkWidget		*aa_choice;
 	guchar			*pixels;
 	guchar			*pixels_prev;
 	t_scene			scene;
+	gboolean		state_prev;
 	pthread_t		thread[NUM_THREAD];
 	unsigned int	limits[NUM_THREAD];
 	unsigned int	limits_prev[NUM_THREAD];

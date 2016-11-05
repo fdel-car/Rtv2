@@ -24,6 +24,7 @@ void	put_pixel(int x, int y, t_color color)
 
 void	launch_thread(void)
 {
+	desactivate_preview();
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);
 	g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir, g_env.scene.cam.right);
 	g_env.scene.cam.up_left = vec_add(g_env.scene.cam.pos,
@@ -67,6 +68,36 @@ void	init_limits(void)
 	}
 }
 
+void	init_gtk(void)
+{
+	static char *anti_alia[] = {"None", "2x AA", "4x AA", "8x AA", "16x AA"};
+	int			iter;
+
+	iter = 0;
+	g_env.build = gtk_builder_new_from_file("interface.glade");
+    g_env.win = GTK_WIDGET(gtk_builder_get_object(g_env.build, "win"));
+	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
+	g_env.pix_prev = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
+	WIDTH_PREVIEW, HEIGHT_PREVIEW);
+	g_env.img = GTK_WIDGET(gtk_builder_get_object(g_env.build, "final_img"));
+	g_env.prev = GTK_WIDGET(gtk_builder_get_object(g_env.build, "prev_img"));
+	g_env.aa_choice = GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"aa_choice"));
+	g_env.toggle_prev = GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"prev_button"));
+	g_env.pixels = gdk_pixbuf_get_pixels(g_env.pix);
+	g_env.pixels_prev = gdk_pixbuf_get_pixels(g_env.pix_prev);
+	g_env.rowstride = WIDTH * 3;
+	g_env.rowstride_prev = WIDTH_PREVIEW * 3;
+	g_env.state_prev = FALSE;
+	while (iter < 5)
+	{
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(g_env.aa_choice),
+		anti_alia[iter]);
+		iter++;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	if (argc != 2)
@@ -75,18 +106,8 @@ int		main(int argc, char **argv)
 	gtk_init(&argc, &argv);
 	init_limits();
 	init_view();
-	g_env.build = gtk_builder_new_from_file("interface.glade");
-    g_env.win = GTK_WIDGET(gtk_builder_get_object(g_env.build, "win"));
-	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
-	g_env.pix_prev = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
-	WIDTH_PREVIEW, HEIGHT_PREVIEW);
-	g_env.img = GTK_WIDGET(gtk_builder_get_object(g_env.build, "final_img"));
-	g_env.prev = GTK_WIDGET(gtk_builder_get_object(g_env.build, "preview_img"));
-	g_env.pixels = gdk_pixbuf_get_pixels(g_env.pix);
-	g_env.pixels_prev = gdk_pixbuf_get_pixels(g_env.pix_prev);
-	g_env.rowstride = WIDTH * 3;
-	g_env.rowstride_prev = WIDTH_PREVIEW * 3;
-	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
+	init_gtk();
+	aa_check();
     gtk_builder_connect_signals(g_env.build, NULL);
     g_object_unref(g_env.build);
 	launch_thread();

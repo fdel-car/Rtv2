@@ -78,9 +78,11 @@ t_color		compute_light(t_data ray, int iter_refl)
 	t_color		c;
 	t_light		*l;
 	gboolean	sh;
+	int			lights;
 
 	l = g_env.scene.lgt;
-	c = color_mult(ray.obj_hit->mater.color, 0.2);
+	c = color_new(0, 0, 0);
+	lights = 0;
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	get_norm(&ray);
 	while (l)
@@ -88,16 +90,18 @@ t_color		compute_light(t_data ray, int iter_refl)
 		sh = is_shadowed(l, &ray);
 		if (sh != FALSE)
 		{
-			c = color_add(c, diffuse_lighting(&ray, l));
+			c = color_stack(c, diffuse_lighting(&ray, l));
 			if (ray.obj_hit->mater.shiny != 0)
-				c = color_add(c, specular_lighting(&ray, l));
+				c = color_stack(c, specular_lighting(&ray, l));
 			if (ray.obj_hit->mater.int_refl > 0)
-				c = color_add(c, reflection_lighting(&ray, iter_refl,
-							color_new(0, 0, 0)));
+				c = color_stack(c, reflection_lighting(&ray, iter_refl,
+				color_new(0, 0, 0)));
 		}
 		l = l->next;
+		lights++;
 	}
-	return (c);
+	c = color_mult(c, 1 / (float)lights);
+	return (color_add(c, color_mult(ray.obj_hit->mater.color, 0.2)));
 }
 
 t_color		render_ray(t_data ray)

@@ -41,5 +41,7 @@ void		get_norm(t_data *ray);
 void		launch_thread(void);
 void		init_view(void);
 void		launch_preview(void);
+void		desactivate_preview(void);
+void		aa_check();
 
 #endif

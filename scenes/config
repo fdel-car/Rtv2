@@ -1,8 +1,8 @@
 scene
 {
 	global_illumination:0
-	anti_aliasing:2
-	iter_reflection:2
+	anti_aliasing:15
+	iter_reflection:1
 	name:test_scene
 	camera
 	{
@@ -17,7 +17,7 @@ scene
 		rayon:2.0
 		type:multi_dir
 		color:130;130;130
-		intensity:0.3
+		intensity:0.2
 		blur:0
 		}
 		light_2
@@ -26,7 +26,7 @@ scene
 		rayon:2.0
 		type:multi_dir
 		color:130;130;130
-		intensity:0.3
+		intensity:0.2
 		blur:0
 		}
 	}

@@ -12,9 +12,23 @@
 
 #include "rt.h"
 
-void		switch_key_focus(void)
+void		desactivate_preview(void)
 {
-	ft_putstr("lol");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(g_env.toggle_prev), FALSE);
+}
+
+void		switch_state_prev(void)
+{
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(g_env.toggle_prev)))
+	{
+		gtk_button_set_label(GTK_BUTTON(g_env.toggle_prev), "Preview ON");
+		g_env.state_prev = TRUE;
+	}
+	else
+	{
+		gtk_button_set_label(GTK_BUTTON(g_env.toggle_prev), "Preview OFF");
+		g_env.state_prev = FALSE;
+	}
 }
 
 void		save_img(int keyval)
@@ -54,6 +68,8 @@ void		rotate_cam(int keyval)
 
 gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 {
+	if (g_env.state_prev == FALSE)
+		return (FALSE);
 	(void)win;
 	if (event->keyval == 119)
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos, g_env.scene.cam.dir);
@@ -74,7 +90,5 @@ gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 	rotate_cam(event->keyval);
 	save_img(event->keyval);
 	launch_preview();
-	if (event->keyval == 65293)
-		launch_thread();
 	return (TRUE);
 }
