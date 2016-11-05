@@ -41,6 +41,8 @@ typedef struct		s_cam
 	float			view_w;
 	float			x_ind;
 	float			y_ind;
+	float			x_ind_p;
+	float			y_ind_p;
 }					t_cam;
 
 typedef struct		s_mater
@@ -105,17 +107,20 @@ typedef struct		s_scene
 
 typedef struct		s_env
 {
+	GtkBuilder		*build;
 	GdkPixbuf		*pix;
+	GdkPixbuf		*pix_prev;
 	GtkWidget		*win;
 	GtkWidget		*img;
-	GtkWidget		*box;
-	GtkWidget		*list;
+	GtkWidget		*prev;
 	guchar			*pixels;
-	t_color			color;
+	guchar			*pixels_prev;
 	t_scene			scene;
 	pthread_t		thread[NUM_THREAD];
 	unsigned int	limits[NUM_THREAD];
+	unsigned int	limits_prev[NUM_THREAD];
 	unsigned int	rowstride;
+	unsigned int	rowstride_prev;
 	unsigned char	id_thread;
 }					t_env;
 

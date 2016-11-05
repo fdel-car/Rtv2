@@ -1,7 +1,7 @@
 scene
 {
 	global_illumination:0
-	anti_aliasing:4
+	anti_aliasing:2
 	iter_reflection:2
 	name:test_scene
 	camera

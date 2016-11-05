@@ -46,37 +46,52 @@ void	launch_thread(void)
 	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
 }
 
-int		main(int argc, char **argv)
+void	init_limits(void)
 {
-	int iter = 0;
-	int	x_column = WIDTH / NUM_THREAD;
+	int iter;
+	int	x_column;
 
-	if (argc == 2)
-		load_file(argv[1]);
-	gtk_init(&argc, &argv);
+	iter = 0;
+	x_column = WIDTH / NUM_THREAD;
 	while (iter < NUM_THREAD)
 	{
 		g_env.limits[iter] = x_column * iter;
 		iter++;
 	}
+	iter = 0;
+	x_column = WIDTH_PREVIEW / NUM_THREAD;
+	while (iter < NUM_THREAD)
+	{
+		g_env.limits_prev[iter] = x_column * iter;
+		iter++;
+	}
+}
+
+int		main(int argc, char **argv)
+{
+	if (argc != 2)
+		return (-1);
+	load_file(argv[1]);
+	gtk_init(&argc, &argv);
+	init_limits();
 	init_view();
-	g_env.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title(GTK_WINDOW(g_env.win), "Raytracer");
-	gtk_window_set_position(GTK_WINDOW(g_env.win), GTK_WIN_POS_CENTER);
-	g_signal_connect(G_OBJECT(g_env.win), "delete-event",
-	G_CALLBACK(gtk_main_quit), NULL);
-	g_signal_connect(G_OBJECT(g_env.win), "key-press-event",
-	G_CALLBACK(key_event), NULL);
+	g_env.build = gtk_builder_new_from_file("interface.glade");
+    g_env.win = GTK_WIDGET(gtk_builder_get_object(g_env.build, "win"));
 	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
-	g_env.img = gtk_image_new_from_pixbuf(g_env.pix);
-	g_env.box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	g_env.list = gtk_list_box_new();
-	gtk_box_pack_start(GTK_BOX(g_env.box), g_env.img, FALSE, FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(g_env.win), g_env.box);
+	g_env.pix_prev = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
+	WIDTH_PREVIEW, HEIGHT_PREVIEW);
+	g_env.img = GTK_WIDGET(gtk_builder_get_object(g_env.build, "final_img"));
+	g_env.prev = GTK_WIDGET(gtk_builder_get_object(g_env.build, "preview_img"));
 	g_env.pixels = gdk_pixbuf_get_pixels(g_env.pix);
+	g_env.pixels_prev = gdk_pixbuf_get_pixels(g_env.pix_prev);
 	g_env.rowstride = WIDTH * 3;
+	g_env.rowstride_prev = WIDTH_PREVIEW * 3;
+	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
+    gtk_builder_connect_signals(g_env.build, NULL);
+    g_object_unref(g_env.build);
 	launch_thread();
-	gtk_widget_show_all(g_env.win);
-	gtk_main();
+	launch_preview();
+    gtk_widget_show_all(g_env.win);
+    gtk_main();
 	return (EXIT_SUCCESS);
 }

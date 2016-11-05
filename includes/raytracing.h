@@ -14,6 +14,7 @@
 # define RAYTRACING_H
 # define EPSILON 0.01
 
+void		switch_key_focus(void);
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
 t_data		intersect_obj(t_data ray);
 t_color		render_ray(t_data ray);
@@ -38,6 +39,7 @@ void		*raytracing(void *arg);
 void		put_pixel(int x, int y, t_color color);
 void		get_norm(t_data *ray);
 void		launch_thread(void);
-void		init_view();
+void		init_view(void);
+void		launch_preview(void);
 
 #endif
