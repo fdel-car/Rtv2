@@ -34,6 +34,11 @@ void	aa_check()
 		g_env.scene.anti_alia = 2;
 		gtk_combo_box_set_active(GTK_COMBO_BOX(g_env.aa_choice), 1);
 	}
+	else if (g_env.scene.anti_alia < 2)
+	{
+		g_env.scene.anti_alia = 0;
+		gtk_combo_box_set_active(GTK_COMBO_BOX(g_env.aa_choice), 0);
+	}
 }
 
 void	switch_anti_aliasing(void)

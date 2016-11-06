@@ -1,21 +1,22 @@
 scene
 {
 	global_illumination:10
-	iter_reflection:2
+	anti_aliasing:0
+	iter_reflection:1
 	name:test_scene
 	camera
 	{
-		pos:0;8;-10
-		dir:0;-0.4;1
+		pos:6;4;-6
+		dir:-1;-0.5;1
 	}
     lights
     {
         light_1
         {
-		pos:-4;12;-12
+		pos:-6;6;-10
 		rayon:2.0
         type:multi_dir
-        color:105;105;105
+        color:255;255;255
         intensity:0.4
         blur:0
         }
@@ -234,6 +235,66 @@ scene
 				reflection:0.8
 				transparence:0
 				color:255;0;255
+				texture:NULL
+			}
+		}
+		plan_1
+		{
+			pos:0;0;0
+			dir:NULL
+			normal:0;1;0
+			rayon:0
+			type:plane
+			materiel
+			{
+				reflection:0
+				transparence:0.4
+				color:173;173;173
+				texture:NULL
+			}
+		}
+		plan_2
+		{
+			pos:0;10;0
+			dir:NULL
+			normal:0;-1;0
+			rayon:0
+			type:plane
+			materiel
+			{
+				reflection:0
+				transparence:0.4
+				color:173;173;173
+				texture:NULL
+			}
+		}
+		plan_3
+		{
+			pos:0;0;20
+			dir:NULL
+			normal:0;0;-1
+			rayon:0
+			type:plane
+			materiel
+			{
+				reflection:1
+				transparence:0.4
+				color:0;173;173
+				texture:NULL
+			}
+		}
+		plan_4
+		{
+			pos:-20;0;0
+			dir:NULL
+			normal:1;0;0
+			rayon:0
+			type:plane
+			materiel
+			{
+				reflection:1
+				transparence:0.4
+				color:173;173;0
 				texture:NULL
 			}
 		}

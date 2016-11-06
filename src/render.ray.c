@@ -97,6 +97,12 @@ t_color		compute_light(t_data ray, int iter_refl)
 				c = color_stack(c, reflection_lighting(&ray, iter_refl,
 				color_new(0, 0, 0)));
 		}
+		else
+		{
+			if (ray.obj_hit->mater.int_refl > 0)
+				c = color_stack(c, reflection_lighting(&ray, iter_refl,
+				color_new(0, 0, 0)));
+		}
 		l = l->next;
 		lights++;
 	}
