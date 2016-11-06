@@ -53,11 +53,14 @@ void	set_func(t_obj *o)
 void	load_object(char **t)
 {
 	t_obj	*new;
+	char	*name;
 	int		n;
 
 	new = malloc(sizeof(t_obj));
 	new->next = NULL;
-	new->name = ft_strdup(*t);
+	name = ft_strdup(*t);
+	new->name = ft_strtrim(name);
+	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
 		while (t[++n] && !ft_sii(t[n], "{"))
 		{
@@ -91,12 +94,15 @@ void	load_object(char **t)
 void	load_light(char **t)
 {
 	t_light	*new;
+	char	*name;
 	int		n;
 
 	n = 1;
 	new = malloc(sizeof(t_light));
 	new->next = NULL;
-	new->name = ft_strdup(*t);
+	name = ft_strdup(*t);
+	new->name = ft_strtrim(name);
+	free(name);
 	if (ft_sii(t[n], "{"))
 		while (t[++n] && !ft_sii(t[n], "{"))
 		{

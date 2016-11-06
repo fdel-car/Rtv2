@@ -13,57 +13,29 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int	ft_count(char const *s, int n)
+char	*ft_strtrim(char const *s)
 {
-	int i;
-	int m;
-
-	m = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] == '\n' || s[i] == '\t' || s[i] == ' ')
-			i++;
-		while (s[i] != '\n' && s[i] != '\t' && s[i] != ' ')
-		{
-			i++;
-			n++;
-			m++;
-		}
-		while (s[i] == '\n' || s[i] == '\t' || s[i] == ' ')
-		{
-			i++;
-			m++;
-		}
-		if (s[i] != '\0')
-			n = m;
-	}
-	return (n);
-}
-
-char		*ft_strtrim(char const *s)
-{
-	int		size;
-	char	*str;
 	int		i;
-	int		j;
+	int		len;
+	char	*str;
 
-	j = 0;
-	i = 0;
-	if (!s)
+	if (s == NULL)
 		return (NULL);
-	size = ft_count(s, 0);
-	str = (char *)malloc(sizeof(char) * (size + 1));
-	if (!str)
+	len = ft_strlen(s);
+	while (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n')
+		len--;
+	i = -1;
+	while (s[++i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		len--;
+	if (len <= 0)
+		len = 0;
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
 		return (NULL);
-	while (s[i] == '\n' || s[i] == '\t' || s[i] == ' ')
-		i++;
-	while (j < size)
-	{
-		str[j] = s[i];
-		j++;
-		i++;
-	}
-	str[j] = '\0';
+	s += i;
+	i = -1;
+	while (++i < len)
+		str[i] = *s++;
+	str[i] = '\0';
 	return (str);
 }
