@@ -125,7 +125,7 @@ scene
 				texture:NULL
 			}
 		}
-		cylinder_2
+		cylinder_3
 		{
 			pos:-10;0;5
 			dir:0;1;0
@@ -141,7 +141,7 @@ scene
 				texture:NULL
 			}
 		}
-		cylinder_2
+		cylinder_4
 		{
 			pos:10;0;5
 			dir:0;1;0

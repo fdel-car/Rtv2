@@ -1,31 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/28 17:08:45 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/10/20 15:30:49 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
+/*
+void	put_pixel(int x, int y, t_color color)
+{
+	int pos;
 
-void save_entry_transformation_object(GtkEntry *entry, t_gtkData *data){
-
-	float ret;
-
-	//change value of attribut of object
-	ret = ft_atof(gtk_entry_get_text(entry));
-
-	if(ft_strcmp(data->desc,"posx") == 0)
-		((t_obj *)data->obj)->pos.x  = ret;
-	else if(ft_strcmp(data->desc,"posy") == 0)
-		((t_obj *)data->obj)->pos.y  = ret;
-	else if(ft_strcmp(data->desc,"posz") == 0)
-		((t_obj *)data->obj)->pos.z  = ret;
-	else if(ft_strcmp(data->desc,"dirx") == 0)
-		((t_obj *)data->obj)->dir.x  = ret;
-	else if(ft_strcmp(data->desc,"diry") == 0)
-		((t_obj *)data->obj)->dir.y  = ret;
-	else if(ft_strcmp(data->desc,"dirz") == 0)
-		((t_obj *)data->obj)->dir.z  = ret;
-	else if(ft_strcmp(data->desc,"rayon") == 0)
-		((t_obj *)data->obj)->rayon  = ret;
-
-	printf("ret =% f\n", ret);
-
+	pos = y * g_env.rowstride + x * 3;
+	g_env.pixels[pos] = color.r;
+	g_env.pixels[pos + 1] = color.g;
+	g_env.pixels[pos + 2] = color.b;
 }
-
+*/
 
 void 	*find_objects(char *name ,unsigned int *n ){
 
@@ -56,9 +52,47 @@ void 	*find_objects(char *name ,unsigned int *n ){
 	return (NULL);
 }
 
-void create_widget_attribute(void *object){
+void save_entry_transformation_light(GtkEntry *entry, t_gtkData *data){
 
-printf("1\n");
+	float ret;
+	//change value of attribut of object
+	ret = ft_atof(gtk_entry_get_text(entry));
+	if(ft_strcmp(data->desc,"posx") == 0)
+		((t_light *)data->obj)->pos.x  = ret;
+	if(ft_strcmp(data->desc,"posy") == 0)
+		((t_light *)data->obj)->pos.y  = ret;
+	if(ft_strcmp(data->desc,"posz") == 0)
+		((t_light *)data->obj)->pos.z  = ret;
+	if(ft_strcmp(data->desc,"rayon") == 0)
+		((t_light *)data->obj)->rayon  = ret;
+}
+
+void save_entry_transformation_object(GtkEntry *entry, t_gtkData *data){
+
+	float ret;
+
+	//change value of attribut of object
+	ret = ft_atof(gtk_entry_get_text(entry));
+
+	if(ft_strcmp(data->desc,"posx") == 0)
+		((t_obj *)data->obj)->pos.x  = ret;
+	else if(ft_strcmp(data->desc,"posy") == 0)
+		((t_obj *)data->obj)->pos.y  = ret;
+	else if(ft_strcmp(data->desc,"posz") == 0)
+		((t_obj *)data->obj)->pos.z  = ret;
+	else if(ft_strcmp(data->desc,"dirx") == 0)
+		((t_obj *)data->obj)->dir.x  = ret;
+	else if(ft_strcmp(data->desc,"diry") == 0)
+		((t_obj *)data->obj)->dir.y  = ret;
+	else if(ft_strcmp(data->desc,"dirz") == 0)
+		((t_obj *)data->obj)->dir.z  = ret;
+	else if(ft_strcmp(data->desc,"rayon") == 0)
+		((t_obj *)data->obj)->rayon  = ret;
+}
+
+void create_transformation_widget_object(void *object, GtkWidget *grid)
+{
+	GtkWidget *label[3];
 	GtkWidget *pos_entry[3];
 	GtkWidget *dir_entry[3];
 	GtkWidget *rayon_entry;
@@ -76,8 +110,6 @@ printf("1\n");
     t_gtkData *entry_dirz = NULL;
     t_gtkData *entry_rayon = NULL;
 
-printf("2\n");
-
 	s_entry = malloc(sizeof(char) * 10);
     
     entry_posx = malloc(sizeof(t_gtkData));
@@ -89,7 +121,6 @@ printf("2\n");
     entry_dirz = malloc(sizeof(t_gtkData));
     
     entry_rayon = malloc(sizeof(t_gtkData));
-printf("3\n");
 
 	current_obj = (t_obj *)object;
 	//set buffer with value of objects
@@ -108,38 +139,65 @@ printf("3\n");
     buffer_dir[2] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
    	sprintf(s_entry,"%f", current_obj->rayon);
     buffer_rayon = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-printf("4\n");
    	
+   	label[0] = gtk_label_new("Position");
+	label[1] = gtk_label_new("Direction");
+	label[2] = gtk_label_new("Rayon");
 
 	//init entry with buffers
-	pos_entry[0] = GTK_WIDGET(gtk_builder_get_object(g_env.build, "Entry_posx"));
-	printf("40\n");
+	pos_entry[0] = gtk_entry_new_with_buffer(buffer_pos[0]);
+	pos_entry[1] = gtk_entry_new_with_buffer(buffer_pos[1]);
+	pos_entry[2] = gtk_entry_new_with_buffer(buffer_pos[2]);
 
-	pos_entry[1] = GTK_WIDGET(gtk_builder_get_object(g_env.build, "Entry_posy"));
-printf("41\n");
+	dir_entry[0] = gtk_entry_new_with_buffer(buffer_dir[0]);
+	dir_entry[1] = gtk_entry_new_with_buffer(buffer_dir[1]);
+	dir_entry[2] = gtk_entry_new_with_buffer(buffer_dir[2]);
 
-	pos_entry[2] = GTK_WIDGET(gtk_builder_get_object(g_env.build, "Entry_posz"));
-printf("42\n");
+	rayon_entry = gtk_entry_new_with_buffer(buffer_rayon);
 
-	dir_entry[0] = GTK_WIDGET(gtk_builder_get_object(g_env.build, "Entry_dirx"));
-	dir_entry[1] = GTK_WIDGET(gtk_builder_get_object(g_env.build, "Entry_diry"));
-	dir_entry[2] = GTK_WIDGET(gtk_builder_get_object(g_env.build, "Entry_dirz"));
+	// define the width of entry
+	gtk_entry_set_width_chars ((GtkEntry *)pos_entry[0], 6);
+	gtk_entry_set_width_chars ((GtkEntry *)pos_entry[1], 6);
+	gtk_entry_set_width_chars ((GtkEntry *)pos_entry[2], 6);
 
-	rayon_entry = GTK_WIDGET(gtk_builder_get_object(g_env.build, "Entry_rayon"));
-printf("45\n");
+	gtk_entry_set_width_chars ((GtkEntry *)dir_entry[0], 6);
+	gtk_entry_set_width_chars ((GtkEntry *)dir_entry[1], 6);
+	gtk_entry_set_width_chars ((GtkEntry *)dir_entry[2], 6);
 
-	gtk_entry_set_buffer (GTK_ENTRY(pos_entry[0]),buffer_pos[0]);
-	gtk_entry_set_buffer (GTK_ENTRY(pos_entry[1]),buffer_pos[1]);
-	gtk_entry_set_buffer (GTK_ENTRY(pos_entry[2]),buffer_pos[2]);
+	gtk_entry_set_width_chars ((GtkEntry *)rayon_entry, 6);
 
-	gtk_entry_set_buffer (GTK_ENTRY(dir_entry[0]),buffer_dir[0]);
-	gtk_entry_set_buffer (GTK_ENTRY(dir_entry[1]),buffer_dir[1]);
-	gtk_entry_set_buffer (GTK_ENTRY(dir_entry[2]),buffer_dir[2]);
+	gtk_entry_set_max_length ((GtkEntry *)pos_entry[0], 6);
+	gtk_entry_set_max_length ((GtkEntry *)pos_entry[1], 6);
+	gtk_entry_set_max_length ((GtkEntry *)pos_entry[2], 6);
 
-	gtk_entry_set_buffer (GTK_ENTRY(rayon_entry),buffer_rayon);
-printf("5\n");
+	gtk_entry_set_max_length ((GtkEntry *)dir_entry[0], 6);
+	gtk_entry_set_max_length ((GtkEntry *)dir_entry[1], 6);
+	gtk_entry_set_max_length ((GtkEntry *)dir_entry[2], 6);
 
-		//set data object to pass to signal handler
+	gtk_entry_set_max_length ((GtkEntry *)rayon_entry, 6);
+
+
+
+	//attach widget to the grid
+	gtk_grid_attach (GTK_GRID (grid), label[0], 0, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), label[1], 0, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), label[2], 0, 2, 1, 1);
+
+	gtk_grid_attach (GTK_GRID (grid), pos_entry[0], 1, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), pos_entry[1], 2, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), pos_entry[2], 3, 0, 1, 1);
+	
+	gtk_grid_attach (GTK_GRID (grid), dir_entry[0], 1, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), dir_entry[1], 2, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), dir_entry[2], 3, 1, 1, 1);
+	
+	gtk_grid_attach (GTK_GRID (grid), rayon_entry, 1, 2, 1, 1); 
+
+
+
+
+
+	//set data object to pass to signal handler
 	entry_posx->data = pos_entry[0];
 	entry_posx->desc = ft_strdup("posx");
 	entry_posx->obj = current_obj;
@@ -190,9 +248,130 @@ printf("5\n");
 	
 	g_signal_connect(rayon_entry, "changed",
 	G_CALLBACK(save_entry_transformation_object), entry_rayon);
-	printf("6\n");
+
 }
 
+void create_transformation_widget_light(void *object, GtkWidget *grid)
+{
+	GtkWidget *label[3];
+	GtkWidget *pos_entry[3];
+	GtkWidget *rayon_entry;
+	GtkEntryBuffer *buffer_pos[3];
+	GtkEntryBuffer *buffer_rayon;
+	t_light *current_light;
+
+	char *s_entry = NULL;
+    t_gtkData *entry_posx = NULL;
+    t_gtkData *entry_posy = NULL;
+    t_gtkData *entry_posz = NULL;
+    t_gtkData *entry_rayon = NULL;
+
+	s_entry = malloc(sizeof(char) * 10);
+    entry_posx = malloc(sizeof(t_gtkData));
+    entry_posy = malloc(sizeof(t_gtkData));
+    entry_posz = malloc(sizeof(t_gtkData));
+    entry_rayon = malloc(sizeof(t_gtkData));
+
+    current_light = (t_light *)object;
+
+    sprintf(s_entry,"%f", current_light->pos.x);
+    buffer_pos[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+    sprintf(s_entry,"%f", current_light->pos.y);
+    buffer_pos[1] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+    sprintf(s_entry,"%f", current_light->pos.z);
+    buffer_pos[2] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+    sprintf(s_entry,"%f", current_light->rayon);
+    buffer_rayon = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+
+    label[0] = gtk_label_new("Position");
+	label[2] = gtk_label_new("Rayon");
+	
+	pos_entry[0] = gtk_entry_new_with_buffer(buffer_pos[0]);
+	pos_entry[1] = gtk_entry_new_with_buffer(buffer_pos[1]);
+	pos_entry[2] = gtk_entry_new_with_buffer(buffer_pos[2]);
+	
+	rayon_entry = gtk_entry_new_with_buffer(buffer_rayon);
+
+
+	// define the width of entry
+	gtk_entry_set_width_chars ((GtkEntry *)pos_entry[0], 6);
+	gtk_entry_set_width_chars ((GtkEntry *)pos_entry[1], 6);
+	gtk_entry_set_width_chars ((GtkEntry *)pos_entry[2], 6);
+
+	gtk_entry_set_width_chars ((GtkEntry *)rayon_entry, 6);
+
+	gtk_entry_set_max_length ((GtkEntry *)pos_entry[0], 6);
+	gtk_entry_set_max_length ((GtkEntry *)pos_entry[1], 6);
+	gtk_entry_set_max_length ((GtkEntry *)pos_entry[2], 6);
+
+	gtk_entry_set_max_length ((GtkEntry *)rayon_entry, 6);
+
+	// attach widget to the grid	
+	gtk_grid_attach (GTK_GRID (grid), label[0], 0, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), label[2], 0, 1, 1, 1);
+	
+	gtk_grid_attach (GTK_GRID (grid), pos_entry[0], 1, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), pos_entry[1], 2, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), pos_entry[2], 3, 0, 1, 1);
+	
+	gtk_grid_attach (GTK_GRID (grid), rayon_entry, 1, 1, 1, 1);
+
+
+	//set data object to pass to signal handler
+
+	entry_posx->data = pos_entry[0];
+	entry_posx->desc = ft_strdup("posx");
+	entry_posx->obj = current_light;
+
+	entry_posy->data = pos_entry[1];
+	entry_posy->desc = ft_strdup("posy");
+	entry_posy->obj = current_light;
+
+	entry_posz->data = pos_entry[2];
+	entry_posz->desc = ft_strdup("posz");
+	entry_posz->obj = current_light;
+
+	entry_rayon->data = rayon_entry;
+	entry_rayon->desc = ft_strdup("rayon");
+	entry_rayon->obj = current_light;
+
+	g_signal_connect(pos_entry[0], "changed",
+	G_CALLBACK(save_entry_transformation_light), entry_posx);
+
+	g_signal_connect(pos_entry[1], "changed",
+	G_CALLBACK(save_entry_transformation_light), entry_posy);
+
+	g_signal_connect(pos_entry[2], "changed",
+	G_CALLBACK(save_entry_transformation_light), entry_posz);
+
+	g_signal_connect(rayon_entry, "changed",
+	G_CALLBACK(save_entry_transformation_light), entry_rayon);
+	
+}
+
+void create_list_of_attributs(void *objects, unsigned int type){
+
+	GtkWidget *grid;
+
+	//erase old widget
+	GList *children, *iter;
+
+	children = gtk_container_get_children(GTK_CONTAINER(gtk_builder_get_object(g_env.build, "right_menu")));
+	for(iter = children; iter != NULL; iter = g_list_next(iter))
+  	gtk_widget_destroy(GTK_WIDGET(iter->data));
+	g_list_free(children);
+
+	grid = gtk_grid_new();
+	gtk_container_add(GTK_CONTAINER(gtk_builder_get_object(g_env.build, "right_menu")), grid);
+
+ 	if (type == 1)
+ 		create_transformation_widget_object(objects, grid);
+    else if (type == 2)
+    	create_transformation_widget_light(objects, grid);
+
+    gtk_widget_show_all(g_env.win);
+
+}
 
 void 	select_current_obj (GtkTreeView        *treeview,
                        GtkTreePath        *path)
@@ -211,8 +390,8 @@ void 	select_current_obj (GtkTreeView        *treeview,
        found_obj = find_objects(name, &n);
        g_free(name);
        // create widget attribut
-       //if (n != 0)
-       		create_widget_attribute(found_obj);
+       if (n != 0)
+       		create_list_of_attributs(found_obj, n);
 
     }
   }
@@ -260,3 +439,4 @@ void create_list_of_objects(){
 
 
 }
+
