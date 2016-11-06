@@ -28,5 +28,6 @@
 # include "color.h"
 # include "parser.h"
 # include "raytracing.h"
+# include "gtks.h"
 
 #endif

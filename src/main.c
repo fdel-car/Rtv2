@@ -112,7 +112,8 @@ int		main(int argc, char **argv)
 	aa_check();
 	spin_button();
     gtk_builder_connect_signals(g_env.build, NULL);
-    g_object_unref(g_env.build);
+    create_list_of_objects();
+    //g_object_unref(g_env.build);
 	launch_thread();
 	launch_preview();
     gtk_widget_show_all(g_env.win);
