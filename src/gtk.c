@@ -416,14 +416,14 @@ void create_list_of_objects(){
 
 	while (obj)
 	{
-		gchar *name_o = ft_strdup(ft_strtrim(obj->name));
+		gchar *name_o = ft_strdup(obj->name);
     	obj = obj->next;
     	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
         gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, name_o, 1);
 		g_free (name_o);
     }
     while (lgt){
-    	gchar *name_o = ft_strdup(ft_strtrim(lgt->name));
+    	gchar *name_o = ft_strdup(lgt->name);
     	lgt = lgt->next;
     	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
         gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, name_o, -1);
