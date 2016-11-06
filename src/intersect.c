@@ -6,11 +6,36 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/26 15:56:11 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/06 13:10:09 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+float	intersect_triangle(t_obj *obj, t_data ray)
+{
+    float       fl[4];
+	t_vect		vc[5];
+
+    vc[0] = vec_sub(obj->v1, obj->v0);
+    vc[1] = vec_sub(obj->v2, obj->v0);
+    vc[2] = cross_pr(ray.dir, vc[1]);
+    fl[0] = vec_dotp(vc[0], vc[2]);
+    if (fl[0] < EPSILON && fl[0] > -EPSILON)
+        return (-1);
+    vc[3] = vec_sub(ray.orig, obj->v0);
+    fl[1] = vec_dotp(vc[3], vc[2]) * (1 / fl[0]);
+    if (fl[1] < 0 || fl[1] > 1)
+        return (-1);
+    vc[4] = cross_pr(vc[3], vc[0]);
+    fl[2] = vec_dotp(ray.dir, vc[4]) * (1 / fl[0]);
+    if (fl[2] < 0 || (fl[1] + fl[2]) > 1)
+        return (-1);
+    fl[3] = vec_dotp(vc[1], vc[4]) * (1 / fl[0]);
+    if (fl[3] > EPSILON)
+        return (fl[3]);
+    return (-1);
+}
 
 float	intersect_sphere(t_obj *obj, t_data ray)
 {

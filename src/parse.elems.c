@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.elems.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/24 17:44:08 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/06 13:11:29 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	set_func(t_obj *o)
 		o->func = &intersect_cylinder;
 	if (o->type == CONE)
 		o->func = &intersect_cone;
+	if (o->type == TRIANGLE)
+		o->func = &intersect_triangle;
 }
 
 void	load_object(char **t)
@@ -59,6 +61,12 @@ void	load_object(char **t)
 	if ((n = 1) && ft_sii(t[n], "{"))
 		while (t[++n] && !ft_sii(t[n], "{"))
 		{
+			if (ft_sii(t[n], "v0:"))
+				new->v0 = read_vec(get_after(t[n], "v0:"));
+			if (ft_sii(t[n], "v1:"))
+				new->v1 = read_vec(get_after(t[n], "v1:"));
+			if (ft_sii(t[n], "v2:"))
+				new->v2 = read_vec(get_after(t[n], "v2:"));
 			if (ft_sii(t[n], "pos:"))
 				new->pos = read_vec(get_after(t[n], "pos:"));
 			if (ft_sii(t[n], "dir:"))

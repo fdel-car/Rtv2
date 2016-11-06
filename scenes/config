@@ -1,7 +1,7 @@
 scene
 {
 	global_illumination:0
-	anti_aliasing:15
+	anti_aliasing:2
 	iter_reflection:1
 	name:test_scene
 	camera
@@ -32,6 +32,24 @@ scene
 	}
 	objects
 	{
+	triangle_2F1
+	{
+		v0:-2;0;2
+		v1:-2;2;2
+		v2:0;2;0
+		pos:0;0;0
+		direction:NULL
+		normal:-1;0;-1
+		rayon:0
+		type:triangle
+		materiel
+		{
+			reflection:0.8
+			transparence:0
+			color:255;0;0
+			texture:NULL
+		}
+	}
 		sphere_1
 		{
 			pos:0;-4;0

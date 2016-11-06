@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_norm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:35:21 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/24 15:35:23 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/06 13:49:19 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	get_norm(t_data *ray)
 {
 	if ((ray->obj_hit)->type == SPHERE)
 		ray->norm = vec_norm(vec_sub(ray->hit_point, (ray->obj_hit)->pos));
-	if ((ray->obj_hit)->type == PLANE)
+	if ((ray->obj_hit)->type == PLANE ||
+		(ray->obj_hit)->type == TRIANGLE)
 		ray->norm = (ray->obj_hit)->norm;
 	if ((ray->obj_hit)->type == CYLINDER)
 		norm_cylinder(ray);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:49:00 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/24 17:49:03 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/06 13:14:20 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ e_type	get_type(char *type)
 
 	t = NONE;
 	!ft_strcmp(type, "sphere") ? t = SPHERE : 0;
+	!ft_strcmp(type, "triangle") ? t = TRIANGLE : 0;
 	!ft_strcmp(type, "cone") ? t = CONE : 0;
 	!ft_strcmp(type, "cylinder") ? t = CYLINDER : 0;
 	!ft_strcmp(type, "plane") ? t = PLANE : 0;
