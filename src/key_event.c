@@ -68,6 +68,8 @@ void		rotate_cam(int keyval)
 
 gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 {
+	if (event->keyval == 65307)
+		gtk_main_quit();
 	if (g_env.state_prev == FALSE)
 		return (FALSE);
 	(void)win;

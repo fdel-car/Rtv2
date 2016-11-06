@@ -83,6 +83,8 @@ void	init_gtk(void)
 	g_env.prev = GTK_WIDGET(gtk_builder_get_object(g_env.build, "prev_img"));
 	g_env.aa_choice = GTK_WIDGET(gtk_builder_get_object(g_env.build,
 	"aa_choice"));
+	g_env.spin_refl = GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"spin_refl"));
 	g_env.toggle_prev = GTK_WIDGET(gtk_builder_get_object(g_env.build,
 	"prev_button"));
 	g_env.pixels = gdk_pixbuf_get_pixels(g_env.pix);
@@ -108,6 +110,7 @@ int		main(int argc, char **argv)
 	init_view();
 	init_gtk();
 	aa_check();
+	spin_button();
     gtk_builder_connect_signals(g_env.build, NULL);
     g_object_unref(g_env.build);
 	launch_thread();

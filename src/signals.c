@@ -12,24 +12,43 @@
 
 #include "rt.h"
 
-void	aa_check()
+void	spin_button(void)
 {
-	if (g_env.scene.anti_alia > 16)
+	GtkAdjustment *adjust;
+
+	if (g_env.scene.iter_refl >= 10)
+		g_env.scene.iter_refl = 10;
+	if (g_env.scene.iter_refl < 0)
+		g_env.scene.iter_refl = 0;
+  	adjust = gtk_adjustment_new(g_env.scene.iter_refl,
+	0.0, 10.0, 1.0, 5.0, 0.0);
+	gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(g_env.spin_refl), adjust);
+}
+
+void	update_iter_refl(void)
+{
+	g_env.scene.iter_refl =
+	gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(g_env.spin_refl));
+}
+
+void	aa_check(void)
+{
+	if (g_env.scene.anti_alia >= 16)
 	{
 		g_env.scene.anti_alia = 16;
 		gtk_combo_box_set_active(GTK_COMBO_BOX(g_env.aa_choice), 4);
 	}
-	else if (g_env.scene.anti_alia > 8 && g_env.scene.anti_alia < 16)
+	else if (g_env.scene.anti_alia >= 8 && g_env.scene.anti_alia < 16)
 	{
 		g_env.scene.anti_alia = 8;
 		gtk_combo_box_set_active(GTK_COMBO_BOX(g_env.aa_choice), 3);
 	}
-	else if (g_env.scene.anti_alia > 4 && g_env.scene.anti_alia < 8)
+	else if (g_env.scene.anti_alia >= 4 && g_env.scene.anti_alia < 8)
 	{
 		g_env.scene.anti_alia = 4;
 		gtk_combo_box_set_active(GTK_COMBO_BOX(g_env.aa_choice), 2);
 	}
-	else if (g_env.scene.anti_alia > 2 && g_env.scene.anti_alia < 4)
+	else if (g_env.scene.anti_alia >= 2 && g_env.scene.anti_alia < 4)
 	{
 		g_env.scene.anti_alia = 2;
 		gtk_combo_box_set_active(GTK_COMBO_BOX(g_env.aa_choice), 1);

@@ -120,6 +120,7 @@ typedef struct		s_env
 	GtkWidget		*prev;
 	GtkWidget		*toggle_prev;
 	GtkWidget		*aa_choice;
+	GtkWidget		*spin_refl;
 	guchar			*pixels;
 	guchar			*pixels_prev;
 	t_scene			scene;
