@@ -34,12 +34,11 @@ scene
 	{
 		sphere_1
 		{
-			pos:NULL
+			pos:0;-4;0
 			dir:NULL
 			normal:NULL
-			rayon:0
-			type:mesh
-			src:obj/cube.obj
+			rayon:2
+			type:sphere
 			materiel
 			{
 				brillance:42

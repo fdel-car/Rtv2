@@ -127,11 +127,14 @@ typedef struct		s_env
 	t_scene			scene;
 	gboolean		state_prev;
 	pthread_t		thread[NUM_THREAD];
+	unsigned char	id_thread;
 	unsigned int	limits[NUM_THREAD];
 	unsigned int	limits_prev[NUM_THREAD];
 	unsigned int	rowstride;
 	unsigned int	rowstride_prev;
-	unsigned char	id_thread;
+
+	unsigned int	progress;
+	unsigned int	total;
 }					t_env;
 
 t_env g_env;

@@ -25,6 +25,7 @@ void	put_pixel(int x, int y, t_color color)
 void	launch_thread(void)
 {
 	desactivate_preview();
+	g_env.progress = 0;
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);
 	g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir, g_env.scene.cam.right);
 	g_env.scene.cam.up_left = vec_add(g_env.scene.cam.pos,
@@ -112,9 +113,9 @@ int		main(int argc, char **argv)
 	aa_check();
 	spin_button();
 	gtk_builder_connect_signals(g_env.build, NULL);
-
 	create_list_of_objects();
 	//g_object_unref(g_env.build);
+	g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();
 	gtk_widget_show_all(g_env.win);

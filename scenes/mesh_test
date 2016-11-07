@@ -1,0 +1,44 @@
+scene
+{
+	global_illumination:0
+	anti_aliasing:0
+	iter_reflection:0
+	name:test_scene
+	camera
+	{
+		pos:0;0;-10
+		dir:0;0;1
+	}
+	lights
+	{
+		light_1
+		{
+		pos:10;1;-10
+		rayon:2.0
+		type:multi_dir
+		color:255;255;255
+		intensity:0.2
+		blur:0
+		}
+	}
+	objects
+	{
+		cube_mesh
+		{
+			pos:NULL
+			dir:NULL
+			normal:NULL
+			rayon:0
+			type:mesh
+			src:obj/deer.obj
+			materiel
+			{
+				brillance:0
+				reflection:0
+				transparence:0.6
+				color:200;100;100
+				texture:NULL
+			}
+		}
+	}
+}
