@@ -40,6 +40,28 @@ void 	*find_objects(char *name ,unsigned int *n )
 	return (NULL);
 }
 
+void    save_color_material(GtkEntry *entry, t_gtkData *data)
+{
+	GdkRGBA *col;
+
+	col = malloc(sizeof(GdkRGBA));
+	gtk_color_chooser_get_rgba ((GtkColorChooser *)entry,col);
+	if(ft_strcmp(data->desc,"color") == 0)
+	{
+		((t_obj *)data->obj)->mater.color.r  = (int)(col->red * 255);
+		((t_obj *)data->obj)->mater.color.g  = (int)(col->green * 255);
+		((t_obj *)data->obj)->mater.color.b  = (int)(col->blue * 255);
+		printf("%f\n", col->red);
+		printf("%f\n", col->green);
+		printf("%f\n", col->blue);
+		printf("%d\n", (int)(col->red * 255));
+		printf("%d\n", (int)(col->green * 255));
+		printf("%d\n", (int)(col->blue * 255));
+	}
+	gdk_rgba_free(col);
+
+}
+
 void	save_entry_transformation_light(GtkEntry *entry, t_gtkData *data)
 {
 	float ret;
@@ -134,6 +156,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	GtkWidget *color_g_entry;
 	GtkWidget *color_b_entry;
 	GtkWidget *text_entry;
+	GtkWidget *color_button;
 
 	GtkEntryBuffer *shiny_buffer;
 	GtkEntryBuffer *refl_buffer;
@@ -152,6 +175,9 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	t_gtkData *entry_col_g = NULL;
 	t_gtkData *entry_col_b = NULL;
 	t_gtkData *entry_text = NULL;
+	t_gtkData *entry_col = NULL;
+	GdkRGBA *col = malloc(sizeof(GdkRGBA));
+
 
 	s_entry = malloc(sizeof(char) * 10);
 	entry_shiny = malloc(sizeof(t_gtkData));
@@ -161,6 +187,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	entry_col_g = malloc(sizeof(t_gtkData));
 	entry_col_b = malloc(sizeof(t_gtkData));
 	entry_text = malloc(sizeof(t_gtkData));
+	entry_col = malloc(sizeof(t_gtkData));
 	current_obj = (t_obj *)object;
 	sprintf(s_entry,"%f", current_obj->mater.shiny);
 	shiny_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -193,6 +220,17 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	color_b_entry = gtk_entry_new_with_buffer(color_b_buffer);
 	text_entry = gtk_entry_new_with_buffer(text_buffer);
 
+
+	col->red  = (double)current_obj->mater.color.r / 255;
+	col->green  = (double)current_obj->mater.color.g / 255;
+	col->blue  = (double)current_obj->mater.color.b / 255;
+	col->alpha = 1;
+
+	color_button = gtk_color_button_new_with_rgba ((const GdkRGBA *)col);
+	entry_col->data = color_button;
+	entry_col->desc = ft_strdup("color");
+	entry_col->obj = current_obj;
+
 	gtk_entry_set_width_chars ((GtkEntry *)shiny_entry, 6);
 	gtk_entry_set_width_chars ((GtkEntry *)refl_entry, 6);
 	gtk_entry_set_width_chars ((GtkEntry *)trans_entry, 6);
@@ -220,6 +258,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	gtk_grid_attach(GTK_GRID(grid), color_r_entry,1,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_g_entry,2,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_b_entry,3,3,1,1);
+	gtk_grid_attach(GTK_GRID(grid), color_button,4,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), text_entry,1,4,1,1);
 
 	entry_shiny->data = shiny_entry;
@@ -279,6 +318,11 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 			G_CALLBACK(launch_preview), entry_col_b);
 	g_signal_connect(text_entry, "changed",
 			G_CALLBACK(launch_preview), entry_text);
+
+	g_signal_connect(color_button, "color-set",
+			G_CALLBACK(save_color_material), entry_col);
+	g_signal_connect(color_button, "color-set",
+			G_CALLBACK(launch_preview), entry_col);
 }
 
 void	create_transformation_widget_object(void *object, GtkWidget *grid)
