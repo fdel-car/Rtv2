@@ -195,6 +195,21 @@ void	create_transformation_widget_object(void *object, GtkWidget *grid)
 			G_CALLBACK(save_entry_transformation_object), entry_dirz);
 	g_signal_connect(rayon_entry, "changed",
 			G_CALLBACK(save_entry_transformation_object), entry_rayon);
+
+	g_signal_connect(pos_entry[0], "changed",
+			G_CALLBACK(launch_preview), entry_posx);
+	g_signal_connect(pos_entry[1], "changed",
+			G_CALLBACK(launch_preview), entry_posy);
+	g_signal_connect(pos_entry[2], "changed",
+			G_CALLBACK(launch_preview), entry_posz);
+	g_signal_connect(dir_entry[0], "changed",
+			G_CALLBACK(launch_preview), entry_dirx);
+	g_signal_connect(dir_entry[1], "changed",
+			G_CALLBACK(launch_preview), entry_diry);
+	g_signal_connect(dir_entry[2], "changed",
+			G_CALLBACK(launch_preview), entry_dirz);
+	g_signal_connect(rayon_entry, "changed",
+			G_CALLBACK(launch_preview), entry_rayon);
 }
 
 void	create_transformation_widget_light(void *object, GtkWidget *grid)
@@ -270,6 +285,15 @@ void	create_transformation_widget_light(void *object, GtkWidget *grid)
 			G_CALLBACK(save_entry_transformation_light), entry_posz);
 	g_signal_connect(rayon_entry, "changed",
 			G_CALLBACK(save_entry_transformation_light), entry_rayon);
+
+	g_signal_connect(pos_entry[0], "changed",
+			G_CALLBACK(launch_preview), entry_posx);
+	g_signal_connect(pos_entry[1], "changed",
+			G_CALLBACK(launch_preview), entry_posy);
+	g_signal_connect(pos_entry[2], "changed",
+			G_CALLBACK(launch_preview), entry_posz);
+	g_signal_connect(rayon_entry, "changed",
+			G_CALLBACK(launch_preview), entry_rayon);
 }
 
 void	create_list_of_attributs(void *objects, unsigned int type)
