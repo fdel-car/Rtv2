@@ -76,6 +76,211 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
 		((t_obj *)data->obj)->rayon  = ret;
 }
 
+void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
+{
+	float ret_f;
+	int ret_i;
+	char *ret_s;
+
+	if(ft_strcmp(data->desc,"shiny") == 0)
+	{
+		ret_f = ft_atof(gtk_entry_get_text(entry));
+		((t_obj *)data->obj)->mater.shiny  = ret_f;
+	}
+	if(ft_strcmp(data->desc,"refl") == 0)
+	{
+		ret_f = ft_atof(gtk_entry_get_text(entry));
+		((t_obj *)data->obj)->mater.int_refl = ret_f;
+	}
+	if(ft_strcmp(data->desc,"trans") == 0)
+	{
+		ret_f = ft_atof(gtk_entry_get_text(entry));
+		((t_obj *)data->obj)->mater.int_trans = ret_f;
+	}
+	if(ft_strcmp(data->desc,"colr") == 0)
+	{
+		ret_i = ft_atoi(gtk_entry_get_text(entry));
+		((t_obj *)data->obj)->mater.color.r  = ret_i;
+	}
+	if(ft_strcmp(data->desc,"colg") == 0)
+	{
+		ret_i = ft_atoi(gtk_entry_get_text(entry));
+		((t_obj *)data->obj)->mater.color.g  = ret_i;
+	}
+	if(ft_strcmp(data->desc,"colb") == 0)
+	{
+		ret_i = ft_atoi(gtk_entry_get_text(entry));
+		((t_obj *)data->obj)->mater.color.b = ret_i;
+	}
+	if(ft_strcmp(data->desc,"text") == 0)
+	{
+		ret_s = (char *)gtk_entry_get_text(entry);
+		((t_obj *)data->obj)->mater.text = ret_s;
+	}
+}
+
+void	create_material_widget_object(void *object, GtkWidget *grid)
+{
+	GtkWidget *shiny_label;
+	GtkWidget *refl_label;
+	GtkWidget *trans_label;
+	GtkWidget *color_label;
+	GtkWidget *text_label;
+
+	GtkWidget *shiny_entry;
+	GtkWidget *refl_entry;
+	GtkWidget *trans_entry;
+	GtkWidget *color_r_entry;
+	GtkWidget *color_g_entry;
+	GtkWidget *color_b_entry;
+	GtkWidget *text_entry;
+
+	GtkEntryBuffer *shiny_buffer;
+	GtkEntryBuffer *refl_buffer;
+	GtkEntryBuffer *trans_buffer;
+	GtkEntryBuffer *color_r_buffer;
+	GtkEntryBuffer *color_g_buffer;
+	GtkEntryBuffer *color_b_buffer;
+	GtkEntryBuffer *text_buffer;
+
+	t_obj *current_obj;
+	char *s_entry = NULL;
+	t_gtkData *entry_shiny = NULL;
+	t_gtkData *entry_refl = NULL;
+	t_gtkData *entry_trans = NULL;
+	t_gtkData *entry_col_r = NULL;
+	t_gtkData *entry_col_g = NULL;
+	t_gtkData *entry_col_b = NULL;
+	t_gtkData *entry_text = NULL;
+
+	s_entry = malloc(sizeof(char) * 10);
+	entry_shiny = malloc(sizeof(t_gtkData));
+	entry_refl = malloc(sizeof(t_gtkData));
+	entry_trans = malloc(sizeof(t_gtkData));
+	entry_col_r= malloc(sizeof(t_gtkData));
+	entry_col_g = malloc(sizeof(t_gtkData));
+	entry_col_b = malloc(sizeof(t_gtkData));
+	entry_text = malloc(sizeof(t_gtkData));
+	current_obj = (t_obj *)object;
+	sprintf(s_entry,"%f", current_obj->mater.shiny);
+	shiny_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry,"%f", current_obj->mater.int_refl);
+	refl_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry,"%f", current_obj->mater.int_trans);
+	trans_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry,"%d", current_obj->mater.color.r);
+	color_r_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry,"%d", current_obj->mater.color.g);
+	color_g_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry,"%d", current_obj->mater.color.b);
+	color_b_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry,"%s", current_obj->mater.text);
+	text_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+
+	free(s_entry);
+
+	shiny_label = gtk_label_new("Brillance");
+	refl_label = gtk_label_new("Reflection");
+	trans_label = gtk_label_new("Transparence");
+	color_label = gtk_label_new("Color");
+	text_label = gtk_label_new("Texture");
+
+	shiny_entry = gtk_entry_new_with_buffer(shiny_buffer);
+	refl_entry = gtk_entry_new_with_buffer(refl_buffer);
+	trans_entry = gtk_entry_new_with_buffer(trans_buffer);
+	color_r_entry = gtk_entry_new_with_buffer(color_r_buffer);
+	color_g_entry = gtk_entry_new_with_buffer(color_g_buffer);
+	color_b_entry = gtk_entry_new_with_buffer(color_b_buffer);
+	text_entry = gtk_entry_new_with_buffer(text_buffer);
+
+	gtk_entry_set_width_chars ((GtkEntry *)shiny_entry, 6);
+	gtk_entry_set_width_chars ((GtkEntry *)refl_entry, 6);
+	gtk_entry_set_width_chars ((GtkEntry *)trans_entry, 6);
+	gtk_entry_set_width_chars ((GtkEntry *)color_r_entry, 3);
+	gtk_entry_set_width_chars ((GtkEntry *)color_g_entry, 3);
+	gtk_entry_set_width_chars ((GtkEntry *)color_b_entry, 3);
+	gtk_entry_set_width_chars ((GtkEntry *)text_entry, 6);
+	gtk_entry_set_max_length ((GtkEntry *)shiny_entry, 6);
+	gtk_entry_set_max_length ((GtkEntry *)refl_entry, 6);
+	gtk_entry_set_max_length ((GtkEntry *)trans_entry, 6);
+	gtk_entry_set_max_length ((GtkEntry *)color_r_entry, 3);
+	gtk_entry_set_max_length ((GtkEntry *)color_g_entry, 3);
+	gtk_entry_set_max_length ((GtkEntry *)color_b_entry, 3);
+	gtk_entry_set_max_length ((GtkEntry *)text_entry, 6);
+
+	gtk_grid_attach(GTK_GRID(grid), shiny_label,0,0,1,1);
+	gtk_grid_attach(GTK_GRID(grid), refl_label,0,1,1,1);
+	gtk_grid_attach(GTK_GRID(grid), trans_label,0,2,1,1);
+	gtk_grid_attach(GTK_GRID(grid), color_label,0,3,1,1);
+	gtk_grid_attach(GTK_GRID(grid), text_label,0,4,1,1);
+
+	gtk_grid_attach(GTK_GRID(grid), shiny_entry,1,0,1,1);
+	gtk_grid_attach(GTK_GRID(grid), refl_entry,1,1,1,1);
+	gtk_grid_attach(GTK_GRID(grid), trans_entry,1,2,1,1);
+	gtk_grid_attach(GTK_GRID(grid), color_r_entry,1,3,1,1);
+	gtk_grid_attach(GTK_GRID(grid), color_g_entry,2,3,1,1);
+	gtk_grid_attach(GTK_GRID(grid), color_b_entry,3,3,1,1);
+	gtk_grid_attach(GTK_GRID(grid), text_entry,1,4,1,1);
+
+	entry_shiny->data = shiny_entry;
+	entry_shiny->desc = ft_strdup("shiny");
+	entry_shiny->obj = current_obj;
+
+	entry_refl->data = refl_entry;
+	entry_refl->desc = ft_strdup("refl");
+	entry_refl->obj = current_obj;
+
+	entry_trans->data = trans_entry;
+	entry_trans->desc = ft_strdup("trans");
+	entry_trans->obj = current_obj;
+
+	entry_col_r->data = color_r_entry;
+	entry_col_r->desc = ft_strdup("colr");
+	entry_col_r->obj = current_obj;
+
+	entry_col_g->data = color_g_entry;
+	entry_col_g->desc = ft_strdup("colg");
+	entry_col_g->obj = current_obj;
+
+	entry_col_b->data = color_b_entry;
+	entry_col_b->desc = ft_strdup("colb");
+	entry_col_b->obj = current_obj;
+
+	entry_text->data = text_entry;
+	entry_text->desc = ft_strdup("text");
+	entry_text->obj = current_obj;
+
+	g_signal_connect(shiny_entry, "changed",
+			G_CALLBACK(save_entry_material_object), entry_shiny);
+	g_signal_connect(refl_entry, "changed",
+			G_CALLBACK(save_entry_material_object), entry_refl);
+	g_signal_connect(trans_entry, "changed",
+			G_CALLBACK(save_entry_material_object), entry_trans);
+	g_signal_connect(color_r_entry, "changed",
+			G_CALLBACK(save_entry_material_object), entry_col_r);
+	g_signal_connect(color_g_entry, "changed",
+			G_CALLBACK(save_entry_material_object), entry_col_g);
+	g_signal_connect(color_b_entry, "changed",
+			G_CALLBACK(save_entry_material_object), entry_col_b);
+	g_signal_connect(text_entry, "changed",
+			G_CALLBACK(save_entry_material_object), entry_text);
+
+	g_signal_connect(shiny_entry, "changed",
+			G_CALLBACK(launch_preview), entry_shiny);
+	g_signal_connect(refl_entry, "changed",
+			G_CALLBACK(launch_preview), entry_refl);
+	g_signal_connect(trans_entry, "changed",
+			G_CALLBACK(launch_preview), entry_trans);
+	g_signal_connect(color_r_entry, "changed",
+			G_CALLBACK(launch_preview), entry_col_r);
+	g_signal_connect(color_g_entry, "changed",
+			G_CALLBACK(launch_preview), entry_col_g);
+	g_signal_connect(color_b_entry, "changed",
+			G_CALLBACK(launch_preview), entry_col_b);
+	g_signal_connect(text_entry, "changed",
+			G_CALLBACK(launch_preview), entry_text);
+}
+
 void	create_transformation_widget_object(void *object, GtkWidget *grid)
 {
 	GtkWidget *label[3];
@@ -298,7 +503,8 @@ void	create_transformation_widget_light(void *object, GtkWidget *grid)
 
 void	create_list_of_attributs(void *objects, unsigned int type)
 {
-	GtkWidget *grid;
+	GtkWidget *grid_transformation;
+	GtkWidget *grid_material;
 	GList *children, *iter;
 
 	children = gtk_container_get_children(GTK_CONTAINER(gtk_builder_get_object\
@@ -306,13 +512,19 @@ void	create_list_of_attributs(void *objects, unsigned int type)
 	for(iter = children; iter != NULL; iter = g_list_next(iter))
 		gtk_widget_destroy(GTK_WIDGET(iter->data));
 	g_list_free(children);
-	grid = gtk_grid_new();
+	grid_transformation = gtk_grid_new();
+	grid_material = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(gtk_builder_get_object(g_env.build,
-					"right_menu")), grid);
+					"right_menu")), grid_transformation);
+	gtk_container_add(GTK_CONTAINER(gtk_builder_get_object(g_env.build,
+					"right_menu")), grid_material);
 	if (type == 1)
-		create_transformation_widget_object(objects, grid);
+	{
+		create_transformation_widget_object(objects, grid_transformation);
+		create_material_widget_object(objects, grid_material);
+	}
 	else if (type == 2)
-		create_transformation_widget_light(objects, grid);
+		create_transformation_widget_light(objects, grid_transformation);
 	gtk_widget_show_all(g_env.win);
 }
 
