@@ -32,7 +32,7 @@ scene
 	}
 	objects
 	{
-		cube_mesh
+		sphere_1
 		{
 			pos:NULL
 			dir:NULL
