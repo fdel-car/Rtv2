@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:49:00 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/06 13:14:20 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:17:38 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ e_type	get_type(char *type)
 
 	t = NONE;
 	!ft_strcmp(type, "sphere") ? t = SPHERE : 0;
+	!ft_strcmp(type, "mesh") ? t = MESH : 0;
 	!ft_strcmp(type, "triangle") ? t = TRIANGLE : 0;
 	!ft_strcmp(type, "cone") ? t = CONE : 0;
 	!ft_strcmp(type, "cylinder") ? t = CYLINDER : 0;
@@ -44,7 +45,7 @@ t_color	read_color(char *data)
 	return (new);
 }
 
-t_vect	read_vec(char *data)
+t_vect	read_vec(char *data, char op)
 {
 	t_vect	new;
 	char	**vals;
@@ -52,7 +53,7 @@ t_vect	read_vec(char *data)
 	new = vec_new(0, 0, 0);
 	if (!ft_strcmp(data, "NULL"))
 		return (new);
-	vals = ft_strsplit(data, ';');
+	vals = ft_strsplit(data, op);
 	if (vals[0] && vals[1] && vals[2])
 	{
 		new.x = ft_atof(vals[0]);

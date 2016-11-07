@@ -6,14 +6,14 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/06 13:12:03 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:14:31 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 
-typedef enum {NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE} e_type;
+typedef enum {NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE, MESH} e_type;
 
 typedef struct		s_vect
 {
@@ -76,6 +76,7 @@ typedef struct		s_obj
 
 	short			type;
 	char			*name;
+	char			*src;//source file for meshes
 	t_vect			pos;
 	t_vect			dir;
 	t_vect			norm;

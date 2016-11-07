@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/24 17:46:44 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:19:47 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	load_camera(char **t)
 	while (t[++n] && !ft_sii(t[n], "}"))
 	{
 		if (ft_sii(t[n], "pos:"))
-			g_env.scene.cam.pos = read_vec(get_after(t[n], "pos:"));
+			g_env.scene.cam.pos = read_vec(get_after(t[n], "pos:"), ';');
 		if (ft_sii(t[n], "dir:"))
-			g_env.scene.cam.dir = vec_norm(read_vec(get_after(t[n], "dir:")));
+			g_env.scene.cam.dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 	}
 }
 

@@ -34,11 +34,12 @@ scene
 	{
 		sphere_1
 		{
-			pos:0;-4;0
+			pos:NULL
 			dir:NULL
 			normal:NULL
-			rayon:2
-			type:sphere
+			rayon:0
+			type:mesh
+			src:obj/lowpolytree.obj
 			materiel
 			{
 				brillance:42

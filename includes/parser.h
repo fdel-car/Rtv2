@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/22 16:32:06 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:20:52 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ void		load_elems(char **t, unsigned char type);
 void		load_camera(char **t);
 int			ft_sii(char *s, char *e);
 char		*get_after(char *s, char *a);
-t_vect		read_vec(char *data);
+t_vect		read_vec(char *data, char op);
 t_color		read_color(char *data);
 void		ctab_free(char **t);
 void		push_obj(t_obj *new);
 void		push_lgt(t_light *new);
+void		parse_obj(char *file_name, t_mater mat);
+void		set_func(t_obj *o);
 e_type		get_type(char *type);
 
 // print

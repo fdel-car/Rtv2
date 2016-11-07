@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/06 13:11:29 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:19:17 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,21 @@ void	load_object(char **t)
 	new->next = NULL;
 	name = ft_strdup(*t);
 	new->name = ft_strtrim(name);
+	new->src = 0;
 	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
 		while (t[++n] && !ft_sii(t[n], "{"))
 		{
 			if (ft_sii(t[n], "v0:"))
-				new->v0 = read_vec(get_after(t[n], "v0:"));
+				new->v0 = read_vec(get_after(t[n], "v0:"), ';');
 			if (ft_sii(t[n], "v1:"))
-				new->v1 = read_vec(get_after(t[n], "v1:"));
+				new->v1 = read_vec(get_after(t[n], "v1:"), ';');
 			if (ft_sii(t[n], "v2:"))
-				new->v2 = read_vec(get_after(t[n], "v2:"));
+				new->v2 = read_vec(get_after(t[n], "v2:"), ';');
 			if (ft_sii(t[n], "pos:"))
-				new->pos = read_vec(get_after(t[n], "pos:"));
+				new->pos = read_vec(get_after(t[n], "pos:"), ';');
 			if (ft_sii(t[n], "dir:"))
-				new->dir = vec_norm(read_vec(get_after(t[n], "dir:")));
+				new->dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 			if (ft_sii(t[n], "rayon:"))
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
 			if (ft_sii(t[n], "alpha:"))
@@ -83,10 +84,14 @@ void	load_object(char **t)
 			if (ft_sii(t[n], "type:"))
 				new->type = get_type(get_after(t[n], "type:"));
 			if (ft_sii(t[n], "normal:"))
-				new->norm = vec_norm(read_vec(get_after(t[n], "normal:")));
+				new->norm = vec_norm(read_vec(get_after(t[n], "normal:"), ';'));
 			if (ft_sii(t[n], "materiel"))
 				new->mater = load_material(&(t[n]));
+			if (ft_sii(t[n], "src:"))
+				new->src = ft_strdup(get_after(t[n], "src:"));
 		}
+	if (new->src)
+		parse_obj(new->src, new->mater);
 	set_func(new);
 	push_obj(new);
 }
@@ -107,7 +112,7 @@ void	load_light(char **t)
 		while (t[++n] && !ft_sii(t[n], "{"))
 		{
 			if (ft_sii(t[n], "pos:"))
-				new->pos = read_vec(get_after(t[n], "pos:"));
+				new->pos = read_vec(get_after(t[n], "pos:"), ';');
 			if (ft_sii(t[n], "rayon:"))
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
 			if (ft_sii(t[n], "type:"))
