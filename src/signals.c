@@ -70,3 +70,21 @@ void	switch_anti_aliasing(void)
 	g_env.scene.anti_alia = aa;
 	free(s);
 }
+
+void  set_signal_create_object(void){
+	GtkWidget *window_popup;
+	GtkWidget *button_create_object;
+	t_gtkData *entry = NULL;
+
+
+
+	window_popup = GTK_WIDGET(gtk_builder_get_object(g_env.build,"popup_create_object"));
+	button_create_object = GTK_WIDGET(gtk_builder_get_object(g_env.build,"button_create"));
+	entry = malloc(sizeof(t_gtkData));
+	entry->data = window_popup;
+	entry->desc = NULL;
+	entry->obj = NULL;
+
+	g_signal_connect(button_create_object, "clicked",
+	 		G_CALLBACK(create_object), entry);
+}

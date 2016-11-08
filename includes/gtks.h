@@ -23,5 +23,7 @@ typedef struct		s_gtkData
 void				create_list_of_objects();
 void				select_current_obj(GtkTreeView *GtkTreeView,
 					GtkTreePath *path);
+void  set_signal_create_object(void);
+void create_object(GtkWidget *entry, t_gtkData *e);
 
 #endif

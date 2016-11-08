@@ -114,6 +114,7 @@ int		main(int argc, char **argv)
 	spin_button();
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
+	set_signal_create_object();
 	//g_object_unref(g_env.build);
 	g_env.total = WIDTH * HEIGHT;
 	launch_thread();
