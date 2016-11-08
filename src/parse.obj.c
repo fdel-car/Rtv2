@@ -85,6 +85,8 @@ void fill_values(char **file, int v_s, int vn_s, t_mater mat)
 	while (file[i] && ft_sii(file[i], "vn "))
 			v[1][in++] = read_vec(get_after(file[i++], "vn "), ' ');
 	load_obj(file, v, i, mat);
+	free(v[0]);
+	free(v[1]);
 }
 
 void parse_obj(char *file_name, t_mater mat)
