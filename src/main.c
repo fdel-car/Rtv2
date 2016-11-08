@@ -99,6 +99,7 @@ void	init_gtk(void)
 				anti_alia[iter]);
 		iter++;
 	}
+	init_gtk_create_widget();
 }
 
 int		main(int argc, char **argv)
@@ -119,6 +120,8 @@ int		main(int argc, char **argv)
 	g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();
+	//init_gtk_create_widget();
+
 	gtk_widget_show_all(g_env.win);
 	gtk_main();
 	return (EXIT_SUCCESS);

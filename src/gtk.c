@@ -12,6 +12,22 @@
 
 #include "rt.h"
 
+void init_gtk_create_widget(void)
+{
+	printf("here");
+	GtkWidget *combo;
+	static char *combo_text[] = {"Sphere", "Plan", "Cone", "Cylindre"};
+	int		i;
+
+	i = 0;
+	combo = GTK_WIDGET(gtk_builder_get_object(g_env.build,"create_type"));
+	while (i < 4)
+	{
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),
+				combo_text[i]);
+		i++;
+	}
+}
 void 	*find_objects(char *name ,unsigned int *n )
 {
 	t_light *lights;
@@ -69,9 +85,9 @@ void    save_color_material(GtkEntry *entry, t_gtkData *data)
 	gtk_color_chooser_get_rgba ((GtkColorChooser *)entry,col);
 	if(ft_strcmp(data->desc,"color") == 0)
 	{
-		((t_light *)data->obj)->color.r  = (int)(col->red * 255);
-		((t_light *)data->obj)->color.g  = (int)(col->green * 255);
-		((t_light *)data->obj)->color.b  = (int)(col->blue * 255);
+		((t_obj *)data->obj)->mater.color.r  = (int)(col->red * 255);
+		((t_obj *)data->obj)->mater.color.g  = (int)(col->green * 255);
+		((t_obj *)data->obj)->mater.color.b  = (int)(col->blue * 255);
 	}
 	gdk_rgba_free(col);
 }

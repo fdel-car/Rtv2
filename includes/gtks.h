@@ -25,5 +25,6 @@ void				select_current_obj(GtkTreeView *GtkTreeView,
 					GtkTreePath *path);
 void  set_signal_create_object(void);
 void create_object(GtkWidget *entry, t_gtkData *e);
+void init_gtk_create_widget(void);
 
 #endif
