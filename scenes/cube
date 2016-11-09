@@ -15,7 +15,7 @@ scene
         {
 		pos:-6;6;-10
 		rayon:2.0
-        type:multi_dir
+        type:point_light
         color:255;255;255
         intensity:0.4
         blur:0

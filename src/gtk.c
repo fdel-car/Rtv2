@@ -14,7 +14,6 @@
 
 void init_gtk_create_widget(void)
 {
-	printf("here");
 	GtkWidget *combo;
 	static char *combo_text[] = {"Sphere", "Plan", "Cone", "Cylindre"};
 	int		i;
@@ -140,7 +139,7 @@ t_obj *add_object_mater_refl(t_obj *obj)
 	obj->mater.int_refl = ft_atof(gtk_entry_get_text(refl));
 	return (obj);
 }
-	
+
 t_obj *add_object_mater_trans(t_obj *obj)
 {
 	GtkEntry *trans;
@@ -167,7 +166,7 @@ t_obj *add_object_mater_color(t_obj *obj)
 }
 
 void signal_add_object(void)
-{	
+{
 	char *s = NULL;
 	t_obj *obj = NULL;
 
@@ -987,7 +986,7 @@ void	create_list_of_objects(void)
 	GtkWidget			*tree_view;
 
 
-	
+
 	obj = g_env.scene.obj;
 	lgt = g_env.scene.lgt;
 	model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
@@ -1004,7 +1003,6 @@ void	create_list_of_objects(void)
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, lgt->name, -1);
 		lgt = lgt->next;
 	}
-	printf("4\n");
 	cell = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Objects", cell,
 			"text", 0, NULL);

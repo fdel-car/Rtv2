@@ -15,24 +15,26 @@
 float	intersect_triangle(t_obj *obj, t_data ray)
 {
 	float       fl[4];
-	t_vect		vc[5];
+	t_vect		vc[3];
+	t_vect		u;
+	t_vect		v;
 
-	vc[0] = vec_sub(obj->v1, obj->v0);
-	vc[1] = vec_sub(obj->v2, obj->v0);
-	vc[2] = cross_pr(ray.dir, vc[1]);
-	fl[0] = vec_dotp(vc[0], vc[2]);
-	if (fl[0] < EPSILON && fl[0] > -EPSILON)
+	u = vec_sub(obj->v1, obj->v0);
+	v = vec_sub(obj->v2, obj->v0);
+	vc[0] = cross_pr(ray.dir, v);
+	fl[0] = vec_dotp(u, vc[0]);
+	if (fl[0] < 0.001 && fl[0] > -0.001)
 		return (-1);
-	vc[3] = vec_sub(ray.orig, obj->v0);
-	fl[1] = vec_dotp(vc[3], vc[2]) * (1 / fl[0]);
+	vc[1] = vec_sub(ray.orig, obj->v0);
+	fl[1] = vec_dotp(vc[1], vc[0]) * (1 / fl[0]);
 	if (fl[1] < 0 || fl[1] > 1)
 		return (-1);
-	vc[4] = cross_pr(vc[3], vc[0]);
-	fl[2] = vec_dotp(ray.dir, vc[4]) * (1 / fl[0]);
+	vc[2] = cross_pr(vc[1], u);
+	fl[2] = vec_dotp(ray.dir, vc[2]) * (1 / fl[0]);
 	if (fl[2] < 0 || (fl[1] + fl[2]) > 1)
 		return (-1);
-	fl[3] = vec_dotp(vc[1], vc[4]) * (1 / fl[0]);
-	if (fl[3] > EPSILON)
+	fl[3] = vec_dotp(v, vc[2]) * (1 / fl[0]);
+	if (fl[3] > 0.001)
 		return (fl[3]);
 	return (-1);
 }

@@ -22,16 +22,34 @@ void	put_pixel(int x, int y, t_color color)
 	g_env.pixels[pos + 2] = color.b;
 }
 
+// void	pre_compute_tri(void)
+// {
+// 	t_obj *o;
+//
+// 	o = g_env.scene.obj;
+// 	while (o)
+// 	{
+// 		if (o->type == TRIANGLE)
+// 		{
+// 			o->u = vec_sub(o->v1, o->v0);
+// 			o->v = vec_sub(o->v2, o->v0);
+// 		}
+// 		o = o->next;
+// 	}
+// }
+
 void	launch_thread(void)
 {
 	desactivate_preview();
-	g_env.progress = 0;
+	// g_env.pixels_progress = 0;
+	// g_env.progress = 0;
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);
 	g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir, g_env.scene.cam.right);
 	g_env.scene.cam.up_left = vec_add(g_env.scene.cam.pos,
-			vec_add(vec_mult(g_env.scene.cam.dir, g_env.scene.cam.view_d),
-				vec_sub(vec_mult(g_env.scene.cam.up, (g_env.scene.cam.view_h / 2.0)),
-					vec_mult(g_env.scene.cam.right, (g_env.scene.cam.view_w / 2.0)))));
+	vec_add(vec_mult(g_env.scene.cam.dir, g_env.scene.cam.view_d),
+	vec_sub(vec_mult(g_env.scene.cam.up, (g_env.scene.cam.view_h / 2.0)),
+	vec_mult(g_env.scene.cam.right, (g_env.scene.cam.view_w / 2.0)))));
+	// pre_compute_tri();
 	g_env.id_thread = 0;
 	while (g_env.id_thread < NUM_THREAD)
 	{
@@ -117,7 +135,7 @@ int		main(int argc, char **argv)
 	create_list_of_objects();
 	set_signal_create_object();
 	//g_object_unref(g_env.build);
-	g_env.total = WIDTH * HEIGHT;
+	// g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();
 	//init_gtk_create_widget();

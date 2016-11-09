@@ -101,8 +101,12 @@ void		*raytracing(void *arg)
 				super_sample(x, y, ray);
 			else
 				put_pixel(x, y, init_ray(x, y, ray));
-			printf("%f %%\n", ((float)g_env.progress / (float)g_env.total) * 100);
-			g_env.progress++;
+			// if ((g_env.pixels_progress * 100) / g_env.total != g_env.progress)
+			// {
+			// 	g_env.progress = (g_env.pixels_progress * 100) / g_env.total;
+			// 	printf("%d %%\n", g_env.progress);
+			// }
+			// g_env.pixels_progress++;
 			y++;
 		}
 		x++;

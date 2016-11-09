@@ -113,10 +113,12 @@ void	load_light(char **t)
 		{
 			if (ft_sii(t[n], "pos:"))
 				new->pos = read_vec(get_after(t[n], "pos:"), ';');
+			if (ft_sii(t[n], "dir:"))
+				new->dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 			if (ft_sii(t[n], "rayon:"))
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
 			if (ft_sii(t[n], "type:"))
-				new->type = ft_strdup(get_after(t[n], "type:"));
+				new->type = get_type(get_after(t[n], "type:"));
 			if (ft_sii(t[n], "color:"))
 				new->color = read_color(get_after(t[n], "color:"));
 			if (ft_sii(t[n], "intensity:"))

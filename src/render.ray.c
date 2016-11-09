@@ -18,7 +18,10 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 	float	cos;
 
 	c = color_new(0, 0, 0);
-	ray->light = vec_norm(vec_sub(l->pos, ray->hit_point));
+	if (l->type == POINT_L)
+		ray->light = vec_norm(vec_sub(l->pos, ray->hit_point));
+	if (l->type == DIR_L)
+		ray->light = vec_mult(l->dir, -1);
 	cos = vec_dotp(ray->light, ray->norm);
 	if (cos < 0 && (ray->obj_hit)->type == PLANE)
 		cos *= -1;
@@ -50,6 +53,15 @@ gboolean	is_shadowed(t_light *l, t_data *ray)
 	t_data sh;
 	t_vect tmp;
 
+	if (l->type == DIR_L)
+	{
+		sh.orig = ray->hit_point;
+		sh.dir = vec_mult(l->dir, -1);
+		sh = intersect_obj(sh);
+		if (sh.solut == -1)
+			return (TRUE);
+		return (FALSE);
+	}
 	sh.orig = l->pos;
 	sh.dir = vec_norm(vec_sub(ray->hit_point, l->pos));
 	sh = intersect_obj(sh);

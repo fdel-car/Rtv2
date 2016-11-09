@@ -13,7 +13,8 @@
 #ifndef TYPES_H
 # define TYPES_H
 
-typedef enum {NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE, MESH} e_type;
+typedef enum	{NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE, MESH, SPOT_L,
+				DIR_L, POINT_L} e_type;
 
 typedef struct		s_vect
 {
@@ -69,14 +70,14 @@ typedef struct		s_data
 
 typedef struct		s_obj
 {
-	//triagnle vectors
 	t_vect			v0;
 	t_vect			v1;
 	t_vect			v2;
-
+	t_vect			u;
+	t_vect			v;
 	short			type;
 	char			*name;
-	char			*src;//source file for meshes
+	char			*src;
 	t_vect			pos;
 	t_vect			dir;
 	t_vect			norm;
@@ -84,6 +85,7 @@ typedef struct		s_obj
 	float			alpha;
 	t_mater			mater;
 	float			(*func)(struct s_obj *obj, t_data ray);
+	struct s_obj	*lst;
 	void			*next;
 }					t_obj;
 
@@ -92,10 +94,11 @@ typedef struct		s_light
 	char			*name;
 	gboolean		blur;
 	t_vect			pos;
+	t_vect			dir;
 	t_color			color;
 	float			rayon;
 	float			intensity;
-	char			*type;
+	e_type			type;
 	float			(*func)(t_obj *obj, t_data ray);
 	void			*next;
 }					t_light;
@@ -132,9 +135,9 @@ typedef struct		s_env
 	unsigned int	limits_prev[NUM_THREAD];
 	unsigned int	rowstride;
 	unsigned int	rowstride_prev;
-
-	unsigned int	progress;
-	unsigned int	total;
+	// unsigned int	progress;
+	// unsigned int	pixels_progress;
+	// unsigned int	total;
 }					t_env;
 
 t_env g_env;
