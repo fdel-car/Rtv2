@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/07 16:12:10 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/09 05:10:00 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,30 @@
 t_data		intersect_obj(t_data ray)
 {
 	t_obj	*obj;
+	t_obj	*lst;
 	float	tmp;
 
 	ray.solut = -1;
 	ray.obj_hit = NULL;
 	obj = g_env.scene.obj;
+	lst = NULL;
 	while (obj)
 	{
 		if (obj->type != MESH)
 			tmp = (*obj->func)(obj, ray);
+		else
+		{
+			lst = (lst) ? lst->next : obj->lst;
+			if (lst)
+				tmp = (*lst->func)(lst, ray);
+		}
 		if ((tmp < ray.solut || ray.solut == -1) && tmp != -1)
 		{
-			ray.obj_hit = obj;
+			ray.obj_hit = lst ? lst : obj;
 			ray.solut = tmp;
 		}
-		obj = obj->next;
+		if (!lst)
+			obj = obj->next;
 	}
 	return (ray);
 }

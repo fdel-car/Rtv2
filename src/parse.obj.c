@@ -49,7 +49,7 @@ void read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)
 	ctab_free(t);
 }
 
-void load_obj(char **file, t_vect **v, int i, t_mater mat)
+void load_obj(char **file, t_vect **v, int i, t_obj *o)
 {
 	t_obj *new;
 
@@ -58,14 +58,14 @@ void load_obj(char **file, t_vect **v, int i, t_mater mat)
 	while (file[i])
 	{
 		new = malloc(sizeof(t_obj));
-		read_triangle(new, file[i], v, mat);
+		read_triangle(new, file[i], v, o->mater);
 		set_func(new);
-		push_obj(new);
+		push_to_obj(new, o);
 		++i;
 	}
 }
 
-void fill_values(char **file, int v_s, int vn_s, t_mater mat)
+void fill_values(char **file, int v_s, int vn_s, t_obj *new)
 {
 	t_vect *v[2];
 	int i;
@@ -84,29 +84,29 @@ void fill_values(char **file, int v_s, int vn_s, t_mater mat)
 	in = 0;
 	while (file[i] && ft_sii(file[i], "vn "))
 			v[1][in++] = read_vec(get_after(file[i++], "vn "), ' ');
-	load_obj(file, v, i, mat);
+	load_obj(file, v, i, new);
 	free(v[0]);
 	free(v[1]);
 }
 
-void parse_obj(char *file_name, t_mater mat)
+void parse_obj(t_obj *new_mesh)
 {
 	int		fd;
 	char	*line;
 	char	*file[9999];
 	int		n;
-	int 	size[2];//v / vn
+	int 	size[2];
 
 	n = -1;
 	size[0] = 0;
 	size[1] = 0;
-	if ((fd = open(file_name, O_RDONLY)) >= 0)
+	if ((fd = open(new_mesh->src, O_RDONLY)) >= 0)
 	{
 		while (get_next_line(fd, &line) && (++n) > -42)
 			file[n] = line;
 		file[n + 1] = 0;
 		count_values(file, &size[0], &size[1]);
-		fill_values(file, size[0], size[1], mat);
+		fill_values(file, size[0], size[1], new_mesh);
 		ctab_free(file);
 	}
 }

@@ -20,6 +20,15 @@ scene
 		intensity:0.2
 		blur:0
 		}
+		light_2
+		{
+		pos:-10;1;-10
+		rayon:2.0
+		type:point_light
+		color:255;255;255
+		intensity:0.2
+		blur:0
+		}
 	}
 	objects
 	{
