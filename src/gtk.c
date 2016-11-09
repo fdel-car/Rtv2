@@ -199,16 +199,11 @@ void signal_add_object(void)
 	set_func(obj);
 	push_obj(obj);
 	printf("fuck3\n");
-	GList *children, *iter2;
-
-	children = gtk_container_get_children(GTK_CONTAINER(gtk_builder_get_object\
-				(g_env.build, "list_objects")));
-	for(iter2 = children; iter2 != NULL; iter2 = g_list_next(iter2))
-		gtk_widget_destroy(GTK_WIDGET(iter2->data));
-	g_list_free(children);
+	GtkListStore *model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
+	gtk_list_store_clear (model);
 	gtk_window_close (GTK_WINDOW(gtk_builder_get_object(g_env.build,"popup_create_object")));
 	create_list_of_objects();
-	launch_thread();
+	//launch_thread();
 }
 
 void 	*find_objects(char *name ,unsigned int *n )
@@ -992,20 +987,16 @@ void	create_list_of_objects(void)
 
 
 	
-	printf("1\n");
 	obj = g_env.scene.obj;
 	lgt = g_env.scene.lgt;
 	model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
 	tree_view = GTK_WIDGET(gtk_builder_get_object(g_env.build,"tree_object"));
-	printf("2\n");
 	while (obj)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
 		obj = obj->next;
 	}
-	printf("3\n");
-	
 	while (lgt)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
