@@ -199,6 +199,14 @@ void signal_add_object(void)
 	set_func(obj);
 	push_obj(obj);
 	printf("fuck3\n");
+	GList *children, *iter2;
+
+	children = gtk_container_get_children(GTK_CONTAINER(gtk_builder_get_object\
+				(g_env.build, "list_objects")));
+	for(iter2 = children; iter2 != NULL; iter2 = g_list_next(iter2))
+		gtk_widget_destroy(GTK_WIDGET(iter2->data));
+	g_list_free(children);
+	gtk_window_close (GTK_WINDOW(gtk_builder_get_object(g_env.build,"popup_create_object")));
 	create_list_of_objects();
 	launch_thread();
 }
@@ -983,13 +991,7 @@ void	create_list_of_objects(void)
 	GtkWidget			*tree_view;
 
 
-	GList *children, *iter2;
-
-	children = gtk_container_get_children(GTK_CONTAINER(gtk_builder_get_object\
-				(g_env.build, "list_objects")));
-	for(iter2 = children; iter2 != NULL; iter2 = g_list_next(iter2))
-		gtk_widget_destroy(GTK_WIDGET(iter2->data));
-	g_list_free(children);
+	
 	printf("1\n");
 	obj = g_env.scene.obj;
 	lgt = g_env.scene.lgt;
