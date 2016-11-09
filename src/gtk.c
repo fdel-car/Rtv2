@@ -203,7 +203,8 @@ void signal_add_object(void)
 	gtk_list_store_clear (model);
 	gtk_window_close (GTK_WINDOW(gtk_builder_get_object(g_env.build,"popup_create_object")));
 	create_list_of_objects();
-	//launch_thread();
+	launch_preview();
+	launch_thread();
 }
 
 void 	*find_objects(char *name ,unsigned int *n )
