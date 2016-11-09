@@ -338,7 +338,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_name">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -348,7 +348,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_posx">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -358,7 +358,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_dirx">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -368,7 +368,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_normx">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -378,7 +378,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_rayon">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -388,7 +388,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_posy">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -398,7 +398,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_posz">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -408,17 +408,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_diry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -428,7 +418,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_dirz">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -438,17 +428,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_normy">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -458,22 +438,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_normz">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
               <packing>
                 <property name="left_attach">3</property>
-                <property name="top_attach">4</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
                 <property name="top_attach">4</property>
               </packing>
             </child>
@@ -488,7 +458,25 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">angle</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="e_angle">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
+              </packing>
             </child>
             <child>
               <placeholder/>
@@ -571,7 +559,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_shiny">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -581,7 +569,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_refl">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -591,7 +579,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="GtkEntry" id="e_trans">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
@@ -601,7 +589,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkColorButton">
+              <object class="GtkColorButton" id="e_color">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -616,6 +604,20 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Ajouter</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="signal_add_object" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>

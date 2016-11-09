@@ -28,6 +28,181 @@ void init_gtk_create_widget(void)
 		i++;
 	}
 }
+
+t_obj *add_object_type(int n, t_obj *obj)
+{
+	if (n == 0)
+		obj->type = SPHERE;
+	else if (n == 1)
+		obj->type = PLANE;
+	else if (n == 2)
+		obj->type = CONE;
+	else if (n == 3)
+		obj->type = CYLINDER;
+	return (obj);
+}
+
+t_obj *add_object_name(t_obj *obj)
+{
+	GtkEntry *name;
+
+	name = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_name"));
+	obj->name = ft_strdup(gtk_entry_get_text(name));
+
+	return (obj);
+}
+
+t_obj *add_object_pos(t_obj *obj)
+{
+	GtkEntry *posx;
+	GtkEntry *posy;
+	GtkEntry *posz;
+
+	posx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posx"));
+	posy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posy"));
+	posz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posz"));
+
+	obj->pos.x = ft_atof(gtk_entry_get_text(posx));
+	obj->pos.y = ft_atof(gtk_entry_get_text(posy));
+	obj->pos.z = ft_atof(gtk_entry_get_text(posz));
+
+	return (obj);
+}
+
+t_obj *add_object_dir(t_obj *obj)
+{
+	GtkEntry *dirx;
+	GtkEntry *diry;
+	GtkEntry *dirz;
+
+	dirx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirx"));
+	diry = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_diry"));
+	dirz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirz"));
+
+	obj->dir.x = ft_atof(gtk_entry_get_text(dirx));
+	obj->dir.y = ft_atof(gtk_entry_get_text(diry));
+	obj->dir.z = ft_atof(gtk_entry_get_text(dirz));
+
+	return (obj);
+}
+
+t_obj *add_object_norm(t_obj *obj)
+{
+	GtkEntry *normx;
+	GtkEntry *normy;
+	GtkEntry *normz;
+
+	normx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normx"));
+	normy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normy"));
+	normz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normz"));
+
+	obj->norm.x = ft_atof(gtk_entry_get_text(normx));
+	obj->norm.y = ft_atof(gtk_entry_get_text(normy));
+	obj->norm.z = ft_atof(gtk_entry_get_text(normz));
+
+	return (obj);
+}
+
+t_obj *add_object_rayon(t_obj *obj)
+{
+	GtkEntry *rayon;
+
+	rayon = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_rayon"));
+	obj->rayon = ft_atof(gtk_entry_get_text(rayon));
+
+	return (obj);
+}
+
+t_obj *add_object_alpha(t_obj *obj)
+{
+	GtkEntry *alpha;
+
+	alpha = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_angle"));
+	obj->alpha = ft_atof(gtk_entry_get_text(alpha));
+
+	return (obj);
+}
+
+t_obj *add_object_mater_shiny(t_obj *obj)
+{
+	GtkEntry *shiny;
+
+	shiny = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_shiny"));
+	obj->mater.shiny = ft_atof(gtk_entry_get_text(shiny));
+	return (obj);
+}
+
+t_obj *add_object_mater_refl(t_obj *obj)
+{
+	GtkEntry *refl;
+
+	refl = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_refl"));
+	obj->mater.int_refl = ft_atof(gtk_entry_get_text(refl));
+	return (obj);
+}
+	
+t_obj *add_object_mater_trans(t_obj *obj)
+{
+	GtkEntry *trans;
+
+	trans = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_trans"));
+	obj->mater.int_trans = ft_atof(gtk_entry_get_text(trans));
+	return (obj);
+}
+
+t_obj *add_object_mater_color(t_obj *obj)
+{
+	GdkRGBA *col;
+	GtkColorChooser *e;
+
+	col = malloc(sizeof(GdkRGBA));
+	e = GTK_COLOR_CHOOSER(gtk_builder_get_object(g_env.build,"e_color"));
+	gtk_color_chooser_get_rgba (e,col);
+	obj->mater.color.r  = (int)(col->red * 255);
+	obj->mater.color.g  = (int)(col->green * 255);
+	obj->mater.color.b  = (int)(col->blue * 255);
+	gdk_rgba_free(col);
+
+	return (obj);
+}
+
+void signal_add_object(void)
+{	
+	char *s = NULL;
+	t_obj *obj = NULL;
+
+	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gtk_builder_get_object(g_env.build,"create_type")));
+	obj = malloc(sizeof(t_obj));
+	if (ft_strcmp(s,"Sphere") == 0)
+		obj = add_object_type(0,obj);
+	else if (ft_strcmp(s,"Plan"))
+		obj = add_object_type(1,obj);
+	else if (ft_strcmp(s,"Cone"))
+		obj = add_object_type(2,obj);
+	else if (ft_strcmp(s,"Cylindre"))
+		obj = add_object_type(3,obj);
+	obj = add_object_name(obj);
+	obj = add_object_pos(obj);
+	obj = add_object_dir(obj);
+	obj = add_object_norm(obj);
+	obj = add_object_rayon(obj);
+	printf("fuck1\n");
+
+	obj = add_object_alpha(obj);
+	obj = add_object_mater_shiny(obj);
+	obj = add_object_mater_refl(obj);
+	obj = add_object_mater_trans(obj);
+	obj = add_object_mater_color(obj);
+	obj->next = NULL;
+	printf("fuck2\n");
+
+	set_func(obj);
+	push_obj(obj);
+	printf("fuck3\n");
+	create_list_of_objects();
+	launch_thread();
+}
+
 void 	*find_objects(char *name ,unsigned int *n )
 {
 	t_light *lights;
@@ -57,7 +232,6 @@ void 	*find_objects(char *name ,unsigned int *n )
 }
 
 void create_object(GtkWidget *entry, t_gtkData *e){
-	printf("ok\n");
 	(void )entry;
 	gtk_window_present( GTK_WINDOW(e->data));
 }
@@ -808,22 +982,35 @@ void	create_list_of_objects(void)
 	GtkTreeViewColumn	*column;
 	GtkWidget			*tree_view;
 
+
+	GList *children, *iter2;
+
+	children = gtk_container_get_children(GTK_CONTAINER(gtk_builder_get_object\
+				(g_env.build, "list_objects")));
+	for(iter2 = children; iter2 != NULL; iter2 = g_list_next(iter2))
+		gtk_widget_destroy(GTK_WIDGET(iter2->data));
+	g_list_free(children);
+	printf("1\n");
 	obj = g_env.scene.obj;
 	lgt = g_env.scene.lgt;
 	model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
 	tree_view = GTK_WIDGET(gtk_builder_get_object(g_env.build,"tree_object"));
+	printf("2\n");
 	while (obj)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
 		obj = obj->next;
 	}
+	printf("3\n");
+	
 	while (lgt)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, lgt->name, -1);
 		lgt = lgt->next;
 	}
+	printf("4\n");
 	cell = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Objects", cell,
 			"text", 0, NULL);

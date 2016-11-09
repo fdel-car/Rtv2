@@ -30,7 +30,7 @@ scene
 			normal:NULL
 			rayon:0
 			type:mesh
-			src:obj/deer.obj
+			src:obj/lowpolytree.obj
 			materiel
 			{
 				brillance:0
