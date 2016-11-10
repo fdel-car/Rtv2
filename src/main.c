@@ -22,21 +22,35 @@ void	put_pixel(int x, int y, t_color color)
 	g_env.pixels[pos + 2] = color.b;
 }
 
-// void	pre_compute_tri(void)
-// {
-// 	t_obj *o;
-//
-// 	o = g_env.scene.obj;
-// 	while (o)
-// 	{
-// 		if (o->type == TRIANGLE)
-// 		{
-// 			o->u = vec_sub(o->v1, o->v0);
-// 			o->v = vec_sub(o->v2, o->v0);
-// 		}
-// 		o = o->next;
-// 	}
-// }
+void	pre_compute_tri(void)
+{
+	t_obj *o;
+	t_obj *tmp;
+
+	o = g_env.scene.obj;
+	while (o)
+	{
+		if (o->type == TRIANGLE)
+		{
+			o->u = vec_sub(o->v1, o->v0);
+			o->v = vec_sub(o->v2, o->v0);
+		}
+		if (o->type == MESH)
+		{
+			tmp = o->lst;
+			while (tmp)
+			{
+				if (tmp->type == TRIANGLE)
+				{
+					tmp->u = vec_sub(tmp->v1, tmp->v0);
+					tmp->v = vec_sub(tmp->v2, tmp->v0);
+				}
+				tmp = tmp->next;
+			}
+		}
+		o = o->next;
+	}
+}
 
 void	launch_thread(void)
 {
@@ -49,7 +63,7 @@ void	launch_thread(void)
 	vec_add(vec_mult(g_env.scene.cam.dir, g_env.scene.cam.view_d),
 	vec_sub(vec_mult(g_env.scene.cam.up, (g_env.scene.cam.view_h / 2.0)),
 	vec_mult(g_env.scene.cam.right, (g_env.scene.cam.view_w / 2.0)))));
-	// pre_compute_tri();
+	pre_compute_tri();
 	g_env.id_thread = 0;
 	while (g_env.id_thread < NUM_THREAD)
 	{

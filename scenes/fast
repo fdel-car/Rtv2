@@ -6,51 +6,37 @@ scene
 	name:test_scene
 	camera
 	{
-		pos:0;0;-20
+		pos:0;0;-10
 		dir:0;0;1
 	}
 	lights
 	{
 		light_1
 		{
-		dir:1;0;1
+		dir:1;-1;2
 		rayon:0
 		type:dir_light
 		color:255;255;255
-		intensity:0.5
+		intensity:0.4
 		blur:0
 		}
 	}
 	objects
 	{
-		sphere_1
+		torus_1
 		{
-			pos:0;-4;0
-			dir:NULL
+			pos:0;0;0
+			dir:0;1;-1
 			normal:NULL
 			rayon:2
-			type:sphere
+			rayon_large:2
+			type:torus
 			materiel
 			{
-				brillance:42
+				brillance:102
 				reflection:1
 				transparence:0.6
 				color:255;0;0
-				texture:NULL
-			}
-		}
-		plan_3
-		{
-			pos:0;0;20
-			dir:NULL
-			normal:0;0;-1
-			rayon:0
-			type:plane
-			materiel
-			{
-				reflection:0.8
-				transparence:0.4
-				color:105;85;65
 				texture:NULL
 			}
 		}

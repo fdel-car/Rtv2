@@ -14,7 +14,7 @@
 # define TYPES_H
 
 typedef enum	{NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE, MESH, SPOT_L,
-				DIR_L, POINT_L} e_type;
+				DIR_L, POINT_L, TORUS} e_type;
 
 typedef struct		s_vect
 {
@@ -82,6 +82,7 @@ typedef struct		s_obj
 	t_vect			dir;
 	t_vect			norm;
 	float			rayon;
+	float			rayon_large;
 	float			alpha;
 	t_mater			mater;
 	float			(*func)(struct s_obj *obj, t_data ray);

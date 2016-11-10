@@ -16,24 +16,22 @@ float	intersect_triangle(t_obj *obj, t_data ray)
 {
 	float       fl[4];
 	t_vect		vc[3];
-	t_vect		u;
-	t_vect		v;
 
-	u = vec_sub(obj->v1, obj->v0);
-	v = vec_sub(obj->v2, obj->v0);
-	vc[0] = cross_pr(ray.dir, v);
-	fl[0] = vec_dotp(u, vc[0]);
+	obj->u = vec_sub(obj->v1, obj->v0);
+	obj->v = vec_sub(obj->v2, obj->v0);
+	vc[0] = cross_pr(ray.dir, obj->v);
+	fl[0] = vec_dotp(obj->u, vc[0]);
 	if (fl[0] < 0.001 && fl[0] > -0.001)
 		return (-1);
 	vc[1] = vec_sub(ray.orig, obj->v0);
 	fl[1] = vec_dotp(vc[1], vc[0]) * (1 / fl[0]);
 	if (fl[1] < 0 || fl[1] > 1)
 		return (-1);
-	vc[2] = cross_pr(vc[1], u);
+	vc[2] = cross_pr(vc[1], obj->u);
 	fl[2] = vec_dotp(ray.dir, vc[2]) * (1 / fl[0]);
 	if (fl[2] < 0 || (fl[1] + fl[2]) > 1)
 		return (-1);
-	fl[3] = vec_dotp(v, vc[2]) * (1 / fl[0]);
+	fl[3] = vec_dotp(obj->v, vc[2]) * (1 / fl[0]);
 	if (fl[3] > 0.001)
 		return (fl[3]);
 	return (-1);
@@ -45,9 +43,9 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 
 	a = SQ(ray.dir.x) + SQ(ray.dir.y) + SQ(ray.dir.z);
 	b = 2.0 * (ray.dir.x * (ray.orig.x - obj->pos.x) + ray.dir.y *
-			(ray.orig.y - obj->pos.y) + ray.dir.z * (ray.orig.z - obj->pos.z));
+	(ray.orig.y - obj->pos.y) + ray.dir.z * (ray.orig.z - obj->pos.z));
 	c = (SQ(ray.orig.x - obj->pos.x) + SQ(ray.orig.y - obj->pos.y) +
-			SQ(ray.orig.z - obj->pos.z)) - SQ(obj->rayon);
+	SQ(ray.orig.z - obj->pos.z)) - SQ(obj->rayon);
 	delta = (b * b) - 4.0 * a * c;
 	if (delta >= 0)
 	{
@@ -79,11 +77,11 @@ float	intersect_cone(t_obj *obj, t_data ray)
 
 	tmp = vec_sub(ray.orig, obj->pos);
 	a = vec_dotp(ray.dir, ray.dir) - ((1.0 + SQ(obj->alpha)) *
-			SQ(vec_dotp(ray.dir, obj->dir)));
+	SQ(vec_dotp(ray.dir, obj->dir)));
 	b = 2.0 * (vec_dotp(ray.dir, tmp) - ((1.0 + SQ(obj->alpha))
-				* vec_dotp(ray.dir, obj->dir) * vec_dotp(tmp, obj->dir)));
+	* vec_dotp(ray.dir, obj->dir) * vec_dotp(tmp, obj->dir)));
 	c = vec_dotp(tmp, tmp) - ((1.0 + SQ(obj->alpha)) *
-			SQ(vec_dotp(tmp, obj->dir)));
+	SQ(vec_dotp(tmp, obj->dir)));
 	delta = SQ(b) - 4.0 * a * c;
 	if (delta >= 0.0)
 	{
@@ -105,7 +103,7 @@ float	intersect_cylinder(t_obj *obj, t_data ray)
 	tmp = vec_sub(ray.orig, obj->pos);
 	a = vec_dotp(ray.dir, ray.dir) - (SQ(vec_dotp(ray.dir, obj->dir)));
 	b = 2.0 * (vec_dotp(ray.dir, tmp) - (vec_dotp(ray.dir,
-					obj->dir) * vec_dotp(tmp, obj->dir)));
+	obj->dir) * vec_dotp(tmp, obj->dir)));
 	c = vec_dotp(tmp, tmp) - (SQ(vec_dotp(tmp, obj->dir))) - SQ(obj->rayon);
 	delta = SQ(b) - 4.0 * a * c;
 	if (delta >= 0.0)
@@ -118,4 +116,27 @@ float	intersect_cylinder(t_obj *obj, t_data ray)
 			return (solut);
 	}
 	return (-1);
+}
+
+float	intersect_torus(t_obj *obj, t_data ray)
+{
+	float	m, n, o, p, q;
+	float	a, b, c, d, e;
+	t_vect	tmp;
+
+	tmp = vec_sub(ray.orig, obj->pos);
+	m = vec_dotp(ray.dir, ray.dir);
+	n = vec_dotp(ray.dir, tmp);
+	o = vec_dotp(tmp, tmp);
+	p = vec_dotp(ray.dir, obj->dir);
+	q = vec_dotp(tmp, obj->dir);
+	a = SQ(m);
+	b = 4 * m * n;
+	c = 4 * SQ(m) + 2 * m * o - 2 * (SQ(obj->rayon_large) + SQ(obj->rayon)) * m
+	+ 4 * SQ(obj->rayon_large) * SQ(p);
+	d = 4 * n * o - 4 * (SQ(obj->rayon_large) + SQ(obj->rayon)) * n + 8 *
+	SQ(obj->rayon_large) * p * q;
+	e = SQ(o) - 2 * (SQ(obj->rayon_large) + SQ(obj->rayon)) * o + 4 *
+	SQ(obj->rayon_large) * SQ(q) + SQ((SQ(obj->rayon_large) - SQ(obj->rayon)));
+	return (fourth_degree(a, b, c, d, e));
 }

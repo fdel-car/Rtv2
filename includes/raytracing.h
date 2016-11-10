@@ -14,10 +14,12 @@
 # define RAYTRACING_H
 # define EPSILON 0.01
 
+float		fourth_degree(float a, float b, float c, float d, float e);
 void		switch_key_focus(void);
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
 t_data		intersect_obj(t_data ray);
 t_color		render_ray(t_data ray);
+float		intersect_torus(t_obj *obj, t_data ray);
 float		intersect_triangle(t_obj *obj, t_data ray);
 float		intersect_sphere(t_obj *obj, t_data ray);
 float		intersect_cylinder(t_obj *obj, t_data ray);

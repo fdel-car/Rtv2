@@ -25,6 +25,7 @@ e_type	get_type(char *type)
 	!ft_strcmp(type, "plane") ? t = PLANE : 0;
 	!ft_strcmp(type, "dir_light") ? t = DIR_L : 0;
 	!ft_strcmp(type, "point_light") ? t = POINT_L : 0;
+	!ft_strcmp(type, "torus") ? t = TORUS : 0;
 	return (t);
 }
 
