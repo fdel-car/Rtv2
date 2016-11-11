@@ -28,16 +28,28 @@ void init_gtk_create_widget(void)
 	}
 }
 
-t_obj *add_object_type(int n, t_obj *obj)
+t_obj *add_object_type(char *s, t_obj *obj)
 {
-	if (n == 0)
+	if (ft_strcmp("Sphere",s) == 0)
+	{
 		obj->type = SPHERE;
-	else if (n == 1)
+		printf("sphere\n");
+	}
+	else if (ft_strcmp("Plan",s) == 0)
+	{
 		obj->type = PLANE;
-	else if (n == 2)
+		printf("plane\n");
+	}
+	else if (ft_strcmp("Cone",s) == 0)
+	{
 		obj->type = CONE;
-	else if (n == 3)
+		printf("cone\n");
+	}
+	else if (ft_strcmp("Cylindre",s) == 0)
+	{
 		obj->type = CYLINDER;
+		printf("cylindre\n");
+	}
 	return (obj);
 }
 
@@ -165,6 +177,77 @@ t_obj *add_object_mater_color(t_obj *obj)
 	return (obj);
 }
 
+void clear_entry_1(){
+	GtkEntry *name;
+	GtkEntry *posx;
+	GtkEntry *posy;
+	GtkEntry *posz;
+
+	name = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_name"));
+	posx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posx"));
+	posy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posy"));
+	posz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posz"));
+
+	gtk_entry_set_text (name,"");
+	gtk_entry_set_text (posx,"");
+	gtk_entry_set_text (posy,"");
+	gtk_entry_set_text (posz,"");
+}
+
+void clear_entry_2(){
+	GtkEntry *dirx;
+	GtkEntry *diry;
+	GtkEntry *dirz;
+	GtkEntry *rayon;
+
+	rayon = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_rayon"));
+	dirx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirx"));
+	diry = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_diry"));
+	dirz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirz"));
+
+	gtk_entry_set_text (rayon,"");
+	gtk_entry_set_text (dirx,"");
+	gtk_entry_set_text (diry,"");
+	gtk_entry_set_text (dirz,"");
+}
+
+void clear_entry_3(){
+	GtkEntry *normx;
+	GtkEntry *normy;
+	GtkEntry *normz;
+	GtkEntry *alpha;
+
+	alpha = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_angle"));
+	normx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normx"));
+	normy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normy"));
+	normz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normz"));
+
+	gtk_entry_set_text (normx,"");
+	gtk_entry_set_text (normy,"");
+	gtk_entry_set_text (normz,"");
+	gtk_entry_set_text (alpha,"");
+}
+
+void clear_entry_4(){
+	GtkEntry *shiny;
+	GtkEntry *refl;
+	GtkEntry *trans;
+
+	trans = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_trans"));
+	refl = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_refl"));
+	shiny = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_shiny"));
+
+	gtk_entry_set_text (shiny,"");
+	gtk_entry_set_text (refl,"");
+	gtk_entry_set_text (trans,"");
+}
+
+void clear_entry_widget_add_object(void){
+	clear_entry_1();
+	clear_entry_2();
+	clear_entry_3();
+	clear_entry_4();
+}
 void signal_add_object(void)
 {
 	char *s = NULL;
@@ -172,20 +255,12 @@ void signal_add_object(void)
 
 	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gtk_builder_get_object(g_env.build,"create_type")));
 	obj = malloc(sizeof(t_obj));
-	if (ft_strcmp(s,"Sphere") == 0)
-		obj = add_object_type(0,obj);
-	else if (ft_strcmp(s,"Plan"))
-		obj = add_object_type(1,obj);
-	else if (ft_strcmp(s,"Cone"))
-		obj = add_object_type(2,obj);
-	else if (ft_strcmp(s,"Cylindre"))
-		obj = add_object_type(3,obj);
+	add_object_type(s,obj);
 	obj = add_object_name(obj);
 	obj = add_object_pos(obj);
 	obj = add_object_dir(obj);
 	obj = add_object_norm(obj);
 	obj = add_object_rayon(obj);
-	printf("fuck1\n");
 
 	obj = add_object_alpha(obj);
 	obj = add_object_mater_shiny(obj);
@@ -193,14 +268,13 @@ void signal_add_object(void)
 	obj = add_object_mater_trans(obj);
 	obj = add_object_mater_color(obj);
 	obj->next = NULL;
-	printf("fuck2\n");
 
 	set_func(obj);
 	push_obj(obj);
-	printf("fuck3\n");
 	GtkListStore *model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
 	gtk_list_store_clear (model);
-	gtk_window_close (GTK_WINDOW(gtk_builder_get_object(g_env.build,"popup_create_object")));
+	clear_entry_widget_add_object();
+	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,"popup_create_object")));
 	create_list_of_objects();
 	launch_preview();
 	launch_thread();
