@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/09 04:04:28 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/11/12 18:36:19 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 
+t_text		load_texture(char *path);
 t_mater		init_mater(void);
 char		*clean_line(char *s);
 void		load_file(char *scene_file);
@@ -35,5 +36,8 @@ e_type		get_type(char *type);
 // print
 void		print_lgt();
 void		print_obj();
+
+// test affichage texture
+void		test_texture(t_text tex);
 
 #endif

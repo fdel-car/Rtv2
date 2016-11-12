@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   math_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,26 @@
 
 #include "rt.h"
 
-float	fourth_degree(float a, float b, float c, float d, float e)
+float	quadratic_root(float a, float b, float c)
 {
+	float	delta;
+	float	t1;
+	float	t2;
+	float	solut;
+
+	delta = SQ(b) - 4.0 * a * c;
+	if (delta >= 0.0)
+	{
+		delta = sqrt(delta);
+		t1 = (-b + delta) / (2.0 * a);
+		t2 = (-b - delta) / (2.0 * a);
+		solut = t1 < t2 && t1 > EPSILON ? t1 : t2;
+		if (solut > EPSILON)
+			return (solut);
+	}
 	return (-1);
-	(void)a;
-	(void)b;
-	(void)c;
-	(void)d;
-	(void)e;
 }
+
+// float	*cubic_root(float a, float b, float c, float d)
+
+// float	quartic_root(float a, float b, float c, float d, float e)

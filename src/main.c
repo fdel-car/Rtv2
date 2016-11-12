@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/06 19:54:02 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/12 18:35:32 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,12 +148,12 @@ int		main(int argc, char **argv)
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
 	set_signal_create_object();
-	//g_object_unref(g_env.build);
+	// g_object_unref(g_env.build);
 	// g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();
-	//init_gtk_create_widget();
-
+	// test_texture(load_texture("bmp/skybox.bmp"));
+	// init_gtk_create_widget();
 	gtk_widget_show_all(g_env.win);
 	gtk_main();
 	return (EXIT_SUCCESS);

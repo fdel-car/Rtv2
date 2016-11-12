@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/07 16:14:31 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/12 17:30:56 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ typedef struct		s_color
 	int				g;
 	int				b;
 }					t_color;
+
+typedef struct		s_text
+{
+	FILE			*img;
+	int				tex_w;
+	int				tex_h;
+	int				size[2];
+	unsigned char	buff[3];
+	unsigned char	*text;
+}					t_text;
 
 typedef struct		s_cam
 {

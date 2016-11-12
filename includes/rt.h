@@ -17,6 +17,8 @@
 # define WIDTH_PREVIEW 192
 # define HEIGHT_PREVIEW 108
 # define SQ(x) ((x) * (x))
+# define CB(x) ((x) * (x) * (x))
+# define QC(x) ((x) * (x) * (x) * (x))
 # define NUM_THREAD 8
 
 # include <stdlib.h>

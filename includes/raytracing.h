@@ -14,7 +14,9 @@
 # define RAYTRACING_H
 # define EPSILON 0.01
 
-float		fourth_degree(float a, float b, float c, float d, float e);
+float		quadratic_root(float a, float b, float c);
+float		*cubic_root(float a, float b, float c, float d);
+float		quartic_root(float a, float b, float c, float d, float e);
 void		switch_key_focus(void);
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
 t_data		intersect_obj(t_data ray);

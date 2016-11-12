@@ -93,6 +93,7 @@ t_obj *add_object_dir(t_obj *obj)
 	obj->dir.x = ft_atof(gtk_entry_get_text(dirx));
 	obj->dir.y = ft_atof(gtk_entry_get_text(diry));
 	obj->dir.z = ft_atof(gtk_entry_get_text(dirz));
+	obj->dir = vec_norm(obj->dir);
 
 	return (obj);
 }
@@ -110,6 +111,7 @@ t_obj *add_object_norm(t_obj *obj)
 	obj->norm.x = ft_atof(gtk_entry_get_text(normx));
 	obj->norm.y = ft_atof(gtk_entry_get_text(normy));
 	obj->norm.z = ft_atof(gtk_entry_get_text(normz));
+	obj->norm = vec_norm(obj->norm);
 
 	return (obj);
 }
@@ -129,7 +131,7 @@ t_obj *add_object_alpha(t_obj *obj)
 	GtkEntry *alpha;
 
 	alpha = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_angle"));
-	obj->alpha = ft_atof(gtk_entry_get_text(alpha));
+	obj->alpha = ft_atof(gtk_entry_get_text(alpha)) * M_PI / 180;
 
 	return (obj);
 }
