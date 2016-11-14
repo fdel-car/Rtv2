@@ -273,13 +273,68 @@ void signal_add_object(void)
 
 	set_func(obj);
 	push_obj(obj);
-	GtkListStore *model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
-	gtk_list_store_clear (model);
 	clear_entry_widget_add_object();
 	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,"popup_create_object")));
 	create_list_of_objects();
 	launch_preview();
 	launch_thread();
+}
+
+void    delete_objects(void *obj, unsigned int n)
+{
+	t_obj *list_obj;
+	t_obj *current_obj;
+	t_light *current_light;
+	t_light *list_lgt;
+
+	list_obj = g_env.scene.obj;
+	list_lgt = g_env.scene.lgt;
+	if (n == 1)
+	{
+		current_obj = (t_obj *)obj;
+		if (list_obj == current_obj)
+		{
+			g_env.scene.obj = list_obj->next;
+			free(current_obj->name);
+			free(current_obj);
+		}
+		else
+		{
+			while (list_obj)
+			{
+				if (list_obj->next == current_obj)
+				{
+					list_obj->next = current_obj->next;
+					free(current_obj->next);
+					free(current_obj);
+				}
+				list_obj = list_obj->next;
+			}
+		}
+	}
+	else if (n == 2)
+	{
+		current_light = (t_light *)obj;
+		if (list_lgt == current_light)
+		{
+			g_env.scene.lgt = list_lgt->next;
+			free(current_light->name);
+			free(current_light);
+		}
+		else
+		{
+			while (list_lgt)
+			{
+				if (list_lgt->next == current_light)
+				{
+					list_lgt->next = current_light->next;
+					free(current_light->name);
+					free(current_light);
+				}
+				list_lgt = list_lgt->next;
+			}
+		}
+	}
 }
 
 void 	*find_objects(char *name ,unsigned int *n )
@@ -1032,6 +1087,8 @@ void	create_list_of_attributs(void *objects, unsigned int type)
 	gtk_widget_show_all(g_env.win);
 }
 
+
+
 void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 {
 	GtkTreeModel 	*model;
@@ -1050,6 +1107,100 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 			create_list_of_attributs(found_obj, n);
 	}
 }
+ void
+  view_popup_menu_delete_row (GtkWidget *menuitem, gpointer userdata)
+  {
+    /* we passed the view as userdata when we connected the signal */
+   	GtkTreeModel 	*model;
+    GtkTreeView *treeview;
+	GtkTreeIter  	iter;
+	GtkTreePath *path;
+	void			*found_obj = NULL;
+	unsigned int 	n = 0;
+	(void)menuitem;
+	treeview = GTK_TREE_VIEW(gtk_builder_get_object(g_env.build,"tree_object"));
+	model = gtk_tree_view_get_model(treeview);
+	path = (GtkTreePath *)userdata;
+
+    if (gtk_tree_model_get_iter(model, &iter, path))
+	{
+		gchar *name;
+		gtk_tree_model_get(model, &iter, 0, &name, -1);
+		found_obj = find_objects(name, &n);
+		g_free(name);
+		if (n != 0)
+		{
+				delete_objects(found_obj, n);
+				printf("%s\n", ((t_obj *)found_obj)->name);
+				gtk_tree_path_free(path);
+				create_list_of_objects();
+				launch_preview();
+				launch_thread();
+		}
+	}
+  }
+
+
+  void
+  view_popup_menu (GtkWidget *treeview, GdkEventButton *event,GtkTreePath *path, gpointer userdata)
+  {
+    GtkWidget *menu, *menuitem;
+
+    menu = gtk_menu_new();
+    (void)userdata;
+    (void)treeview;
+    menuitem = gtk_menu_item_new_with_label("Delete");
+
+    g_signal_connect(menuitem, "activate",
+                     (GCallback) view_popup_menu_delete_row , path);
+
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
+
+    gtk_widget_show_all(menu);
+
+    gtk_menu_popup_at_pointer(GTK_MENU(menu),(GdkEvent*)event);
+  }
+
+
+  gboolean
+  view_onButtonPressed (GtkWidget *treeview, GdkEventButton *event, gpointer userdata)
+  {
+    GtkTreePath *path = NULL;
+    GtkTreeSelection *selection;
+
+    if (event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
+    {
+     if (1)
+     {
+       selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+
+       if (gtk_tree_selection_count_selected_rows(selection)  <= 1)
+       {
+
+          if (gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeview),
+                                            (gint) event->x, 
+                                            (gint) event->y,
+                                            &path, NULL, NULL, NULL))
+          {
+            gtk_tree_selection_unselect_all(selection);
+            gtk_tree_selection_select_path(selection, path);
+          }
+       }
+     }
+      view_popup_menu(treeview, event,path, userdata);
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+
+  gboolean
+  view_onPopupMenu (GtkWidget *treeview, GtkTreePath *path, gpointer userdata)
+  {
+    view_popup_menu(treeview, NULL,path, userdata);
+
+    return TRUE;
+  }
 
 void	create_list_of_objects(void)
 {
@@ -1060,6 +1211,8 @@ void	create_list_of_objects(void)
 	GtkCellRenderer		*cell;
 	GtkTreeViewColumn	*column;
 	GtkWidget			*tree_view;
+    GdkPixbuf     *icon;
+    GError        *error = NULL;
 
 
 
@@ -1067,23 +1220,44 @@ void	create_list_of_objects(void)
 	lgt = g_env.scene.lgt;
 	model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
 	tree_view = GTK_WIDGET(gtk_builder_get_object(g_env.build,"tree_object"));
+    icon = gdk_pixbuf_new_from_file("close_icon.png", &error);
+    if (error)
+    {
+      g_warning ("Could not load icon: %s\n", error->message);
+      g_error_free(error);
+      error = NULL;
+    }
+	gtk_list_store_clear (model);
 	while (obj)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name,1,icon, -1);
 		obj = obj->next;
 	}
 	while (lgt)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, lgt->name, -1);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, lgt->name,1,icon, -1);
 		lgt = lgt->next;
 	}
+
+ 
+
+
 	cell = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Objects", cell,
 			"text", 0, NULL);
-	gtk_tree_view_append_column(GTK_TREE_VIEW(tree_view),
+	static int i = 0 ;
+
+	if (i == 0)
+	{
+		gtk_tree_view_append_column(GTK_TREE_VIEW(tree_view),
 			GTK_TREE_VIEW_COLUMN(column));
+		i++;
+	}
+	
 	g_signal_connect(tree_view, "row-activated", (GCallback) select_current_obj,
 			NULL);
+	g_signal_connect(tree_view, "button-press-event", (GCallback) view_onButtonPressed, NULL);
+   // g_signal_connect(tree_view, "popup-menu", (GCallback) view_onPopupMenu, NULL);
 }
