@@ -6,7 +6,7 @@
 #    By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 11:18:23 by fdel-car          #+#    #+#              #
-#    Updated: 2016/06/23 14:59:28 by fdel-car         ###   ########.fr        #
+#    Updated: 2016/11/15 15:00:49 by slgracie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ SRCS := $(shell echo *.c ft_printf/*.c)
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 all: $(NAME)
 

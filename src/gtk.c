@@ -286,7 +286,6 @@ void    delete_objects(void *obj, unsigned int n)
 	t_obj *current_obj;
 	t_light *current_light;
 	t_light *list_lgt;
-
 	list_obj = g_env.scene.obj;
 	list_lgt = g_env.scene.lgt;
 	if (n == 1)
@@ -305,7 +304,7 @@ void    delete_objects(void *obj, unsigned int n)
 				if (list_obj->next == current_obj)
 				{
 					list_obj->next = current_obj->next;
-					free(current_obj->next);
+					free(current_obj->name);
 					free(current_obj);
 				}
 				list_obj = list_obj->next;
@@ -341,13 +340,15 @@ void 	*find_objects(char *name ,unsigned int *n )
 {
 	t_light *lights;
 	t_obj *obj;
-
+	printf("name= %s\n", name);
 	lights = g_env.scene.lgt;
 	obj = g_env.scene.obj;
+	printf("find1\n");
 	while (obj)
 	{
 		if (ft_strcmp(obj->name, name) == 0)
 		{
+			printf("find2\n");
 			*n = 1;
 			return (obj);
 		}
@@ -1111,33 +1112,45 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
   view_popup_menu_delete_row (GtkWidget *menuitem, gpointer userdata)
   {
     /* we passed the view as userdata when we connected the signal */
-   	GtkTreeModel 	*model;
-    GtkTreeView *treeview;
+    printf("view_popup_menu_delete_row \n");
+   	GtkTreeModel 	*model = NULL;
+    GtkTreeView *treeview = NULL;
 	GtkTreeIter  	iter;
-	GtkTreePath *path;
+	GtkTreePath *path = NULL;
 	void			*found_obj = NULL;
 	unsigned int 	n = 0;
 	(void)menuitem;
-	treeview = GTK_TREE_VIEW(gtk_builder_get_object(g_env.build,"tree_object"));
-	model = gtk_tree_view_get_model(treeview);
+	if (!(treeview = GTK_TREE_VIEW(gtk_builder_get_object(g_env.build,"tree_object"))))
+		printf("treeview is NULL\n");
+	if (!(model = gtk_tree_view_get_model(treeview)))
+		printf("model is NULL\n");
+
 	path = (GtkTreePath *)userdata;
 
     if (gtk_tree_model_get_iter(model, &iter, path))
 	{
+		printf("1\n");
 		gchar *name;
 		gtk_tree_model_get(model, &iter, 0, &name, -1);
+		printf("2\n");
 		found_obj = find_objects(name, &n);
+		printf("3\n");
 		g_free(name);
 		if (n != 0)
 		{
 				delete_objects(found_obj, n);
-				printf("%s\n", ((t_obj *)found_obj)->name);
+				printf("delete %s\n", ((t_obj *)found_obj)->name);
 				gtk_tree_path_free(path);
+				printf("1\n");
 				create_list_of_objects();
+				printf("2\n");
 				launch_preview();
+				printf("3\n");
 				launch_thread();
+				printf("4\n");
 		}
 	}
+	printf("ici4\n");
   }
 
 
@@ -1211,38 +1224,24 @@ void	create_list_of_objects(void)
 	GtkCellRenderer		*cell;
 	GtkTreeViewColumn	*column;
 	GtkWidget			*tree_view;
-    GdkPixbuf     *icon;
-    GError        *error = NULL;
-
-
 
 	obj = g_env.scene.obj;
 	lgt = g_env.scene.lgt;
 	model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
 	tree_view = GTK_WIDGET(gtk_builder_get_object(g_env.build,"tree_object"));
-    icon = gdk_pixbuf_new_from_file("close_icon.png", &error);
-    if (error)
-    {
-      g_warning ("Could not load icon: %s\n", error->message);
-      g_error_free(error);
-      error = NULL;
-    }
 	gtk_list_store_clear (model);
 	while (obj)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name,1,icon, -1);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
 		obj = obj->next;
 	}
 	while (lgt)
 	{
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, lgt->name,1,icon, -1);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, lgt->name, -1);
 		lgt = lgt->next;
 	}
-
- 
-
 
 	cell = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Objects", cell,
