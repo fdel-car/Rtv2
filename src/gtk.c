@@ -31,25 +31,13 @@ void init_gtk_create_widget(void)
 t_obj *add_object_type(char *s, t_obj *obj)
 {
 	if (ft_strcmp("Sphere",s) == 0)
-	{
 		obj->type = SPHERE;
-		printf("sphere\n");
-	}
 	else if (ft_strcmp("Plan",s) == 0)
-	{
 		obj->type = PLANE;
-		printf("plane\n");
-	}
 	else if (ft_strcmp("Cone",s) == 0)
-	{
 		obj->type = CONE;
-		printf("cone\n");
-	}
 	else if (ft_strcmp("Cylindre",s) == 0)
-	{
 		obj->type = CYLINDER;
-		printf("cylindre\n");
-	}
 	return (obj);
 }
 
@@ -340,15 +328,12 @@ void 	*find_objects(char *name ,unsigned int *n )
 {
 	t_light *lights;
 	t_obj *obj;
-	printf("name= %s\n", name);
 	lights = g_env.scene.lgt;
 	obj = g_env.scene.obj;
-	printf("find1\n");
 	while (obj)
 	{
 		if (ft_strcmp(obj->name, name) == 0)
 		{
-			printf("find2\n");
 			*n = 1;
 			return (obj);
 		}
@@ -1111,8 +1096,6 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
  void
   view_popup_menu_delete_row (GtkWidget *menuitem, gpointer userdata)
   {
-    /* we passed the view as userdata when we connected the signal */
-    printf("view_popup_menu_delete_row \n");
    	GtkTreeModel 	*model = NULL;
     GtkTreeView *treeview = NULL;
 	GtkTreeIter  	iter;
@@ -1120,39 +1103,25 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 	void			*found_obj = NULL;
 	unsigned int 	n = 0;
 	(void)menuitem;
-	if (!(treeview = GTK_TREE_VIEW(gtk_builder_get_object(g_env.build,"tree_object"))))
-		printf("treeview is NULL\n");
-	if (!(model = gtk_tree_view_get_model(treeview)))
-		printf("model is NULL\n");
-
+	treeview = GTK_TREE_VIEW(gtk_builder_get_object(g_env.build,"tree_object"));
+	model = gtk_tree_view_get_model(treeview);
 	path = (GtkTreePath *)userdata;
-
     if (gtk_tree_model_get_iter(model, &iter, path))
 	{
-		printf("1\n");
 		gchar *name;
 		gtk_tree_model_get(model, &iter, 0, &name, -1);
-		printf("2\n");
 		found_obj = find_objects(name, &n);
-		printf("3\n");
 		g_free(name);
 		if (n != 0)
 		{
 				delete_objects(found_obj, n);
-				printf("delete %s\n", ((t_obj *)found_obj)->name);
 				gtk_tree_path_free(path);
-				printf("1\n");
 				create_list_of_objects();
-				printf("2\n");
 				launch_preview();
-				printf("3\n");
 				launch_thread();
-				printf("4\n");
 		}
 	}
-	printf("ici4\n");
   }
-
 
   void
   view_popup_menu (GtkWidget *treeview, GdkEventButton *event,GtkTreePath *path, gpointer userdata)
@@ -1207,13 +1176,7 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
   }
 
 
-  gboolean
-  view_onPopupMenu (GtkWidget *treeview, GtkTreePath *path, gpointer userdata)
-  {
-    view_popup_menu(treeview, NULL,path, userdata);
 
-    return TRUE;
-  }
 
 void	create_list_of_objects(void)
 {
@@ -1258,5 +1221,4 @@ void	create_list_of_objects(void)
 	g_signal_connect(tree_view, "row-activated", (GCallback) select_current_obj,
 			NULL);
 	g_signal_connect(tree_view, "button-press-event", (GCallback) view_onButtonPressed, NULL);
-   // g_signal_connect(tree_view, "popup-menu", (GCallback) view_onPopupMenu, NULL);
 }
