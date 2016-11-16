@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 16:26:43 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/07/17 18:37:21 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/16 01:49:24 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ t_vect	vec_mult(t_vect u, float value)
 	w.x = u.x * value;
 	w.y = u.y * value;
 	w.z = u.z * value;
+	return (w);
+}
+
+t_vect	vec_mul(t_vect u, t_vect v)
+{
+	t_vect w;
+
+	w.x = u.x * v.x;
+	w.y = u.y * v.y;
+	w.z = u.z * v.z;
 	return (w);
 }
 

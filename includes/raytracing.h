@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 00:48:51 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/16 01:53:15 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_color		get_texture(t_data ray);
 t_vect		vec_new(float x, float y, float z);
 t_vect		cross_pr(t_vect u, t_vect v);
 t_vect		vec_mult(t_vect u, float value);
+t_vect		vec_mul(t_vect u, t_vect v);
 t_vect		vec_sub(t_vect u, t_vect v);
 t_vect		vec_add(t_vect u, t_vect v);
 t_vect		vec_norm(t_vect u);

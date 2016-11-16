@@ -23,14 +23,31 @@ scene
 	}
 	objects
 	{
-		torus_1
+		earth
 		{
-			pos:0;0;0
+			pos:-5;0;0
 			dir:0;1;0
 			normal:NULL
-			rayon:4
+			rayon:2
 			rayon_large:2
 			type:sphere
+			materiel
+			{
+				texture:bmp/map.bmp
+				brillance:102
+				reflection:1
+				transparence:0.6
+				color:255;0;0
+			}
+		}
+		earth
+		{
+			pos:5;0;0
+			dir:0;1;0
+			normal:NULL
+			rayon:2
+			rayon_large:2
+			type:cylinder
 			materiel
 			{
 				texture:bmp/map.bmp
