@@ -59,7 +59,9 @@ t_color		get_texture(t_data ray)
 {
 	t_color r;
 
-	r = color_new(0, 0, 0);
+	r = ray.obj_hit->mater.color;
+	if (!ray.obj_hit->mater.tex)
+		return (r);
 	if (ray.obj_hit->type == SPHERE)
 		return (getex_sphere(ray));
 	if (ray.obj_hit->type == CYLINDER ||
