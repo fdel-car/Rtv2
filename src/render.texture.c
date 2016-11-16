@@ -20,6 +20,27 @@ t_color		get_texel(t_text tex, int i, int j)
 	return (r);
 }
 
+t_color		getex_plane(t_data ray)
+{
+	float	u;
+	float	v;
+	t_vect	u_axis;
+	t_vect	v_axis;
+	float	scale;
+
+	scale = 1;
+	u_axis = vec_new(ray.norm.y, ray.norm.z, -ray.norm.x);
+	v_axis = cross_pr(u_axis, ray.obj_hit->norm);
+	u = vec_dotp(ray.hit_point, u_axis) * scale;
+	v = vec_dotp(ray.hit_point, v_axis) * scale;
+	u = u - floor(u);
+	v = v - floor(v);
+
+	return (get_texel(*ray.obj_hit->mater.tex,
+	v * (ray.obj_hit->mater.tex->tex_h - 1),
+	u * (ray.obj_hit->mater.tex->tex_w - 1)));
+}
+
 t_color		getex_sphere(t_data ray)
 {
 	t_vect	d;
@@ -64,6 +85,8 @@ t_color		get_texture(t_data ray)
 		return (r);
 	if (ray.obj_hit->type == SPHERE)
 		return (getex_sphere(ray));
+	if (ray.obj_hit->type == PLANE)
+		return (getex_plane(ray));
 	if (ray.obj_hit->type == CYLINDER ||
 	ray.obj_hit->type == CONE)
 		return (getex_cyl(ray));

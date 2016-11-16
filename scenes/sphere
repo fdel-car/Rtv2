@@ -13,9 +13,9 @@ scene
 	{
 		light_1
 		{
-		dir:1;-1;2
+		pos:1;0;-12
 		rayon:0
-		type:dir_light
+		type:point_light
 		color:255;255;255
 		intensity:0.4
 		blur:0
@@ -40,14 +40,14 @@ scene
 				color:255;0;0
 			}
 		}
-		earth
+		cyl
 		{
 			pos:5;0;0
 			dir:0;1;0
 			normal:NULL
 			rayon:2
-			rayon_large:2
-			type:cylinder
+			alpha:30
+			type:cone
 			materiel
 			{
 				texture:bmp/map.bmp
@@ -57,20 +57,21 @@ scene
 				color:255;0;0
 			}
 		}
-		plan_2
+		earth2
 		{
 			pos:0;-3;0
-			dir:NULL
+			dir:0;1;0
 			normal:0;1;0
-			rayon:0
+			rayon:2
+			rayon_large:2
 			type:plane
 			materiel
 			{
+				texture:bmp/wood.bmp
+				brillance:102
 				reflection:1
-				transparence:0.4
-				color:173;173;173
-				texture:NULL
+				transparence:0.6
+				color:255;0;0
 			}
 		}
-	}
 }
