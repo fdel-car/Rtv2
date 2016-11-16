@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems.init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:39:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/24 17:40:02 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/16 00:40:16 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ t_mater		init_mater(void)
 	new.int_refl = 0;
 	new.int_trans = 0;
 	new.color = color_new(0, 0, 0);
-	new.text = NULL;
+	new.tex = NULL;
 	return (new);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gtk.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 17:08:45 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/06 19:53:30 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/16 00:40:59 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -461,7 +461,7 @@ void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
 	if(ft_strcmp(data->desc,"text") == 0)
 	{
 		ret_s = (char *)gtk_entry_get_text(entry);
-		((t_obj *)data->obj)->mater.text = ret_s;
+		// ((t_obj *)data->obj)->mater.text = ret_s;
 	}
 }
 
@@ -556,7 +556,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	color_g_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	sprintf(s_entry,"%d", current_obj->mater.color.b);
 	color_b_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%s", current_obj->mater.text);
+	// sprintf(s_entry,"%s", current_obj->mater.text);
 	text_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 
 	free(s_entry);
@@ -1160,7 +1160,7 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
        {
 
           if (gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeview),
-                                            (gint) event->x, 
+                                            (gint) event->x,
                                             (gint) event->y,
                                             &path, NULL, NULL, NULL))
           {
@@ -1217,7 +1217,7 @@ void	create_list_of_objects(void)
 			GTK_TREE_VIEW_COLUMN(column));
 		i++;
 	}
-	
+
 	g_signal_connect(tree_view, "row-activated", (GCallback) select_current_obj,
 			NULL);
 	g_signal_connect(tree_view, "button-press-event", (GCallback) view_onButtonPressed, NULL);

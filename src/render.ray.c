@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/10/31 19:06:40 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/16 00:59:38 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 	if (cos > 0)
 	{
 		c = color_add(color_add(c, color_mult(l->color, l->intensity * cos))
-		, color_mult((ray->obj_hit)->mater.color, l->intensity * cos));
+		, color_mult(get_texture(*ray), l->intensity * cos));
 	}
 	return (c);
 }
@@ -119,7 +119,7 @@ t_color		compute_light(t_data ray, int iter_refl)
 		lights++;
 	}
 	c = color_mult(c, 1 / (float)lights);
-	return (color_add(c, color_mult(ray.obj_hit->mater.color, 0.2)));
+	return (color_add(c, color_mult(get_texture(ray), 0.2)));
 }
 
 t_color		render_ray(t_data ray)

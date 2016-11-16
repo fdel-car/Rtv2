@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preview.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 18:15:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/04 18:15:42 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/16 01:01:38 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_color		compute_light_prev(t_data ray)
 
 	lights = 0;
 	l = g_env.scene.lgt;
-	ambiant = color_mult(ray.obj_hit->mater.color, 0.2);
+	ambiant = color_mult(get_texture(ray), 0.2);
 	c = color_new(0, 0, 0);
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	get_norm(&ray);

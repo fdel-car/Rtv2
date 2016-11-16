@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/09 04:35:16 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/11/16 00:47:42 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_mater	load_material(char **t)
 			if (ft_sii(t[n], "color:"))
 				new.color = read_color(get_after(t[n], "color:"));
 			if (ft_sii(t[n], "texture:"))
-				new.text = ft_strdup(get_after(t[n], "texture:"));
+				new.tex = load_texture(get_after(t[n], "texture:"));
 		}
 	return (new);
 }
