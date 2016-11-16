@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/06 19:53:19 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/16 05:16:06 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,19 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 	float	a;
 	float	b;
 	float	c;
+	float	r[2];
 
 	a = SQ(ray.dir.x) + SQ(ray.dir.y) + SQ(ray.dir.z);
 	b = 2.0 * (ray.dir.x * (ray.orig.x - obj->pos.x) + ray.dir.y *
 	(ray.orig.y - obj->pos.y) + ray.dir.z * (ray.orig.z - obj->pos.z));
 	c = (SQ(ray.orig.x - obj->pos.x) + SQ(ray.orig.y - obj->pos.y) +
 	SQ(ray.orig.z - obj->pos.z)) - SQ(obj->rayon);
-	return (quadratic_root(a, b, c));
+	quadratic_root(a, b, c, r);
+	if (r[0] > EPSILON)
+		return (r[0]);
+	if (r[1] > EPSILON)
+		return (r[1]);
+	return (-1);
 }
 
 float	intersect_plane(t_obj *obj, t_data ray)
@@ -66,6 +72,7 @@ float	intersect_cone(t_obj *obj, t_data ray)
 	float	b;
 	float	c;
 	t_vect	tmp;
+	float	r[2];
 
 	tmp = vec_sub(ray.orig, obj->pos);
 	a = vec_dotp(ray.dir, ray.dir) - ((1.0 + SQ(obj->alpha)) *
@@ -74,7 +81,7 @@ float	intersect_cone(t_obj *obj, t_data ray)
 	* vec_dotp(ray.dir, obj->dir) * vec_dotp(tmp, obj->dir)));
 	c = vec_dotp(tmp, tmp) - ((1.0 + SQ(obj->alpha)) *
 	SQ(vec_dotp(tmp, obj->dir)));
-	return (quadratic_root(a, b, c));
+	return (quadratic_root(a, b, c, r));
 }
 
 float	intersect_cylinder(t_obj *obj, t_data ray)
@@ -83,35 +90,12 @@ float	intersect_cylinder(t_obj *obj, t_data ray)
 	float	b;
 	float	c;
 	t_vect	tmp;
+	float	r[2];
 
 	tmp = vec_sub(ray.orig, obj->pos);
 	a = vec_dotp(ray.dir, ray.dir) - (SQ(vec_dotp(ray.dir, obj->dir)));
 	b = 2.0 * (vec_dotp(ray.dir, tmp) - (vec_dotp(ray.dir,
 	obj->dir) * vec_dotp(tmp, obj->dir)));
 	c = vec_dotp(tmp, tmp) - (SQ(vec_dotp(tmp, obj->dir))) - SQ(obj->rayon);
-	return (quadratic_root(a, b, c));
-}
-
-float	intersect_torus(t_obj *obj, t_data ray)
-{
-	float	m, n, o, p, q;
-	float	a, b, c, d, e;
-	t_vect	tmp;
-
-	tmp = vec_sub(ray.orig, obj->pos);
-	m = vec_dotp(ray.dir, ray.dir);
-	n = vec_dotp(ray.dir, tmp);
-	o = vec_dotp(tmp, tmp);
-	p = vec_dotp(ray.dir, obj->dir);
-	q = vec_dotp(tmp, obj->dir);
-	a = SQ(m);
-	b = 4 * m * n;
-	c = 4 * SQ(m) + 2 * m * o - 2 * (SQ(obj->rayon_large) + SQ(obj->rayon)) * m
-	+ 4 * SQ(obj->rayon_large) * SQ(p);
-	d = 4 * n * o - 4 * (SQ(obj->rayon_large) + SQ(obj->rayon)) * n + 8 *
-	SQ(obj->rayon_large) * p * q;
-	e = SQ(o) - 2 * (SQ(obj->rayon_large) + SQ(obj->rayon)) * o + 4 *
-	SQ(obj->rayon_large) * SQ(q) + SQ((SQ(obj->rayon_large) - SQ(obj->rayon)));
-	// return (quartic_root(a, b, c, d, e));
-	return (-1);
+	return (quadratic_root(a, b, c, r));
 }

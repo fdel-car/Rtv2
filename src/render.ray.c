@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 00:59:38 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/16 05:41:22 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ t_color		compute_light(t_data ray, int iter_refl)
 	lights = 0;
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	get_norm(&ray);
+	if (ft_strcmp(ray.obj_hit->name, "skybox") == 0)
+		return (get_texture(ray));
 	while (l)
 	{
 		sh = is_shadowed(l, &ray);

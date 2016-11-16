@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 01:53:15 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/16 05:11:31 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 # define RAYTRACING_H
 # define EPSILON 0.01
 
-float		quadratic_root(float a, float b, float c);
-float		*cubic_root(float a, float b, float c, float d);
-float		quartic_root(float a, float b, float c, float d, float e);
+float		quadratic_root(float a, float b, float c, float *roots);
 void		switch_key_focus(void);
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
 t_data		intersect_obj(t_data ray);
 t_color		render_ray(t_data ray);
-float		intersect_torus(t_obj *obj, t_data ray);
 float		intersect_triangle(t_obj *obj, t_data ray);
 float		intersect_sphere(t_obj *obj, t_data ray);
 float		intersect_cylinder(t_obj *obj, t_data ray);

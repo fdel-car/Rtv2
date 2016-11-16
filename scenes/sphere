@@ -40,6 +40,22 @@ scene
 				color:255;0;0
 			}
 		}
+		skybox
+		{
+			pos:0;0;0
+			dir:0;0;0
+			normal:NULL
+			rayon:8096
+			type:sphere
+			materiel
+			{
+				texture:bmp/skybox.bmp
+				brillance:0
+				reflection:1
+				transparence:0.6
+				color:255;0;0
+			}
+		}
 		cyl
 		{
 			pos:5;0;0

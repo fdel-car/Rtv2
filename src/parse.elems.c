@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.elems.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 03:15:49 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/16 05:12:00 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	set_func(t_obj *o)
 		o->func = &intersect_cone;
 	if (o->type == TRIANGLE)
 		o->func = &intersect_triangle;
-	if (o->type == TORUS)
-		o->func = &intersect_torus;
 }
 
 void	load_object(char **t)
@@ -79,8 +77,6 @@ void	load_object(char **t)
 				new->dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 			if (ft_sii(t[n], "rayon:"))
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
-			if (ft_sii(t[n], "rayon_large:"))
-				new->rayon_large = ft_atof(get_after(t[n], "rayon_large:"));
 			if (ft_sii(t[n], "alpha:"))
 				new->alpha = ft_atof(get_after(t[n], "alpha:")) * M_PI / 180;
 			if (new->alpha > 1.5707)

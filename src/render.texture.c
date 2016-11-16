@@ -69,7 +69,7 @@ t_color		getex_cyl(t_data ray)
 
 	d = vec_sub(ray.hit_point, vec_mul(ray.obj_hit->pos, ray.obj_hit->dir));
 	u = 0.5 + atan2(d.z, d.x) / M_PI * 0.5;
-	v = d.y / 10;//10 correspond a la hauteur du repeat de la texture
+	v = d.y / 10; // 10 correspond a la hauteur du repeat de la texture
 	v = v - floor(v);
 	i = ft_limit(u * ray.obj_hit->mater.tex->tex_w, 0, ray.obj_hit->mater.tex->tex_w - 1);
 	j = ft_limit(v * ray.obj_hit->mater.tex->tex_h, 0, ray.obj_hit->mater.tex->tex_h - 1);
