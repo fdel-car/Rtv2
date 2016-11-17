@@ -24,6 +24,9 @@ void				create_list_of_objects();
 void				select_current_obj(GtkTreeView *GtkTreeView,
 					GtkTreePath *path);
 void  set_signal_create_object(void);
+void  set_signal_open_save_scene(void);
+void open_scene(void);
+void save_scene(void);
 void create_object(GtkWidget *entry, t_gtkData *e);
 void init_gtk_create_widget(void);
 

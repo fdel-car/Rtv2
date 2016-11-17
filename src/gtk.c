@@ -12,6 +12,43 @@
 
 #include "rt.h"
 
+void open_file(char *filename){
+	printf("%s\n",filename );
+	printf("%s\n",filename + ft_strlen(filename ) -4 );
+	if (ft_strcmp(".scn", filename + ft_strlen(filename) - 4) == 0)
+	{
+		load_file(filename);
+		create_list_of_objects();
+		launch_thread();
+		launch_preview();
+	}
+}
+void save_scene(void){
+
+}
+
+void open_scene(){
+	GtkWidget *dialog;
+	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	gint res;
+	
+	dialog = gtk_file_chooser_dialog_new ("Open File",NULL,action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
+	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Cancel", GTK_RESPONSE_CANCEL);
+	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Open", GTK_RESPONSE_ACCEPT);
+	
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (res == GTK_RESPONSE_ACCEPT)
+	  {
+	    char *filename;
+	    GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+	    filename = gtk_file_chooser_get_filename (chooser);
+	    open_file (filename);
+	    g_free (filename);
+  }
+
+gtk_widget_destroy (dialog);
+}
+
 void init_gtk_create_widget(void)
 {
 	GtkWidget *combo;

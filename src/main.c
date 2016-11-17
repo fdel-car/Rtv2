@@ -132,6 +132,8 @@ void	init_gtk(void)
 		iter++;
 	}
 	init_gtk_create_widget();
+	set_signal_create_object();
+	set_signal_open_save_scene();
 }
 
 int		main(int argc, char **argv)
@@ -147,13 +149,12 @@ int		main(int argc, char **argv)
 	spin_button();
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
-	set_signal_create_object();
+
 	// g_object_unref(g_env.build);
 	// g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();
 	// test_texture(load_texture("bmp/skybox.bmp"));
-	// init_gtk_create_widget();
 	gtk_widget_show_all(g_env.win);
 	gtk_main();
 	return (EXIT_SUCCESS);
