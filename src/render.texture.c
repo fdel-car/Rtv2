@@ -83,7 +83,7 @@ t_color		get_texture(t_data ray)
 	r = ray.obj_hit->mater.color;
 	if (!ray.obj_hit->mater.tex)
 		return (r);
-	if (ray.obj_hit->type == SPHERE)
+	if (ray.obj_hit->type == SPHERE || ray.obj_hit->type == SKYBOX)
 		return (getex_sphere(ray));
 	if (ray.obj_hit->type == PLANE)
 		return (getex_plane(ray));

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 18:15:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 05:50:36 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:29:05 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_color		init_ray_prev(float x, float y, t_data ray)
 	g_env.scene.cam.x_ind_p * x)), vec_mult(g_env.scene.cam.up,
 	g_env.scene.cam.y_ind_p * y));
 	ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
-	return (render_ray_prev(intersect_obj(ray)));
+	return (render_ray_prev(intersect_obj(ray, FALSE)));
 }
 
 void		*raytracing_prev(void *arg)

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 05:12:00 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:21:37 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_mater	load_material(char **t)
 void	set_func(t_obj *o)
 {
 	if (o->type == SPHERE)
+		o->func = &intersect_sphere;
+	if (o->type == SKYBOX)
 		o->func = &intersect_sphere;
 	if (o->type == PLANE)
 		o->func = &intersect_plane;

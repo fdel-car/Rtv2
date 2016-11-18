@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:49:00 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 05:11:42 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:20:54 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ e_type	get_type(char *type)
 	!ft_strcmp(type, "plane") ? t = PLANE : 0;
 	!ft_strcmp(type, "dir_light") ? t = DIR_L : 0;
 	!ft_strcmp(type, "point_light") ? t = POINT_L : 0;
+	!ft_strcmp(type, "skybox") ? t = SKYBOX : 0;
 	return (t);
 }
 

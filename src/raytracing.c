@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/09 05:10:00 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/11/18 18:28:04 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_data		intersect_obj(t_data ray)
+t_data		intersect_obj(t_data ray, gboolean sh)
 {
 	t_obj	*obj;
 	t_obj	*lst;
@@ -25,7 +25,10 @@ t_data		intersect_obj(t_data ray)
 	while (obj)
 	{
 		if (obj->type != MESH)
-			tmp = (*obj->func)(obj, ray);
+		{
+			if (sh != TRUE || obj->type != SKYBOX)
+				tmp = (*obj->func)(obj, ray);
+		}
 		else
 		{
 			lst = (lst) ? lst->next : obj->lst;
@@ -64,7 +67,7 @@ t_color		init_ray(float x, float y, t_data ray)
 	g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
 	g_env.scene.cam.y_ind * y));
 	ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
-	return (render_ray(intersect_obj(ray)));
+	return (render_ray(intersect_obj(ray, FALSE)));
 }
 
 void		super_sample(float x, float y, t_data ray)

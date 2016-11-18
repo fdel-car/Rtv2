@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 00:42:22 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:20:28 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TYPES_H
 
 typedef enum	{NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE, MESH, SPOT_L,
-				DIR_L, POINT_L, TORUS} e_type;
+				DIR_L, POINT_L, SKYBOX} e_type;
 
 typedef struct		s_vect
 {

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 05:41:22 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:31:28 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ gboolean	is_shadowed(t_light *l, t_data *ray)
 	{
 		sh.orig = ray->hit_point;
 		sh.dir = vec_mult(l->dir, -1);
-		sh = intersect_obj(sh);
+		sh = intersect_obj(sh, TRUE);
 		if (sh.solut == -1)
 			return (TRUE);
 		return (FALSE);
 	}
 	sh.orig = l->pos;
 	sh.dir = vec_norm(vec_sub(ray->hit_point, l->pos));
-	sh = intersect_obj(sh);
+	sh = intersect_obj(sh, TRUE);
 	tmp = vec_add(sh.orig, vec_mult(sh.dir, sh.solut));
 	if (dist_p(tmp, l->pos) < dist_p(ray->hit_point, l->pos) - EPSILON)
 		return (FALSE);
@@ -78,7 +78,7 @@ t_color		reflection_lighting(t_data *ray, int iter_refl, t_color c)
 	refl.dir = vec_mult(ray->norm, -2.0 * vec_dotp(ray->dir, ray->norm));
 	refl.dir = vec_norm(vec_add(ray->dir, refl.dir));
 	refl.orig = ray->hit_point;
-	refl = intersect_obj(refl);
+	refl = intersect_obj(refl, FALSE);
 	if (iter_refl > 0 && refl.solut != -1)
 		return (color_add(c, color_mult(compute_light(refl, --iter_refl), 0.25 *
 		(ray->obj_hit)->mater.int_refl)));
@@ -97,7 +97,7 @@ t_color		compute_light(t_data ray, int iter_refl)
 	lights = 0;
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	get_norm(&ray);
-	if (ft_strcmp(ray.obj_hit->name, "skybox") == 0)
+	if (ray.obj_hit->type == SKYBOX)
 		return (get_texture(ray));
 	while (l)
 	{
