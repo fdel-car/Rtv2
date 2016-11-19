@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 17:08:45 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 00:40:59 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/19 18:35:03 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void open_scene(){
 	GtkWidget *dialog;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	gint res;
-	
+
 	dialog = gtk_file_chooser_dialog_new ("Open File",NULL,action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
 	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Cancel", GTK_RESPONSE_CANCEL);
 	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Open", GTK_RESPONSE_ACCEPT);
-	
+
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	  {
@@ -282,6 +282,7 @@ void signal_add_object(void)
 
 	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gtk_builder_get_object(g_env.build,"create_type")));
 	obj = malloc(sizeof(t_obj));
+	// init_obj
 	add_object_type(s,obj);
 	obj = add_object_name(obj);
 	obj = add_object_pos(obj);
@@ -295,6 +296,7 @@ void signal_add_object(void)
 	obj = add_object_mater_trans(obj);
 	obj = add_object_mater_color(obj);
 	obj->next = NULL;
+	obj->mater.tex = NULL;
 
 	set_func(obj);
 	push_obj(obj);
