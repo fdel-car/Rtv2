@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/18 18:21:37 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:21:20 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ void	load_object(char **t)
 
 	new = malloc(sizeof(t_obj));
 	new->next = NULL;
+	new->src = NULL;
 	name = ft_strdup(*t);
 	new->name = ft_strtrim(name);
-	new->src = 0;
+	new->cut = vec_new(0, 0, 0);
+	new->min = 0;
+	new->max = 0;
 	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
 		while (t[++n] && !ft_sii(t[n], "{"))
@@ -75,8 +78,14 @@ void	load_object(char **t)
 				new->v2 = read_vec(get_after(t[n], "v2:"), ';');
 			if (ft_sii(t[n], "pos:"))
 				new->pos = read_vec(get_after(t[n], "pos:"), ';');
+			if (ft_sii(t[n], "cut:"))
+				new->cut = vec_norm(read_vec(get_after(t[n], "cut:"), ';'));
 			if (ft_sii(t[n], "dir:"))
 				new->dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
+			if (ft_sii(t[n], "min:"))
+				new->min = ft_atof(get_after(t[n], "min:"));
+			if (ft_sii(t[n], "max:"))
+				new->max = ft_atof(get_after(t[n], "max:"));
 			if (ft_sii(t[n], "rayon:"))
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
 			if (ft_sii(t[n], "alpha:"))

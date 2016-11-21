@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/18 18:20:28 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:21:30 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ typedef struct		s_obj
 	t_vect			pos;
 	t_vect			dir;
 	t_vect			norm;
+	t_vect			cut;
+	float			min;
+	float			max;
 	float			rayon;
-	float			rayon_large;
 	float			alpha;
 	t_mater			mater;
 	float			(*func)(struct s_obj *obj, t_data ray);

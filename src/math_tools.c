@@ -6,11 +6,26 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:55:38 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 05:20:30 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:36:22 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+float	cut_basics(t_data *ray, t_obj *o, t_vect cut, float *r)
+{
+	float		m;
+
+	m = vec_dotp(ray->dir, cut) * r[0] + vec_dotp(ray->orig, cut);
+	if (m > o->max || m < o->min || r[0] < EPSILON)
+	{
+		m = vec_dotp(ray->dir, cut) * r[1] + vec_dotp(ray->orig, cut);
+		if (m < o->max && m > o->min && r[1] > EPSILON)
+			return (r[1]);
+		return (-1);
+	}
+	return (r[0]);
+}
 
 float	quadratic_root(float a, float b, float c, float *roots)
 {

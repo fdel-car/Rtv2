@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 18:11:57 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/08/15 18:11:58 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:24:00 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,11 @@ float	dist_p(t_vect u, t_vect v)
 
 	dist = sqrt(SQ(u.x - v.x) + SQ(u.y - v.y) + SQ(u.z - v.z));
 	return (dist);
+}
+
+int		vec_is_null(t_vect u)
+{
+	if (u.x == 0 && u.y == 0 && u.z == 0)
+		return (1);
+	return (0);
 }

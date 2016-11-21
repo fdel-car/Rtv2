@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/18 18:27:50 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:24:36 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RAYTRACING_H
 # define EPSILON 0.001
 
+float		cut_basics(t_data *ray, t_obj *o, t_vect cut, float *r);
 float		quadratic_root(float a, float b, float c, float *roots);
 void		switch_key_focus(void);
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
@@ -48,5 +49,6 @@ void		launch_preview(void);
 void		desactivate_preview(void);
 void		spin_button(void);
 void		aa_check();
+int			vec_is_null(t_vect u);
 
 #endif

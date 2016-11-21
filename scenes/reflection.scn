@@ -6,14 +6,14 @@ scene
 	name:test_scene
 	camera
 	{
-		pos:0;0;-20
+		pos:0;0;-10
 		dir:0;0;1
 	}
 	lights
 	{
 		light_1
 		{
-		dir:1;-1;3
+		dir:1;-1;2
 		rayon:2.0
 		type:dir_light
 		color:255;255;255
@@ -38,42 +38,14 @@ scene
 				texture:NULL
 			}
 		}
-		plan_3
-		{
-			pos:0;0;20
-			dir:NULL
-			normal:0;0;-1
-			rayon:0
-			type:plane
-			materiel
-			{
-				reflection:3.4
-				transparence:0.4
-				color:0;0;0
-				texture:NULL
-			}
-		}
-		plan_5
-		{
-			pos:10;0;0
-			dir:NULL
-			normal:1;0;0
-			rayon:0
-			type:plane
-			materiel
-			{
-				reflection:3.4
-				transparence:0.4
-				color:0;0;0
-				texture:NULL
-			}
-		}
 		cylinder_1
 		{
-			pos:6;0;4
-			dir:1;1;1
+			pos:2;1;0
+			dir:-1;1;1
 			normal:NULL
 			rayon:1
+			min:-1
+			max:5
 			type:cylinder
 			materiel
 			{
@@ -86,17 +58,19 @@ scene
 		}
 		cone_1
 		{
-			pos:4;-2;6
-			dir:-1;4;1
+			pos:0;0;0
+			dir:0;1;0
 			normal:NULL
-			alpha:45
+			alpha:30
+			min:-2
+			max:2
 			type:cone
 			materiel
 			{
 				brillance:152
 				reflection:1
 				transparence:0.4
-				color:45;150;120
+				color:205;0;0
 				texture:NULL
 			}
 		}

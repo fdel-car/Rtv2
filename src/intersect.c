@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 05:16:06 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:38:21 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,12 @@ float	intersect_cone(t_obj *obj, t_data ray)
 	* vec_dotp(ray.dir, obj->dir) * vec_dotp(tmp, obj->dir)));
 	c = vec_dotp(tmp, tmp) - ((1.0 + SQ(obj->alpha)) *
 	SQ(vec_dotp(tmp, obj->dir)));
-	return (quadratic_root(a, b, c, r));
+	if (obj->min == 0 && obj->max == 0)
+		return (quadratic_root(a, b, c, r));
+	if (!quadratic_root(a, b, c, r))
+		return (-1);
+	return (cut_basics(&ray, obj, vec_is_null(obj->cut)
+	? obj->dir : obj->cut, r));
 }
 
 float	intersect_cylinder(t_obj *obj, t_data ray)
@@ -97,5 +102,10 @@ float	intersect_cylinder(t_obj *obj, t_data ray)
 	b = 2.0 * (vec_dotp(ray.dir, tmp) - (vec_dotp(ray.dir,
 	obj->dir) * vec_dotp(tmp, obj->dir)));
 	c = vec_dotp(tmp, tmp) - (SQ(vec_dotp(tmp, obj->dir))) - SQ(obj->rayon);
-	return (quadratic_root(a, b, c, r));
+	if (obj->min == 0 && obj->max == 0)
+		return (quadratic_root(a, b, c, r));
+	if (!quadratic_root(a, b, c, r))
+		return (-1);
+	return (cut_basics(&ray, obj, vec_is_null(obj->cut)
+	? obj->dir : obj->cut, r));
 }
