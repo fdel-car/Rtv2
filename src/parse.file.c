@@ -21,6 +21,10 @@ void	load_camera(char **t)
 	{
 		if (ft_sii(t[n], "pos:"))
 			g_env.scene.cam.pos = read_vec(get_after(t[n], "pos:"), ';');
+		if (ft_sii(t[n], "pos2:"))
+			g_env.scene.cam.pos2 = read_vec(get_after(t[n], "pos2:"), ';');
+		if (ft_sii(t[n], "pos3:"))
+			g_env.scene.cam.pos3 = read_vec(get_after(t[n], "pos3:"), ';');
 		if (ft_sii(t[n], "dir:"))
 			g_env.scene.cam.dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 	}

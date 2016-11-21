@@ -56,6 +56,8 @@ void		init_view(void)
 	g_env.scene.cam.y_ind = g_env.scene.cam.view_h / (float)HEIGHT;
 	g_env.scene.cam.x_ind_p = g_env.scene.cam.view_w / (float)WIDTH_PREVIEW;
 	g_env.scene.cam.y_ind_p = g_env.scene.cam.view_h / (float)HEIGHT_PREVIEW;
+	g_env.scene.cam.pos1 = g_env.scene.cam.pos;
+	g_env.scene.cam.c_pos = 1;
 }
 
 t_color		init_ray(float x, float y, t_data ray)

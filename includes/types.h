@@ -42,6 +42,11 @@ typedef struct		s_text
 typedef struct		s_cam
 {
 	t_vect			pos;
+	t_vect			pos1;
+	t_vect			pos2;
+	t_vect			pos3;
+	int				c_pos;
+
 	t_vect			dir;
 	t_vect			right;
 	t_vect			up;

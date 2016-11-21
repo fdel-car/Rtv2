@@ -27,6 +27,39 @@ void save_scene(void){
 
 }
 
+void switch_cam_pos(){
+	if (g_env.scene.cam.c_pos == 1)
+		g_env.scene.cam.pos = g_env.scene.cam.pos1;
+	else if (g_env.scene.cam.c_pos == 2)
+		g_env.scene.cam.pos = g_env.scene.cam.pos2;
+	else if (g_env.scene.cam.c_pos == 3)
+		g_env.scene.cam.pos = g_env.scene.cam.pos3;
+}
+
+void switch_cam(GtkWidget *entry){
+	if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_prev")))
+	{
+		if (g_env.scene.cam.c_pos == 1)
+			g_env.scene.cam.c_pos = 3;
+		else if (g_env.scene.cam.c_pos == 2)
+			g_env.scene.cam.c_pos = 1;
+		else if (g_env.scene.cam.c_pos == 3)
+			g_env.scene.cam.c_pos = 2;
+	}
+	else if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_next")))
+	{
+		if (g_env.scene.cam.c_pos == 1)
+			g_env.scene.cam.c_pos = 2;
+		else if (g_env.scene.cam.c_pos == 2)
+			g_env.scene.cam.c_pos = 3;
+		else if (g_env.scene.cam.c_pos == 3)
+			g_env.scene.cam.c_pos = 1;
+	}
+	switch_cam_pos();
+	launch_preview();
+	launch_thread();
+}
+
 void open_scene(){
 	GtkWidget *dialog;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;

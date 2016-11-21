@@ -102,3 +102,17 @@ void  set_signal_open_save_scene(void)
 	g_signal_connect(btn_save,"clicked",
 		G_CALLBACK(save_scene), NULL);
 }
+
+void set_signal_switch_cam(void)
+{
+	GtkWidget *btn_next = NULL;
+	GtkWidget *btn_prev = NULL;
+
+	btn_prev = GTK_WIDGET(gtk_builder_get_object(g_env.build,"cam_prev"));
+	btn_next = GTK_WIDGET(gtk_builder_get_object(g_env.build,"cam_next"));
+
+	g_signal_connect(btn_prev,"clicked",
+		G_CALLBACK(switch_cam), NULL);
+	g_signal_connect(btn_next,"clicked",
+		G_CALLBACK(switch_cam), NULL);
+}

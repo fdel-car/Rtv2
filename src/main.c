@@ -134,6 +134,7 @@ void	init_gtk(void)
 	init_gtk_create_widget();
 	set_signal_create_object();
 	set_signal_open_save_scene();
+	set_signal_switch_cam();
 }
 
 int		main(int argc, char **argv)

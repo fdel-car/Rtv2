@@ -7,6 +7,8 @@ scene
 	camera
 	{
 		pos:0;0;-20
+		pos2:-5;0;-20
+		pos3:5;0;-20
 		dir:0;0;1
 	}
 	lights
