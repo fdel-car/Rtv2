@@ -32,7 +32,7 @@ void open_scene(){
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	gint res;
 
-	dialog = gtk_file_chooser_dialog_new ("Open File",NULL,action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
+	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
 	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Cancel", GTK_RESPONSE_CANCEL);
 	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Open", GTK_RESPONSE_ACCEPT);
 
@@ -440,11 +440,46 @@ void	save_entry_transformation_light(GtkEntry *entry, t_gtkData *data)
 		((t_light *)data->obj)->rayon  = ret;
 }
 
+void save_translation_mesh_object(GtkEntry *entry, t_gtkData *data, t_vect oldpos)
+{
+	t_obj *list;
+	float ret;
+
+	list = ((t_obj *)data->obj)->lst;
+	ret = ft_atof(gtk_entry_get_text(entry));
+
+	while (list)
+	{
+		if(ft_strcmp(data->desc,"posx") == 0)
+		{
+			list->v0.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+			list->v1.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+			list->v2.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+		}
+		else if(ft_strcmp(data->desc,"posy") == 0)
+		{
+			list->v0.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
+			list->v1.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
+			list->v2.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
+		}
+		else if(ft_strcmp(data->desc,"posz") == 0)
+		{
+			list->v0.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+			list->v1.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+			list->v2.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+		}
+		list = list->next;
+	}
+}
+
 void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
 {
 	float ret;
+	t_vect pos;
+	
 
 	ret = ft_atof(gtk_entry_get_text(entry));
+	pos = ((t_obj *)data->obj)->pos;
 	if(ft_strcmp(data->desc,"posx") == 0)
 		((t_obj *)data->obj)->pos.x  = ret;
 	else if(ft_strcmp(data->desc,"posy") == 0)
@@ -459,6 +494,14 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
 		((t_obj *)data->obj)->dir.z  = ret;
 	else if(ft_strcmp(data->desc,"rayon") == 0)
 		((t_obj *)data->obj)->rayon  = ret;
+
+	if (((t_obj *)data->obj)->type == MESH )
+	{
+		if(ft_strcmp(data->desc,"posx") == 0 || ft_strcmp(data->desc,"posy") == 0||ft_strcmp(data->desc,"posz") == 0)
+		{
+			save_translation_mesh_object(entry,data, pos);
+		}
+	}
 }
 
 void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
@@ -502,6 +545,29 @@ void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
 		ret_s = (char *)gtk_entry_get_text(entry);
 		// ((t_obj *)data->obj)->mater.text = ret_s;
 	}
+}
+
+void	select_text(GtkEntry *entry, t_gtkData *data){
+	GtkWidget *dialog;
+	(void)entry;
+	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	gint res;
+
+	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
+
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (res == GTK_RESPONSE_ACCEPT)
+	{
+	    char *filename;
+	    GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+	    filename = gtk_file_chooser_get_filename (chooser);
+	    //free(((t_obj *)data->obj)->mater.tex->text);
+	    //free(((t_obj *)data->obj)->mater.tex);
+	    ((t_obj *)data->obj)->mater.tex = load_texture(filename);
+	    g_free (filename);
+	}
+	launch_preview();
+	gtk_widget_destroy (dialog);
 }
 
 void	save_entry_material_light(GtkEntry *entry, t_gtkData *data)
@@ -550,6 +616,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	GtkWidget *color_g_entry;
 	GtkWidget *color_b_entry;
 	GtkWidget *text_entry;
+	GtkWidget *btn_text;
 	GtkWidget *color_button;
 
 	GtkEntryBuffer *shiny_buffer;
@@ -613,7 +680,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	color_g_entry = gtk_entry_new_with_buffer(color_g_buffer);
 	color_b_entry = gtk_entry_new_with_buffer(color_b_buffer);
 	text_entry = gtk_entry_new_with_buffer(text_buffer);
-
+	btn_text = gtk_button_new_with_label ("Select texture");
 
 	col->red  = (double)current_obj->mater.color.r / 255;
 	col->green  = (double)current_obj->mater.color.g / 255;
@@ -654,6 +721,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	gtk_grid_attach(GTK_GRID(grid), color_b_entry,3,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_button,4,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), text_entry,1,4,1,1);
+	gtk_grid_attach(GTK_GRID(grid), btn_text,2,4,1,1);
 
 	entry_shiny->data = shiny_entry;
 	entry_shiny->desc = ft_strdup("shiny");
@@ -697,6 +765,8 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 			G_CALLBACK(save_entry_material_object), entry_col_b);
 	g_signal_connect(text_entry, "changed",
 			G_CALLBACK(save_entry_material_object), entry_text);
+	g_signal_connect(btn_text, "clicked",
+	 		G_CALLBACK(select_text), entry_text);
 
 	g_signal_connect(shiny_entry, "changed",
 			G_CALLBACK(launch_preview), entry_shiny);
