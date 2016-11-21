@@ -1,13 +1,13 @@
 scene
 {
 	global_illumination:0
-	anti_aliasing:0
-	iter_reflection:0
+	anti_aliasing:2
+	iter_reflection:1
 	name:test_scene
 	camera
 	{
 		pos:0;0;-10
-		dir:0;0;1
+		dir:-0.5;0;1
 	}
 	lights
 	{
@@ -26,10 +26,8 @@ scene
 		earth
 		{
 			pos:-5;0;0
-			dir:0;1;0
 			normal:NULL
 			rayon:2
-			rayon_large:2
 			type:sphere
 			materiel
 			{
