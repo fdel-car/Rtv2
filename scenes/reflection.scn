@@ -40,11 +40,11 @@ scene
 		}
 		cylinder_1
 		{
-			pos:2;1;0
-			dir:-1;1;1
+			pos:0;0;0
+			dir:1;1;0
 			normal:NULL
 			rayon:1
-			min:-1
+			min:-0.4
 			max:5
 			type:cylinder
 			materiel
@@ -56,21 +56,51 @@ scene
 				texture:NULL
 			}
 		}
-		cone_1
+		sphere_1
 		{
-			pos:0;0;0
-			dir:0;1;0
+			pos:3.5;3.5;0
+			dir:NULL
 			normal:NULL
-			alpha:30
-			min:-2
-			max:2
-			type:cone
+			rayon:1
+			type:sphere
 			materiel
 			{
-				brillance:152
+				brillance:42
 				reflection:1
-				transparence:0.4
-				color:205;0;0
+				transparence:0.6
+				color:255;0;0
+				texture:NULL
+			}
+		}
+		sphere_2
+		{
+			pos:-0.2;-0.2;1.25
+			dir:NULL
+			normal:NULL
+			rayon:1.6
+			type:sphere
+			materiel
+			{
+				brillance:42
+				reflection:1
+				transparence:0.6
+				color:0;255;255
+				texture:NULL
+			}
+		}
+		sphere_3
+		{
+			pos:-0.2;-0.2;-1.25
+			dir:NULL
+			normal:NULL
+			rayon:1.6
+			type:sphere
+			materiel
+			{
+				brillance:42
+				reflection:1
+				transparence:0.6
+				color:0;255;255
 				texture:NULL
 			}
 		}

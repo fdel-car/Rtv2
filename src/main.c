@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/12 18:35:32 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/22 18:06:39 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,12 +150,10 @@ int		main(int argc, char **argv)
 	spin_button();
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
-
 	// g_object_unref(g_env.build);
 	// g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();
-	// test_texture(load_texture("bmp/skybox.bmp"));
 	gtk_widget_show_all(g_env.win);
 	gtk_main();
 	return (EXIT_SUCCESS);
