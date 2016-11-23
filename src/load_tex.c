@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:06:31 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 13:31:45 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/23 13:57:10 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_text	*load_texture(char *path)
 
 	if (!ft_strcmp(path, "damier"))
 		return (create_board());
-	if (!end_by(path, ".bmp") || !(img = fopen(path, "r")))
+	if (!end_by(path, ".bmp") || (img = fopen(path, "r")) <= 0)
 		return (0);
 	if (!(tex = malloc(sizeof(t_text))) && !fclose(img))
 		return (0);

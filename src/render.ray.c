@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/18 18:31:28 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/23 14:03:21 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,10 @@ t_color		compute_light(t_data ray, int iter_refl)
 			c = color_stack(c, diffuse_lighting(&ray, l));
 			if (ray.obj_hit->mater.shiny != 0)
 				c = color_stack(c, specular_lighting(&ray, l));
-			if (ray.obj_hit->mater.int_refl > 0)
-				c = color_stack(c, reflection_lighting(&ray, iter_refl,
-				color_new(0, 0, 0)));
 		}
-		else
-		{
-			if (ray.obj_hit->mater.int_refl > 0)
-				c = color_stack(c, reflection_lighting(&ray, iter_refl,
+		if (ray.obj_hit->mater.int_refl > 0)
+			c = color_stack(c, reflection_lighting(&ray, iter_refl,
 				color_new(0, 0, 0)));
-		}
 		l = l->next;
 		lights++;
 	}
