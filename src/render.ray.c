@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 14:03:21 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/23 14:18:22 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_color		reflection_lighting(t_data *ray, int iter_refl, t_color c)
 	refl.orig = ray->hit_point;
 	refl = intersect_obj(refl, FALSE);
 	if (iter_refl > 0 && refl.solut != -1)
-		return (color_add(c, color_mult(compute_light(refl, --iter_refl), 0.25 *
+		return (color_add(c, color_mult(compute_light(refl, --iter_refl),
 		(ray->obj_hit)->mater.int_refl)));
 	return (c);
 }
@@ -108,12 +108,15 @@ t_color		compute_light(t_data ray, int iter_refl)
 			if (ray.obj_hit->mater.shiny != 0)
 				c = color_stack(c, specular_lighting(&ray, l));
 		}
-		if (ray.obj_hit->mater.int_refl > 0)
-			c = color_stack(c, reflection_lighting(&ray, iter_refl,
-				color_new(0, 0, 0)));
 		l = l->next;
 		lights++;
 	}
+	// if (ray.obj_hit->mater.int_refl > 0)
+	// 	c = color_stack(c, transparent_lighting(&ray, iter_refl,
+	// 		color_new(0, 0, 0)));
+	if (ray.obj_hit->mater.int_refl > 0)
+		c = color_stack(c, reflection_lighting(&ray, iter_refl,
+			color_new(0, 0, 0)));
 	c = color_mult(c, 1 / (float)lights);
 	return (color_add(c, color_mult(get_texture(ray), 0.2)));
 }
