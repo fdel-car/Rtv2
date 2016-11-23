@@ -13,9 +13,10 @@ scene
 	{
 		light_1
 		{
-		dir:1;-1;0
+		pos:0;10;-20
+		dir:0;-1;0
 		rayon:0
-		type:dir_light
+		type:point_light
 		color:255;255;255
 		intensity:0.4
 		blur:0
@@ -38,20 +39,19 @@ scene
 				color:0;0;0
 			}
 		}
-		skybox
+		plan_1
 		{
-			pos:0;0;0
-			dir:0;0;0
-			normal:NULL
-			rayon:8096
-			type:skybox
+			pos:0;-6;0
+			dir:NULL
+			normal:0;1;0
+			rayon:0
+			type:plane
 			materiel
 			{
-				texture:bmp/skybox.bmp
-				brillance:0
 				reflection:1
-				transparence:0.6
-				color:255;0;0
+				transparence:0.4
+				color:173;173;173
+				texture:NULL
 			}
 		}
 }

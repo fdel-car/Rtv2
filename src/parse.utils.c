@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:49:00 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/18 18:20:54 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/23 13:07:27 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,29 @@ int		ft_sii(char *s, char *e)
 			return (1);
 	}
 	return (0);
+}
+
+int		end_by(char *s, char *end)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	while (s[++i])
+		;
+	while (end[++j])
+		;
+	i--;
+	j--;
+	while (j >= 0 && end[j] && s[i])
+	{
+		if (s[i] != end[j])
+			return (0);
+		j--;
+		i--;
+	}
+	return (1);
 }
 
 char	*get_after(char *s, char *a)
