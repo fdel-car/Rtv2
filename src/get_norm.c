@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_norm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:35:21 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 05:41:29 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/23 15:08:47 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,21 @@ void	norm_cone(t_data *ray)
 	ray->norm = vec_norm(vec_sub(ray->hit_point, dir));
 }
 
+void	normal_mapping(t_data *ray)
+{
+	t_color		p;
+
+	p = color_new(0, 0, 0);
+	if (ray->obj_hit->type == SPHERE)
+		p = getex_sphere(*ray, ray->obj_hit->mater.ntex);
+	else if (ray->obj_hit->type == PLANE)
+		p = getex_plane(*ray, ray->obj_hit->mater.ntex);
+	else if (ray->obj_hit->type == CYLINDER ||
+	ray->obj_hit->type == CONE)
+		p = getex_cyl(*ray, ray->obj_hit->mater.ntex);
+	ray->norm = vec_norm(vec_sub(ray->norm, bump_normal(p)));
+}
+
 void	get_norm(t_data *ray)
 {
 	if ((ray->obj_hit)->type == SPHERE)
@@ -60,4 +75,6 @@ void	get_norm(t_data *ray)
 		norm_cylinder(ray);
 	if ((ray->obj_hit)->type == CONE)
 		norm_cone(ray);
+	if ((ray->obj_hit)->mater.ntex)
+		normal_mapping(ray);
 }

@@ -72,7 +72,7 @@ t_color		get_texel(t_text tex, int i, int j)
 	return (r);
 }
 
-t_color		getex_plane(t_data ray)
+t_color		getex_plane(t_data ray, t_text *tex)
 {
 	float	u;
 	float	v;
@@ -88,12 +88,12 @@ t_color		getex_plane(t_data ray)
 	u = u - floor(u);
 	v = v - floor(v);
 
-	return (get_texel(*ray.obj_hit->mater.tex,
-	v * (ray.obj_hit->mater.tex->tex_h - 1),
-	u * (ray.obj_hit->mater.tex->tex_w - 1)));
+	return (get_texel(*tex,
+	v * (tex->tex_h - 1),
+	u * (tex->tex_w - 1)));
 }
 
-t_color		getex_sphere(t_data ray)
+t_color		getex_sphere(t_data ray, t_text *tex)
 {
 	t_vect	d;
 	float	u;
@@ -101,17 +101,17 @@ t_color		getex_sphere(t_data ray)
 	int		i;
 	int		j;
 
-	if (!ray.obj_hit || !ray.obj_hit->mater.tex)
+	if (!ray.obj_hit || !tex)
 		return (ray.obj_hit->mater.color);
 	d = vec_norm(vec_sub(ray.hit_point, ray.obj_hit->pos));
 	u = 0.5 + atan2(d.z, d.x) / M_PI * 0.5;
 	v = 0.5 - asin(d.y) / M_PI;
-	i = ft_limit(u * ray.obj_hit->mater.tex->tex_w, 0, ray.obj_hit->mater.tex->tex_w - 1);
-	j = ft_limit(v * ray.obj_hit->mater.tex->tex_h, 0, ray.obj_hit->mater.tex->tex_h - 1);
-	return (get_texel(*ray.obj_hit->mater.tex, i, j));
+	i = ft_limit(u * tex->tex_w, 0, tex->tex_w - 1);
+	j = ft_limit(v * tex->tex_h, 0, tex->tex_h - 1);
+	return (get_texel(*tex, i, j));
 }
 
-t_color		getex_cyl(t_data ray)
+t_color		getex_cyl(t_data ray, t_text *tex)
 {
 	t_vect	d;
 	float	u;
@@ -123,9 +123,9 @@ t_color		getex_cyl(t_data ray)
 	u = 0.5 + atan2(d.z, d.x) / M_PI * 0.5;
 	v = d.y / 10; // 10 correspond a la hauteur du repeat de la texture
 	v = v - floor(v);
-	i = ft_limit(u * ray.obj_hit->mater.tex->tex_w, 0, ray.obj_hit->mater.tex->tex_w - 1);
-	j = ft_limit(v * ray.obj_hit->mater.tex->tex_h, 0, ray.obj_hit->mater.tex->tex_h - 1);
-	return (get_texel(*ray.obj_hit->mater.tex, i, j));
+	i = ft_limit(u * tex->tex_w, 0, tex->tex_w - 1);
+	j = ft_limit(v * tex->tex_h, 0, tex->tex_h - 1);
+	return (get_texel(*tex, i, j));
 }
 
 t_color		get_texture(t_data ray)
@@ -136,11 +136,11 @@ t_color		get_texture(t_data ray)
 	if (!ray.obj_hit->mater.tex)
 		return (r);
 	if (ray.obj_hit->type == SPHERE || ray.obj_hit->type == SKYBOX)
-		return (getex_sphere(ray));
+		return (getex_sphere(ray, ray.obj_hit->mater.tex));
 	if (ray.obj_hit->type == PLANE)
-		return (getex_plane(ray));
+		return (getex_plane(ray, ray.obj_hit->mater.tex));
 	if (ray.obj_hit->type == CYLINDER ||
 	ray.obj_hit->type == CONE)
-		return (getex_cyl(ray));
+		return (getex_cyl(ray, ray.obj_hit->mater.tex));
 	return (r);
 }

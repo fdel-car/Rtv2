@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 14:18:22 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/23 15:32:31 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,31 @@ t_color		reflection_lighting(t_data *ray, int iter_refl, t_color c)
 	return (c);
 }
 
+t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
+{
+	t_data	trs;
+	int		iter;
+
+	// trs.dir = vec_mult(ray->norm, -2.0 * vec_dotp(ray->dir, ray->norm));
+	trs.dir = ray->dir;
+	trs.orig = ray->hit_point;
+	// trs.orig = vec_add(trs.orig, vec_new(2, 2, 2));
+	trs = intersect_obj(trs, FALSE);
+	iter = 0;
+	while (trs.solut != -1)
+	{
+		iter++;
+		c = color_stack(c, color_mult(compute_light(trs, iter_refl),
+		(ray->obj_hit)->mater.int_trans));
+		if (trs.obj_hit->mater.int_trans == 0)
+			break ;
+		trs.orig = trs.hit_point;
+		trs = intersect_obj(trs, FALSE);
+	}
+	c = color_mult(c, 1.0 / (float)iter);
+	return (c);
+}
+
 t_color		compute_light(t_data ray, int iter_refl)
 {
 	t_color		c;
@@ -111,7 +136,7 @@ t_color		compute_light(t_data ray, int iter_refl)
 		l = l->next;
 		lights++;
 	}
-	// if (ray.obj_hit->mater.int_refl > 0)
+	// if (ray.obj_hit->mater.int_trans > 0)
 	// 	c = color_stack(c, transparent_lighting(&ray, iter_refl,
 	// 		color_new(0, 0, 0)));
 	if (ray.obj_hit->mater.int_refl > 0)

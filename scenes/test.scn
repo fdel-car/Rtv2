@@ -49,7 +49,7 @@ scene
 			materiel
 			{
 				reflection:1
-				transparence:0.4
+				transparence:0
 				color:173;173;173
 				texture:NULL
 			}
