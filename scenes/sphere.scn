@@ -1,7 +1,7 @@
 scene
 {
 	global_illumination:0
-	anti_aliasing:2
+	anti_aliasing:0
 	iter_reflection:1
 	name:test_scene
 	camera
@@ -14,10 +14,9 @@ scene
 		light_1
 		{
 		pos:0;0;-10
-		dir:1;-1;0
 		rayon:0
 		type:point_light
-		color:255;255;255
+		color:0;0;0
 		intensity:0.4
 		blur:0
 		}
@@ -32,7 +31,6 @@ scene
 			type:sphere
 			materiel
 			{
-				ntext:bmp/nn.bmp
 				brillance:102
 				reflection:1
 				transparence:0.6

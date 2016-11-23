@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 15:32:31 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:11:42 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 	if (l->type == DIR_L)
 		ray->light = vec_mult(l->dir, -1);
 	cos = vec_dotp(ray->light, ray->norm);
-	if (cos < 0 && (ray->obj_hit)->type == PLANE)
-		cos *= -1;
 	if (cos > 0)
 	{
 		c = color_add(color_add(c, color_mult(l->color, l->intensity * cos))
@@ -38,9 +36,10 @@ t_color		specular_lighting(t_data *ray, t_light *l)
 	t_color	c;
 
 	c = color_new(0, 0, 0);
-	ray->refl = vec_norm(vec_sub(vec_mult(vec_mult(ray->norm,
-	vec_dotp(ray->norm, ray->light)), 2.0), ray->light));
-	if (vec_dotp(ray->light, ray->refl) > 0)
+	ray->refl = vec_norm(vec_add(ray->dir, vec_mult(ray->norm,
+	-vec_dotp(ray->norm, ray->dir) * 2.0)));
+	if (vec_dotp(ray->light, ray->refl) > 0
+	&& vec_dotp(ray->light, ray->norm) > 0)
 	{
 		c = color_add(c, color_mult(l->color,
 		powf(vec_dotp(ray->light, ray->refl), (ray->obj_hit)->mater.shiny)));
@@ -65,6 +64,8 @@ gboolean	is_shadowed(t_light *l, t_data *ray)
 	sh.orig = l->pos;
 	sh.dir = vec_norm(vec_sub(ray->hit_point, l->pos));
 	sh = intersect_obj(sh, TRUE);
+	if (sh.obj_hit == ray->obj_hit)
+		return (TRUE);
 	tmp = vec_add(sh.orig, vec_mult(sh.dir, sh.solut));
 	if (dist_p(tmp, l->pos) < dist_p(ray->hit_point, l->pos) - EPSILON)
 		return (FALSE);
@@ -82,31 +83,6 @@ t_color		reflection_lighting(t_data *ray, int iter_refl, t_color c)
 	if (iter_refl > 0 && refl.solut != -1)
 		return (color_add(c, color_mult(compute_light(refl, --iter_refl),
 		(ray->obj_hit)->mater.int_refl)));
-	return (c);
-}
-
-t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
-{
-	t_data	trs;
-	int		iter;
-
-	// trs.dir = vec_mult(ray->norm, -2.0 * vec_dotp(ray->dir, ray->norm));
-	trs.dir = ray->dir;
-	trs.orig = ray->hit_point;
-	// trs.orig = vec_add(trs.orig, vec_new(2, 2, 2));
-	trs = intersect_obj(trs, FALSE);
-	iter = 0;
-	while (trs.solut != -1)
-	{
-		iter++;
-		c = color_stack(c, color_mult(compute_light(trs, iter_refl),
-		(ray->obj_hit)->mater.int_trans));
-		if (trs.obj_hit->mater.int_trans == 0)
-			break ;
-		trs.orig = trs.hit_point;
-		trs = intersect_obj(trs, FALSE);
-	}
-	c = color_mult(c, 1.0 / (float)iter);
 	return (c);
 }
 

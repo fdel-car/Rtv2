@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_norm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:35:21 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 15:08:47 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/23 16:13:34 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	normal_mapping(t_data *ray)
 	else if (ray->obj_hit->type == CYLINDER ||
 	ray->obj_hit->type == CONE)
 		p = getex_cyl(*ray, ray->obj_hit->mater.ntex);
-	ray->norm = vec_norm(vec_sub(ray->norm, bump_normal(p)));
+	ray->norm = vec_norm(vec_add(ray->norm, bump_normal(p)));
 }
 
 void	get_norm(t_data *ray)

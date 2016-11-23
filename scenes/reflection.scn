@@ -41,11 +41,12 @@ scene
 		cylinder_1
 		{
 			pos:0;0;0
-			dir:1;1;0
+			dir:0;1;0
+			cut:1;1;1
 			normal:NULL
 			rayon:1
-			min:-0.4
-			max:5
+			min:0
+			max:2
 			type:cylinder
 			materiel
 			{
@@ -58,49 +59,15 @@ scene
 		}
 		sphere_1
 		{
-			pos:3.5;3.5;0
-			dir:NULL
-			normal:NULL
-			rayon:1
+			pos:0;0;-4
+			rayon:2
 			type:sphere
 			materiel
 			{
-				brillance:42
+				brillance:152
 				reflection:1
-				transparence:0.6
-				color:255;0;0
-				texture:NULL
-			}
-		}
-		sphere_2
-		{
-			pos:-0.2;-0.2;1.25
-			dir:NULL
-			normal:NULL
-			rayon:1.6
-			type:sphere
-			materiel
-			{
-				brillance:42
-				reflection:1
-				transparence:0.6
-				color:0;255;255
-				texture:NULL
-			}
-		}
-		sphere_3
-		{
-			pos:-0.2;-0.2;-1.25
-			dir:NULL
-			normal:NULL
-			rayon:1.6
-			type:sphere
-			materiel
-			{
-				brillance:42
-				reflection:1
-				transparence:0.6
-				color:0;255;255
+				transparence:0.5
+				color:205;0;50
 				texture:NULL
 			}
 		}
