@@ -32,8 +32,8 @@ scene
 			type:plane
 			materiel
 			{
-				reflection:3.4
-				transparence:0.4
+				reflection:1
+				transparence:0
 				color:0;0;0
 				texture:NULL
 			}
@@ -42,7 +42,7 @@ scene
 		{
 			pos:0;0;0
 			dir:0;1;0
-			cut:1;1;1
+			cut:-1;1;1
 			normal:NULL
 			rayon:1
 			min:0
@@ -52,8 +52,24 @@ scene
 			{
 				brillance:152
 				reflection:1
-				transparence:0.4
-				color:205;150;0
+				transparence:0
+				color:122;85;0
+				texture:NULL
+			}
+		}
+		cylinder_2
+		{
+			pos:0;0;4
+			dir:1;0.5;0
+			normal:NULL
+			rayon:1
+			type:cylinder
+			materiel
+			{
+				brillance:152
+				reflection:1
+				transparence:0
+				color:0;122;0
 				texture:NULL
 			}
 		}
@@ -66,8 +82,9 @@ scene
 			{
 				brillance:152
 				reflection:1
-				transparence:0.5
-				color:205;0;50
+				transparence:0.8
+				indice:1.02
+				color:0;0;50
 				texture:NULL
 			}
 		}

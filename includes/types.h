@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 15:04:13 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:22:18 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_mater
 	float			shiny;
 	float			int_refl;
 	float			int_trans;
+	float			indice;
 	t_color			color;
 	// char			*text;
 	t_text			*tex;
@@ -76,6 +77,7 @@ typedef struct		s_data
 	t_vect			hit_point;
 	float			dist;
 	float			solut;
+	float			indice;
 	t_vect			dir;
 	t_vect			orig;
 	t_vect			norm;

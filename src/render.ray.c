@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 17:11:42 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/23 19:01:18 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,81 @@ t_color		reflection_lighting(t_data *ray, int iter_refl, t_color c)
 	return (c);
 }
 
+t_color		compute_light2(t_data ray, int iter_refl)
+{
+	t_color		c;
+	t_light		*l;
+	gboolean	sh;
+	int			lights;
+
+	l = g_env.scene.lgt;
+	c = color_new(0, 0, 0);
+	lights = 0;
+	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
+	get_norm(&ray);
+	if (ray.obj_hit->type == SKYBOX)
+		return (get_texture(ray));
+	while (l)
+	{
+		sh = is_shadowed(l, &ray);
+		if (sh != FALSE)
+		{
+			c = color_stack(c, diffuse_lighting(&ray, l));
+			if (ray.obj_hit->mater.shiny != 0)
+				c = color_stack(c, specular_lighting(&ray, l));
+		}
+		l = l->next;
+		lights++;
+	}
+	if (ray.obj_hit->mater.int_refl > 0)
+		c = color_stack(c, reflection_lighting(&ray, iter_refl,
+			color_new(0, 0, 0)));
+	c = color_mult(c, 1 / (float)lights);
+	return (color_add(c, color_mult(get_texture(ray), 0.2)));
+}
+
+t_vect	refract_dir(t_data *ray, t_obj *obj)
+{
+	float	n;
+	float	n1;
+	float	n2;
+	float	calc[3];
+	t_vect	dir;
+
+	calc[0] = vec_dotp(ray->norm, ray->dir);
+	if (calc[0] > 0.0)
+	{
+		n1 = 1.0;
+		n2 = obj->mater.indice;
+		ray->norm = vec_mult(ray->norm, -1.0);
+	}
+	else
+	{
+		n1 = obj->mater.indice;
+		n2 = 1.0;
+		calc[0] = -calc[0];
+	}
+	n = n1 / n2;
+	calc[2] = n * n * (1.0 - calc[0] * calc[0]);
+	calc[1] = sqrt(1.0 - calc[2]);
+	dir = vec_add(vec_mult(ray->dir, n),
+	vec_mult(ray->norm, (n * calc[0] - calc[1])));
+	return (vec_norm(dir));
+}
+
+t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
+{
+	t_data	refr;
+
+	refr.dir = refract_dir(ray, ray->obj_hit);
+	refr.orig = ray->hit_point;
+	refr = intersect_obj(refr, FALSE);
+	if (refr.solut != -1)
+		return (color_add(c, color_mult(compute_light(refr, iter_refl),
+		(ray->obj_hit)->mater.int_trans)));
+	return (c);
+}
+
 t_color		compute_light(t_data ray, int iter_refl)
 {
 	t_color		c;
@@ -112,9 +187,9 @@ t_color		compute_light(t_data ray, int iter_refl)
 		l = l->next;
 		lights++;
 	}
-	// if (ray.obj_hit->mater.int_trans > 0)
-	// 	c = color_stack(c, transparent_lighting(&ray, iter_refl,
-	// 		color_new(0, 0, 0)));
+	if (ray.obj_hit->mater.int_trans > 0)
+		c = color_stack(c, transparent_lighting(&ray, iter_refl,
+			color_new(0, 0, 0)));
 	if (ray.obj_hit->mater.int_refl > 0)
 		c = color_stack(c, reflection_lighting(&ray, iter_refl,
 			color_new(0, 0, 0)));

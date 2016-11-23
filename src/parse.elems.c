@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.elems.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 15:04:33 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:51:02 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_mater	load_material(char **t)
 				new.int_refl = ft_atof(get_after(t[n], "reflection:"));
 			if (ft_sii(t[n], "transparence:"))
 				new.int_trans = ft_atof(get_after(t[n], "transparence:"));
+			if (ft_sii(t[n], "indice:"))
+				new.indice = ft_atof(get_after(t[n], "indice:"));
 			if (ft_sii(t[n], "color:"))
 				new.color = read_color(get_after(t[n], "color:"));
 			if (ft_sii(t[n], "texture:"))
