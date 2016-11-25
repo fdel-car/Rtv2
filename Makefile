@@ -6,7 +6,7 @@
 #    By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/28 17:56:29 by fdel-car          #+#    #+#              #
-#    Updated: 2016/11/25 14:57:25 by fdel-car         ###   ########.fr        #
+#    Updated: 2016/11/25 16:18:12 by fdel-car         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,16 +33,18 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	# @cd libft && make re && cd ..
-	gcc  -I./includes $(GTK) -o $@ $^ ./libft/libft.a
+	@gcc  -I./includes $(GTK) -o $@ $^ ./libft/libft.a
 	@echo "\033[1;31mRT compiled successfully"
 	@echo "\033[1A\033[0;39m"
 	@rm *.o
 
 $(OBJS): $(SRCS)
 	@cd ressources && mv interface.gtk gtk.c && cd ..
-	@clang $(CFLAGS) -c $^ ressources/gtk.c `pkg-config --cflags gtk+-3.0` \
+	@clang $(CFLAGS) -c ressources/gtk.c `pkg-config --cflags gtk+-3.0` \
 	-I./libft/includes -I./includes
 	@cd ressources && mv gtk.c interface.gtk && cd ..
+	@clang $(CFLAGS) -c $^ `pkg-config --cflags gtk+-3.0` \
+	-I./libft/includes -I./includes
 
 clean:
 	@cd libft && make clean && cd ..
