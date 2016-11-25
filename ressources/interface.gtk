@@ -24,6 +24,34 @@ void switch_cam_pos(){
 		g_env.scene.cam.pos = g_env.scene.cam.pos3;
 }
 
+void save_image_chooser(void)
+{
+	GtkWidget *dialog;
+	GtkFileChooser *chooser;
+	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
+	gint res;
+	
+	dialog = gtk_file_chooser_dialog_new ("Save File",GTK_WINDOW(g_env.win), action, "_Cancel",
+		GTK_RESPONSE_CANCEL,"_Save",GTK_RESPONSE_ACCEPT,NULL);
+	chooser = GTK_FILE_CHOOSER (dialog);
+	
+	gtk_file_chooser_set_do_overwrite_confirmation (chooser, TRUE);
+	
+  	gtk_file_chooser_set_current_name (chooser,("Untitled document"));
+	
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (res == GTK_RESPONSE_ACCEPT)
+	{
+	    char *filename;
+	
+	    filename = gtk_file_chooser_get_filename (chooser);
+	    save_img (filename);
+	    g_free (filename);
+	}
+
+	gtk_widget_destroy (dialog);
+}
+
 void switch_cam(GtkWidget *entry){
 	if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_prev")))
 	{

@@ -93,14 +93,19 @@ void  set_signal_open_save_scene(void)
 {
 	GtkWidget *btn_open = NULL;
 	GtkWidget *btn_save = NULL;
+	GtkWidget *btn_save_img = NULL;
+
 
 	btn_open = GTK_WIDGET(gtk_builder_get_object(g_env.build,"btn_open"));
 	btn_save = GTK_WIDGET(gtk_builder_get_object(g_env.build,"btn_save"));
+	btn_save_img = GTK_WIDGET(gtk_builder_get_object(g_env.build,"btn_save_img"));
 
 	g_signal_connect(btn_open,"clicked",
 		G_CALLBACK(open_scene), NULL);
 	g_signal_connect(btn_save,"clicked",
 		G_CALLBACK(save_scene), NULL);
+	g_signal_connect(btn_save_img,"clicked",
+		G_CALLBACK(save_image_chooser), NULL);
 }
 
 void set_signal_switch_cam(void)

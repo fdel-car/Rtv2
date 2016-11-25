@@ -31,11 +31,10 @@ void		switch_state_prev(void)
 	}
 }
 
-void		save_img(int keyval)
+void		save_img(char *filename)
 {
-	if (keyval == 65421)
-		gdk_pixbuf_save(g_env.pix, "ressources/saves/rtv2.jpeg", "jpeg", NULL,
-		"quality", "100", NULL);
+	gdk_pixbuf_save(g_env.pix, filename, "jpeg", NULL,
+	"quality", "100", NULL);
 }
 
 void		rotate_cam(int keyval)
@@ -90,7 +89,6 @@ gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
 		rot_any(g_env.scene.cam.dir, g_env.scene.cam.right, 90));
 	rotate_cam(event->keyval);
-	save_img(event->keyval);
 	launch_preview();
 	return (TRUE);
 }
