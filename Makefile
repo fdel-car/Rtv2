@@ -6,24 +6,25 @@
 #    By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/28 17:56:29 by fdel-car          #+#    #+#              #
-#    Updated: 2016/11/25 16:18:12 by fdel-car         ###   ########.fr        #
+#    Updated: 2016/11/25 16:56:10 by fdel-car         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = rtv2
 
 SRCS =  src/color.c src/elems.init.c src/main.c src/parse.elems.c \
-		src/push.elems.c src/parse.file.c src/parse.utils.c src/print.elems.c \
+		src/push.elems.c src/parse.file.c src/parse.utils.c \
 		src/vector.c src/vector2.c src/vector3.c src/intersect.c \
 		src/raytracing.c src/get_norm.c src/render.ray.c src/key_event.c \
 		src/preview.c src/signals.c src/parse.obj.c src/math_tools.c \
-		src/load_tex.c src/render.texture.c src/normal.mapping.c
+		src/load_tex.c src/render.texture.c src/normal.mapping.c \
+		src/parse.obj2.c src/preview2.c src/render.ray2.c src/render.texture2.c
 
 OBJS =	color.o elems.init.o main.o parse.elems.o push.elems.o parse.file.o \
-		parse.utils.o print.elems.o vector.o vector2.o vector3.o intersect.o \
-		raytracing.o get_norm.o render.ray.o key_event.o preview.o signals.o \
-		gtk.o parse.obj.o math_tools.o load_tex.o render.texture.o \
-		normal.mapping.o
+		parse.utils.o vector.o vector2.o vector3.o intersect.o raytracing.o \
+		get_norm.o render.ray.o key_event.o preview.o signals.o gtk.o \
+		parse.obj.o parse.obj2.o math_tools.o load_tex.o preview2.o \
+		render.texture.o normal.mapping.o render.ray2.o render.texture2.o
 
 CFLAGS = -Wall -Wextra -Werror
 

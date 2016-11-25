@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 16:38:55 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:49:43 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define RAYTRACING_H
 # define EPSILON 0.001
 
+t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c);
+t_color		specular_lighting(t_data *ray, t_light *l);
 float		cut_basics(t_data *ray, t_obj *o, t_vect cut, float *r);
 float		quadratic_root(float a, float b, float c, float *roots);
 void		switch_key_focus(void);
@@ -54,5 +56,6 @@ void		desactivate_preview(void);
 void		spin_button(void);
 void		aa_check();
 int			vec_is_null(t_vect u);
+void		put_pixel_prev(int x, int y, t_color color);
 
 #endif

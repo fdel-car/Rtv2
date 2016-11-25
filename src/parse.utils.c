@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:49:00 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 13:07:27 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:37:42 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,24 +106,4 @@ int		end_by(char *s, char *end)
 		i--;
 	}
 	return (1);
-}
-
-char	*get_after(char *s, char *a)
-{
-	while (*s == ' ' || *s == '\t')
-		s++;
-	while (*s == *a && (++s))
-		++a;
-	while (*s == ' ' || *s == '\t')
-		s++;
-	return (s);
-}
-
-void	ctab_free(char **t)
-{
-	int	i;
-
-	i = -1;
-	while (t[++i])
-		free(t[i]);
 }

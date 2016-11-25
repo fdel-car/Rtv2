@@ -44,7 +44,7 @@ scene
 			{
 				brillance:0
 				reflection:0
-				transparence:0.6
+				transparence:0
 				color:0;100;100
 				texture:NULL
 			}
@@ -58,7 +58,7 @@ scene
 			{
 				brillance:0
 				reflection:0
-				transparence:0.6
+				transparence:0
 				color:100;0;100
 				texture:NULL
 			}

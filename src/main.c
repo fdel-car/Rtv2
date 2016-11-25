@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 15:57:19 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:26:07 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ void	put_pixel(int x, int y, t_color color)
 	g_env.pixels[pos + 2] = color.b;
 }
 
-void	pre_compute_tri(void)
+void	pre_compute_tri(t_obj *o)
 {
-	t_obj *o;
 	t_obj *tmp;
 
-	o = g_env.scene.obj;
 	while (o)
 	{
 		if (o->type == TRIANGLE)
@@ -63,7 +61,7 @@ void	launch_thread(void)
 	vec_add(vec_mult(g_env.scene.cam.dir, g_env.scene.cam.view_d),
 	vec_sub(vec_mult(g_env.scene.cam.up, (g_env.scene.cam.view_h / 2.0)),
 	vec_mult(g_env.scene.cam.right, (g_env.scene.cam.view_w / 2.0)))));
-	pre_compute_tri();
+	pre_compute_tri(g_env.scene.obj);
 	g_env.id_thread = 0;
 	while (g_env.id_thread < NUM_THREAD)
 	{
@@ -101,49 +99,13 @@ void	init_limits(void)
 	}
 }
 
-void	init_gtk(void)
-{
-	static char *anti_alia[] = {"None", "2x AA", "4x AA", "8x AA", "16x AA"};
-	int			iter;
-
-	iter = 0;
-	g_env.build = gtk_builder_new_from_file("ressources/interface.glade");
-	g_env.win = GTK_WIDGET(gtk_builder_get_object(g_env.build, "win"));
-	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
-	g_env.pix_prev = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
-			WIDTH_PREVIEW, HEIGHT_PREVIEW);
-	g_env.img = GTK_WIDGET(gtk_builder_get_object(g_env.build, "final_img"));
-	g_env.prev = GTK_WIDGET(gtk_builder_get_object(g_env.build, "prev_img"));
-	g_env.aa_choice = GTK_WIDGET(gtk_builder_get_object(g_env.build,
-				"aa_choice"));
-	g_env.spin_refl = GTK_WIDGET(gtk_builder_get_object(g_env.build,
-				"spin_refl"));
-	g_env.toggle_prev = GTK_WIDGET(gtk_builder_get_object(g_env.build,
-				"prev_button"));
-	g_env.pixels = gdk_pixbuf_get_pixels(g_env.pix);
-	g_env.pixels_prev = gdk_pixbuf_get_pixels(g_env.pix_prev);
-	g_env.rowstride = WIDTH * 3;
-	g_env.rowstride_prev = WIDTH_PREVIEW * 3;
-	g_env.state_prev = FALSE;
-	while (iter < 5)
-	{
-		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(g_env.aa_choice),
-				anti_alia[iter]);
-		iter++;
-	}
-	init_gtk_create_widget();
-	set_signal_create_object();
-	set_signal_open_save_scene();
-	set_signal_switch_cam();
-}
-
 int		main(int argc, char **argv)
 {
 	if (argc < 2 || argc > 3)
 		return (-1);
 	if (argc == 3)
 	{
-		if (ft_strcmp(argv[2],"-p") != 0)
+		if (ft_strcmp(argv[2], "-p") != 0)
 			return (-1);
 		g_env.progress_bar = 1;
 		load_file(argv[1]);

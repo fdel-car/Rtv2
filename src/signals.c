@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 19:02:37 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/05 19:02:39 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 17:26:24 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	spin_button(void)
 	if (g_env.scene.iter_refl >= 10)
 		g_env.scene.iter_refl = 10;
 	if (g_env.scene.iter_refl < 0)
+	{
 		g_env.scene.iter_refl = 0;
-  	adjust = gtk_adjustment_new(g_env.scene.iter_refl,
+	}
+	adjust = gtk_adjustment_new(g_env.scene.iter_refl,
 	0.0, 10.0, 1.0, 5.0, 0.0);
 	gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(g_env.spin_refl), adjust);
 }
@@ -71,53 +73,53 @@ void	switch_anti_aliasing(void)
 	free(s);
 }
 
-void  set_signal_create_object(void){
+void	set_signal_create_object(void)
+{
 	GtkWidget *window_popup;
 	GtkWidget *button_create_object;
-	t_gtkData *entry = NULL;
+	t_gtkData *entry;
 
-
-
-	window_popup = GTK_WIDGET(gtk_builder_get_object(g_env.build,"popup_create_object"));
-	button_create_object = GTK_WIDGET(gtk_builder_get_object(g_env.build,"button_create"));
+	entry = NULL;
+	window_popup = GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"popup_create_object"));
+	button_create_object = GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"button_create"));
 	entry = malloc(sizeof(t_gtkData));
 	entry->data = window_popup;
 	entry->desc = NULL;
 	entry->obj = NULL;
-
 	g_signal_connect(button_create_object, "clicked",
-	 		G_CALLBACK(create_object), entry);
+	G_CALLBACK(create_object), entry);
 }
 
-void  set_signal_open_save_scene(void)
+void	set_signal_open_save_scene(void)
 {
-	GtkWidget *btn_open = NULL;
-	GtkWidget *btn_save = NULL;
-	GtkWidget *btn_save_img = NULL;
+	GtkWidget *btn_open;
+	GtkWidget *btn_save;
+	GtkWidget *btn_save_img;
 
-
-	btn_open = GTK_WIDGET(gtk_builder_get_object(g_env.build,"btn_open"));
-	btn_save = GTK_WIDGET(gtk_builder_get_object(g_env.build,"btn_save"));
-	btn_save_img = GTK_WIDGET(gtk_builder_get_object(g_env.build,"btn_save_img"));
-
-	g_signal_connect(btn_open,"clicked",
-		G_CALLBACK(open_scene), NULL);
-	g_signal_connect(btn_save,"clicked",
-		G_CALLBACK(save_scene), NULL);
-	g_signal_connect(btn_save_img,"clicked",
-		G_CALLBACK(save_image_chooser), NULL);
+	btn_open = NULL;
+	btn_save = NULL;
+	btn_save_img = NULL;
+	btn_open = GTK_WIDGET(gtk_builder_get_object(g_env.build, "btn_open"));
+	btn_save = GTK_WIDGET(gtk_builder_get_object(g_env.build, "btn_save"));
+	btn_save_img = GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"btn_save_img"));
+	g_signal_connect(btn_open, "clicked", G_CALLBACK(open_scene), NULL);
+	g_signal_connect(btn_save, "clicked", G_CALLBACK(save_scene), NULL);
+	g_signal_connect(btn_save_img, "clicked",
+	G_CALLBACK(save_image_chooser), NULL);
 }
 
-void set_signal_switch_cam(void)
+void	set_signal_switch_cam(void)
 {
-	GtkWidget *btn_next = NULL;
-	GtkWidget *btn_prev = NULL;
+	GtkWidget *btn_next;
+	GtkWidget *btn_prev;
 
-	btn_prev = GTK_WIDGET(gtk_builder_get_object(g_env.build,"cam_prev"));
-	btn_next = GTK_WIDGET(gtk_builder_get_object(g_env.build,"cam_next"));
-
-	g_signal_connect(btn_prev,"clicked",
-		G_CALLBACK(switch_cam), NULL);
-	g_signal_connect(btn_next,"clicked",
-		G_CALLBACK(switch_cam), NULL);
+	btn_next = NULL;
+	btn_prev = NULL;
+	btn_prev = GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_prev"));
+	btn_next = GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_next"));
+	g_signal_connect(btn_prev, "clicked", G_CALLBACK(switch_cam), NULL);
+	g_signal_connect(btn_next, "clicked", G_CALLBACK(switch_cam), NULL);
 }

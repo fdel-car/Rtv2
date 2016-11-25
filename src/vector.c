@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 16:26:43 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/16 01:49:24 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:59:08 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-t_vect	cross_pr(t_vect u, t_vect v)
-{
-	t_vect w;
-
-	w.x = (u.y * v.z) - (u.z * v.y);
-	w.y = (u.z * v.x) - (u.x * v.z);
-	w.z = (u.x * v.y) - (u.y * v.x);
-	return (w);
-}
 
 t_vect	vec_mult(t_vect u, float value)
 {

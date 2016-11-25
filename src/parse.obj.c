@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.obj.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/25 16:30:40 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/11/25 16:36:30 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
-void count_values(char **file, int *v_size, int *vn_size)
+void	count_values(char **file, int *v_size, int *vn_size)
 {
 	int i;
 
@@ -18,38 +30,7 @@ void count_values(char **file, int *v_size, int *vn_size)
 		(*vn_size)++;
 }
 
-int get_val(char *s, int r)
-{
-	int i;
-	int c;
-
-	i = -1;
-	c = 1;
-	while (s[++i] && c < r)
-		s[i] == '/' || s[i] == ' ' ? ++c : 0;
-	return (ft_atoi(&(s[i])));
-}
-
-void read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)
-{
-	char **t;
-
-	t = ft_strsplit(line, ' ');
-	if (t[0] && t[1] && t[2] && t[3])
-	{
-			o->name = ft_strdup("mesh_triangle");
-			o->type = TRIANGLE;
-			o->norm = v[1][get_val(t[1], 3) - 1];
-			o->v0 = v[0][get_val(t[1], 1) - 1];
-			o->v1 = v[0][get_val(t[2], 1) - 1];
-			o->v2 = v[0][get_val(t[3], 1) - 1];
-			o->mater = mat;
-			o->next = 0;
-	}
-	ctab_free(t);
-}
-
-void load_obj(char **file, t_vect **v, int i, t_obj *o)
+void	load_obj(char **file, t_vect **v, int i, t_obj *o)
 {
 	t_obj *new;
 
@@ -65,11 +46,11 @@ void load_obj(char **file, t_vect **v, int i, t_obj *o)
 	}
 }
 
-void fill_values(char **file, int v_s, int vn_s, t_obj *new)
+void	fill_values(char **file, int v_s, int vn_s, t_obj *new)
 {
-	t_vect *v[2];
-	int i;
-	int in;
+	t_vect	*v[2];
+	int		i;
+	int		in;
 
 	i = 0;
 	v[0] = malloc(sizeof(t_vect) * (v_s + 1));
@@ -78,24 +59,24 @@ void fill_values(char **file, int v_s, int vn_s, t_obj *new)
 		++i;
 	in = 0;
 	while (file[i] && ft_sii(file[i], "v "))
-			v[0][in++] = read_vec(get_after(file[i++], "v "), ' ');
+		v[0][in++] = read_vec(get_after(file[i++], "v "), ' ');
 	while (file[i] && !ft_sii(file[i], "vn "))
 		++i;
 	in = 0;
 	while (file[i] && ft_sii(file[i], "vn "))
-			v[1][in++] = read_vec(get_after(file[i++], "vn "), ' ');
+		v[1][in++] = read_vec(get_after(file[i++], "vn "), ' ');
 	load_obj(file, v, i, new);
 	free(v[0]);
 	free(v[1]);
 }
 
-void parse_obj(t_obj *new_mesh)
+void	parse_obj(t_obj *new_mesh)
 {
 	int		fd;
 	char	*line;
 	char	*file[9999];
 	int		n;
-	int 	size[2];
+	int		size[2];
 
 	n = -1;
 	size[0] = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 13:05:12 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:57:40 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <fcntl.h>
 
+int			ft_limit(int v, int min, int max);
+void		read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat);
+void		init_gtk(void);
 void		resize_texture(t_text *tex, float coef);
 int			end_by(char *s, char *end);
 t_text		*load_texture(char *path);
@@ -34,12 +37,5 @@ void		push_lgt(t_light *new);
 void		parse_obj(t_obj *new_mesh);
 void		set_func(t_obj *o);
 e_type		get_type(char *type);
-
-// print
-void		print_lgt();
-void		print_obj();
-
-// test affichage texture
-void		test_texture(t_text tex);
 
 #endif

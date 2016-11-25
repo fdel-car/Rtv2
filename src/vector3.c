@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 18:11:57 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/21 18:24:00 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:59:17 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ int		vec_is_null(t_vect u)
 	if (u.x == 0 && u.y == 0 && u.z == 0)
 		return (1);
 	return (0);
+}
+
+t_vect	cross_pr(t_vect u, t_vect v)
+{
+	t_vect w;
+
+	w.x = (u.y * v.z) - (u.z * v.y);
+	w.y = (u.z * v.x) - (u.x * v.z);
+	w.z = (u.x * v.y) - (u.y * v.x);
+	return (w);
 }

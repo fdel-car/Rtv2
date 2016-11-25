@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 14:59:59 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:04:16 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 17:22:02 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		switch_state_prev(void)
 
 void		save_img(char *filename)
 {
-	filename = ft_strcat(filename,".jpeg");
+	filename = ft_strcat(filename, ".jpeg");
 	gdk_pixbuf_save(g_env.pix, filename, "jpeg", NULL,
 	"quality", "100", NULL);
 }

@@ -6,21 +6,11 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 18:15:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/18 18:29:05 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:41:03 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void	put_pixel_prev(int x, int y, t_color color)
-{
-	int pos;
-
-	pos = y * g_env.rowstride_prev + x * 3;
-	g_env.pixels_prev[pos] = color.r;
-	g_env.pixels_prev[pos + 1] = color.g;
-	g_env.pixels_prev[pos + 2] = color.b;
-}
 
 t_color		compute_light_prev(t_data ray)
 {
@@ -48,7 +38,6 @@ t_color		compute_light_prev(t_data ray)
 	return (c);
 }
 
-
 t_color		render_ray_prev(t_data ray)
 {
 	t_color color;
@@ -75,7 +64,9 @@ t_color		init_ray_prev(float x, float y, t_data ray)
 void		*raytracing_prev(void *arg)
 {
 	int		*tmp;
-	int		x, x_max, y;
+	int		x;
+	int		x_max;
+	int		y;
 	t_data	ray;
 
 	tmp = (int *)arg;
@@ -95,7 +86,7 @@ void		*raytracing_prev(void *arg)
 	pthread_exit(NULL);
 }
 
-void	launch_preview(void)
+void		launch_preview(void)
 {
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);
 	g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir, g_env.scene.cam.right);

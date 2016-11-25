@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normal.mapping.c                                   :+:      :+:    :+:   */
+/*   preview2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/23 16:25:32 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:28:18 by fdel-car         ###   ########.fr       */
+/*   Created: 2016/11/25 16:40:32 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/11/25 16:41:07 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vect	bump_normal(t_color p)
+void		put_pixel_prev(int x, int y, t_color color)
 {
-	t_vect	r;
+	int pos;
 
-	r.x = (float)p.r / 255;
-	r.y = (float)p.g / 255;
-	r.z = (float)p.b / 255;
-	r = vec_sub(vec_mult(r, 2.0), vec_new(1, 1, 1));
-	return (r);
+	pos = y * g_env.rowstride_prev + x * 3;
+	g_env.pixels_prev[pos] = color.r;
+	g_env.pixels_prev[pos + 1] = color.g;
+	g_env.pixels_prev[pos + 2] = color.b;
 }
