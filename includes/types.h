@@ -155,9 +155,10 @@ typedef struct		s_env
 	unsigned int	limits_prev[NUM_THREAD];
 	unsigned int	rowstride;
 	unsigned int	rowstride_prev;
-	// unsigned int	progress;
-	// unsigned int	pixels_progress;
-	// unsigned int	total;
+	unsigned int	progress;
+	unsigned int	pixels_progress;
+	unsigned int	total;
+	unsigned int    progress_bar;
 }					t_env;
 
 t_env g_env;

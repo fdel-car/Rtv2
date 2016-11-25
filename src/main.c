@@ -139,8 +139,16 @@ void	init_gtk(void)
 
 int		main(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc < 2 || argc > 3)
 		return (-1);
+	load_file(argv[1]);
+	if (argc == 3)
+	{
+		if (strcmp(argv[2],"-p") == 0)
+			g_env.progress_bar = 1;
+		else
+			g_env.progress_bar = 1;
+	}
 	load_file(argv[1]);
 	gtk_init(&argc, &argv);
 	init_limits();
@@ -151,7 +159,7 @@ int		main(int argc, char **argv)
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
 	// g_object_unref(g_env.build);
-	// g_env.total = WIDTH * HEIGHT;
+	g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();
 	gtk_widget_show_all(g_env.win);

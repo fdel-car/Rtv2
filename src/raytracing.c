@@ -96,6 +96,33 @@ void		super_sample(float x, float y, t_data ray)
 	put_pixel(x, y, c);
 }
 
+
+void display_progress_bar()
+{
+	if ((g_env.pixels_progress * 100) / g_env.total != g_env.progress)
+			 {
+			 	g_env.progress = (g_env.pixels_progress * 100) / g_env.total;
+			 	if (g_env.progress_bar == 1)
+			 	{
+			 		if (g_env.progress % 5 == 0)
+			 		{
+			 			unsigned int i = 0;
+			 			system("clear");
+			 			printf(ANSI_COLOR_GREEN"##########################################\n"ANSI_COLOR_RESET);
+			 			printf(ANSI_COLOR_GREEN"#"ANSI_COLOR_RESET);
+			 			while (i <= g_env.progress / 5)
+			 			{
+			 				printf(ANSI_COLOR_BLUE"--"ANSI_COLOR_RESET);
+			 				i++;
+			 			}
+			 			printf(ANSI_COLOR_GREEN"#\n"ANSI_COLOR_RESET);
+			 			printf(ANSI_COLOR_GREEN"##########################################\n"ANSI_COLOR_RESET);
+			 		}
+			 	}
+			 }
+			 g_env.pixels_progress++;
+}
+
 void		*raytracing(void *arg)
 {
 	int		*tmp;
@@ -115,12 +142,7 @@ void		*raytracing(void *arg)
 				super_sample(x, y, ray);
 			else
 				put_pixel(x, y, init_ray(x, y, ray));
-			// if ((g_env.pixels_progress * 100) / g_env.total != g_env.progress)
-			// {
-			// 	g_env.progress = (g_env.pixels_progress * 100) / g_env.total;
-			// 	printf("%d %%\n", g_env.progress);
-			// }
-			// g_env.pixels_progress++;
+			display_progress_bar();
 			y++;
 		}
 		x++;
