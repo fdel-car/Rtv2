@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   gtk.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/28 17:08:45 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/19 18:35:03 by fdel-car         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rt.h"
 
 void open_file(char *filename){
@@ -23,8 +11,8 @@ void open_file(char *filename){
 		launch_preview();
 	}
 }
-void save_scene(void){
 
+void save_scene(void){
 }
 
 void switch_cam_pos(){
@@ -65,7 +53,8 @@ void open_scene(){
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	gint res;
 
-	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
+	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),
+	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
 	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Cancel", GTK_RESPONSE_CANCEL);
 	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Open", GTK_RESPONSE_ACCEPT);
 
@@ -345,7 +334,8 @@ void signal_add_object(void)
 	set_func(obj);
 	push_obj(obj);
 	clear_entry_widget_add_object();
-	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,"popup_create_object")));
+	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"popup_create_object")));
 	create_list_of_objects();
 	launch_preview();
 	launch_thread();
@@ -520,7 +510,7 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
 {
 	float ret;
 	t_vect pos;
-	
+
 
 	ret = ft_atof(gtk_entry_get_text(entry));
 	pos = ((t_obj *)data->obj)->pos;
@@ -541,7 +531,8 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
 
 	if (((t_obj *)data->obj)->type == MESH )
 	{
-		if(ft_strcmp(data->desc,"posx") == 0 || ft_strcmp(data->desc,"posy") == 0||ft_strcmp(data->desc,"posz") == 0)
+		if(ft_strcmp(data->desc,"posx") == 0 || ft_strcmp(data->desc,"posy") ==
+		0 || ft_strcmp(data->desc,"posz") == 0)
 		{
 			save_translation_mesh_object(entry,data, pos);
 		}
@@ -597,7 +588,8 @@ void	select_text(GtkEntry *entry, t_gtkData *data){
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	gint res;
 
-	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
+	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),
+	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
 
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
@@ -1277,7 +1269,8 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
   }
 
   void
-  view_popup_menu (GtkWidget *treeview, GdkEventButton *event,GtkTreePath *path, gpointer userdata)
+  view_popup_menu (GtkWidget *treeview, GdkEventButton *event,GtkTreePath *path,
+  gpointer userdata)
   {
     GtkWidget *menu, *menuitem;
 
