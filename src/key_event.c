@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 14:59:59 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/18 18:54:03 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:04:16 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		desactivate_preview(void)
 {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(g_env.toggle_prev), FALSE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(g_env.toggle_prev), FALSE);
 }
 
 void		switch_state_prev(void)
@@ -34,7 +34,7 @@ void		switch_state_prev(void)
 void		save_img(int keyval)
 {
 	if (keyval == 65421)
-		gdk_pixbuf_save (g_env.pix, "saves/rtv2.jpeg", "jpeg", NULL,
+		gdk_pixbuf_save(g_env.pix, "ressources/saves/rtv2.jpeg", "jpeg", NULL,
 		"quality", "100", NULL);
 }
 

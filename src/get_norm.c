@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:35:21 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 16:13:34 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:58:32 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	norm_cone(t_data *ray)
 	t_vect	dir;
 
 	dir = (ray->obj_hit)->dir;
-	beta = vec_dotp(vec_norm(vec_sub(ray->hit_point, (ray->obj_hit)->pos)), dir);
+	beta = vec_dotp(vec_norm(vec_sub(ray->hit_point,
+	(ray->obj_hit)->pos)), dir);
 	if ((acos(beta) * 180.0 / M_PI) > 90.0)
 	{
 		dir = vec_mult(dir, -1);

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/22 16:40:35 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:24:24 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,30 +97,31 @@ void		super_sample(float x, float y, t_data ray)
 }
 
 
-void display_progress_bar()
+void		display_progress_bar()
 {
+	if (g_env.progress_bar != 1)
+		return ;
 	if ((g_env.pixels_progress * 100) / g_env.total != g_env.progress)
-			 {
-			 	g_env.progress = (g_env.pixels_progress * 100) / g_env.total;
-			 	if (g_env.progress_bar == 1)
-			 	{
-			 		if (g_env.progress % 5 == 0)
-			 		{
-			 			unsigned int i = 0;
-			 			system("clear");
-			 			printf(ANSI_COLOR_GREEN"##########################################\n"ANSI_COLOR_RESET);
-			 			printf(ANSI_COLOR_GREEN"#"ANSI_COLOR_RESET);
-			 			while (i <= g_env.progress / 5)
-			 			{
-			 				printf(ANSI_COLOR_BLUE"--"ANSI_COLOR_RESET);
-			 				i++;
-			 			}
-			 			printf(ANSI_COLOR_GREEN"#\n"ANSI_COLOR_RESET);
-			 			printf(ANSI_COLOR_GREEN"##########################################\n"ANSI_COLOR_RESET);
-			 		}
-			 	}
-			 }
-			 g_env.pixels_progress++;
+	{
+		g_env.progress = (g_env.pixels_progress * 100) / g_env.total;
+	 	{
+	 		if (g_env.progress % 5 == 0)
+	 		{
+	 			unsigned int i;
+				i = -1;
+				system("clear");
+	 			ft_printf(ANSI_COLOR_GREEN"####################################\
+######\n"ANSI_COLOR_RESET);
+	 			ft_printf(ANSI_COLOR_GREEN"#"ANSI_COLOR_RESET);
+	 			while (++i <= g_env.progress / 5)
+	 				ft_printf(ANSI_COLOR_BLUE"--"ANSI_COLOR_RESET);
+	 			ft_printf(ANSI_COLOR_GREEN"#\n"ANSI_COLOR_RESET);
+	 			ft_printf(ANSI_COLOR_GREEN"####################################\
+######\n"ANSI_COLOR_RESET);
+	 		}
+	 	}
+	 }
+	 g_env.pixels_progress++;
 }
 
 void		*raytracing(void *arg)

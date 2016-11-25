@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/21 18:38:21 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:58:48 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float	intersect_triangle(t_obj *obj, t_data ray)
 {
-	float       fl[4];
+	float		fl[4];
 	t_vect		vc[3];
 
 	vc[0] = cross_pr(ray.dir, obj->v);

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/22 18:06:39 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:57:19 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	pre_compute_tri(void)
 void	launch_thread(void)
 {
 	desactivate_preview();
-	// g_env.pixels_progress = 0;
-	// g_env.progress = 0;
+	g_env.pixels_progress = 0;
+	g_env.progress = 0;
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);
 	g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir, g_env.scene.cam.right);
 	g_env.scene.cam.up_left = vec_add(g_env.scene.cam.pos,
@@ -107,7 +107,7 @@ void	init_gtk(void)
 	int			iter;
 
 	iter = 0;
-	g_env.build = gtk_builder_new_from_file("interface.glade");
+	g_env.build = gtk_builder_new_from_file("ressources/interface.glade");
 	g_env.win = GTK_WIDGET(gtk_builder_get_object(g_env.build, "win"));
 	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
 	g_env.pix_prev = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
@@ -141,15 +141,15 @@ int		main(int argc, char **argv)
 {
 	if (argc < 2 || argc > 3)
 		return (-1);
-	load_file(argv[1]);
 	if (argc == 3)
 	{
-		if (strcmp(argv[2],"-p") == 0)
-			g_env.progress_bar = 1;
-		else
-			g_env.progress_bar = 1;
+		if (ft_strcmp(argv[2],"-p") != 0)
+			return (-1);
+		g_env.progress_bar = 1;
+		load_file(argv[1]);
 	}
-	load_file(argv[1]);
+	else
+		load_file(argv[1]);
 	gtk_init(&argc, &argv);
 	init_limits();
 	init_view();
@@ -158,7 +158,6 @@ int		main(int argc, char **argv)
 	spin_button();
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
-	// g_object_unref(g_env.build);
 	g_env.total = WIDTH * HEIGHT;
 	launch_thread();
 	launch_preview();

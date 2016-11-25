@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   load_tex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:06:31 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 13:57:10 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:01:38 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void	test_texture(t_text tex)
-{
-	t_color color;
-	int x = 0;
-	int y;
-	while (x < tex.tex_w)
-	{
-		y = 0;
-		while (y < tex.tex_h)
-		{
-			color.r = tex.text[y * (tex.tex_w * 3) + (x * 3)];
-			color.g = tex.text[y * (tex.tex_w * 3) + (x * 3) + 1];
-			color.b = tex.text[y * (tex.tex_w * 3) + (x * 3) + 2];
-			put_pixel(x, y, color);
-			y++;
-		}
-		x++;
-	}
-	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
-}
 
 void	fill_board(t_text *tex, int curs[2], t_color cl[2], int ref)
 {
@@ -56,7 +35,7 @@ void	fill_board(t_text *tex, int curs[2], t_color cl[2], int ref)
 	}
 }
 
-t_text	*create_board()
+t_text	*create_board(void)
 {
 	t_text	*tex;
 	int		ref;
@@ -77,7 +56,7 @@ t_text	*create_board()
 	return (tex);
 }
 
-int	fill_texture(t_text *tex, FILE	*img)
+int		fill_texture(t_text *tex, FILE *img)
 {
 	int		iter;
 	int		tmp;

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 19:01:18 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:29:11 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,39 +84,6 @@ t_color		reflection_lighting(t_data *ray, int iter_refl, t_color c)
 		return (color_add(c, color_mult(compute_light(refl, --iter_refl),
 		(ray->obj_hit)->mater.int_refl)));
 	return (c);
-}
-
-t_color		compute_light2(t_data ray, int iter_refl)
-{
-	t_color		c;
-	t_light		*l;
-	gboolean	sh;
-	int			lights;
-
-	l = g_env.scene.lgt;
-	c = color_new(0, 0, 0);
-	lights = 0;
-	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
-	get_norm(&ray);
-	if (ray.obj_hit->type == SKYBOX)
-		return (get_texture(ray));
-	while (l)
-	{
-		sh = is_shadowed(l, &ray);
-		if (sh != FALSE)
-		{
-			c = color_stack(c, diffuse_lighting(&ray, l));
-			if (ray.obj_hit->mater.shiny != 0)
-				c = color_stack(c, specular_lighting(&ray, l));
-		}
-		l = l->next;
-		lights++;
-	}
-	if (ray.obj_hit->mater.int_refl > 0)
-		c = color_stack(c, reflection_lighting(&ray, iter_refl,
-			color_new(0, 0, 0)));
-	c = color_mult(c, 1 / (float)lights);
-	return (color_add(c, color_mult(get_texture(ray), 0.2)));
 }
 
 t_vect	refract_dir(t_data *ray, t_obj *obj)
