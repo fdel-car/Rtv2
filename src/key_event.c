@@ -33,6 +33,7 @@ void		switch_state_prev(void)
 
 void		save_img(char *filename)
 {
+	filename = ft_strcat(filename,".jpeg");
 	gdk_pixbuf_save(g_env.pix, filename, "jpeg", NULL,
 	"quality", "100", NULL);
 }
