@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 18:51:02 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 17:52:13 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	load_object(char **t)
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
 			if (ft_sii(t[n], "alpha:"))
 				new->alpha = ft_atof(get_after(t[n], "alpha:")) * M_PI / 180;
-			if (new->alpha > 1.5707)
+			if (new->alpha > 1.5707 || new->alpha == 0)
 				new->alpha = 1.5707;
 			if (ft_sii(t[n], "type:"))
 				new->type = get_type(get_after(t[n], "type:"));
@@ -132,6 +132,10 @@ void	load_light(char **t)
 				new->dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 			if (ft_sii(t[n], "rayon:"))
 				new->rayon = ft_atof(get_after(t[n], "rayon:"));
+			if (ft_sii(t[n], "alpha:"))
+				new->alpha = ft_atof(get_after(t[n], "alpha:")) * M_PI / 180;
+			if (new->alpha > 1.5707 || new->alpha == 0)
+				new->alpha = 1.5707;
 			if (ft_sii(t[n], "type:"))
 				new->type = get_type(get_after(t[n], "type:"));
 			if (ft_sii(t[n], "color:"))

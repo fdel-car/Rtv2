@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:47:22 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:48:32 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 18:22:59 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 {
 	t_color	c;
 	float	cos;
+	float	ang;
 
 	c = color_new(0, 0, 0);
-	if (l->type == POINT_L)
+	if (l->type == POINT_L || l->type == SPOT_L)
 		ray->light = vec_norm(vec_sub(l->pos, ray->hit_point));
 	if (l->type == DIR_L)
 		ray->light = vec_mult(l->dir, -1);
+	if (l->type == SPOT_L)
+	{
+		ang = vec_dotp(l->dir, vec_mult(ray->light, -1));
+		if (acos(ang) > l->alpha)
+			return (c);
+	}
 	cos = vec_dotp(ray->light, ray->norm);
 	if (cos > 0)
 	{

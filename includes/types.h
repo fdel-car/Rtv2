@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/23 18:22:18 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/25 17:51:13 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct		s_light
 	t_vect			dir;
 	t_color			color;
 	float			rayon;
+	float			alpha;
 	float			intensity;
 	e_type			type;
 	float			(*func)(t_obj *obj, t_data ray);
