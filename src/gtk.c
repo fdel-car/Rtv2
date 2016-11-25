@@ -308,6 +308,16 @@ void clear_entry_widget_add_object(void){
 	clear_entry_3();
 	clear_entry_4();
 }
+
+void init_obj(t_obj *obj){
+	obj->name = NULL;
+	obj->src = NULL;
+	obj->lst = NULL;
+	obj->next = NULL;
+	obj->mater.tex = NULL;
+	obj->mater.ntex = NULL;
+
+}
 void signal_add_object(void)
 {
 	char *s = NULL;
@@ -315,8 +325,9 @@ void signal_add_object(void)
 
 	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gtk_builder_get_object(g_env.build,"create_type")));
 	obj = malloc(sizeof(t_obj));
-	// init_obj
+	init_obj(obj);
 	add_object_type(s,obj);
+
 	obj = add_object_name(obj);
 	obj = add_object_pos(obj);
 	obj = add_object_dir(obj);
