@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:57:40 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/30 03:14:25 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 
+void		add_torus_sphere(t_obj *o);
 int			ft_limit(int v, int min, int max);
 void		read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat);
 void		init_gtk(void);

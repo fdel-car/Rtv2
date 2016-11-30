@@ -30,20 +30,20 @@ void save_image_chooser(void)
 	GtkFileChooser *chooser;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
 	gint res;
-	
+
 	dialog = gtk_file_chooser_dialog_new ("Save File",GTK_WINDOW(g_env.win), action, "_Cancel",
 		GTK_RESPONSE_CANCEL,"_Save",GTK_RESPONSE_ACCEPT,NULL);
 	chooser = GTK_FILE_CHOOSER (dialog);
-	
+
 	gtk_file_chooser_set_do_overwrite_confirmation (chooser, TRUE);
-	
+
   	gtk_file_chooser_set_current_name (chooser,("Untitled document"));
-	
+
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
 	    char *filename;
-	
+
 	    filename = gtk_file_chooser_get_filename (chooser);
 	    save_img (filename);
 	    g_free (filename);
@@ -102,12 +102,12 @@ gtk_widget_destroy (dialog);
 void init_gtk_create_widget(void)
 {
 	GtkWidget *combo;
-	static char *combo_text[] = {"Sphere", "Plan", "Cone", "Cylindre"};
+	static char *combo_text[] = {"Sphere", "Plan", "Cone", "Cylindre", "Torus"};
 	int		i;
 
 	i = 0;
 	combo = GTK_WIDGET(gtk_builder_get_object(g_env.build,"create_type"));
-	while (i < 4)
+	while (i < 5)
 	{
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),
 				combo_text[i]);
@@ -125,6 +125,8 @@ t_obj *add_object_type(char *s, t_obj *obj)
 		obj->type = CONE;
 	else if (ft_strcmp("Cylindre",s) == 0)
 		obj->type = CYLINDER;
+	else if (ft_strcmp("Torus",s) == 0)
+		obj->type = MESH;
 	return (obj);
 }
 
@@ -360,6 +362,8 @@ void signal_add_object(void)
 	obj->mater.tex = NULL;
 
 	set_func(obj);
+	if (ft_strcmp(s, "Torus") == 0)
+		add_torus_sphere(obj);
 	push_obj(obj);
 	clear_entry_widget_add_object();
 	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,
@@ -518,23 +522,41 @@ void save_translation_mesh_object(GtkEntry *entry, t_gtkData *data, t_vect oldpo
 
 	while (list)
 	{
-		if(ft_strcmp(data->desc,"posx") == 0)
+		if(list->type == TRIANGLE)
 		{
-			list->v0.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
-			list->v1.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
-			list->v2.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+			if(ft_strcmp(data->desc,"posx") == 0)
+			{
+				list->v0.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+				list->v1.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+				list->v2.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+			}
+			else if(ft_strcmp(data->desc,"posy") == 0)
+			{
+				list->v0.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
+				list->v1.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
+				list->v2.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
+			}
+			else if(ft_strcmp(data->desc,"posz") == 0)
+			{
+				list->v0.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+				list->v1.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+				list->v2.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+			}
 		}
-		else if(ft_strcmp(data->desc,"posy") == 0)
+		else
 		{
-			list->v0.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
-			list->v1.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
-			list->v2.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
-		}
-		else if(ft_strcmp(data->desc,"posz") == 0)
-		{
-			list->v0.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
-			list->v1.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
-			list->v2.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+			if(ft_strcmp(data->desc,"posx") == 0)
+			{
+				list->pos.x  += (((t_obj *)data->obj)->pos.x - oldpos.x);
+			}
+			else if(ft_strcmp(data->desc,"posy") == 0)
+			{
+				list->pos.y  += (((t_obj *)data->obj)->pos.y - oldpos.y);
+			}
+			else if(ft_strcmp(data->desc,"posz") == 0)
+			{
+				list->pos.z += (((t_obj *)data->obj)->pos.z - oldpos.z);
+			}
 		}
 		list = list->next;
 	}
@@ -1195,7 +1217,7 @@ void rayon_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	entry_rayon->data = rayon_entry;
 	entry_rayon->desc = ft_strdup("rayon");
 	entry_rayon->obj = current_obj;
-	
+
 	g_signal_connect(rayon_entry, "changed",
 			G_CALLBACK(save_entry_transformation_object), entry_rayon);
 	g_signal_connect(rayon_entry, "changed",
@@ -1220,7 +1242,7 @@ void alpha_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	entry_alpha->data = alpha_entry;
 	entry_alpha->desc = ft_strdup("alpha");
 	entry_alpha->obj = current_obj;
-	
+
 	g_signal_connect(alpha_entry, "changed",
 			G_CALLBACK(save_entry_transformation_object), entry_alpha);
 	g_signal_connect(alpha_entry, "changed",
@@ -1232,7 +1254,7 @@ void	create_transformation_widget_object(void *object, GtkWidget *grid)
 	t_obj *current_obj;
 	char *s_entry = NULL;
 	s_entry = malloc(sizeof(char) * 10);
-	
+
 	current_obj = (t_obj *)object;
 
 	position_widget(current_obj,grid,s_entry);
