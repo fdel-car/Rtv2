@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 22:20:34 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/30 00:25:39 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/30 04:39:47 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	add_torus_sphere(t_obj *o)
 	t_vect	pos;
 	int		i = 0;
 
-	pos = vec_new(o->rayon, 0, 0);
+	pos = vec_new(o->pos.x + o->rayon, o->pos.y, o->pos.z);
 	while (i < 360)
 	{
 		add_sphere(o, pos);
-		pos = rot_y(1, pos);
+		pos = rot_any(pos, o->dir, 1);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:39:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:19:02 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/30 05:39:41 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void		init_gtk(void)
 	g_env.build = gtk_builder_new_from_file("ressources/interface.glade");
 	g_env.win = GTK_WIDGET(gtk_builder_get_object(g_env.build, "win"));
 	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
+	g_env.filter = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
+	g_env.filter_p = gdk_pixbuf_get_pixels(g_env.filter);
 	g_env.pix_prev = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
 			WIDTH_PREVIEW, HEIGHT_PREVIEW);
 	g_env.img = GTK_WIDGET(gtk_builder_get_object(g_env.build, "final_img"));

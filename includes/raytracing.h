@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:49:43 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/30 05:09:14 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_color		get_texture(t_data ray);
 t_color		getex_sphere(t_data ray, t_text *tex);
 t_color		getex_cyl(t_data ray, t_text *tex);
 t_color		getex_plane(t_data ray, t_text *tex);
+t_color		greyscale(t_color c);
+t_color		get_color_img(guchar *new, int x, int y, int i, int j);
 t_vect		bump_normal(t_color	p);
 t_vect		vec_new(float x, float y, float z);
 t_vect		cross_pr(t_vect u, t_vect v);
@@ -57,5 +59,11 @@ void		spin_button(void);
 void		aa_check();
 int			vec_is_null(t_vect u);
 void		put_pixel_prev(int x, int y, t_color color);
+void		sepia_filter();
+void		greyscale_filter();
+void		put_pixel2(guchar *dst, int x, int y, t_color color);
+int			g_pos(guchar *new, int x, int y);
+void		sobel_filter();
+
 
 #endif

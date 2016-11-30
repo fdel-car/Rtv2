@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 17:51:13 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/30 05:41:58 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct		s_env
 	GtkBuilder		*build;
 	GdkPixbuf		*pix;
 	GdkPixbuf		*pix_prev;
+	GdkPixbuf		*filter;
 	GtkWidget		*win;
 	GtkWidget		*img;
 	GtkWidget		*prev;
@@ -148,6 +149,7 @@ typedef struct		s_env
 	GtkWidget		*spin_refl;
 	guchar			*pixels;
 	guchar			*pixels_prev;
+	guchar			*filter_p;
 	t_scene			scene;
 	gboolean		state_prev;
 	pthread_t		thread[NUM_THREAD];

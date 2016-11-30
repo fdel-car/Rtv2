@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 14:59:59 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 17:22:02 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/11/30 05:53:24 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ void		rotate_cam(int keyval)
 		g_env.scene.iter_refl--;
 }
 
+void		apply_filter(int keyval)
+{
+	if (keyval == 49)
+		sepia_filter();
+	if (keyval == 50)
+		greyscale_filter();
+	if (keyval == 51)
+		sobel_filter();
+	if (keyval == 96)
+		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
+}
+
 gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 {
 	if (event->keyval == 65307)
@@ -89,6 +101,7 @@ gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 	if (event->keyval == 99)
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
 		rot_any(g_env.scene.cam.dir, g_env.scene.cam.right, 90));
+	apply_filter(event->keyval);
 	rotate_cam(event->keyval);
 	launch_preview();
 	return (TRUE);

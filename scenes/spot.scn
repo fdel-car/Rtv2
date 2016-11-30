@@ -52,7 +52,7 @@ scene
 				reflection:1
 				transparence:0
 				color:173;173;173
-				texture:NULL
+				texture:damier
 			}
 		}
 }

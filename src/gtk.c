@@ -1460,8 +1460,8 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 			create_list_of_attributs(found_obj, n);
 	}
 }
- void
-  view_popup_menu_delete_row (GtkWidget *menuitem, gpointer userdata)
+
+void	view_popup_menu_delete_row (GtkWidget *menuitem, gpointer userdata)
   {
    	GtkTreeModel 	*model = NULL;
     GtkTreeView *treeview = NULL;
@@ -1542,9 +1542,6 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
     }
     return FALSE;
   }
-
-
-
 
 void	create_list_of_objects(void)
 {

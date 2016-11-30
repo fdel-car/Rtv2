@@ -46,7 +46,7 @@ scene
 			type:skybox
 			materiel
 			{
-				texture:bmp/skybox.bmp
+				texture:ressources/bmp/skybox.bmp
 				brillance:0
 				reflection:1
 				transparence:0.6
