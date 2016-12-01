@@ -39,6 +39,7 @@ void save_scene(void);
 void switch_cam(GtkWidget *entry);
 void create_object(GtkWidget *entry, t_gtkData *e);
 void init_gtk_create_widget(void);
+void init_gtk_filter_widget(void);
 void save_img(char *filename);
 void save_image_chooser(void);
 

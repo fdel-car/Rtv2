@@ -34,7 +34,6 @@ void	sepia_filter()
 	int		y;
 	t_color	in;
 	t_color	out;
-
 	y = -1;
 	while (++y < HEIGHT - 1)
 	{

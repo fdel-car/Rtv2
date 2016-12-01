@@ -83,8 +83,6 @@ void open_scene(){
 
 	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),
 	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
-	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Cancel", GTK_RESPONSE_CANCEL);
-	//gtk_dialog_add_button(GTK_DIALOG(dialog),"_Open", GTK_RESPONSE_ACCEPT);
 
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
@@ -97,6 +95,38 @@ void open_scene(){
   }
 
 gtk_widget_destroy (dialog);
+}
+
+void switch_filter(GtkWidget *combo)
+{
+	char	*s;
+
+	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo));
+	if (ft_strcmp("Sepia",s) == 0)
+		sepia_filter();
+	else if (ft_strcmp("Sobel",s) == 0)
+		sobel_filter();
+	else if (ft_strcmp("Greyscale",s) == 0)
+		greyscale_filter();
+	free(s);
+}
+
+void init_gtk_filter_widget(void)
+{
+	GtkWidget *combo;
+	static char *combo_text[] = {"Sepia","Sobel","Cartoon","Greyscale","Blur"};
+	int		i;
+
+	i = 0;
+	combo = GTK_WIDGET(gtk_builder_get_object(g_env.build,"filtre_combo"));
+	while (i < 5)
+	{
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),
+				combo_text[i]);
+		i++;
+	}
+	g_signal_connect(combo, "changed",
+			G_CALLBACK(switch_filter), NULL);
 }
 
 void init_gtk_create_widget(void)
@@ -479,14 +509,29 @@ void    save_color_material_light(GtkEntry *entry, t_gtkData *data)
 void    save_color_material(GtkEntry *entry, t_gtkData *data)
 {
 	GdkRGBA *col;
+	short type;
+	t_obj *list;
+
 
 	col = malloc(sizeof(GdkRGBA));
+	list = ((t_obj *)data->obj)->lst;
+	type = ((t_obj *)data->obj)->type;
 	gtk_color_chooser_get_rgba ((GtkColorChooser *)entry,col);
 	if(ft_strcmp(data->desc,"color") == 0)
 	{
 		((t_obj *)data->obj)->mater.color.r  = (int)(col->red * 255);
 		((t_obj *)data->obj)->mater.color.g  = (int)(col->green * 255);
 		((t_obj *)data->obj)->mater.color.b  = (int)(col->blue * 255);
+		if (type == MESH)
+		{
+			while (list)
+			{
+				list->mater.color.r = ((t_obj *)data->obj)->mater.color.r;
+				list->mater.color.g = ((t_obj *)data->obj)->mater.color.g;
+				list->mater.color.b = ((t_obj *)data->obj)->mater.color.b;
+				list = list->next;
+			}
+		}
 	}
 	gdk_rgba_free(col);
 }
@@ -609,7 +654,11 @@ void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
 	float ret_f;
 	int ret_i;
 	char *ret_s;
+	t_obj *list;
+	short type;
 
+	type = ((t_obj *)data->obj)->type;
+	list = ((t_obj *)data->obj)->lst;
 	if(ft_strcmp(data->desc,"shiny") == 0)
 	{
 		ret_f = ft_atof(gtk_entry_get_text(entry));
@@ -644,6 +693,38 @@ void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
 	{
 		ret_s = (char *)gtk_entry_get_text(entry);
 		// ((t_obj *)data->obj)->mater.text = ret_s;
+	}
+
+	if (type == MESH)
+	{
+		while (list)
+		{
+			if(ft_strcmp(data->desc,"shiny") == 0)
+			{
+				list->mater.shiny = ((t_obj *)data->obj)->mater.shiny;
+			}
+			if(ft_strcmp(data->desc,"refl") == 0)
+			{
+				list->mater.int_refl = ((t_obj *)data->obj)->mater.int_refl;
+			}
+			if(ft_strcmp(data->desc,"trans") == 0)
+			{
+				list->mater.int_trans = ((t_obj *)data->obj)->mater.int_trans;
+			}
+			if(ft_strcmp(data->desc,"colr") == 0)
+			{
+				list->mater.color.r = ((t_obj *)data->obj)->mater.color.r;
+			}
+			if(ft_strcmp(data->desc,"colg") == 0)
+			{
+				list->mater.color.g = ((t_obj *)data->obj)->mater.color.g;
+			}
+			if(ft_strcmp(data->desc,"colb") == 0)
+			{
+				list->mater.color.b = ((t_obj *)data->obj)->mater.color.b;
+			}
+			list = list->next;
+		}
 	}
 }
 
