@@ -45,9 +45,7 @@ scene
 			{
 				brillance:42
 				reflection:1
-				transparence:0.6
 				color:255;0;0
-				texture:NULL
 			}
 		}
 		plan_1
@@ -60,9 +58,7 @@ scene
 			materiel
 			{
 				reflection:1
-				transparence:0.4
 				color:173;173;173
-				texture:NULL
 			}
 		}
 		plan_2
@@ -75,9 +71,7 @@ scene
 			materiel
 			{
 				reflection:1
-				transparence:0.4
 				color:173;173;173
-				texture:NULL
 			}
 		}
 		plan_3
@@ -90,9 +84,7 @@ scene
 			materiel
 			{
 				reflection:0.8
-				transparence:0.4
 				color:105;85;65
-				texture:NULL
 			}
 		}
 		cylinder_1
@@ -106,9 +98,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				transparence:0.4
 				color:205;150;0
-				texture:NULL
 			}
 		}
 		cylinder_2
@@ -122,9 +112,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				transparence:0.4
 				color:205;150;0
-				texture:NULL
 			}
 		}
 		cylinder_3
@@ -138,9 +126,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				transparence:0.4
 				color:205;150;0
-				texture:NULL
 			}
 		}
 		cylinder_4
@@ -154,9 +140,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				transparence:0.4
 				color:205;150;0
-				texture:NULL
 			}
 		}
 	}

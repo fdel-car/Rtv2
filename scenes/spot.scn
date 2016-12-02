@@ -2,22 +2,23 @@ scene
 {
 	global_illumination:0
 	anti_aliasing:2
-	iter_reflection:1
+	iter_reflection:0
+	soft_shadow:1
 	name:test_scene
 	camera
 	{
-		pos:0;0;-10
-		dir:-0.5;0;1
+		pos:0;0;-20
+		dir:0;0;1
 	}
 	lights
 	{
 		light_1
 		{
-		pos:-10;10;0
+		pos:0;10;0
 		dir:1;-1;0
 		rayon:0
 		alpha:30
-		type:spot_light
+		type:dir_light
 		color:255;255;255
 		intensity:0.4
 		blur:0
@@ -27,7 +28,7 @@ scene
 	{
 		earth
 		{
-			pos:-5;0;0
+			pos:0;0;0
 			normal:NULL
 			rayon:2
 			type:sphere
@@ -52,7 +53,6 @@ scene
 				reflection:1
 				transparence:0
 				color:173;173;173
-				texture:damier
 			}
 		}
 }
