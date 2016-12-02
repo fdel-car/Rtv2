@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:30:59 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 15:35:09 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	parse_scene(char **t)
 		if (ft_sii(t[n], "global_illumination:"))
 			g_env.scene.gl_illum = ft_atoi(get_after(t[n],
 			"global_illumination:"));
+		if (ft_sii(t[n], "soft_shadow:"))
+			g_env.scene.soft_shadow = ft_atoi(get_after(t[n],
+			"soft_shadow:"));
 		if (ft_sii(t[n], "anti_aliasing:"))
 			g_env.scene.anti_alia = ft_atoi(get_after(t[n],
 			"anti_aliasing:"));

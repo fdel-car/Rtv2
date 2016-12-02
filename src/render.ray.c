@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 14:02:33 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 15:39:17 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ t_color		compute_light(t_data ray, int iter_refl)
 {
 	t_color		c;
 	t_light		*l;
-	gboolean	sh;
 	int			lights;
+	float		coef;
 
 	l = g_env.scene.lgt;
 	c = color_new(0, 0, 0);
@@ -82,13 +82,10 @@ t_color		compute_light(t_data ray, int iter_refl)
 		return (get_texture(ray, ray.obj_hit->mater.tex));
 	while (l)
 	{
-		sh = is_shadowed(l, &ray);
-		if (sh != FALSE)
-		{
-			c = color_stack(c, diffuse_lighting(&ray, l));
-			if (ray.obj_hit->mater.shiny != 0)
-				c = color_stack(c, specular_lighting(&ray, l));
-		}
+		coef = get_shadow(l, &ray);
+		c = color_stack(c, color_mult(diffuse_lighting(&ray, l), coef));
+		if (coef >= 0.75 && ray.obj_hit->mater.shiny != 0)
+			c = color_stack(c, color_mult(specular_lighting(&ray, l), coef));
 		l = l->next;
 		lights++;
 	}
