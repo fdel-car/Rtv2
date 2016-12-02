@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:53:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:57:28 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:02:03 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,19 @@ t_color		getex_cyl(t_data ray, t_text *tex)
 	return (get_texel(*tex, i, j));
 }
 
-t_color		get_texture(t_data ray)
+t_color		get_texture(t_data ray, t_text *tex)
 {
 	t_color r;
 
 	r = ray.obj_hit->mater.color;
-	if (!ray.obj_hit->mater.tex)
+	if (!tex)
 		return (r);
 	if (ray.obj_hit->type == SPHERE || ray.obj_hit->type == SKYBOX)
-		return (getex_sphere(ray, ray.obj_hit->mater.tex));
+		return (getex_sphere(ray, tex));
 	if (ray.obj_hit->type == PLANE)
-		return (getex_plane(ray, ray.obj_hit->mater.tex));
+		return (getex_plane(ray, tex));
 	if (ray.obj_hit->type == CYLINDER ||
 	ray.obj_hit->type == CONE)
-		return (getex_cyl(ray, ray.obj_hit->mater.tex));
+		return (getex_cyl(ray, tex));
 	return (r);
 }

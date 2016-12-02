@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/30 05:42:19 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:21:13 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat);
 void		init_gtk(void);
 void		resize_texture(t_text *tex, float coef);
 int			end_by(char *s, char *end);
+int			count_esize(char **t);
 t_text		*load_texture(char *path);
 t_mater		init_mater(void);
 char		*clean_line(char *s);

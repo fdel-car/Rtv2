@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:47:22 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 18:22:59 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:10:06 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 	if (cos > 0)
 	{
 		c = color_add(color_add(c, color_mult(l->color, l->intensity * cos))
-		, color_mult(get_texture(*ray), l->intensity * cos));
+		, color_mult(get_texture(*ray, ray->obj_hit->mater.tex), l->intensity * cos));
 	}
 	return (c);
 }
@@ -83,17 +83,31 @@ t_vect		refract_dir(t_data *ray, t_obj *obj)
 	return (vec_norm(dir));
 }
 
+float		transparent_map(t_data *ray)
+{
+	t_color	p;
+	float	r;
+
+	r = (ray->obj_hit)->mater.int_trans;
+	if ((ray->obj_hit)->mater.ttex)
+	{
+		p = get_texture(*ray, (ray->obj_hit)->mater.ttex);
+		r = (((float)p.r + (float)p.g + (float)p.b) / 3.0) / 255.0;
+	}
+	return (r);
+}
+
 t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
 {
 	t_data	refr;
+	float	t_coef;
 
 	refr.dir = refract_dir(ray, ray->obj_hit);
 	refr.orig = ray->hit_point;
 	refr = intersect_obj(refr, FALSE);
+	t_coef = transparent_map(ray);
 	if (refr.solut != -1)
-	{
 		return (color_add(c, color_mult(compute_light(refr, iter_refl),
-		(ray->obj_hit)->mater.int_trans)));
-	}
+		t_coef)));
 	return (c);
 }

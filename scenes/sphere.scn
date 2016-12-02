@@ -31,6 +31,8 @@ scene
 			type:sphere
 			materiel
 			{
+				indice:0.98
+				ttext:ressources/bmp/tmap.bmp
 				brillance:102
 				reflection:1
 				transparence:0.6

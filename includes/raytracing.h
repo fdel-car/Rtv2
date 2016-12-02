@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/30 05:09:14 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:01:26 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ float		intersect_cylinder(t_obj *obj, t_data ray);
 float		intersect_cone(t_obj *obj, t_data ray);
 float		intersect_plane(t_obj *obj, t_data ray);
 t_color		compute_light(t_data ray, int r_max);
-t_color		get_texture(t_data ray);
+t_color		get_texture(t_data ray, t_text *tex);
 t_color		getex_sphere(t_data ray, t_text *tex);
 t_color		getex_cyl(t_data ray, t_text *tex);
 t_color		getex_plane(t_data ray, t_text *tex);

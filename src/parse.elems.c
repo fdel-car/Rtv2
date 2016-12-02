@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.elems.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 17:52:13 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:30:55 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ t_mater	load_material(char **t)
 {
 	t_mater	new;
 	int		n;
+	int		se;
 
 	n = 1;
 	new = init_mater();
+	se = count_esize(&(t[n]));
 	if (ft_sii(t[n], "{"))
-		while (t[++n] && !ft_sii(t[n], "{"))
+		while (t[++n] && --se > 1)
 		{
 			if (ft_sii(t[n], "brillance:"))
 				new.shiny = ft_atof(get_after(t[n], "brillance:"));
@@ -36,6 +38,8 @@ t_mater	load_material(char **t)
 				new.tex = load_texture(get_after(t[n], "texture:"));
 			if (ft_sii(t[n], "ntext:"))
 				new.ntex = load_texture(get_after(t[n], "ntext:"));
+			if (ft_sii(t[n], "ttext:"))
+				new.ttex = load_texture(get_after(t[n], "ttext:"));
 		}
 	return (new);
 }
@@ -61,6 +65,7 @@ void	load_object(char **t)
 	t_obj	*new;
 	char	*name;
 	int		n;
+	int		se;
 
 	new = malloc(sizeof(t_obj));
 	new->next = NULL;
@@ -70,9 +75,10 @@ void	load_object(char **t)
 	new->cut = vec_new(0, 0, 0);
 	new->min = 0;
 	new->max = 0;
+	se = count_esize(&(t[1]));
 	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
-		while (t[++n] && !ft_sii(t[n], "{"))
+		while (t[++n] && --se > 1)
 		{
 			if (ft_sii(t[n], "v0:"))
 				new->v0 = read_vec(get_after(t[n], "v0:"), ';');
@@ -116,15 +122,17 @@ void	load_light(char **t)
 	t_light	*new;
 	char	*name;
 	int		n;
+	int		se;
 
 	n = 1;
 	new = malloc(sizeof(t_light));
 	new->next = NULL;
 	name = ft_strdup(*t);
+	se = count_esize(&(t[n]));
 	new->name = ft_strtrim(name);
 	free(name);
 	if (ft_sii(t[n], "{"))
-		while (t[++n] && !ft_sii(t[n], "{"))
+		while (t[++n] && --se > 1)
 		{
 			if (ft_sii(t[n], "pos:"))
 				new->pos = read_vec(get_after(t[n], "pos:"), ';');

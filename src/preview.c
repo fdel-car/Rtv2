@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preview.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 18:15:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:41:03 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:02:49 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_color		compute_light_prev(t_data ray)
 
 	lights = 0;
 	l = g_env.scene.lgt;
-	ambiant = color_mult(get_texture(ray), 0.2);
+	ambiant = color_mult(get_texture(ray, ray.obj_hit->mater.tex), 0.2);
 	c = color_new(0, 0, 0);
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	if (ft_strcmp(ray.obj_hit->name, "skybox") == 0)
-		return (get_texture(ray));
+		return (get_texture(ray, ray.obj_hit->mater.tex));
 	get_norm(&ray);
 	while (l)
 	{

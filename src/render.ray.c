@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:53:15 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:02:33 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_color		compute_light_bis(t_data ray, int iter_refl, t_color c, int lights)
 		c = color_stack(c, reflection_lighting(&ray, iter_refl,
 			color_new(0, 0, 0)));
 	c = color_mult(c, 1 / (float)lights);
-	return (color_add(c, color_mult(get_texture(ray), 0.2)));
+	return (color_add(c, color_mult(get_texture(ray,
+	ray.obj_hit->mater.tex), 0.2)));
 }
 
 t_color		compute_light(t_data ray, int iter_refl)
@@ -78,7 +79,7 @@ t_color		compute_light(t_data ray, int iter_refl)
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	get_norm(&ray);
 	if (ray.obj_hit->type == SKYBOX)
-		return (get_texture(ray));
+		return (get_texture(ray, ray.obj_hit->mater.tex));
 	while (l)
 	{
 		sh = is_shadowed(l, &ray);
