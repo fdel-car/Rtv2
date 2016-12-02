@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:02:16 by vde-la-s          #+#    #+#             */
-/*   Updated: 2016/12/02 15:36:14 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 16:50:01 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float	get_msoft_shadow(t_light *l, t_data *ray)
 	float	sample[2];
 
 	sample[0] = 0.2;
-	sample[1] = 0.8;
+	sample[1] = 0.4;
 	nsh = 0;
 	sh.orig = l->pos;
 	r[0] = 0;
@@ -51,6 +51,7 @@ float	get_shadow(t_light *l, t_data *ray)
 {
 	t_data sh;
 	t_vect tmp;
+	float coef;
 
 	if (g_env.scene.soft_shadow > 0)
 		return (get_msoft_shadow(l, ray));
@@ -61,7 +62,9 @@ float	get_shadow(t_light *l, t_data *ray)
 		sh = intersect_obj(sh, TRUE);
 		if (sh.solut == -1)
 			return (1.0);
-		return (0.3);
+		coef = 1.0 - sh.obj_hit->mater.int_trans > 0 ?
+		sh.obj_hit->mater.int_trans : 1.0;
+		return (0.3 * coef);
 	}
 	sh.orig = l->pos;
 	sh.dir = vec_norm(vec_sub(ray->hit_point, l->pos));
@@ -69,7 +72,9 @@ float	get_shadow(t_light *l, t_data *ray)
 	if (sh.obj_hit == ray->obj_hit)
 		return (1.0);
 	tmp = vec_add(sh.orig, vec_mult(sh.dir, sh.solut));
+	coef = 1.0 - sh.obj_hit->mater.int_trans > 0 ?
+	sh.obj_hit->mater.int_trans : 1.0;
 	if (dist_p(tmp, l->pos) < dist_p(ray->hit_point, l->pos) - EPSILON)
-		return (0.3);
+		return (0.3 * coef);
 	return (1.0);
 }

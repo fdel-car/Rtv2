@@ -14,11 +14,22 @@ scene
 	{
 		light_1
 		{
-		pos:0;10;0
+		pos:-4;10;10
 		dir:1;-1;0
 		rayon:0
 		alpha:30
-		type:dir_light
+		type:point_light
+		color:255;255;255
+		intensity:0.4
+		blur:0
+		}
+		light_2
+		{
+		pos:6;20;10
+		dir:1;-1;0
+		rayon:0
+		alpha:30
+		type:point_light
 		color:255;255;255
 		intensity:0.4
 		blur:0
@@ -38,6 +49,21 @@ scene
 				brillance:102
 				reflection:1
 				transparence:0
+				color:0;0;121
+			}
+		}
+		earth2
+		{
+			pos:-5;0;0
+			normal:NULL
+			rayon:2
+			type:sphere
+			materiel
+			{
+				texture:damier
+				brillance:102
+				reflection:1
+				transparence:0.5
 				color:0;0;121
 			}
 		}
