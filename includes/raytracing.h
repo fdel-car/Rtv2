@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 14:01:26 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:49:24 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		switch_key_focus(void);
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
 t_data		intersect_obj(t_data ray, gboolean sh);
 t_color		render_ray(t_data ray);
+float		get_shadow(t_light *l, t_data *ray);
 float		intersect_triangle(t_obj *obj, t_data ray);
 float		intersect_sphere(t_obj *obj, t_data ray);
 float		intersect_cylinder(t_obj *obj, t_data ray);

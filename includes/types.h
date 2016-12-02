@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 14:05:40 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 15:33:02 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct		s_scene
 {
 	gboolean		gl_illum;
 	int				anti_alia;
+	int				soft_shadow;
 	int				iter_refl;
 	char			*name;
 	t_cam			cam;
