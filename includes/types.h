@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 15:33:02 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:44:31 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct		s_obj
 	t_vect			dir;
 	t_vect			norm;
 	t_vect			cut;
+	t_vect			cut_pos;
 	float			min;
 	float			max;
 	float			rayon;

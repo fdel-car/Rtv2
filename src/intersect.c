@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 15:58:48 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:49:47 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 	c = (SQ(ray.orig.x - obj->pos.x) + SQ(ray.orig.y - obj->pos.y) +
 	SQ(ray.orig.z - obj->pos.z)) - SQ(obj->rayon);
 	quadratic_root(a, b, c, r);
-	if (r[0] > EPSILON)
-		return (r[0]);
-	if (r[1] > EPSILON)
-		return (r[1]);
-	return (-1);
+	return (sphere_cut(r, ray, obj->cut_pos, obj->cut));
 }
 
 float	intersect_plane(t_obj *obj, t_data ray)

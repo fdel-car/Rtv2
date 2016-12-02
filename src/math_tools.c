@@ -6,11 +6,37 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:55:38 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:27:58 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:49:37 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+float	sphere_cut(float *r, t_data ray, t_vect cut_pos, t_vect cut)
+{
+	t_vect	u;
+	t_vect	hit;
+
+	if (vec_is_null(cut))
+	{
+		if (r[0] > EPSILON)
+			return (r[0]);
+		if (r[1] > EPSILON)
+			return (r[1]);
+		return (-1);
+	}
+	hit = vec_add(ray.orig, vec_mult(ray.dir, r[0]));
+	u = vec_sub(hit, cut_pos);
+	if (vec_dotp(cut, u) < 0 || r[0] < EPSILON)
+	{
+		hit = vec_add(ray.orig, vec_mult(ray.dir, r[1]));
+		u = vec_sub(hit, cut_pos);
+		if (vec_dotp(cut, u) > 0 && r[1] > EPSILON)
+			return (r[1]);
+		return (-1);
+	}
+	return (r[0]);
+}
 
 float	cut_basics(t_data *ray, t_obj *o, t_vect cut, float *r)
 {

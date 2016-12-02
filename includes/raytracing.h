@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 14:49:24 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:51:45 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RAYTRACING_H
 # define EPSILON 0.001
 
+float		sphere_cut(float *r, t_data ray, t_vect cut_pos, t_vect cut);
 t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c);
 t_color		specular_lighting(t_data *ray, t_light *l);
 float		cut_basics(t_data *ray, t_obj *o, t_vect cut, float *r);
@@ -62,7 +63,6 @@ int			vec_is_null(t_vect u);
 void		put_pixel_prev(int x, int y, t_color color);
 void		sepia_filter();
 void		greyscale_filter();
-void		put_pixel2(guchar *dst, int x, int y, t_color color);
 int			g_pos(guchar *new, int x, int y);
 void		sobel_filter();
 

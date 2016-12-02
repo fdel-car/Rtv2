@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.elems.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 14:30:55 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:44:14 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	load_object(char **t)
 				new->pos = read_vec(get_after(t[n], "pos:"), ';');
 			if (ft_sii(t[n], "cut:"))
 				new->cut = vec_norm(read_vec(get_after(t[n], "cut:"), ';'));
+			if (ft_sii(t[n], "cut_center:"))
+				new->cut_pos = read_vec(get_after(t[n], "cut_center:"), ';');
 			if (ft_sii(t[n], "dir:"))
 				new->dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 			if (ft_sii(t[n], "min:"))
