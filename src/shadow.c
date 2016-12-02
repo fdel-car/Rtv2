@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:02:16 by vde-la-s          #+#    #+#             */
-/*   Updated: 2016/12/02 16:50:01 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/02 16:59:55 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ float	get_shadow(t_light *l, t_data *ray)
 		sh = intersect_obj(sh, TRUE);
 		if (sh.solut == -1)
 			return (1.0);
-		coef = 1.0 - sh.obj_hit->mater.int_trans > 0 ?
+		coef = sh.obj_hit && 1.0 - sh.obj_hit->mater.int_trans > 0 ?
 		sh.obj_hit->mater.int_trans : 1.0;
 		return (0.3 * coef);
 	}
@@ -72,7 +72,7 @@ float	get_shadow(t_light *l, t_data *ray)
 	if (sh.obj_hit == ray->obj_hit)
 		return (1.0);
 	tmp = vec_add(sh.orig, vec_mult(sh.dir, sh.solut));
-	coef = 1.0 - sh.obj_hit->mater.int_trans > 0 ?
+	coef = sh.obj_hit && 1.0 - sh.obj_hit->mater.int_trans > 0 ?
 	sh.obj_hit->mater.int_trans : 1.0;
 	if (dist_p(tmp, l->pos) < dist_p(ray->hit_point, l->pos) - EPSILON)
 		return (0.3 * coef);
