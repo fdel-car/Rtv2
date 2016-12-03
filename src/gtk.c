@@ -97,6 +97,21 @@ void open_scene(){
 gtk_widget_destroy (dialog);
 }
 
+void check_filter(){
+	char	*s;
+
+	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gtk_builder_get_object(g_env.build,"filtre_combo")));
+	if (!s)
+		return;
+	if (ft_strcmp("Sepia",s) == 0)
+		sepia_filter();
+	else if (ft_strcmp("Cartoon",s) == 0)
+		sobel_filter();
+	else if (ft_strcmp("Greyscale",s) == 0)
+		greyscale_filter();
+	free(s);
+}
+
 void switch_filter(GtkWidget *combo)
 {
 	char	*s;
@@ -104,27 +119,30 @@ void switch_filter(GtkWidget *combo)
 	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo));
 	if (ft_strcmp("Sepia",s) == 0)
 		sepia_filter();
-	else if (ft_strcmp("Sobel",s) == 0)
+	else if (ft_strcmp("Cartoon",s) == 0)
 		sobel_filter();
 	else if (ft_strcmp("Greyscale",s) == 0)
 		greyscale_filter();
+	else if (ft_strcmp("None",s) == 0)
+		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
 	free(s);
 }
 
 void init_gtk_filter_widget(void)
 {
 	GtkWidget *combo;
-	static char *combo_text[] = {"Sepia","Sobel","Cartoon","Greyscale","Blur"};
+	static char *combo_text[] = {"None","Sepia","Cartoon","Greyscale"};
 	int		i;
 
 	i = 0;
 	combo = GTK_WIDGET(gtk_builder_get_object(g_env.build,"filtre_combo"));
-	while (i < 5)
+	while (i < 4)
 	{
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),
 				combo_text[i]);
 		i++;
 	}
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
 	g_signal_connect(combo, "changed",
 			G_CALLBACK(switch_filter), NULL);
 }

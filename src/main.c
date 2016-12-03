@@ -76,6 +76,7 @@ void	launch_thread(void)
 		g_env.id_thread++;
 	}
 	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
+	check_filter();
 }
 
 void	init_limits(void)

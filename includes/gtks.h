@@ -42,5 +42,6 @@ void init_gtk_create_widget(void);
 void init_gtk_filter_widget(void);
 void save_img(char *filename);
 void save_image_chooser(void);
+void check_filter(void);
 
 #endif
