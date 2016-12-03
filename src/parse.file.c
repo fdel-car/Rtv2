@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/03 17:21:55 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:32:51 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void	load_camera(char **t)
 void	parse_scene(char **t)
 {
 	int	n;
+	int	se;
 
+	se = count_esize(t);
 	n = -1;
-	while (t[++n])
+	while (t[++n] && --se > 1)
 	{
 		if (ft_sii(t[n], "ambiant_lighting:"))
 			g_env.scene.ambiant = ft_atof(get_after(t[n], "ambiant_lighting:"));
-		printf("%f\n", g_env.scene.ambiant);
 		if (ft_sii(t[n], "soft_shadow:"))
 			g_env.scene.soft_shadow = ft_atoi(get_after(t[n], "soft_shadow:"));
 		if (ft_sii(t[n], "anti_aliasing:"))
@@ -65,7 +66,7 @@ void	load_scene(char **t)
 	while (t[++n])
 		if (ft_strcmp(t[n], "scene") && t[n + 2])
 		{
-			parse_scene(&(t[n + 2]));
+			parse_scene(&(t[n]));
 			return ;
 		}
 }
