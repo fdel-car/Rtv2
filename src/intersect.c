@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 17:49:47 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:58:19 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,19 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 
 float	intersect_plane(t_obj *obj, t_data ray)
 {
-	float solut;
+	float	solut;
+	t_vect	hit;
 
 	solut = -vec_dotp(vec_sub(ray.orig, obj->pos), obj->norm) /
 		vec_dotp(obj->norm, ray.dir);
 	if (solut > EPSILON)
+	{
+		hit = vec_add(ray.orig, vec_mult(ray.dir, solut));
+		if (SQ(hit.x - obj->pos.x) + SQ(hit.y - obj->pos.y) + SQ(hit.z -
+		obj->pos.z) > SQ(obj->sphere_cut) && obj->sphere_cut != 0)
+			return (-1);
 		return (solut);
+	}
 	return (-1);
 }
 

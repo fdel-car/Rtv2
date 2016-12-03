@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 17:44:14 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:01:58 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	load_object(char **t)
 	new->cut = vec_new(0, 0, 0);
 	new->min = 0;
 	new->max = 0;
+	new->sphere_cut = 0;
 	se = count_esize(&(t[1]));
 	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
@@ -88,10 +89,12 @@ void	load_object(char **t)
 				new->v2 = read_vec(get_after(t[n], "v2:"), ';');
 			if (ft_sii(t[n], "pos:"))
 				new->pos = read_vec(get_after(t[n], "pos:"), ';');
-			if (ft_sii(t[n], "cut:"))
-				new->cut = vec_norm(read_vec(get_after(t[n], "cut:"), ';'));
+			if (ft_sii(t[n], "cut_dir:"))
+				new->cut = vec_norm(read_vec(get_after(t[n], "cut_dir:"), ';'));
 			if (ft_sii(t[n], "cut_center:"))
 				new->cut_pos = read_vec(get_after(t[n], "cut_center:"), ';');
+			if (ft_sii(t[n], "sphere_cut:"))
+				new->sphere_cut = ft_atof(get_after(t[n], "sphere_cut:"));
 			if (ft_sii(t[n], "dir:"))
 				new->dir = vec_norm(read_vec(get_after(t[n], "dir:"), ';'));
 			if (ft_sii(t[n], "min:"))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preview.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 18:15:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 14:02:49 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:11:50 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 t_color		compute_light_prev(t_data ray)
 {
 	t_color		c;
-	t_color		ambiant;
 	t_light		*l;
 	int			lights;
 
 	lights = 0;
 	l = g_env.scene.lgt;
-	ambiant = color_mult(get_texture(ray, ray.obj_hit->mater.tex), 0.2);
 	c = color_new(0, 0, 0);
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	if (ft_strcmp(ray.obj_hit->name, "skybox") == 0)
@@ -34,8 +32,8 @@ t_color		compute_light_prev(t_data ray)
 		lights++;
 	}
 	c = color_mult(c, 1.0 / (float)lights);
-	c = color_add(c, ambiant);
-	return (c);
+	return (color_add(c, color_mult(get_texture(ray,
+	ray.obj_hit->mater.tex), g_env.scene.ambiant)));
 }
 
 t_color		render_ray_prev(t_data ray)

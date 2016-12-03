@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 17:44:31 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:19:00 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct		s_obj
 	float			max;
 	float			rayon;
 	float			alpha;
+	float			sphere_cut;
 	t_mater			mater;
 	float			(*func)(struct s_obj *obj, t_data ray);
 	struct s_obj	*lst;
@@ -128,7 +129,7 @@ typedef struct		s_light
 
 typedef struct		s_scene
 {
-	gboolean		gl_illum;
+	float			ambiant;
 	int				anti_alia;
 	int				soft_shadow;
 	int				iter_refl;
