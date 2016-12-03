@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/03 17:14:52 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:39:03 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_color		compute_light_bis(t_data ray, int iter_refl, t_color c, int lights)
 			color_new(0, 0, 0)));
 	c = color_mult(c, 1 / (float)lights);
 	return (color_add(c, color_mult(get_texture(ray,
-	ray.obj_hit->mater.tex), 0.2)));
+	ray.obj_hit->mater.tex), g_env.scene.ambiant)));
 }
 
 t_color		compute_light(t_data ray, int iter_refl)
