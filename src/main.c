@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:26:07 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:39:04 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,24 @@ void	pre_compute_tri(t_obj *o)
 
 void 	stereo_func()
 {
-	if(g_env.stereo_red == TRUE)
+	if (g_env.stereo_red == TRUE)
 	{
 		red_filter();
 		g_env.stereo_red = FALSE;
-		g_env.scene.cam.pos.x += DIST_INTEROCULAR;
+		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.right, DIST_INTEROCULAR));
+		g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
+		g_env.scene.cam.pos));
 		launch_thread();
-	}	
+	}
 	else
 	{
-		g_env.scene.cam.pos.x -= DIST_INTEROCULAR;
+		g_env.scene.cam.pos = vec_sub(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.right, DIST_INTEROCULAR / 2));
+		g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
+		g_env.scene.cam.pos));
 		green_blue_filter();
+		g_env.stereo_red = TRUE;
 		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);
 	}
 }
@@ -70,6 +77,13 @@ void 	stereo_func()
 void	launch_thread(void)
 {
 	desactivate_preview();
+	if (g_env.stereo == TRUE && g_env.stereo_red == TRUE)
+	{
+		g_env.scene.cam.pos = vec_sub(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.right, DIST_INTEROCULAR / 2));
+		g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
+		g_env.scene.cam.pos));
+	}
 	g_env.pixels_progress = 0;
 	g_env.progress = 0;
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);

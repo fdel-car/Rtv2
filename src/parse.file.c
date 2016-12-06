@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/03 17:32:51 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:41:56 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ void	load_camera(char **t)
 			g_env.scene.cam.pos2 = read_vec(get_after(t[n], "pos2:"), ';');
 		if (ft_sii(t[n], "pos3:"))
 			g_env.scene.cam.pos3 = read_vec(get_after(t[n], "pos3:"), ';');
-		if (ft_sii(t[n], "dir:"))
-			g_env.scene.cam.dir = vec_norm(read_vec(get_after(t[n],
-			"dir:"), ';'));
+		if (ft_sii(t[n], "look:"))
+			g_env.scene.cam.look_at = read_vec(get_after(t[n], "look:"), ';');
+		g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
+		g_env.scene.cam.pos));
+		g_env.scene.cam.dist = dist_p(g_env.scene.cam.pos,
+		g_env.scene.cam.look_at);
 	}
 }
 

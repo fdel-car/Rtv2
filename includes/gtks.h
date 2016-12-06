@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtks.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 19:50:46 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/06 19:50:47 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:20:00 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-# define DIST_INTEROCULAR 0.45
+# define DIST_INTEROCULAR 0.55
 
 
 typedef struct		s_gtkData

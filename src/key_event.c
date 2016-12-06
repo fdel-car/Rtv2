@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 14:59:59 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/30 05:53:24 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:59:15 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,27 @@ void		save_img(char *filename)
 void		rotate_cam(int keyval)
 {
 	if (keyval == 65361)
+	{
 		g_env.scene.cam.dir = vec_norm(rot_any(g_env.scene.cam.dir,
 		g_env.scene.cam.up, -9));
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+	}
 	if (keyval == 65363)
+	{
 		g_env.scene.cam.dir = vec_norm(rot_any(g_env.scene.cam.dir,
 		g_env.scene.cam.up, 9));
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+	}
 	if (keyval == 65362)
 	{
 		g_env.scene.cam.dir = vec_norm(rot_any(g_env.scene.cam.dir,
 		g_env.scene.cam.right, -9));
 		g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir,
 		g_env.scene.cam.right);
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
 	}
 	if (keyval == 65364)
 	{
@@ -59,6 +69,8 @@ void		rotate_cam(int keyval)
 		g_env.scene.cam.right, 9));
 		g_env.scene.cam.up = cross_pr(g_env.scene.cam.dir,
 		g_env.scene.cam.right);
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
 	}
 	if (keyval == 65451)
 		g_env.scene.iter_refl++;
@@ -86,21 +98,45 @@ gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 		return (FALSE);
 	(void)win;
 	if (event->keyval == 119)
+	{
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos, g_env.scene.cam.dir);
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.look_at,
+		g_env.scene.cam.dir);
+	}
 	if (event->keyval == 115)
+	{
 		g_env.scene.cam.pos = vec_sub(g_env.scene.cam.pos, g_env.scene.cam.dir);
+		g_env.scene.cam.look_at = vec_sub(g_env.scene.cam.look_at,
+		g_env.scene.cam.dir);
+	}
 	if (event->keyval == 97)
+	{
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
 		rot_any(g_env.scene.cam.dir, g_env.scene.cam.up, -90));
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.look_at,
+		rot_any(g_env.scene.cam.dir, g_env.scene.cam.up, -90));
+	}
 	if (event->keyval == 100)
+	{
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
 		rot_any(g_env.scene.cam.dir, g_env.scene.cam.up, 90));
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.look_at,
+		rot_any(g_env.scene.cam.dir, g_env.scene.cam.up, 90));
+	}
 	if (event->keyval == 32)
+	{
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
 		rot_any(g_env.scene.cam.dir, g_env.scene.cam.right, -90));
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.look_at,
+		rot_any(g_env.scene.cam.dir, g_env.scene.cam.right, -90));
+	}
 	if (event->keyval == 99)
+	{
 		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
 		rot_any(g_env.scene.cam.dir, g_env.scene.cam.right, 90));
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.look_at,
+		rot_any(g_env.scene.cam.dir, g_env.scene.cam.right, 90));
+	}
 	apply_filter(event->keyval);
 	rotate_cam(event->keyval);
 	launch_preview();

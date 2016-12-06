@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/03 17:19:00 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:40:42 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_cam
 	t_vect			pos1;
 	t_vect			pos2;
 	t_vect			pos3;
+	t_vect			look_at;
 	int				c_pos;
 	t_vect			dir;
 	t_vect			right;
@@ -57,6 +58,7 @@ typedef struct		s_cam
 	float			y_ind;
 	float			x_ind_p;
 	float			y_ind_p;
+	float			dist;
 }					t_cam;
 
 typedef struct		s_mater
