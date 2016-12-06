@@ -24,6 +24,7 @@ void switch_cam_pos(){
 		g_env.scene.cam.pos = g_env.scene.cam.pos3;
 }
 
+
 void save_image_chooser(void)
 {
 	GtkWidget *dialog;
@@ -554,6 +555,12 @@ void    save_color_material(GtkEntry *entry, t_gtkData *data)
 	gdk_rgba_free(col);
 }
 
+
+void save_indice_ref(GtkSpinButton *btn, t_gtkData *data)
+{
+	((t_obj *)data->obj)->mater.indice = gtk_spin_button_get_value (btn);
+}
+
 void	save_entry_transformation_light(GtkEntry *entry, t_gtkData *data)
 {
 	float ret;
@@ -808,6 +815,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	GtkWidget *trans_label;
 	GtkWidget *color_label;
 	GtkWidget *text_label;
+	GtkWidget *indice_ref_label;
 
 	GtkWidget *shiny_entry;
 	GtkWidget *refl_entry;
@@ -818,6 +826,9 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	GtkWidget *text_entry;
 	GtkWidget *btn_text;
 	GtkWidget *color_button;
+	GtkWidget *ref_spin_button;
+	GtkAdjustment *adjustment;
+
 
 	GtkEntryBuffer *shiny_buffer;
 	GtkEntryBuffer *refl_buffer;
@@ -872,6 +883,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	trans_label = gtk_label_new("Transparence");
 	color_label = gtk_label_new("Color");
 	text_label = gtk_label_new("Texture");
+	indice_ref_label = gtk_label_new("indice Ref");
 
 	shiny_entry = gtk_entry_new_with_buffer(shiny_buffer);
 	refl_entry = gtk_entry_new_with_buffer(refl_buffer);
@@ -881,6 +893,8 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	color_b_entry = gtk_entry_new_with_buffer(color_b_buffer);
 	text_entry = gtk_entry_new_with_buffer(text_buffer);
 	btn_text = gtk_button_new_with_label ("Tex");
+	adjustment = gtk_adjustment_new (current_obj->mater.indice, 0.9, 1.1, 0.01, 0.1, 0.0);
+  	ref_spin_button = gtk_spin_button_new (adjustment, 0.01, 3);
 
 	col->red  = (double)current_obj->mater.color.r / 255;
 	col->green  = (double)current_obj->mater.color.g / 255;
@@ -912,6 +926,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	gtk_grid_attach(GTK_GRID(grid), trans_label,0,2,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_label,0,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), text_label,0,4,1,1);
+	gtk_grid_attach(GTK_GRID(grid), indice_ref_label,0,5,1,1);
 
 	gtk_grid_attach(GTK_GRID(grid), shiny_entry,1,0,1,1);
 	gtk_grid_attach(GTK_GRID(grid), refl_entry,1,1,1,1);
@@ -922,6 +937,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	gtk_grid_attach(GTK_GRID(grid), color_button,4,3,1,1);
 //	gtk_grid_attach(GTK_GRID(grid), text_entry,1,4,1,1);
 	gtk_grid_attach(GTK_GRID(grid), btn_text,1,4,4,1);
+	gtk_grid_attach(GTK_GRID(grid), ref_spin_button,1,5,4,1);
 
 	entry_shiny->data = shiny_entry;
 	entry_shiny->desc = ft_strdup("shiny");
@@ -945,6 +961,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 
 	entry_col_b->data = color_b_entry;
 	entry_col_b->desc = ft_strdup("colb");
+	
 	entry_col_b->obj = current_obj;
 
 	entry_text->data = text_entry;
@@ -967,6 +984,8 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 			G_CALLBACK(save_entry_material_object), entry_text);
 	g_signal_connect(btn_text, "clicked",
 	 		G_CALLBACK(select_text), entry_text);
+	g_signal_connect(ref_spin_button, "value-changed",
+	 		G_CALLBACK(save_indice_ref), entry_text);
 
 	g_signal_connect(shiny_entry, "changed",
 			G_CALLBACK(launch_preview), entry_shiny);
