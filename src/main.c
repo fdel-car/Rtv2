@@ -50,6 +50,23 @@ void	pre_compute_tri(t_obj *o)
 	}
 }
 
+void 	stereo_func()
+{
+	if(g_env.stereo_red == TRUE)
+	{
+		red_filter();
+		g_env.stereo_red = FALSE;
+		g_env.scene.cam.pos.x += DIST_INTEROCULAR;
+		launch_thread();
+	}	
+	else
+	{
+		g_env.scene.cam.pos.x -= DIST_INTEROCULAR;
+		green_blue_filter();
+		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);
+	}
+}
+
 void	launch_thread(void)
 {
 	desactivate_preview();
@@ -75,7 +92,10 @@ void	launch_thread(void)
 		pthread_join(g_env.thread[g_env.id_thread], NULL);
 		g_env.id_thread++;
 	}
-	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
+	if (g_env.stereo == TRUE)
+		stereo_func();
+	else
+		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
 	check_filter();
 }
 

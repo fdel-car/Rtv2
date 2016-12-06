@@ -53,6 +53,75 @@ void	sepia_filter()
 	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);
 }
 
+
+
+void	red_filter(){
+	int		x;
+	int		y;
+	t_color	in;
+	t_color	out;
+	y = -1;
+	while (++y < HEIGHT - 1)
+	{
+		x = -1;
+		while (++x < WIDTH - 1)
+		{
+			in = get_color_img(g_env.pixels, x, y, 0, 0);
+			out = color_new(in.r,0,0);
+			out.r > 255 ? out.r = 255 : 0;
+			out.g > 255 ? out.g = 255 : 0;
+			out.b > 255 ? out.b = 255 : 0;
+			put_pixel_filter(x, y, out);
+		}
+	}
+}
+
+void	green_blue_filter(){
+	int		x;
+	int		y;
+	t_color	in;
+	t_color	in2;
+	t_color	out;
+	y = -1;
+	while (++y < HEIGHT - 1)
+	{
+		x = -1;
+		while (++x < WIDTH - 1)
+		{
+			in = get_color_img(g_env.pixels, x, y, 0, 0);
+			in2 = get_color_img(g_env.filter_p, x, y, 0, 0);
+			out = color_new(in2.r,in.g,in.b);
+			out.r > 255 ? out.r = 255 : 0;
+			out.g > 255 ? out.g = 255 : 0;
+			out.b > 255 ? out.b = 255 : 0;
+			put_pixel_filter(x, y, out);
+		}
+	}
+}
+
+void	stereoscopique_filter()
+{
+	int		x;
+	int		y;
+	t_color	in;
+	t_color	out;
+	y = -1;
+	while (++y < HEIGHT - 1)
+	{
+		x = -1;
+		while (++x < WIDTH - 1)
+		{
+			in = get_color_img(g_env.pixels, x, y, 0, 0);
+			out = color_new(in.r,0,0);
+			out.r > 255 ? out.r = 255 : 0;
+			out.g > 255 ? out.g = 255 : 0;
+			out.b > 255 ? out.b = 255 : 0;
+			put_pixel_filter(x, y, out);
+		}
+	}
+	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);
+}
+
 t_color	greyscale(t_color c)
 {
 	t_color	new;

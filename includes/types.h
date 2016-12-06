@@ -145,6 +145,7 @@ typedef struct		s_env
 	GdkPixbuf		*pix;
 	GdkPixbuf		*pix_prev;
 	GdkPixbuf		*filter;
+	GdkPixbuf		*stereoscopiqu;
 	GtkWidget		*win;
 	GtkWidget		*img;
 	GtkWidget		*prev;
@@ -154,8 +155,13 @@ typedef struct		s_env
 	guchar			*pixels;
 	guchar			*pixels_prev;
 	guchar			*filter_p;
+	guchar			*filter_r;
+	guchar			*filter_gb;
+
 	t_scene			scene;
 	gboolean		state_prev;
+	gboolean		stereo;
+	gboolean		stereo_red;
 	pthread_t		thread[NUM_THREAD];
 	unsigned char	id_thread;
 	unsigned int	limits[NUM_THREAD];

@@ -21,6 +21,9 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+# define DIST_INTEROCULAR 0.45
+
+
 typedef struct		s_gtkData
 {
 	GtkWidget		*data;
@@ -43,5 +46,8 @@ void init_gtk_filter_widget(void);
 void save_img(char *filename);
 void save_image_chooser(void);
 void check_filter(void);
+void stereoscopique_filter(void);
+void red_filter();
+void green_blue_filter();
 
 #endif

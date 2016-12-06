@@ -1,5 +1,6 @@
 #include "rt.h"
 
+
 void open_file(char *filename){
 	printf("%s\n",filename );
 	printf("%s\n",filename + ft_strlen(filename ) -4 );
@@ -124,20 +125,28 @@ void switch_filter(GtkWidget *combo)
 		sobel_filter();
 	else if (ft_strcmp("Greyscale",s) == 0)
 		greyscale_filter();
+	else if (ft_strcmp("Stereocopique",s) == 0)
+	{
+		g_env.stereo = TRUE;
+		g_env.stereo_red = TRUE;
+		launch_thread();
+	}
 	else if (ft_strcmp("None",s) == 0)
+	{
 		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
+	}
 	free(s);
 }
 
 void init_gtk_filter_widget(void)
 {
 	GtkWidget *combo;
-	static char *combo_text[] = {"None","Sepia","Cartoon","Greyscale"};
+	static char *combo_text[] = {"None","Sepia","Cartoon","Greyscale", "Stereocopique"};
 	int		i;
 
 	i = 0;
 	combo = GTK_WIDGET(gtk_builder_get_object(g_env.build,"filtre_combo"));
-	while (i < 4)
+	while (i < 5)
 	{
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),
 				combo_text[i]);
@@ -961,7 +970,7 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 
 	entry_col_b->data = color_b_entry;
 	entry_col_b->desc = ft_strdup("colb");
-	
+
 	entry_col_b->obj = current_obj;
 
 	entry_text->data = text_entry;
