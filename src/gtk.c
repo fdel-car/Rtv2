@@ -193,8 +193,9 @@ t_obj *add_object_name(t_obj *obj)
 	GtkEntry *name;
 
 	name = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_name"));
+	if (ft_strcmp("", gtk_entry_get_text(name)) == 0)
+		return (obj);
 	obj->name = ft_strdup(gtk_entry_get_text(name));
-
 	return (obj);
 }
 
@@ -386,15 +387,6 @@ void clear_entry_widget_add_object(void){
 	clear_entry_4();
 }
 
-void init_obj(t_obj *obj){
-	obj->name = NULL;
-	obj->src = NULL;
-	obj->lst = NULL;
-	obj->next = NULL;
-	obj->mater.tex = NULL;
-	obj->mater.ntex = NULL;
-
-}
 void signal_add_object(void)
 {
 	char *s = NULL;

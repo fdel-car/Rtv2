@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/03 17:01:58 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/07 15:10:48 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ void	set_func(t_obj *o)
 		o->func = &intersect_triangle;
 }
 
+void	init_obj(t_obj *obj)
+{
+	obj->next = NULL;
+	obj->src = NULL;
+	obj->cut = vec_new(0, 0, 0);
+	obj->min = 0;
+	obj->max = 0;
+	obj->sphere_cut = 0;
+	obj->lst = NULL;
+	obj->mater = init_mater();
+	obj->name = "no name";
+}
+
 void	load_object(char **t)
 {
 	t_obj	*new;
@@ -68,14 +81,9 @@ void	load_object(char **t)
 	int		se;
 
 	new = malloc(sizeof(t_obj));
-	new->next = NULL;
-	new->src = NULL;
+	init_obj(new);
 	name = ft_strdup(*t);
 	new->name = ft_strtrim(name);
-	new->cut = vec_new(0, 0, 0);
-	new->min = 0;
-	new->max = 0;
-	new->sphere_cut = 0;
 	se = count_esize(&(t[1]));
 	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
