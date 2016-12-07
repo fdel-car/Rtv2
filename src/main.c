@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/06 15:39:04 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/07 17:47:32 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,56 @@ void	init_limits(void)
 	}
 }
 
+void	test_texture(t_text *tex)
+{
+	t_color color;
+	int x = 0;
+	int y;
+	while (x < tex->tex_w)
+	{
+		y = 0;
+		while (y < tex->tex_h)
+		{
+			color.r = tex->text[y * (tex->tex_w * 3) + (x * 3)];
+			color.g = tex->text[y * (tex->tex_w * 3) + (x * 3) + 1];
+			color.b = tex->text[y * (tex->tex_w * 3) + (x * 3) + 2];
+			put_pixel(x, y, color);
+			y++;
+		}
+		x++;
+	}
+	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
+}
+
+// t_text	*marble(void)
+// {
+//
+// }
+
+void	init_sphere_oculus(void)
+{
+	t_obj *obj;
+
+	obj = (t_obj *)malloc(sizeof(t_obj));
+	obj->src = NULL;
+	obj->cut = vec_new(0, 0, 0);
+	obj->rayon = 0.8;
+	obj->min = 0;
+	obj->max = 0;
+	obj->sphere_cut = 0;
+	obj->lst = NULL;
+	obj->name = ft_strdup("sphere_oculus");
+	obj->type = SPHERE;
+	obj->pos = vec_add(g_env.scene.cam.pos,
+	vec_mult(g_env.scene.cam.dir, 2));
+	obj->mater = init_mater();
+	obj->mater.indice = 1.1;
+	obj->mater.int_trans = 1;
+	set_func(obj);
+	obj->next = g_env.scene.obj;
+	g_env.scene.obj = obj;
+}
+
 int		main(int argc, char **argv)
 {
 	if (argc < 2 || argc > 3)
@@ -147,6 +197,7 @@ int		main(int argc, char **argv)
 	}
 	else
 		load_file(argv[1]);
+	init_sphere_oculus();
 	gtk_init(&argc, &argv);
 	init_limits();
 	init_view();
@@ -156,8 +207,10 @@ int		main(int argc, char **argv)
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
 	g_env.total = WIDTH * HEIGHT;
+	g_env.oculus = TRUE;
 	launch_thread();
 	launch_preview();
+	// test_texture();
 	gtk_widget_show_all(g_env.win);
 	gtk_main();
 	return (EXIT_SUCCESS);

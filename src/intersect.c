@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/03 16:58:19 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/07 17:43:32 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 	float	c;
 	float	r[2];
 
+	if (ft_strcmp("sphere_oculus", obj->name) == 0 && g_env.oculus == FALSE)
+		return (-1);
 	a = SQ(ray.dir.x) + SQ(ray.dir.y) + SQ(ray.dir.z);
 	b = 2.0 * (ray.dir.x * (ray.orig.x - obj->pos.x) + ray.dir.y *
 	(ray.orig.y - obj->pos.y) + ray.dir.z * (ray.orig.z - obj->pos.z));

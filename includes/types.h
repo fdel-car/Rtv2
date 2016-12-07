@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/06 15:40:42 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/07 17:34:22 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,11 @@ typedef struct		s_env
 	guchar			*filter_p;
 	guchar			*filter_r;
 	guchar			*filter_gb;
-
 	t_scene			scene;
 	gboolean		state_prev;
 	gboolean		stereo;
 	gboolean		stereo_red;
+	gboolean		oculus;
 	pthread_t		thread[NUM_THREAD];
 	unsigned char	id_thread;
 	unsigned int	limits[NUM_THREAD];

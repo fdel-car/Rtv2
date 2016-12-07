@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 17:27:13 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/07 17:55:35 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ void		init_view(void)
 	g_env.scene.cam.c_pos = 1;
 }
 
+t_data		oculus_view(t_data ray)
+{
+	ray.solut = intersect_sphere(g_env.scene.obj, ray);
+	if (ray.solut != -1)
+		ray.obj_hit = g_env.scene.obj;
+	return (ray);
+}
+
 t_color		init_ray(float x, float y, t_data ray)
 {
 	t_vect	view_point;
@@ -69,6 +77,8 @@ t_color		init_ray(float x, float y, t_data ray)
 	g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
 	g_env.scene.cam.y_ind * y));
 	ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
+	if (g_env.oculus == TRUE)
+		return (render_ray(oculus_view(ray)));
 	return (render_ray(intersect_obj(ray, FALSE)));
 }
 
