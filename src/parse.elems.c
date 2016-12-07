@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/07 15:10:48 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:14:24 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_obj(t_obj *obj)
 	obj->sphere_cut = 0;
 	obj->lst = NULL;
 	obj->mater = init_mater();
-	obj->name = "no name";
+	obj->name = ft_strdup("no name");
 }
 
 void	load_object(char **t)
