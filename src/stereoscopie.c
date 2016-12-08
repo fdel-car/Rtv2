@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stereoscopie.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhuver <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bhuver <bhuver@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 12:17:18 by bhuver            #+#    #+#             */
-/*   Updated: 2016/12/08 12:23:43 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/12/08 19:03:12 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,44 @@ void				stereoscopique_filter(void)
 		}
 	}
 	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);
+}
+
+void				left_filter(void)
+{
+	int				x;
+	int				y;
+	t_color			in;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			in = get_color_img(g_env.pixels, x, y, 0, 0);
+			put_pixel_filter(x, y, in);
+			x++;
+		}
+		y++;
+	}
+}
+
+void				right_filter(void)
+{
+	int				x;
+	int				y;
+	t_color			in;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			in = get_color_img(g_env.pixels, x, y, 0, 0);
+			put_pixel_filter(x + 640, y, in);
+			x++;
+		}
+		y++;
+	}
 }

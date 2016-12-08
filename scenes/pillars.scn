@@ -65,7 +65,7 @@ scene
 		{
 			pos:0;6;0
 			dir:NULL
-			normal:0;1;0
+			normal:0;-1;0
 			rayon:0
 			type:plane
 			materiel

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 19:50:46 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/06 15:20:00 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:46:09 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct		s_gtkData
 	char 			*desc;
 }					t_gtkData;
 
+void				left_filter(void);
+void				right_filter(void);
 void				create_list_of_objects();
 void				select_current_obj(GtkTreeView *GtkTreeView,
 					GtkTreePath *path);

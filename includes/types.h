@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 16:12:10 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:40:16 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct		s_env
 	gboolean		stereo;
 	gboolean		stereo_red;
 	gboolean		oculus;
+	gboolean		oculus_left;
 	pthread_t		thread[NUM_THREAD];
 	unsigned char	id_thread;
 	unsigned int	limits[NUM_THREAD];
@@ -174,6 +175,7 @@ typedef struct		s_env
 	unsigned int	pixels_progress;
 	unsigned int	total;
 	unsigned int    progress_bar;
+	int	width;
 }					t_env;
 
 t_env g_env;

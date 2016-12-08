@@ -6,13 +6,13 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/21 18:40:26 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:26:19 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
-# define WIDTH 1280
+# define WIDTH g_env.width
 # define HEIGHT 720
 # define WIDTH_PREVIEW 192
 # define HEIGHT_PREVIEW 108

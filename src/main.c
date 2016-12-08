@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 16:18:20 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:46:19 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,35 @@ void 	stereo_func()
 	}
 }
 
+void 	oculus_func()
+{
+	if (g_env.oculus_left == TRUE)
+	{
+		g_env.oculus_left = FALSE;
+		g_env.scene.cam.pos = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.right, DIST_INTEROCULAR));
+		g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
+		g_env.scene.cam.pos));
+		left_filter();
+		launch_thread();
+	}
+	else
+	{
+		g_env.scene.cam.pos = vec_sub(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.right, DIST_INTEROCULAR / 2));
+		g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
+		g_env.scene.cam.pos));
+		right_filter();
+		g_env.oculus_left = TRUE;
+		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);
+	}
+}
+
 void	launch_thread(void)
 {
 	desactivate_preview();
-	if (g_env.stereo == TRUE && g_env.stereo_red == TRUE)
+	if ((g_env.stereo == TRUE && g_env.stereo_red == TRUE) ||
+	(g_env.oculus == TRUE && g_env.oculus_left == TRUE))
 	{
 		g_env.scene.cam.pos = vec_sub(g_env.scene.cam.pos,
 		vec_mult(g_env.scene.cam.right, DIST_INTEROCULAR / 2));
@@ -108,6 +133,8 @@ void	launch_thread(void)
 	}
 	if (g_env.stereo == TRUE)
 		stereo_func();
+	else if (g_env.oculus == TRUE)
+		oculus_func();
 	else
 		gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.pix);
 	check_filter();
@@ -197,6 +224,7 @@ int		main(int argc, char **argv)
 	}
 	else
 		load_file(argv[1]);
+	g_env.width = 1280;
 	init_sphere_oculus();
 	gtk_init(&argc, &argv);
 	init_limits();
