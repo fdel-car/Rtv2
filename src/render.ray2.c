@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:47:22 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 14:10:06 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:49:59 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
 
 	refr.dir = refract_dir(ray, ray->obj_hit);
 	refr.orig = ray->hit_point;
-	refr = intersect_obj(refr, FALSE);
+	refr = intersect_obj(refr, FALSE, FALSE);
 	t_coef = transparent_map(ray);
 	if (refr.solut != -1)
 		return (color_add(c, color_mult(compute_light(refr, iter_refl),

@@ -18,7 +18,7 @@ scene
 		dir:1;-1;0
 		rayon:0
 		alpha:30
-		type:point_light
+		type:dir_light
 		color:255;255;255
 		intensity:0.4
 		blur:0
@@ -41,7 +41,6 @@ scene
 		{
 			pos:0;0;0
 			normal:NULL
-			cut_dir:1;1;0
 			rayon:2
 			type:sphere
 			materiel
@@ -58,7 +57,6 @@ scene
 			pos:-5;0;0
 			normal:NULL
 			rayon:2
-			cut_center:-5;0;0
 			type:sphere
 			materiel
 			{

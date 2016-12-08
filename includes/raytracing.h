@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 17:51:45 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:16:12 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RAYTRACING_H
 # define EPSILON 0.001
 
+t_data		oculus_view(t_data ray);
 float		sphere_cut(float *r, t_data ray, t_vect cut_pos, t_vect cut);
 t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c);
 t_color		specular_lighting(t_data *ray, t_light *l);
@@ -21,7 +22,7 @@ float		cut_basics(t_data *ray, t_obj *o, t_vect cut, float *r);
 float		quadratic_root(float a, float b, float c, float *roots);
 void		switch_key_focus(void);
 gboolean	key_event(GtkWidget *win, GdkEventKey *event);
-t_data		intersect_obj(t_data ray, gboolean sh);
+t_data		intersect_obj(t_data ray, gboolean sh, gboolean prev);
 t_color		render_ray(t_data ray);
 float		get_shadow(t_light *l, t_data *ray);
 float		intersect_triangle(t_obj *obj, t_data ray);

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:35:21 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 15:58:32 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:05:19 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	normal_mapping(t_data *ray)
 
 void	get_norm(t_data *ray)
 {
-	if ((ray->obj_hit)->type == SPHERE)
+	if ((ray->obj_hit)->type == SPHERE || (ray->obj_hit)->type == OCULUS)
 		ray->norm = vec_norm(vec_sub(ray->hit_point, (ray->obj_hit)->pos));
 	if ((ray->obj_hit)->type == PLANE ||
 		(ray->obj_hit)->type == TRIANGLE)

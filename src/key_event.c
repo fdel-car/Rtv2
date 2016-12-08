@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 14:59:59 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/06 15:59:15 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:45:00 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 	}
 	apply_filter(event->keyval);
 	rotate_cam(event->keyval);
+	g_env.scene.obj->pos = vec_add(g_env.scene.cam.pos,
+	vec_mult(g_env.scene.cam.dir, 2));
 	launch_preview();
 	return (TRUE);
 }

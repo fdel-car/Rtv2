@@ -25,16 +25,16 @@ scene
 	{
 		earth
 		{
-			pos:-5;0;0
+			pos:0;0;0
 			normal:NULL
 			rayon:2
 			type:sphere
 			materiel
 			{
-				indice:0.98
-				brillance:102
-				reflection:1
-				transparence:0.6
+				indice:1.10
+				brillance:0
+				reflection:0
+				transparence:1
 				color:0;0;0
 			}
 		}

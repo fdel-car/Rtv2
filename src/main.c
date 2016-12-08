@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/07 17:47:32 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:18:20 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,13 +173,13 @@ void	init_sphere_oculus(void)
 	obj->sphere_cut = 0;
 	obj->lst = NULL;
 	obj->name = ft_strdup("sphere_oculus");
-	obj->type = SPHERE;
+	obj->type = OCULUS;
 	obj->pos = vec_add(g_env.scene.cam.pos,
 	vec_mult(g_env.scene.cam.dir, 2));
 	obj->mater = init_mater();
 	obj->mater.indice = 1.1;
 	obj->mater.int_trans = 1;
-	set_func(obj);
+	obj->func = &intersect_sphere;
 	obj->next = g_env.scene.obj;
 	g_env.scene.obj = obj;
 }
@@ -207,7 +207,7 @@ int		main(int argc, char **argv)
 	gtk_builder_connect_signals(g_env.build, NULL);
 	create_list_of_objects();
 	g_env.total = WIDTH * HEIGHT;
-	g_env.oculus = TRUE;
+	g_env.oculus = FALSE;
 	launch_thread();
 	launch_preview();
 	// test_texture();

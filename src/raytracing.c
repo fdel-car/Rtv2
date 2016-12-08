@@ -6,13 +6,13 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/07 17:55:35 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:38:57 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_data		intersect_obj(t_data ray, gboolean sh)
+t_data		intersect_obj(t_data ray, gboolean sh, gboolean prev)
 {
 	t_obj	*obj;
 	t_obj	*lst;
@@ -21,6 +21,8 @@ t_data		intersect_obj(t_data ray, gboolean sh)
 	ray.solut = -1;
 	ray.obj_hit = NULL;
 	obj = g_env.scene.obj;
+	if (sh == TRUE || prev == TRUE)
+		obj = obj->next;
 	lst = NULL;
 	while (obj)
 	{
@@ -79,7 +81,7 @@ t_color		init_ray(float x, float y, t_data ray)
 	ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
 	if (g_env.oculus == TRUE)
 		return (render_ray(oculus_view(ray)));
-	return (render_ray(intersect_obj(ray, FALSE)));
+	return (render_ray(intersect_obj(ray, FALSE, FALSE)));
 }
 
 void		super_sample(float x, float y, t_data ray)

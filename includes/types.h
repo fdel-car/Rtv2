@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/07 17:34:22 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:12:10 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TYPES_H
 
 typedef enum	{NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE, MESH, SPOT_L,
-				DIR_L, POINT_L, SKYBOX} e_type;
+				DIR_L, POINT_L, SKYBOX, OCULUS} e_type;
 
 typedef struct		s_vect
 {
