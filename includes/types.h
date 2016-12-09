@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 18:40:16 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/09 16:20:37 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_text
 	int				size[2];
 	unsigned char	buff[3];
 	unsigned char	*text;
+	float			tsize;
 }					t_text;
 
 typedef struct		s_cam
@@ -72,6 +73,7 @@ typedef struct		s_mater
 	t_text			*tex;
 	t_text			*ntex;
 	t_text			*ttex;
+	t_text			*ctex;
 }					t_mater;
 
 typedef struct		s_data

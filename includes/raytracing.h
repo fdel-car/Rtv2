@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 16:16:12 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/09 17:04:19 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_data		oculus_view(t_data ray);
 float		sphere_cut(float *r, t_data ray, t_vect cut_pos, t_vect cut);
 t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c);
 t_color		specular_lighting(t_data *ray, t_light *l);
+float		texture_cut(float res, t_obj *o, t_data mray);
+float		texture_cutr(float res, float *r, t_obj *o, t_data mray);
 float		cut_basics(t_data *ray, t_obj *o, t_vect cut, float *r);
 float		quadratic_root(float a, float b, float c, float *roots);
 void		switch_key_focus(void);
