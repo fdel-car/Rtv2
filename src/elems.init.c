@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:39:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/02 15:07:59 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/09 15:25:03 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_mater		init_mater(void)
 	new.tex = NULL;
 	new.ntex = NULL;
 	new.ttex = NULL;
+	new.ctex = NULL;
 	new.indice = 1.0;
 	return (new);
 }

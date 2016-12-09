@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:53:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 16:08:57 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/09 17:12:44 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_color		getex_plane(t_data ray, t_text *tex)
 	t_vect	v_axis;
 	float	scale;
 
-	scale = 1;
+	scale = tex->tsize > 0 ? tex->tsize : 0.1;
 	u_axis = vec_new(ray.norm.y, ray.norm.z, -ray.norm.x);
 	v_axis = cross_pr(u_axis, ray.obj_hit->norm);
 	u = vec_dotp(ray.hit_point, u_axis) * scale;
@@ -64,17 +64,17 @@ t_color		getex_sphere(t_data ray, t_text *tex)
 t_color		getex_cyl(t_data ray, t_text *tex)
 {
 	t_vect	d;
-	float	u;
-	float	v;
+	float	v[3];
 	int		i;
 	int		j;
 
+	v[2] = tex->tsize > 0 ? tex->tsize : 10;
 	d = vec_sub(ray.hit_point, vec_mul(ray.obj_hit->pos, ray.obj_hit->dir));
-	u = 0.5 + atan2(d.z, d.x) / M_PI * 0.5;
-	v = d.y / 10;
-	v = v - floor(v);
-	i = ft_limit(u * tex->tex_w, 0, tex->tex_w - 1);
-	j = ft_limit(v * tex->tex_h, 0, tex->tex_h - 1);
+	v[0] = 0.5 + atan2(d.z, d.x) / M_PI * 0.5;
+	v[1] = d.y / tex->tsize;
+	v[1] = v[1] - floor(v[1]);
+	i = ft_limit(v[0] * tex->tex_w, 0, tex->tex_w - 1);
+	j = ft_limit(v[1] * tex->tex_h, 0, tex->tex_h - 1);
 	return (get_texel(*tex, i, j));
 }
 

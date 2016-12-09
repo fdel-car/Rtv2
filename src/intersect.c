@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/07 17:43:32 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/09 17:15:24 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 	float	c;
 	float	r[2];
 
-	if (ft_strcmp("sphere_oculus", obj->name) == 0 && g_env.oculus == FALSE)
+	if (!ft_strcmp("sphere_oculus", obj->name) && !g_env.oculus)
 		return (-1);
 	a = SQ(ray.dir.x) + SQ(ray.dir.y) + SQ(ray.dir.z);
 	b = 2.0 * (ray.dir.x * (ray.orig.x - obj->pos.x) + ray.dir.y *
@@ -50,7 +50,7 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 	c = (SQ(ray.orig.x - obj->pos.x) + SQ(ray.orig.y - obj->pos.y) +
 	SQ(ray.orig.z - obj->pos.z)) - SQ(obj->rayon);
 	quadratic_root(a, b, c, r);
-	return (sphere_cut(r, ray, obj->cut_pos, obj->cut));
+	return (texture_cutr(sphere_cut(r, ray, obj->cut_pos, obj->cut), r, obj, ray));
 }
 
 float	intersect_plane(t_obj *obj, t_data ray)
@@ -66,7 +66,7 @@ float	intersect_plane(t_obj *obj, t_data ray)
 		if (SQ(hit.x - obj->pos.x) + SQ(hit.y - obj->pos.y) + SQ(hit.z -
 		obj->pos.z) > SQ(obj->sphere_cut) && obj->sphere_cut != 0)
 			return (-1);
-		return (solut);
+		return (texture_cut(solut, obj, ray));
 	}
 	return (-1);
 }
@@ -87,11 +87,11 @@ float	intersect_cone(t_obj *obj, t_data ray)
 	c = vec_dotp(tmp, tmp) - ((1.0 + SQ(obj->alpha)) *
 	SQ(vec_dotp(tmp, obj->dir)));
 	if (obj->min == 0 && obj->max == 0)
-		return (quadratic_root(a, b, c, r));
+		return (texture_cutr(quadratic_root(a, b, c, r), r, obj, ray));
 	if (!quadratic_root(a, b, c, r))
 		return (-1);
-	return (cut_basics(&ray, obj, vec_is_null(obj->cut)
-	? obj->dir : obj->cut, r));
+	return (texture_cutr(cut_basics(&ray, obj, vec_is_null(obj->cut)
+	? obj->dir : obj->cut, r), r, obj, ray));
 }
 
 float	intersect_cylinder(t_obj *obj, t_data ray)
@@ -108,9 +108,9 @@ float	intersect_cylinder(t_obj *obj, t_data ray)
 	obj->dir) * vec_dotp(tmp, obj->dir)));
 	c = vec_dotp(tmp, tmp) - (SQ(vec_dotp(tmp, obj->dir))) - SQ(obj->rayon);
 	if (obj->min == 0 && obj->max == 0)
-		return (quadratic_root(a, b, c, r));
+		return (texture_cutr(quadratic_root(a, b, c, r), r, obj, ray));
 	if (!quadratic_root(a, b, c, r))
 		return (-1);
-	return (cut_basics(&ray, obj, vec_is_null(obj->cut)
-	? obj->dir : obj->cut, r));
+	return (texture_cutr(cut_basics(&ray, obj, vec_is_null(obj->cut)
+	? obj->dir : obj->cut, r), r, obj, ray));
 }

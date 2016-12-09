@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.elems.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/07 16:14:24 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/09 17:10:37 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ t_mater	load_material(char **t)
 	t_mater	new;
 	int		n;
 	int		se;
+	float	tsize;
 
 	n = 1;
+	tsize = -42;
 	new = init_mater();
 	se = count_esize(&(t[n]));
 	if (ft_sii(t[n], "{"))
@@ -32,6 +34,8 @@ t_mater	load_material(char **t)
 				new.int_trans = ft_atof(get_after(t[n], "transparence:"));
 			if (ft_sii(t[n], "indice:"))
 				new.indice = ft_atof(get_after(t[n], "indice:"));
+			if (ft_sii(t[n], "tsize:"))
+				tsize = ft_atof(get_after(t[n], "tsize:"));
 			if (ft_sii(t[n], "color:"))
 				new.color = read_color(get_after(t[n], "color:"));
 			if (ft_sii(t[n], "texture:"))
@@ -40,7 +44,12 @@ t_mater	load_material(char **t)
 				new.ntex = load_texture(get_after(t[n], "ntext:"));
 			if (ft_sii(t[n], "ttext:"))
 				new.ttex = load_texture(get_after(t[n], "ttext:"));
+			if (ft_sii(t[n], "ctext:"))
+				new.ctex = load_texture(get_after(t[n], "ctext:"));
+
 		}
+	if (new.tex)
+		new.tex->tsize = tsize > 0 ? tsize : -42;
 	return (new);
 }
 
