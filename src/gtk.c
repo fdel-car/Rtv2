@@ -631,6 +631,7 @@ void	save_entry_transformation_light(GtkEntry *entry, t_gtkData *data)
 		((t_light *)data->obj)->dir.y  = ret;
 	if(ft_strcmp(data->desc,"dirz") == 0)
 		((t_light *)data->obj)->dir.z  = ret;
+	((t_light *)data->obj)->dir = vec_norm(((t_light *)data->obj)->dir);
 	if(ft_strcmp(data->desc,"rayon") == 0)
 		((t_light *)data->obj)->rayon  = ret;
 }
@@ -695,25 +696,26 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
 	pos = ((t_obj *)data->obj)->pos;
 	if(ft_strcmp(data->desc,"posx") == 0)
 		((t_obj *)data->obj)->pos.x  = ret;
-	else if(ft_strcmp(data->desc,"posy") == 0)
+	if(ft_strcmp(data->desc,"posy") == 0)
 		((t_obj *)data->obj)->pos.y  = ret;
-	else if(ft_strcmp(data->desc,"posz") == 0)
+	if(ft_strcmp(data->desc,"posz") == 0)
 		((t_obj *)data->obj)->pos.z  = ret;
-	else if(ft_strcmp(data->desc,"dirx") == 0)
+	if(ft_strcmp(data->desc,"dirx") == 0)
 		((t_obj *)data->obj)->dir.x  = ret;
-	else if(ft_strcmp(data->desc,"diry") == 0)
+	if(ft_strcmp(data->desc,"diry") == 0)
 		((t_obj *)data->obj)->dir.y  = ret;
-	else if(ft_strcmp(data->desc,"dirz") == 0)
+	if(ft_strcmp(data->desc,"dirz") == 0)
 		((t_obj *)data->obj)->dir.z  = ret;
-	else if(ft_strcmp(data->desc,"normx") == 0)
+	((t_obj *)data->obj)->dir = vec_norm(((t_obj *)data->obj)->dir);
+	if(ft_strcmp(data->desc,"normx") == 0)
 		((t_obj *)data->obj)->norm.x  = ret;
-	else if(ft_strcmp(data->desc,"normy") == 0)
+	if(ft_strcmp(data->desc,"normy") == 0)
 		((t_obj *)data->obj)->norm.y  = ret;
-	else if(ft_strcmp(data->desc,"normz") == 0)
+	if(ft_strcmp(data->desc,"normz") == 0)
 		((t_obj *)data->obj)->norm.z = ret;
-	else if(ft_strcmp(data->desc,"rayon") == 0)
+	if(ft_strcmp(data->desc,"rayon") == 0)
 		((t_obj *)data->obj)->rayon  = ret;
-	else if(ft_strcmp(data->desc,"alpha") == 0)
+	if(ft_strcmp(data->desc,"alpha") == 0)
 		((t_obj *)data->obj)->alpha  = ret * M_PI / 180;
 
 

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 18:46:19 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/09 18:45:41 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void	init_sphere_oculus(void)
 	obj->pos = vec_add(g_env.scene.cam.pos,
 	vec_mult(g_env.scene.cam.dir, 2));
 	obj->mater = init_mater();
-	obj->mater.indice = 1.1;
+	obj->mater.indice = 0.90;
 	obj->mater.int_trans = 1;
 	obj->func = &intersect_sphere;
 	obj->next = g_env.scene.obj;

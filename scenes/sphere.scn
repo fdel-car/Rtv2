@@ -31,7 +31,7 @@ scene
 			type:sphere
 			materiel
 			{
-				indice:1.10
+				indice:0.9
 				brillance:0
 				reflection:0
 				transparence:1
