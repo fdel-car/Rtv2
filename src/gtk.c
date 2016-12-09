@@ -212,12 +212,12 @@ void init_gtk_filter_widget(void)
 void init_gtk_create_widget(void)
 {
 	GtkWidget *combo;
-	static char *combo_text[] = {"Sphere", "Plan", "Cone", "Cylindre", "Torus"};
+	static char *combo_text[] = {"Sphere", "Plan", "Cone", "Cylindre", "Torus", "ADN"};
 	int		i;
 
 	i = 0;
 	combo = GTK_WIDGET(gtk_builder_get_object(g_env.build,"create_type"));
-	while (i < 5)
+	while (i < 6)
 	{
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),
 				combo_text[i]);
@@ -236,6 +236,8 @@ t_obj *add_object_type(char *s, t_obj *obj)
 	else if (ft_strcmp("Cylindre",s) == 0)
 		obj->type = CYLINDER;
 	else if (ft_strcmp("Torus",s) == 0)
+		obj->type = MESH;
+	else if (ft_strcmp("ADN",s) == 0)
 		obj->type = MESH;
 	return (obj);
 }
@@ -466,6 +468,8 @@ void signal_add_object(void)
 	set_func(obj);
 	if (ft_strcmp(s, "Torus") == 0)
 		add_torus_sphere(obj);
+	else if (ft_strcmp(s, "ADN") == 0)
+		add_adn(obj);
 	push_obj(obj);
 	clear_entry_widget_add_object();
 	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,

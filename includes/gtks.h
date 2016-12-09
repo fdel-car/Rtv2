@@ -51,5 +51,8 @@ void check_filter(void);
 void stereoscopique_filter(void);
 void red_filter();
 void green_blue_filter();
+void add_cylindre_adn(t_obj *o, t_vect pos, t_vect pos1);
+void	add_adn(t_obj *o);
+void	add_sphere_adn(t_obj *o, t_vect pos);
 
 #endif
