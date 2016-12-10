@@ -20,6 +20,7 @@ scene
         intensity:0.4
         blur:0
         }
+	}
 	objects
 	{
 		triangle_1F1
