@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_objects.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 22:20:34 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/30 04:39:47 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:18:36 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,19 +112,18 @@ void	add_adn(t_obj *o)
 	t_vect	pos1;
 	int		i = 0;
 
-	
+
 	pos = vec_new(o->pos.x + o->rayon, o->pos.y, o->pos.z);
 	pos1 = vec_new(o->pos.x - o->rayon, o->pos.y, o->pos.z);
-	while (i < 360)
+	while (i < 18)
 	{
-		pos.y += 0.04;
-		pos1.y += 0.04;
-		if (i % 20 == 0)
-			add_cylindre_adn(o,pos, pos1);
+		pos.y += 0.8;
+		pos1.y += 0.8;
 		add_sphere_adn(o, pos);
 		add_sphere_adn(o, pos1);
-		pos = rot_y(1, pos);
-		pos1 = rot_y(1, pos1);
+		add_cylindre_adn(o,pos, pos1);
+		pos = rot_y(20, pos);
+		pos1 = rot_y(20, pos1);
 		i++;
 	}
 }

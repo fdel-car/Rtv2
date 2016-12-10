@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 17:38:57 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:28:38 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_data		intersect_obj(t_data ray, gboolean sh, gboolean prev)
 	{
 		if (obj->type != MESH)
 		{
-			if (sh != TRUE || obj->type != SKYBOX)
+			if (obj->type != NONE && (sh != TRUE || obj->type != SKYBOX))
 				tmp = (*obj->func)(obj, ray);
 		}
 		else

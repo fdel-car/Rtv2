@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/06 15:41:56 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/10 14:44:59 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	parse_scene(char **t)
 		if (ft_sii(t[n], "camera") && t[n + 2])
 			load_camera(&(t[n + 2]));
 		if (ft_sii(t[n], "lights") && t[n + 2])
-			load_elems(&(t[n + 2]), 'l');
+			load_elems(&(t[n + 1]), 'l');
 		if (ft_sii(t[n], "objects") && t[n + 2])
-			load_elems(&(t[n + 2]), 'o');
+			load_elems(&(t[n + 1]), 'o');
 	}
 }
 
@@ -96,8 +96,11 @@ void	load_file(char *scene_file)
 	{
 		while (get_next_line(fd, &line) && (++n) > -42)
 			file[n] = line;
-		file[n] = 0;
-		load_scene(file);
+		file[n + 1] = 0;
+		if (verif_file(file))
+			load_scene(file);
+		else
+			ft_putendl("WRONG FORMAT FOR CONFIG FILE !");
 		ctab_free(file);
 	}
 }

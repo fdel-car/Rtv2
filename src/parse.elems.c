@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/09 17:10:37 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:02:32 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,18 +181,25 @@ void	load_light(char **t)
 void	load_elems(char **t, unsigned char type)
 {
 	int	n;
+	int	se;
+	int tmp;
+	int	nb;
 
-	n = 0;
-	while (t[n])
+	n = 1;
+	se = count_esize(t);
+	while (t[n] && --se > 1)
 	{
-		if (!ft_strcmp(clean_line(t[n]), "}"))
-			break ;
+		nb = n;
+		while (is_blank(t[nb]))
+			nb++;
+		nb = nb - n;
+		n += nb;
+		se -= nb;
 		type == 'l' ?
 			load_light(&(t[n])) : load_object(&(t[n]));
 		++n;
-		if (!ft_strcmp(clean_line(t[n]), "{") && ++n)
-			while (t[n] && ft_strcmp(clean_line(t[n]), "}"))
-				++n;
-		n += type == 'l' ? 1 : 2;
+		tmp = count_esize(&(t[n]));
+		n += tmp;
+		se -= tmp;
 	}
 }

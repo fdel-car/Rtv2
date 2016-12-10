@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 18:45:58 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/10 16:29:49 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <fcntl.h>
 
+int			is_sim(char *t, char *s);
+int			verif_file(char **t);
+int			is_blank(char *l);
 void		init_obj(t_obj *obj);
 void		put_pixel_filter(int x, int y, t_color color);
 void		add_torus_sphere(t_obj *o);
