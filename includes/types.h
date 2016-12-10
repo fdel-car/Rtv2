@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/09 16:20:37 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:30:32 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,31 @@ typedef struct		s_text
 	unsigned char	*text;
 	float			tsize;
 }					t_text;
+
+typedef struct		s_noise
+{
+	float			gradtab[8][2];
+	float			unit;
+	float			tempx;
+	float			tempy;
+	float			s;
+	float			t;
+	float			u;
+	float			v;
+	float			cx;
+	float			cy;
+	float			li1;
+	float			li2;
+	float			tmp;
+	int				x0;
+	int				y0;
+	int				ii;
+	int				jj;
+	int				gr0;
+	int				gr1;
+	int				gr2;
+	int				gr3;
+}					t_noise;
 
 typedef struct		s_cam
 {

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:06:31 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:01:38 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:38:59 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,20 @@ t_text	*create_board(void)
 	return (tex);
 }
 
+t_text	*create_perlin(int resolution, float index)
+{
+	t_text	*tex;
+
+	if (!(tex = malloc(sizeof(t_text))))
+		return (0);
+	tex->tex_h = resolution;
+	tex->tex_w = resolution;
+	tex->text = (unsigned char *)malloc(sizeof(unsigned char) *
+	(resolution * 3 * resolution));
+	generate_perlin_tex(tex, index);
+	return (tex);
+}
+
 int		fill_texture(t_text *tex, FILE *img)
 {
 	int		iter;
@@ -86,6 +100,8 @@ t_text	*load_texture(char *path)
 
 	if (!ft_strcmp(path, "damier"))
 		return (create_board());
+	if (!ft_strcmp(path, "perlin"))
+		return (create_perlin(600, 20.0));
 	if (!end_by(path, ".bmp") || (img = fopen(path, "r")) <= 0)
 		return (0);
 	if (!(tex = malloc(sizeof(t_text))) && !fclose(img))

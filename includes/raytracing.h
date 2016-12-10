@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/09 17:04:19 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:39:44 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void		sepia_filter();
 void		greyscale_filter();
 int			g_pos(guchar *new, int x, int y);
 void		sobel_filter();
-
+void		generate_perlin_tex(t_text *tex, float index);
 
 #endif

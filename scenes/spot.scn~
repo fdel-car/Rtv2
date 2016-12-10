@@ -60,7 +60,7 @@ scene
 			type:sphere
 			materiel
 			{
-				texture:perlin
+				texture:damier
 				brillance:102
 				reflection:1
 				transparence:0
