@@ -32,8 +32,8 @@ scene
 			{
 				indice:0.9
 				brillance:0
-				reflection:0.5
-				transparence:0.5
+				reflection:1
+				transparence:0.1
 				color:0;0;0
 			}
 		}

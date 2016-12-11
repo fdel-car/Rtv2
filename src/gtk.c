@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/11 18:34:15 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/12/11 18:41:28 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
+void	save_scene(void)
+{
+	ft_putendl("Not available, come back later.");
+}
 
-void open_file(char *filename)
+void	open_file(char *filename)
 {
 	printf("%s\n",filename );
 	printf("%s\n",filename + ft_strlen(filename ) -4 );
@@ -14,11 +30,7 @@ void open_file(char *filename)
 	}
 }
 
-void save_scene(void)
-{
-}
-
-void switch_cam_pos()
+void	switch_cam_pos()
 {
 	if (g_env.scene.cam.c_pos == 1)
 		g_env.scene.cam.pos = g_env.scene.cam.pos1;
@@ -28,36 +40,31 @@ void switch_cam_pos()
 		g_env.scene.cam.pos = g_env.scene.cam.pos3;
 }
 
-
-void save_image_chooser(void)
+void	save_image_chooser(void)
 {
 	GtkWidget *dialog;
 	GtkFileChooser *chooser;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
 	gint res;
 
-	dialog = gtk_file_chooser_dialog_new ("Save File",GTK_WINDOW(g_env.win), action, "_Cancel",
-		GTK_RESPONSE_CANCEL,"_Save",GTK_RESPONSE_ACCEPT,NULL);
+	dialog = gtk_file_chooser_dialog_new ("Save File",GTK_WINDOW(g_env.win),
+	action, "_Cancel", GTK_RESPONSE_CANCEL,"_Save",GTK_RESPONSE_ACCEPT,NULL);
 	chooser = GTK_FILE_CHOOSER (dialog);
-
 	gtk_file_chooser_set_do_overwrite_confirmation (chooser, TRUE);
-
-  	gtk_file_chooser_set_current_name (chooser,("Untitled document"));
-
+	gtk_file_chooser_set_current_name (chooser,("Untitled document"));
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
-	    char *filename;
+		char *filename;
 
-	    filename = gtk_file_chooser_get_filename (chooser);
-	    save_img (filename);
-	    g_free (filename);
+		filename = gtk_file_chooser_get_filename (chooser);
+		save_img (filename);
+		g_free (filename);
 	}
-
 	gtk_widget_destroy (dialog);
 }
 
-void switch_cam(GtkWidget *entry)
+void	switch_cam(GtkWidget *entry)
 {
 	if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_prev")))
 	{
@@ -82,7 +89,7 @@ void switch_cam(GtkWidget *entry)
 	launch_thread();
 }
 
-void open_scene()
+void	open_scene()
 {
 	GtkWidget *dialog;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
@@ -90,21 +97,19 @@ void open_scene()
 
 	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),
 	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
-
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
-	  {
-	    char *filename;
-	    GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
-	    filename = gtk_file_chooser_get_filename (chooser);
-	    open_file (filename);
-	    g_free (filename);
-  }
-
-gtk_widget_destroy (dialog);
+	{
+		char *filename;
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+		filename = gtk_file_chooser_get_filename (chooser);
+		open_file (filename);
+		g_free (filename);
+	}
+	gtk_widget_destroy (dialog);
 }
 
-void check_filter()
+void	check_filter()
 {
 	char	*s;
 
@@ -122,7 +127,7 @@ void check_filter()
 
 void	init_limits(void);
 
-void switch_filter(GtkWidget *combo)
+void	switch_filter(GtkWidget *combo)
 {
 	char	*s;
 
@@ -195,11 +200,11 @@ void switch_filter(GtkWidget *combo)
 	launch_thread();
 }
 
-void init_gtk_filter_widget(void)
+void	init_gtk_filter_widget(void)
 {
 	GtkWidget *combo;
 	static char *combo_text[] = {"None","Sepia","Cartoon","Greyscale",
-	"Stereocopique", "Oculus"};
+		"Stereocopique", "Oculus"};
 	int		i;
 
 	i = 0;
@@ -215,7 +220,7 @@ void init_gtk_filter_widget(void)
 			G_CALLBACK(switch_filter), NULL);
 }
 
-void init_gtk_create_widget(void)
+void	init_gtk_create_widget(void)
 {
 	GtkWidget *combo;
 	static char *combo_text[] = {"Sphere", "Plan", "Cone", "Cylindre", "Torus", "ADN"};
@@ -268,11 +273,9 @@ t_obj *add_object_pos(t_obj *obj)
 	posx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posx"));
 	posy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posy"));
 	posz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posz"));
-
 	obj->pos.x = ft_atof(gtk_entry_get_text(posx));
 	obj->pos.y = ft_atof(gtk_entry_get_text(posy));
 	obj->pos.z = ft_atof(gtk_entry_get_text(posz));
-
 	return (obj);
 }
 
@@ -285,12 +288,10 @@ t_obj *add_object_dir(t_obj *obj)
 	dirx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirx"));
 	diry = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_diry"));
 	dirz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirz"));
-
 	obj->dir.x = ft_atof(gtk_entry_get_text(dirx));
 	obj->dir.y = ft_atof(gtk_entry_get_text(diry));
 	obj->dir.z = ft_atof(gtk_entry_get_text(dirz));
 	obj->dir = vec_norm(obj->dir);
-
 	return (obj);
 }
 
@@ -303,12 +304,10 @@ t_obj *add_object_norm(t_obj *obj)
 	normx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normx"));
 	normy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normy"));
 	normz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normz"));
-
 	obj->norm.x = ft_atof(gtk_entry_get_text(normx));
 	obj->norm.y = ft_atof(gtk_entry_get_text(normy));
 	obj->norm.z = ft_atof(gtk_entry_get_text(normz));
 	obj->norm = vec_norm(obj->norm);
-
 	return (obj);
 }
 
@@ -318,7 +317,6 @@ t_obj *add_object_rayon(t_obj *obj)
 
 	rayon = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_rayon"));
 	obj->rayon = ft_atof(gtk_entry_get_text(rayon));
-
 	return (obj);
 }
 
@@ -328,7 +326,6 @@ t_obj *add_object_alpha(t_obj *obj)
 
 	alpha = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_angle"));
 	obj->alpha = ft_atof(gtk_entry_get_text(alpha)) * M_PI / 180;
-
 	return (obj);
 }
 
@@ -371,11 +368,10 @@ t_obj *add_object_mater_color(t_obj *obj)
 	obj->mater.color.g  = (int)(col->green * 255);
 	obj->mater.color.b  = (int)(col->blue * 255);
 	gdk_rgba_free(col);
-
 	return (obj);
 }
 
-void clear_entry_1(void)
+void	clear_entry_1(void)
 {
 	GtkEntry *name;
 	GtkEntry *posx;
@@ -386,14 +382,13 @@ void clear_entry_1(void)
 	posx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posx"));
 	posy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posy"));
 	posz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_posz"));
-
 	gtk_entry_set_text (name,"");
 	gtk_entry_set_text (posx,"");
 	gtk_entry_set_text (posy,"");
 	gtk_entry_set_text (posz,"");
 }
 
-void clear_entry_2(void)
+void	clear_entry_2(void)
 {
 	GtkEntry *dirx;
 	GtkEntry *diry;
@@ -404,14 +399,13 @@ void clear_entry_2(void)
 	dirx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirx"));
 	diry = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_diry"));
 	dirz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirz"));
-
 	gtk_entry_set_text (rayon,"");
 	gtk_entry_set_text (dirx,"");
 	gtk_entry_set_text (diry,"");
 	gtk_entry_set_text (dirz,"");
 }
 
-void clear_entry_3(void)
+void	clear_entry_3(void)
 {
 	GtkEntry *normx;
 	GtkEntry *normy;
@@ -422,14 +416,13 @@ void clear_entry_3(void)
 	normx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normx"));
 	normy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normy"));
 	normz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normz"));
-
 	gtk_entry_set_text (normx,"");
 	gtk_entry_set_text (normy,"");
 	gtk_entry_set_text (normz,"");
 	gtk_entry_set_text (alpha,"");
 }
 
-void clear_entry_4(void)
+void	clear_entry_4(void)
 {
 	GtkEntry *shiny;
 	GtkEntry *refl;
@@ -438,13 +431,12 @@ void clear_entry_4(void)
 	trans = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_trans"));
 	refl = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_refl"));
 	shiny = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_shiny"));
-
 	gtk_entry_set_text (shiny,"");
 	gtk_entry_set_text (refl,"");
 	gtk_entry_set_text (trans,"");
 }
 
-void clear_entry_widget_add_object(void)
+void	clear_entry_widget_add_object(void)
 {
 	clear_entry_1();
 	clear_entry_2();
@@ -452,7 +444,7 @@ void clear_entry_widget_add_object(void)
 	clear_entry_4();
 }
 
-void signal_add_object(void)
+void	signal_add_object(void)
 {
 	char *s = NULL;
 	t_obj *obj = NULL;
@@ -461,13 +453,11 @@ void signal_add_object(void)
 	obj = malloc(sizeof(t_obj));
 	init_obj(obj);
 	add_object_type(s,obj);
-
 	obj = add_object_name(obj);
 	obj = add_object_pos(obj);
 	obj = add_object_dir(obj);
 	obj = add_object_norm(obj);
 	obj = add_object_rayon(obj);
-
 	obj = add_object_alpha(obj);
 	obj = add_object_mater_shiny(obj);
 	obj = add_object_mater_refl(obj);
@@ -475,7 +465,6 @@ void signal_add_object(void)
 	obj = add_object_mater_color(obj);
 	obj->next = NULL;
 	obj->mater.tex = NULL;
-
 	set_func(obj);
 	if (ft_strcmp(s, "Torus") == 0)
 		add_torus_sphere(obj);
@@ -484,13 +473,13 @@ void signal_add_object(void)
 	push_obj(obj);
 	clear_entry_widget_add_object();
 	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,
-	"popup_create_object")));
+					"popup_create_object")));
 	create_list_of_objects();
 	launch_preview();
 	launch_thread();
 }
 
-void    delete_objects(void *obj, unsigned int n)
+void	delete_objects(void *obj, unsigned int n)
 {
 	t_obj *list_obj;
 	t_obj *current_obj;
@@ -546,7 +535,7 @@ void    delete_objects(void *obj, unsigned int n)
 	}
 }
 
-void 	*find_objects(char *name ,unsigned int *n )
+void	*find_objects(char *name ,unsigned int *n )
 {
 	t_light *lights;
 	t_obj *obj;
@@ -573,13 +562,13 @@ void 	*find_objects(char *name ,unsigned int *n )
 	return (NULL);
 }
 
-void create_object(GtkWidget *entry, t_gtkdata *e)
+void	create_object(GtkWidget *entry, t_gtkdata *e)
 {
 	(void )entry;
 	gtk_window_present( GTK_WINDOW(e->data));
 }
 
-void    save_color_material_light(GtkEntry *entry, t_gtkdata *data)
+void	save_color_material_light(GtkEntry *entry, t_gtkdata *data)
 {
 	GdkRGBA *col;
 
@@ -594,12 +583,11 @@ void    save_color_material_light(GtkEntry *entry, t_gtkdata *data)
 	gdk_rgba_free(col);
 }
 
-void    save_color_material(GtkEntry *entry, t_gtkdata *data)
+void	save_color_material(GtkEntry *entry, t_gtkdata *data)
 {
 	GdkRGBA *col;
 	short type;
 	t_obj *list;
-
 
 	col = malloc(sizeof(GdkRGBA));
 	list = ((t_obj *)data->obj)->lst;
@@ -625,7 +613,7 @@ void    save_color_material(GtkEntry *entry, t_gtkdata *data)
 }
 
 
-void save_indice_ref(GtkSpinButton *btn, t_gtkdata *data)
+void	save_indice_ref(GtkSpinButton *btn, t_gtkdata *data)
 {
 	((t_obj *)data->obj)->mater.indice = gtk_spin_button_get_value (btn);
 }
@@ -652,14 +640,13 @@ void	save_entry_transformation_light(GtkEntry *entry, t_gtkdata *data)
 		((t_light *)data->obj)->rayon  = ret;
 }
 
-void save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data, t_vect oldpos)
+void	save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data, t_vect oldpos)
 {
 	t_obj *list;
 	float ret;
 
 	list = ((t_obj *)data->obj)->lst;
 	ret = ft_atof(gtk_entry_get_text(entry));
-
 	while (list)
 	{
 		if(list->type == TRIANGLE)
@@ -707,7 +694,6 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
 	float ret;
 	t_vect pos;
 
-
 	ret = ft_atof(gtk_entry_get_text(entry));
 	pos = ((t_obj *)data->obj)->pos;
 	if(ft_strcmp(data->desc,"posx") == 0)
@@ -733,12 +719,10 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
 		((t_obj *)data->obj)->rayon  = ret;
 	if(ft_strcmp(data->desc,"alpha") == 0)
 		((t_obj *)data->obj)->alpha  = ret * M_PI / 180;
-
-
 	if (((t_obj *)data->obj)->type == MESH )
 	{
 		if(ft_strcmp(data->desc,"posx") == 0 || ft_strcmp(data->desc,"posy") ==
-		0 || ft_strcmp(data->desc,"posz") == 0)
+				0 || ft_strcmp(data->desc,"posz") == 0)
 		{
 			save_translation_mesh_object(entry,data, pos);
 		}
@@ -790,7 +774,6 @@ void	save_entry_material_object(GtkEntry *entry, t_gtkdata *data)
 		ret_s = (char *)gtk_entry_get_text(entry);
 		// ((t_obj *)data->obj)->mater.text = ret_s;
 	}
-
 	if (type == MESH)
 	{
 		while (list)
@@ -833,17 +816,16 @@ void	select_text(GtkEntry *entry, t_gtkdata *data)
 
 	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),
 	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
-
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
-	    char *filename;
-	    GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
-	    filename = gtk_file_chooser_get_filename (chooser);
-	    //free(((t_obj *)data->obj)->mater.tex->text);
-	    //free(((t_obj *)data->obj)->mater.tex);
-	    ((t_obj *)data->obj)->mater.tex = load_texture(filename);
-	    g_free (filename);
+		char *filename;
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+		filename = gtk_file_chooser_get_filename (chooser);
+		//free(((t_obj *)data->obj)->mater.tex->text);
+		//free(((t_obj *)data->obj)->mater.tex);
+		((t_obj *)data->obj)->mater.tex = load_texture(filename);
+		g_free (filename);
 	}
 	launch_preview();
 	gtk_widget_destroy (dialog);
@@ -888,7 +870,6 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	GtkWidget *color_label;
 	GtkWidget *text_label;
 	GtkWidget *indice_ref_label;
-
 	GtkWidget *shiny_entry;
 	GtkWidget *refl_entry;
 	GtkWidget *trans_entry;
@@ -900,8 +881,6 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	GtkWidget *color_button;
 	GtkWidget *ref_spin_button;
 	GtkAdjustment *adjustment;
-
-
 	GtkEntryBuffer *shiny_buffer;
 	GtkEntryBuffer *refl_buffer;
 	GtkEntryBuffer *trans_buffer;
@@ -909,7 +888,6 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	GtkEntryBuffer *color_g_buffer;
 	GtkEntryBuffer *color_b_buffer;
 	GtkEntryBuffer *text_buffer;
-
 	t_obj *current_obj;
 	char *s_entry = NULL;
 	t_gtkdata *entry_shiny = NULL;
@@ -921,7 +899,6 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	t_gtkdata *entry_text = NULL;
 	t_gtkdata *entry_col = NULL;
 	GdkRGBA *col = malloc(sizeof(GdkRGBA));
-
 
 	s_entry = malloc(sizeof(char) * 10);
 	entry_shiny = malloc(sizeof(t_gtkdata));
@@ -947,16 +924,13 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	color_b_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	// sprintf(s_entry,"%s", current_obj->mater.text);
 	text_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-
 	free(s_entry);
-
 	shiny_label = gtk_label_new("Brillance");
 	refl_label = gtk_label_new("Reflection");
 	trans_label = gtk_label_new("Transparence");
 	color_label = gtk_label_new("Color");
 	text_label = gtk_label_new("Texture");
 	indice_ref_label = gtk_label_new("indice Ref");
-
 	shiny_entry = gtk_entry_new_with_buffer(shiny_buffer);
 	refl_entry = gtk_entry_new_with_buffer(refl_buffer);
 	trans_entry = gtk_entry_new_with_buffer(trans_buffer);
@@ -966,18 +940,15 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	text_entry = gtk_entry_new_with_buffer(text_buffer);
 	btn_text = gtk_button_new_with_label ("Tex");
 	adjustment = gtk_adjustment_new (current_obj->mater.indice, 0.9, 1.1, 0.01, 0.1, 0.0);
-  	ref_spin_button = gtk_spin_button_new (adjustment, 0.01, 3);
-
+	ref_spin_button = gtk_spin_button_new (adjustment, 0.01, 3);
 	col->red  = (double)current_obj->mater.color.r / 255;
 	col->green  = (double)current_obj->mater.color.g / 255;
 	col->blue  = (double)current_obj->mater.color.b / 255;
 	col->alpha = 1;
-
 	color_button = gtk_color_button_new_with_rgba ((const GdkRGBA *)col);
 	entry_col->data = color_button;
 	entry_col->desc = ft_strdup("color");
 	entry_col->obj = current_obj;
-
 	gtk_entry_set_width_chars ((GtkEntry *)shiny_entry, 6);
 	gtk_entry_set_width_chars ((GtkEntry *)refl_entry, 6);
 	gtk_entry_set_width_chars ((GtkEntry *)trans_entry, 6);
@@ -992,14 +963,12 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	gtk_entry_set_max_length ((GtkEntry *)color_g_entry, 3);
 	gtk_entry_set_max_length ((GtkEntry *)color_b_entry, 3);
 	gtk_entry_set_max_length ((GtkEntry *)text_entry, 6);
-
 	gtk_grid_attach(GTK_GRID(grid), shiny_label,0,0,1,1);
 	gtk_grid_attach(GTK_GRID(grid), refl_label,0,1,1,1);
 	gtk_grid_attach(GTK_GRID(grid), trans_label,0,2,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_label,0,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), text_label,0,4,1,1);
 	gtk_grid_attach(GTK_GRID(grid), indice_ref_label,0,5,1,1);
-
 	gtk_grid_attach(GTK_GRID(grid), shiny_entry,1,0,1,1);
 	gtk_grid_attach(GTK_GRID(grid), refl_entry,1,1,1,1);
 	gtk_grid_attach(GTK_GRID(grid), trans_entry,1,2,1,1);
@@ -1007,39 +976,30 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	gtk_grid_attach(GTK_GRID(grid), color_g_entry,2,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_b_entry,3,3,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_button,4,3,1,1);
-//	gtk_grid_attach(GTK_GRID(grid), text_entry,1,4,1,1);
+	//	gtk_grid_attach(GTK_GRID(grid), text_entry,1,4,1,1);
 	gtk_grid_attach(GTK_GRID(grid), btn_text,1,4,4,1);
 	gtk_grid_attach(GTK_GRID(grid), ref_spin_button,1,5,4,1);
-
 	entry_shiny->data = shiny_entry;
 	entry_shiny->desc = ft_strdup("shiny");
 	entry_shiny->obj = current_obj;
-
 	entry_refl->data = refl_entry;
 	entry_refl->desc = ft_strdup("refl");
 	entry_refl->obj = current_obj;
-
 	entry_trans->data = trans_entry;
 	entry_trans->desc = ft_strdup("trans");
 	entry_trans->obj = current_obj;
-
 	entry_col_r->data = color_r_entry;
 	entry_col_r->desc = ft_strdup("colr");
 	entry_col_r->obj = current_obj;
-
 	entry_col_g->data = color_g_entry;
 	entry_col_g->desc = ft_strdup("colg");
 	entry_col_g->obj = current_obj;
-
 	entry_col_b->data = color_b_entry;
 	entry_col_b->desc = ft_strdup("colb");
-
 	entry_col_b->obj = current_obj;
-
 	entry_text->data = text_entry;
 	entry_text->desc = ft_strdup("text");
 	entry_text->obj = current_obj;
-
 	g_signal_connect(shiny_entry, "changed",
 			G_CALLBACK(save_entry_material_object), entry_shiny);
 	g_signal_connect(refl_entry, "changed",
@@ -1055,10 +1015,9 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 	g_signal_connect(text_entry, "changed",
 			G_CALLBACK(save_entry_material_object), entry_text);
 	g_signal_connect(btn_text, "clicked",
-	 		G_CALLBACK(select_text), entry_text);
+			G_CALLBACK(select_text), entry_text);
 	g_signal_connect(ref_spin_button, "value-changed",
-	 		G_CALLBACK(save_indice_ref), entry_text);
-
+			G_CALLBACK(save_indice_ref), entry_text);
 	g_signal_connect(shiny_entry, "changed",
 			G_CALLBACK(launch_preview), entry_shiny);
 	g_signal_connect(refl_entry, "changed",
@@ -1073,7 +1032,6 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 			G_CALLBACK(launch_preview), entry_col_b);
 	g_signal_connect(text_entry, "changed",
 			G_CALLBACK(launch_preview), entry_text);
-
 	g_signal_connect(color_button, "color-set",
 			G_CALLBACK(save_color_material), entry_col);
 	g_signal_connect(color_button, "color-set",
@@ -1085,20 +1043,17 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 	GtkWidget *intensity_label;
 	GtkWidget *blur_label;
 	GtkWidget *color_label;
-
 	GtkWidget *intensity_entry;
 	GtkWidget *blur_entry;
 	GtkWidget *color_r_entry;
 	GtkWidget *color_g_entry;
 	GtkWidget *color_b_entry;
 	GtkWidget *color_button;
-
 	GtkEntryBuffer *intensity_buffer;
 	GtkEntryBuffer *blur_buffer;
 	GtkEntryBuffer *color_r_buffer;
 	GtkEntryBuffer *color_g_buffer;
 	GtkEntryBuffer *color_b_buffer;
-
 	t_light *current_obj;
 	char *s_entry = NULL;
 	t_gtkdata *entry_intensity = NULL;
@@ -1107,7 +1062,6 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 	t_gtkdata *entry_col_g = NULL;
 	t_gtkdata *entry_col_b = NULL;
 	t_gtkdata *entry_col = NULL;
-
 	GdkRGBA *col = malloc(sizeof(GdkRGBA));
 
 	s_entry = malloc(sizeof(char) * 10);
@@ -1128,29 +1082,23 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 	color_g_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	sprintf(s_entry,"%d", current_obj->color.b);
 	color_b_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-
 	free(s_entry);
-
 	intensity_label = gtk_label_new("    Intensite    ");
 	blur_label = gtk_label_new("Blur");
 	color_label = gtk_label_new("Color");
-
 	intensity_entry = gtk_entry_new_with_buffer(intensity_buffer);
 	blur_entry = gtk_entry_new_with_buffer(blur_buffer);
 	color_r_entry = gtk_entry_new_with_buffer(color_r_buffer);
 	color_g_entry = gtk_entry_new_with_buffer(color_g_buffer);
 	color_b_entry = gtk_entry_new_with_buffer(color_b_buffer);
-
 	col->red  = (double)current_obj->color.r / 255;
 	col->green  = (double)current_obj->color.g / 255;
 	col->blue  = (double)current_obj->color.b / 255;
 	col->alpha = 1;
-
 	color_button = gtk_color_button_new_with_rgba ((const GdkRGBA *)col);
 	entry_col->data = color_button;
 	entry_col->desc = ft_strdup("color");
 	entry_col->obj = current_obj;
-
 	gtk_entry_set_width_chars ((GtkEntry *)intensity_entry, 6);
 	gtk_entry_set_width_chars ((GtkEntry *)blur_entry, 6);
 	gtk_entry_set_width_chars ((GtkEntry *)color_r_entry, 3);
@@ -1161,38 +1109,30 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 	gtk_entry_set_max_length ((GtkEntry *)color_r_entry, 3);
 	gtk_entry_set_max_length ((GtkEntry *)color_g_entry, 3);
 	gtk_entry_set_max_length ((GtkEntry *)color_b_entry, 3);
-
 	gtk_grid_attach(GTK_GRID(grid), intensity_label,0,0,1,1);
 	gtk_grid_attach(GTK_GRID(grid), blur_label,0,1,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_label,0,2,1,1);
-
 	gtk_grid_attach(GTK_GRID(grid), intensity_entry,1,0,1,1);
 	gtk_grid_attach(GTK_GRID(grid), blur_entry,1,1,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_r_entry,1,2,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_g_entry,2,2,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_b_entry,3,2,1,1);
 	gtk_grid_attach(GTK_GRID(grid), color_button,4,2,1,1);
-
 	entry_intensity->data = intensity_entry;
 	entry_intensity->desc = ft_strdup("intens");
 	entry_intensity->obj = current_obj;
-
 	entry_blur->data = blur_entry;
 	entry_blur->desc = ft_strdup("blur");
 	entry_blur->obj = current_obj;
-
 	entry_col_r->data = color_r_entry;
 	entry_col_r->desc = ft_strdup("colr");
 	entry_col_r->obj = current_obj;
-
 	entry_col_g->data = color_g_entry;
 	entry_col_g->desc = ft_strdup("colg");
 	entry_col_g->obj = current_obj;
-
 	entry_col_b->data = color_b_entry;
 	entry_col_b->desc = ft_strdup("colb");
 	entry_col_b->obj = current_obj;
-
 	g_signal_connect(intensity_entry, "changed",
 			G_CALLBACK(save_entry_material_light), entry_intensity);
 	g_signal_connect(blur_entry, "changed",
@@ -1203,7 +1143,6 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 			G_CALLBACK(save_entry_material_light), entry_col_g);
 	g_signal_connect(color_b_entry, "changed",
 			G_CALLBACK(save_entry_material_light), entry_col_b);
-
 	g_signal_connect(intensity_entry, "changed",
 			G_CALLBACK(launch_preview), entry_intensity);
 	g_signal_connect(blur_entry, "changed",
@@ -1214,15 +1153,13 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 			G_CALLBACK(launch_preview), entry_col_g);
 	g_signal_connect(color_b_entry, "changed",
 			G_CALLBACK(launch_preview), entry_col_b);
-
-
 	g_signal_connect(color_button, "color-set",
 			G_CALLBACK(save_color_material_light), entry_col);
 	g_signal_connect(color_button, "color-set",
 			G_CALLBACK(launch_preview), entry_col);
 }
 
-void position_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
+void	position_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 {
 	GtkWidget *label;
 	GtkWidget *pos_entry[3];
@@ -1234,7 +1171,6 @@ void position_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	entry_posx = malloc(sizeof(t_gtkdata));
 	entry_posy = malloc(sizeof(t_gtkdata));
 	entry_posz = malloc(sizeof(t_gtkdata));
-
 	sprintf(s_entry,"%f", current_obj->pos.x);
 	buffer_pos[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	sprintf(s_entry,"%f", current_obj->pos.y);
@@ -1264,7 +1200,6 @@ void position_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	entry_posz->data = pos_entry[2];
 	entry_posz->desc = ft_strdup("posz");
 	entry_posz->obj = current_obj;
-
 	g_signal_connect(pos_entry[0], "changed",
 			G_CALLBACK(save_entry_transformation_object), entry_posx);
 	g_signal_connect(pos_entry[1], "changed",
@@ -1279,7 +1214,7 @@ void position_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 			G_CALLBACK(launch_preview), entry_posz);
 }
 
-void direction_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
+void	direction_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 {
 	GtkWidget *label;
 	GtkWidget *dir_entry[3];
@@ -1287,10 +1222,10 @@ void direction_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	t_gtkdata *entry_dirx = NULL;
 	t_gtkdata *entry_diry = NULL;
 	t_gtkdata *entry_dirz = NULL;
+
 	entry_dirx = malloc(sizeof(t_gtkdata));
 	entry_diry = malloc(sizeof(t_gtkdata));
 	entry_dirz = malloc(sizeof(t_gtkdata));
-
 	sprintf(s_entry,"%f", current_obj->dir.x);
 	buffer_dir[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	sprintf(s_entry,"%f", current_obj->dir.y);
@@ -1334,7 +1269,7 @@ void direction_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 			G_CALLBACK(launch_preview), entry_dirz);
 }
 
-void normal_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
+void	normal_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 {
 	GtkWidget *label;
 	GtkWidget *norm_entry[3];
@@ -1342,10 +1277,10 @@ void normal_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	t_gtkdata *entry_normx = NULL;
 	t_gtkdata *entry_normy = NULL;
 	t_gtkdata *entry_normz = NULL;
+
 	entry_normx = malloc(sizeof(t_gtkdata));
 	entry_normy = malloc(sizeof(t_gtkdata));
 	entry_normz = malloc(sizeof(t_gtkdata));
-
 	sprintf(s_entry,"%f", current_obj->norm.x);
 	buffer_norm[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	sprintf(s_entry,"%f", current_obj->norm.y);
@@ -1389,12 +1324,13 @@ void normal_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 			G_CALLBACK(launch_preview), entry_normz);
 }
 
-void rayon_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
+void	rayon_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 {
 	GtkWidget *label;
 	GtkWidget *rayon_entry;
 	GtkEntryBuffer *buffer_rayon;
 	t_gtkdata *entry_rayon = NULL;
+
 	entry_rayon = malloc(sizeof(t_gtkdata));
 	sprintf(s_entry,"%f", current_obj->rayon);
 	buffer_rayon = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1407,19 +1343,19 @@ void rayon_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	entry_rayon->data = rayon_entry;
 	entry_rayon->desc = ft_strdup("rayon");
 	entry_rayon->obj = current_obj;
-
 	g_signal_connect(rayon_entry, "changed",
 			G_CALLBACK(save_entry_transformation_object), entry_rayon);
 	g_signal_connect(rayon_entry, "changed",
 			G_CALLBACK(launch_preview), entry_rayon);
 }
 
-void alpha_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
+void	alpha_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 {
 	GtkWidget *label;
 	GtkWidget *alpha_entry;
 	GtkEntryBuffer *buffer_alpha;
 	t_gtkdata *entry_alpha = NULL;
+
 	entry_alpha = malloc(sizeof(t_gtkdata));
 	sprintf(s_entry,"%f", current_obj->alpha);
 	buffer_alpha = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1432,7 +1368,6 @@ void alpha_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	entry_alpha->data = alpha_entry;
 	entry_alpha->desc = ft_strdup("alpha");
 	entry_alpha->obj = current_obj;
-
 	g_signal_connect(alpha_entry, "changed",
 			G_CALLBACK(save_entry_transformation_object), entry_alpha);
 	g_signal_connect(alpha_entry, "changed",
@@ -1444,9 +1379,7 @@ void	create_transformation_widget_object(void *object, GtkWidget *grid)
 	t_obj *current_obj;
 	char *s_entry = NULL;
 	s_entry = malloc(sizeof(char) * 10);
-
 	current_obj = (t_obj *)object;
-
 	position_widget(current_obj,grid,s_entry);
 	if (current_obj->type == CONE || current_obj->type == CYLINDER)
 		direction_widget(current_obj,grid,s_entry);
@@ -1456,10 +1389,9 @@ void	create_transformation_widget_object(void *object, GtkWidget *grid)
 		normal_widget(current_obj,grid,s_entry);
 	if (current_obj->type == CONE)
 		alpha_widget(current_obj,grid,s_entry);
-
 }
 
-void direction_widget_light(t_light *current_obj, GtkWidget *grid,char *s_entry)
+void	direction_widget_light(t_light *current_obj, GtkWidget *grid,char *s_entry)
 {
 	GtkWidget *label;
 	GtkWidget *dir_entry[3];
@@ -1470,7 +1402,6 @@ void direction_widget_light(t_light *current_obj, GtkWidget *grid,char *s_entry)
 	entry_dirx = malloc(sizeof(t_gtkdata));
 	entry_diry = malloc(sizeof(t_gtkdata));
 	entry_dirz = malloc(sizeof(t_gtkdata));
-
 	sprintf(s_entry,"%f", current_obj->dir.x);
 	buffer_dir[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	sprintf(s_entry,"%f", current_obj->dir.y);
@@ -1527,7 +1458,6 @@ void	create_transformation_widget_light(void *object, GtkWidget *grid)
 	t_gtkdata *entry_posy = NULL;
 	t_gtkdata *entry_posz = NULL;
 	t_gtkdata *entry_rayon = NULL;
-
 	s_entry = malloc(sizeof(char) * 10);
 	entry_posx = malloc(sizeof(t_gtkdata));
 	entry_posy = malloc(sizeof(t_gtkdata));
@@ -1542,7 +1472,6 @@ void	create_transformation_widget_light(void *object, GtkWidget *grid)
 	buffer_pos[2] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	sprintf(s_entry,"%f", current_light->rayon);
 	buffer_rayon = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-
 	label[0] = gtk_label_new("    Position    ");
 	label[2] = gtk_label_new("Rayon");
 	pos_entry[0] = gtk_entry_new_with_buffer(buffer_pos[0]);
@@ -1564,23 +1493,18 @@ void	create_transformation_widget_light(void *object, GtkWidget *grid)
 	gtk_grid_attach (GTK_GRID (grid), pos_entry[1], 2, 0, 1, 1);
 	gtk_grid_attach (GTK_GRID (grid), pos_entry[2], 3, 0, 1, 1);
 	gtk_grid_attach (GTK_GRID (grid), rayon_entry, 1, 2, 1, 1);
-
 	entry_posx->data = pos_entry[0];
 	entry_posx->desc = ft_strdup("posx");
 	entry_posx->obj = current_light;
-
 	entry_posy->data = pos_entry[1];
 	entry_posy->desc = ft_strdup("posy");
 	entry_posy->obj = current_light;
-
 	entry_posz->data = pos_entry[2];
 	entry_posz->desc = ft_strdup("posz");
 	entry_posz->obj = current_light;
-
 	entry_rayon->data = rayon_entry;
 	entry_rayon->desc = ft_strdup("rayon");
 	entry_rayon->obj = current_light;
-
 	g_signal_connect(pos_entry[0], "changed",
 			G_CALLBACK(save_entry_transformation_light), entry_posx);
 	g_signal_connect(pos_entry[1], "changed",
@@ -1589,7 +1513,6 @@ void	create_transformation_widget_light(void *object, GtkWidget *grid)
 			G_CALLBACK(save_entry_transformation_light), entry_posz);
 	g_signal_connect(rayon_entry, "changed",
 			G_CALLBACK(save_entry_transformation_light), entry_rayon);
-
 	g_signal_connect(pos_entry[0], "changed",
 			G_CALLBACK(launch_preview), entry_posx);
 	g_signal_connect(pos_entry[1], "changed",
@@ -1607,7 +1530,7 @@ void	create_list_of_attributs(void *objects, unsigned int type)
 	GList *children, *iter;
 
 	children = gtk_container_get_children(GTK_CONTAINER(gtk_builder_get_object\
-				(g_env.build, "right_menu")));
+		(g_env.build, "right_menu")));
 	for(iter = children; iter != NULL; iter = g_list_next(iter))
 		gtk_widget_destroy(GTK_WIDGET(iter->data));
 	g_list_free(children);
@@ -1630,7 +1553,7 @@ void	create_list_of_attributs(void *objects, unsigned int type)
 	gtk_widget_show_all(g_env.win);
 }
 
-void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
+void	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 {
 	GtkTreeModel 	*model;
 	GtkTreeIter  	iter;
@@ -1651,8 +1574,8 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 
 void	view_popup_menu_delete_row(GtkWidget *menuitem, gpointer userdata)
 {
-   	GtkTreeModel 	*model = NULL;
-    GtkTreeView *treeview = NULL;
+	GtkTreeModel 	*model = NULL;
+	GtkTreeView *treeview = NULL;
 	GtkTreeIter  	iter;
 	GtkTreePath *path = NULL;
 	void			*found_obj = NULL;
@@ -1661,7 +1584,7 @@ void	view_popup_menu_delete_row(GtkWidget *menuitem, gpointer userdata)
 	treeview = GTK_TREE_VIEW(gtk_builder_get_object(g_env.build,"tree_object"));
 	model = gtk_tree_view_get_model(treeview);
 	path = (GtkTreePath *)userdata;
-    if (gtk_tree_model_get_iter(model, &iter, path))
+	if (gtk_tree_model_get_iter(model, &iter, path))
 	{
 		gchar *name;
 		gtk_tree_model_get(model, &iter, 0, &name, -1);
@@ -1669,45 +1592,45 @@ void	view_popup_menu_delete_row(GtkWidget *menuitem, gpointer userdata)
 		g_free(name);
 		if (n != 0)
 		{
-				delete_objects(found_obj, n);
-				gtk_tree_path_free(path);
-				create_list_of_objects();
-				launch_preview();
-				launch_thread();
+			delete_objects(found_obj, n);
+			gtk_tree_path_free(path);
+			create_list_of_objects();
+			launch_preview();
+			launch_thread();
 		}
 	}
 }
 
 void	view_popup_menu(GtkWidget *treeview, GdkEventButton *event,
-	GtkTreePath *path, gpointer userdata)
+		GtkTreePath *path, gpointer userdata)
 {
 	GtkWidget *menu, *menuitem;
-    menu = gtk_menu_new();
-    (void)userdata;
-    (void)treeview;
-    menuitem = gtk_menu_item_new_with_label("Delete");
-    g_signal_connect(menuitem, "activate",
-	(GCallback)view_popup_menu_delete_row ,path);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
-    gtk_widget_show_all(menu);
-    gtk_menu_popup_at_pointer(GTK_MENU(menu),(GdkEvent*)event);
+	menu = gtk_menu_new();
+	(void)userdata;
+	(void)treeview;
+	menuitem = gtk_menu_item_new_with_label("Delete");
+	g_signal_connect(menuitem, "activate",
+			(GCallback)view_popup_menu_delete_row ,path);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
+	gtk_widget_show_all(menu);
+	gtk_menu_popup_at_pointer(GTK_MENU(menu),(GdkEvent*)event);
 }
 
 gboolean view_onButtonPressed(GtkWidget *treeview, GdkEventButton *event,
-	gpointer userdata)
+		gpointer userdata)
 {
-    GtkTreePath *path = NULL;
-    GtkTreeSelection *selection;
+	GtkTreePath *path = NULL;
+	GtkTreeSelection *selection;
 
-    if (event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
-    {
+	if (event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
+	{
 		if (1)
 		{
 			selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
 			if (gtk_tree_selection_count_selected_rows(selection)  <= 1)
 			{
 				if (gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeview),
-                (gint) event->x, (gint) event->y, &path, NULL, NULL, NULL))
+							(gint) event->x, (gint) event->y, &path, NULL, NULL, NULL))
 				{
 					gtk_tree_selection_unselect_all(selection);
 					gtk_tree_selection_select_path(selection, path);
@@ -1747,20 +1670,18 @@ void	create_list_of_objects(void)
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter,0, lgt->name, -1);
 		lgt = lgt->next;
 	}
-
 	cell = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Objects", cell,
 			"text", 0, NULL);
 	static int i = 0 ;
-
 	if (i == 0)
 	{
 		gtk_tree_view_append_column(GTK_TREE_VIEW(tree_view),
-			GTK_TREE_VIEW_COLUMN(column));
+				GTK_TREE_VIEW_COLUMN(column));
 		i++;
 	}
-
-	g_signal_connect(tree_view, "row-activated", (GCallback) select_current_obj,
-			NULL);
-	g_signal_connect(tree_view, "button-press-event", (GCallback) view_onButtonPressed, NULL);
+	g_signal_connect(tree_view, "row-activated",
+	(GCallback)select_current_obj, NULL);
+	g_signal_connect(tree_view, "button-press-event",
+	(GCallback)view_onButtonPressed, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 16:54:33 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 17:28:51 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:50:50 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,9 @@ t_vect	refract_dir_bis(t_data *ray, t_obj *obj, float n, float cos)
 	disc = 1 - (pow(n, 2) * (1 - pow(cos, 2)));
 	if (disc < 0 && obj->type != OCULUS)
 	{
-		ray->hit_point = vec_add(ray->hit_point, vec_mult(ray->norm, EPSILON));
 		return (vec_sub(ray->dir, vec_mult(ray->norm, 2 * vec_dotp(ray->dir,
 		ray->norm))));
 	}
-	ray->hit_point = vec_sub(ray->hit_point, vec_mult(ray->norm, EPSILON));
 	return (vec_add(vec_mult(ray->dir, n), vec_mult(ray->norm,
 	((n * cos) - sqrt(disc)))));
 }

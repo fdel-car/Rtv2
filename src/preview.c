@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 18:15:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 16:59:28 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:46:10 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		launch_preview(void)
 	g_env.scene.cam.up_left = vec_add(g_env.scene.cam.pos,
 	vec_add(vec_mult(g_env.scene.cam.dir, g_env.scene.cam.view_d),
 	vec_sub(vec_mult(g_env.scene.cam.up, (g_env.scene.cam.view_h / 2.0)),
-	vec_mult(g_env.scene.cam.right, (g_env.scene.cam.view_w / 2.0)))));
+	vec_mult(g_env.scene.cam.right, (2.4 / 2.0)))));
 	g_env.id_thread = 0;
 	while (g_env.id_thread < NUM_THREAD)
 	{
