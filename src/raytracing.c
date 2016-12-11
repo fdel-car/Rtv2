@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/10 17:28:38 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/11 17:12:16 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,13 @@
 t_data		intersect_obj(t_data ray, gboolean sh, gboolean prev)
 {
 	t_obj	*obj;
-	t_obj	*lst;
-	float	tmp;
 
 	ray.solut = -1;
 	ray.obj_hit = NULL;
 	obj = g_env.scene.obj;
 	if (sh == TRUE || prev == TRUE)
 		obj = obj->next;
-	lst = NULL;
-	while (obj)
-	{
-		if (obj->type != MESH)
-		{
-			if (obj->type != NONE && (sh != TRUE || obj->type != SKYBOX))
-				tmp = (*obj->func)(obj, ray);
-		}
-		else
-		{
-			lst = (lst) ? lst->next : obj->lst;
-			if (lst)
-				tmp = (*lst->func)(lst, ray);
-		}
-		if ((tmp < ray.solut || ray.solut == -1) && tmp != -1)
-		{
-			ray.obj_hit = lst ? lst : obj;
-			ray.solut = tmp;
-		}
-		if (!lst)
-			obj = obj->next;
-	}
+	loop_intersect(&ray, sh, obj);
 	return (ray);
 }
 
@@ -62,22 +39,14 @@ void		init_view(void)
 	g_env.scene.cam.c_pos = 1;
 }
 
-t_data		oculus_view(t_data ray)
-{
-	ray.solut = intersect_sphere(g_env.scene.obj, ray);
-	if (ray.solut != -1)
-		ray.obj_hit = g_env.scene.obj;
-	return (ray);
-}
-
 t_color		init_ray(float x, float y, t_data ray)
 {
 	t_vect	view_point;
 
 	view_point = vec_sub(vec_add(g_env.scene.cam.up_left,
-	vec_mult(g_env.scene.cam.right,
-	g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
-	g_env.scene.cam.y_ind * y));
+				vec_mult(g_env.scene.cam.right,
+					g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
+					g_env.scene.cam.y_ind * y));
 	ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
 	if (g_env.oculus == TRUE)
 		return (render_ray(oculus_view(ray)));
@@ -108,38 +77,12 @@ void		super_sample(float x, float y, t_data ray)
 	put_pixel(x, y, c);
 }
 
-
-void		display_progress_bar()
-{
-	if (g_env.progress_bar != 1)
-		return ;
-	if ((g_env.pixels_progress * 100) / g_env.total != g_env.progress)
-	{
-		g_env.progress = (g_env.pixels_progress * 100) / g_env.total;
-	 	{
-	 		if (g_env.progress % 5 == 0)
-	 		{
-	 			unsigned int i;
-				i = -1;
-				system("clear");
-	 			ft_printf(ANSI_COLOR_GREEN"####################################\
-######\n"ANSI_COLOR_RESET);
-	 			ft_printf(ANSI_COLOR_GREEN"#"ANSI_COLOR_RESET);
-	 			while (++i <= g_env.progress / 5)
-	 				ft_printf(ANSI_COLOR_BLUE"--"ANSI_COLOR_RESET);
-	 			ft_printf(ANSI_COLOR_GREEN"#\n"ANSI_COLOR_RESET);
-	 			ft_printf(ANSI_COLOR_GREEN"####################################\
-######\n"ANSI_COLOR_RESET);
-	 		}
-	 	}
-	 }
-	 g_env.pixels_progress++;
-}
-
 void		*raytracing(void *arg)
 {
 	int		*tmp;
-	int		x, x_max, y;
+	int		x;
+	int		x_max;
+	int		y;
 	t_data	ray;
 
 	tmp = (int *)arg;

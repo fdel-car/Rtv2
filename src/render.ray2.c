@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:47:22 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/09 18:45:18 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/11 17:25:48 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_color		diffuse_lighting(t_data *ray, t_light *l)
 	if (cos > 0)
 	{
 		c = color_add(color_add(c, color_mult(l->color, l->intensity * cos))
-		, color_mult(get_texture(*ray, ray->obj_hit->mater.tex), l->intensity * cos));
+		, color_mult(get_texture(*ray, ray->obj_hit->mater.tex), l->intensity *
+		cos));
 	}
 	return (c);
 }
@@ -60,7 +61,6 @@ t_vect		refract_dir(t_data *ray, t_obj *obj)
 	float	n1;
 	float	n2;
 	float	cos;
-	float	disc;
 
 	cos = vec_dotp(ray->norm, ray->dir);
 	if (cos > 0)
@@ -76,16 +76,7 @@ t_vect		refract_dir(t_data *ray, t_obj *obj)
 		cos = -cos;
 	}
 	n = n1 / n2;
-	disc = 1 - (pow(n , 2) * (1 - pow(cos , 2)));
-	if (disc < 0 && obj->type != OCULUS)
-	{
-		ray->hit_point = vec_add(ray->hit_point, vec_mult(ray->norm, EPSILON));
-		return (vec_sub(ray->dir, vec_mult(ray->norm, 2 * vec_dotp(ray->dir,
-		ray->norm))));
-	}
-	ray->hit_point = vec_sub(ray->hit_point, vec_mult(ray->norm, EPSILON));
-	return (vec_add(vec_mult(ray->dir, n), vec_mult(ray->norm,
-	((n * cos) - sqrt(disc)))));
+	return (refract_dir_bis(ray, obj, n, cos));
 }
 
 float		transparent_map(t_data *ray)
@@ -112,7 +103,9 @@ t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
 	refr = intersect_obj(refr, FALSE, FALSE);
 	t_coef = transparent_map(ray);
 	if (refr.solut != -1)
-		return (color_add(c, color_mult(compute_light(refr, iter_refl),
-		t_coef)));
+	{
+		return (color_add(c, color_mult(compute_light(refr,
+			iter_refl), t_coef)));
+	}
 	return (c);
 }

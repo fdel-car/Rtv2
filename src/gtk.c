@@ -1,7 +1,8 @@
 #include "rt.h"
 
 
-void open_file(char *filename){
+void open_file(char *filename)
+{
 	printf("%s\n",filename );
 	printf("%s\n",filename + ft_strlen(filename ) -4 );
 	if (ft_strcmp(".scn", filename + ft_strlen(filename) - 4) == 0)
@@ -13,10 +14,12 @@ void open_file(char *filename){
 	}
 }
 
-void save_scene(void){
+void save_scene(void)
+{
 }
 
-void switch_cam_pos(){
+void switch_cam_pos()
+{
 	if (g_env.scene.cam.c_pos == 1)
 		g_env.scene.cam.pos = g_env.scene.cam.pos1;
 	else if (g_env.scene.cam.c_pos == 2)
@@ -54,7 +57,8 @@ void save_image_chooser(void)
 	gtk_widget_destroy (dialog);
 }
 
-void switch_cam(GtkWidget *entry){
+void switch_cam(GtkWidget *entry)
+{
 	if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_prev")))
 	{
 		if (g_env.scene.cam.c_pos == 1)
@@ -78,7 +82,8 @@ void switch_cam(GtkWidget *entry){
 	launch_thread();
 }
 
-void open_scene(){
+void open_scene()
+{
 	GtkWidget *dialog;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	gint res;
@@ -99,7 +104,8 @@ void open_scene(){
 gtk_widget_destroy (dialog);
 }
 
-void check_filter(){
+void check_filter()
+{
 	char	*s;
 
 	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gtk_builder_get_object(g_env.build,"filtre_combo")));
@@ -369,7 +375,8 @@ t_obj *add_object_mater_color(t_obj *obj)
 	return (obj);
 }
 
-void clear_entry_1(){
+void clear_entry_1(void)
+{
 	GtkEntry *name;
 	GtkEntry *posx;
 	GtkEntry *posy;
@@ -386,7 +393,8 @@ void clear_entry_1(){
 	gtk_entry_set_text (posz,"");
 }
 
-void clear_entry_2(){
+void clear_entry_2(void)
+{
 	GtkEntry *dirx;
 	GtkEntry *diry;
 	GtkEntry *dirz;
@@ -403,7 +411,8 @@ void clear_entry_2(){
 	gtk_entry_set_text (dirz,"");
 }
 
-void clear_entry_3(){
+void clear_entry_3(void)
+{
 	GtkEntry *normx;
 	GtkEntry *normy;
 	GtkEntry *normz;
@@ -420,7 +429,8 @@ void clear_entry_3(){
 	gtk_entry_set_text (alpha,"");
 }
 
-void clear_entry_4(){
+void clear_entry_4(void)
+{
 	GtkEntry *shiny;
 	GtkEntry *refl;
 	GtkEntry *trans;
@@ -434,7 +444,8 @@ void clear_entry_4(){
 	gtk_entry_set_text (trans,"");
 }
 
-void clear_entry_widget_add_object(void){
+void clear_entry_widget_add_object(void)
+{
 	clear_entry_1();
 	clear_entry_2();
 	clear_entry_3();
@@ -562,12 +573,13 @@ void 	*find_objects(char *name ,unsigned int *n )
 	return (NULL);
 }
 
-void create_object(GtkWidget *entry, t_gtkData *e){
+void create_object(GtkWidget *entry, t_gtkdata *e)
+{
 	(void )entry;
 	gtk_window_present( GTK_WINDOW(e->data));
 }
 
-void    save_color_material_light(GtkEntry *entry, t_gtkData *data)
+void    save_color_material_light(GtkEntry *entry, t_gtkdata *data)
 {
 	GdkRGBA *col;
 
@@ -582,7 +594,7 @@ void    save_color_material_light(GtkEntry *entry, t_gtkData *data)
 	gdk_rgba_free(col);
 }
 
-void    save_color_material(GtkEntry *entry, t_gtkData *data)
+void    save_color_material(GtkEntry *entry, t_gtkdata *data)
 {
 	GdkRGBA *col;
 	short type;
@@ -613,12 +625,12 @@ void    save_color_material(GtkEntry *entry, t_gtkData *data)
 }
 
 
-void save_indice_ref(GtkSpinButton *btn, t_gtkData *data)
+void save_indice_ref(GtkSpinButton *btn, t_gtkdata *data)
 {
 	((t_obj *)data->obj)->mater.indice = gtk_spin_button_get_value (btn);
 }
 
-void	save_entry_transformation_light(GtkEntry *entry, t_gtkData *data)
+void	save_entry_transformation_light(GtkEntry *entry, t_gtkdata *data)
 {
 	float ret;
 
@@ -640,7 +652,7 @@ void	save_entry_transformation_light(GtkEntry *entry, t_gtkData *data)
 		((t_light *)data->obj)->rayon  = ret;
 }
 
-void save_translation_mesh_object(GtkEntry *entry, t_gtkData *data, t_vect oldpos)
+void save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data, t_vect oldpos)
 {
 	t_obj *list;
 	float ret;
@@ -690,7 +702,7 @@ void save_translation_mesh_object(GtkEntry *entry, t_gtkData *data, t_vect oldpo
 	}
 }
 
-void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
+void	save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
 {
 	float ret;
 	t_vect pos;
@@ -733,7 +745,7 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkData *data)
 	}
 }
 
-void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
+void	save_entry_material_object(GtkEntry *entry, t_gtkdata *data)
 {
 	float ret_f;
 	int ret_i;
@@ -812,7 +824,8 @@ void	save_entry_material_object(GtkEntry *entry, t_gtkData *data)
 	}
 }
 
-void	select_text(GtkEntry *entry, t_gtkData *data){
+void	select_text(GtkEntry *entry, t_gtkdata *data)
+{
 	GtkWidget *dialog;
 	(void)entry;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
@@ -836,7 +849,7 @@ void	select_text(GtkEntry *entry, t_gtkData *data){
 	gtk_widget_destroy (dialog);
 }
 
-void	save_entry_material_light(GtkEntry *entry, t_gtkData *data)
+void	save_entry_material_light(GtkEntry *entry, t_gtkdata *data)
 {
 	float ret_f;
 	int ret_i;
@@ -899,26 +912,26 @@ void	create_material_widget_object(void *object, GtkWidget *grid)
 
 	t_obj *current_obj;
 	char *s_entry = NULL;
-	t_gtkData *entry_shiny = NULL;
-	t_gtkData *entry_refl = NULL;
-	t_gtkData *entry_trans = NULL;
-	t_gtkData *entry_col_r = NULL;
-	t_gtkData *entry_col_g = NULL;
-	t_gtkData *entry_col_b = NULL;
-	t_gtkData *entry_text = NULL;
-	t_gtkData *entry_col = NULL;
+	t_gtkdata *entry_shiny = NULL;
+	t_gtkdata *entry_refl = NULL;
+	t_gtkdata *entry_trans = NULL;
+	t_gtkdata *entry_col_r = NULL;
+	t_gtkdata *entry_col_g = NULL;
+	t_gtkdata *entry_col_b = NULL;
+	t_gtkdata *entry_text = NULL;
+	t_gtkdata *entry_col = NULL;
 	GdkRGBA *col = malloc(sizeof(GdkRGBA));
 
 
 	s_entry = malloc(sizeof(char) * 10);
-	entry_shiny = malloc(sizeof(t_gtkData));
-	entry_refl = malloc(sizeof(t_gtkData));
-	entry_trans = malloc(sizeof(t_gtkData));
-	entry_col_r= malloc(sizeof(t_gtkData));
-	entry_col_g = malloc(sizeof(t_gtkData));
-	entry_col_b = malloc(sizeof(t_gtkData));
-	entry_text = malloc(sizeof(t_gtkData));
-	entry_col = malloc(sizeof(t_gtkData));
+	entry_shiny = malloc(sizeof(t_gtkdata));
+	entry_refl = malloc(sizeof(t_gtkdata));
+	entry_trans = malloc(sizeof(t_gtkdata));
+	entry_col_r= malloc(sizeof(t_gtkdata));
+	entry_col_g = malloc(sizeof(t_gtkdata));
+	entry_col_b = malloc(sizeof(t_gtkdata));
+	entry_text = malloc(sizeof(t_gtkdata));
+	entry_col = malloc(sizeof(t_gtkdata));
 	current_obj = (t_obj *)object;
 	sprintf(s_entry,"%f", current_obj->mater.shiny);
 	shiny_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1088,22 +1101,22 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 
 	t_light *current_obj;
 	char *s_entry = NULL;
-	t_gtkData *entry_intensity = NULL;
-	t_gtkData *entry_blur = NULL;
-	t_gtkData *entry_col_r = NULL;
-	t_gtkData *entry_col_g = NULL;
-	t_gtkData *entry_col_b = NULL;
-	t_gtkData *entry_col = NULL;
+	t_gtkdata *entry_intensity = NULL;
+	t_gtkdata *entry_blur = NULL;
+	t_gtkdata *entry_col_r = NULL;
+	t_gtkdata *entry_col_g = NULL;
+	t_gtkdata *entry_col_b = NULL;
+	t_gtkdata *entry_col = NULL;
 
 	GdkRGBA *col = malloc(sizeof(GdkRGBA));
 
 	s_entry = malloc(sizeof(char) * 10);
-	entry_intensity = malloc(sizeof(t_gtkData));
-	entry_blur = malloc(sizeof(t_gtkData));
-	entry_col_r= malloc(sizeof(t_gtkData));
-	entry_col_g = malloc(sizeof(t_gtkData));
-	entry_col_b = malloc(sizeof(t_gtkData));
-	entry_col = malloc(sizeof(t_gtkData));
+	entry_intensity = malloc(sizeof(t_gtkdata));
+	entry_blur = malloc(sizeof(t_gtkdata));
+	entry_col_r= malloc(sizeof(t_gtkdata));
+	entry_col_g = malloc(sizeof(t_gtkdata));
+	entry_col_b = malloc(sizeof(t_gtkdata));
+	entry_col = malloc(sizeof(t_gtkdata));
 	current_obj = (t_light *)object;
 	sprintf(s_entry,"%f", current_obj->intensity);
 	intensity_buffer = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1214,13 +1227,13 @@ void position_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	GtkWidget *label;
 	GtkWidget *pos_entry[3];
 	GtkEntryBuffer *buffer_pos[3];
-	t_gtkData *entry_posx = NULL;
-	t_gtkData *entry_posy = NULL;
-	t_gtkData *entry_posz = NULL;
+	t_gtkdata *entry_posx = NULL;
+	t_gtkdata *entry_posy = NULL;
+	t_gtkdata *entry_posz = NULL;
 
-	entry_posx = malloc(sizeof(t_gtkData));
-	entry_posy = malloc(sizeof(t_gtkData));
-	entry_posz = malloc(sizeof(t_gtkData));
+	entry_posx = malloc(sizeof(t_gtkdata));
+	entry_posy = malloc(sizeof(t_gtkdata));
+	entry_posz = malloc(sizeof(t_gtkdata));
 
 	sprintf(s_entry,"%f", current_obj->pos.x);
 	buffer_pos[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1271,12 +1284,12 @@ void direction_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	GtkWidget *label;
 	GtkWidget *dir_entry[3];
 	GtkEntryBuffer *buffer_dir[3];
-	t_gtkData *entry_dirx = NULL;
-	t_gtkData *entry_diry = NULL;
-	t_gtkData *entry_dirz = NULL;
-	entry_dirx = malloc(sizeof(t_gtkData));
-	entry_diry = malloc(sizeof(t_gtkData));
-	entry_dirz = malloc(sizeof(t_gtkData));
+	t_gtkdata *entry_dirx = NULL;
+	t_gtkdata *entry_diry = NULL;
+	t_gtkdata *entry_dirz = NULL;
+	entry_dirx = malloc(sizeof(t_gtkdata));
+	entry_diry = malloc(sizeof(t_gtkdata));
+	entry_dirz = malloc(sizeof(t_gtkdata));
 
 	sprintf(s_entry,"%f", current_obj->dir.x);
 	buffer_dir[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1326,12 +1339,12 @@ void normal_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	GtkWidget *label;
 	GtkWidget *norm_entry[3];
 	GtkEntryBuffer *buffer_norm[3];
-	t_gtkData *entry_normx = NULL;
-	t_gtkData *entry_normy = NULL;
-	t_gtkData *entry_normz = NULL;
-	entry_normx = malloc(sizeof(t_gtkData));
-	entry_normy = malloc(sizeof(t_gtkData));
-	entry_normz = malloc(sizeof(t_gtkData));
+	t_gtkdata *entry_normx = NULL;
+	t_gtkdata *entry_normy = NULL;
+	t_gtkdata *entry_normz = NULL;
+	entry_normx = malloc(sizeof(t_gtkdata));
+	entry_normy = malloc(sizeof(t_gtkdata));
+	entry_normz = malloc(sizeof(t_gtkdata));
 
 	sprintf(s_entry,"%f", current_obj->norm.x);
 	buffer_norm[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1381,8 +1394,8 @@ void rayon_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	GtkWidget *label;
 	GtkWidget *rayon_entry;
 	GtkEntryBuffer *buffer_rayon;
-	t_gtkData *entry_rayon = NULL;
-	entry_rayon = malloc(sizeof(t_gtkData));
+	t_gtkdata *entry_rayon = NULL;
+	entry_rayon = malloc(sizeof(t_gtkdata));
 	sprintf(s_entry,"%f", current_obj->rayon);
 	buffer_rayon = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	label = gtk_label_new("Rayon");
@@ -1406,8 +1419,8 @@ void alpha_widget(t_obj *current_obj, GtkWidget *grid,char *s_entry)
 	GtkWidget *label;
 	GtkWidget *alpha_entry;
 	GtkEntryBuffer *buffer_alpha;
-	t_gtkData *entry_alpha = NULL;
-	entry_alpha = malloc(sizeof(t_gtkData));
+	t_gtkdata *entry_alpha = NULL;
+	entry_alpha = malloc(sizeof(t_gtkdata));
 	sprintf(s_entry,"%f", current_obj->alpha);
 	buffer_alpha = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
 	label = gtk_label_new("Alpha");
@@ -1451,12 +1464,12 @@ void direction_widget_light(t_light *current_obj, GtkWidget *grid,char *s_entry)
 	GtkWidget *label;
 	GtkWidget *dir_entry[3];
 	GtkEntryBuffer *buffer_dir[3];
-	t_gtkData *entry_dirx = NULL;
-	t_gtkData *entry_diry = NULL;
-	t_gtkData *entry_dirz = NULL;
-	entry_dirx = malloc(sizeof(t_gtkData));
-	entry_diry = malloc(sizeof(t_gtkData));
-	entry_dirz = malloc(sizeof(t_gtkData));
+	t_gtkdata *entry_dirx = NULL;
+	t_gtkdata *entry_diry = NULL;
+	t_gtkdata *entry_dirz = NULL;
+	entry_dirx = malloc(sizeof(t_gtkdata));
+	entry_diry = malloc(sizeof(t_gtkdata));
+	entry_dirz = malloc(sizeof(t_gtkdata));
 
 	sprintf(s_entry,"%f", current_obj->dir.x);
 	buffer_dir[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1510,16 +1523,16 @@ void	create_transformation_widget_light(void *object, GtkWidget *grid)
 	GtkEntryBuffer *buffer_rayon;
 	t_light *current_light;
 	char *s_entry = NULL;
-	t_gtkData *entry_posx = NULL;
-	t_gtkData *entry_posy = NULL;
-	t_gtkData *entry_posz = NULL;
-	t_gtkData *entry_rayon = NULL;
+	t_gtkdata *entry_posx = NULL;
+	t_gtkdata *entry_posy = NULL;
+	t_gtkdata *entry_posz = NULL;
+	t_gtkdata *entry_rayon = NULL;
 
 	s_entry = malloc(sizeof(char) * 10);
-	entry_posx = malloc(sizeof(t_gtkData));
-	entry_posy = malloc(sizeof(t_gtkData));
-	entry_posz = malloc(sizeof(t_gtkData));
-	entry_rayon = malloc(sizeof(t_gtkData));
+	entry_posx = malloc(sizeof(t_gtkdata));
+	entry_posy = malloc(sizeof(t_gtkdata));
+	entry_posz = malloc(sizeof(t_gtkdata));
+	entry_rayon = malloc(sizeof(t_gtkdata));
 	current_light = (t_light *)object;
 	sprintf(s_entry,"%f", current_light->pos.x);
 	buffer_pos[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
@@ -1617,8 +1630,6 @@ void	create_list_of_attributs(void *objects, unsigned int type)
 	gtk_widget_show_all(g_env.win);
 }
 
-
-
 void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 {
 	GtkTreeModel 	*model;
@@ -1638,8 +1649,8 @@ void 	select_current_obj(GtkTreeView *treeview, GtkTreePath *path)
 	}
 }
 
-void	view_popup_menu_delete_row (GtkWidget *menuitem, gpointer userdata)
-  {
+void	view_popup_menu_delete_row(GtkWidget *menuitem, gpointer userdata)
+{
    	GtkTreeModel 	*model = NULL;
     GtkTreeView *treeview = NULL;
 	GtkTreeIter  	iter;
@@ -1665,60 +1676,49 @@ void	view_popup_menu_delete_row (GtkWidget *menuitem, gpointer userdata)
 				launch_thread();
 		}
 	}
-  }
+}
 
-  void
-  view_popup_menu (GtkWidget *treeview, GdkEventButton *event,GtkTreePath *path,
-  gpointer userdata)
-  {
-    GtkWidget *menu, *menuitem;
-
+void	view_popup_menu(GtkWidget *treeview, GdkEventButton *event,
+	GtkTreePath *path, gpointer userdata)
+{
+	GtkWidget *menu, *menuitem;
     menu = gtk_menu_new();
     (void)userdata;
     (void)treeview;
     menuitem = gtk_menu_item_new_with_label("Delete");
-
     g_signal_connect(menuitem, "activate",
-                     (GCallback) view_popup_menu_delete_row , path);
-
+	(GCallback)view_popup_menu_delete_row ,path);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
-
     gtk_widget_show_all(menu);
-
     gtk_menu_popup_at_pointer(GTK_MENU(menu),(GdkEvent*)event);
-  }
+}
 
-
-  gboolean
-  view_onButtonPressed (GtkWidget *treeview, GdkEventButton *event, gpointer userdata)
-  {
+gboolean view_onButtonPressed(GtkWidget *treeview, GdkEventButton *event,
+	gpointer userdata)
+{
     GtkTreePath *path = NULL;
     GtkTreeSelection *selection;
 
     if (event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
     {
-     if (1)
-     {
-       selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
-
-       if (gtk_tree_selection_count_selected_rows(selection)  <= 1)
-       {
-
-          if (gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeview),
-                                            (gint) event->x,
-                                            (gint) event->y,
-                                            &path, NULL, NULL, NULL))
-          {
-            gtk_tree_selection_unselect_all(selection);
-            gtk_tree_selection_select_path(selection, path);
-          }
-       }
-     }
-      view_popup_menu(treeview, event,path, userdata);
-      return TRUE;
-    }
-    return FALSE;
-  }
+		if (1)
+		{
+			selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+			if (gtk_tree_selection_count_selected_rows(selection)  <= 1)
+			{
+				if (gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeview),
+                (gint) event->x, (gint) event->y, &path, NULL, NULL, NULL))
+				{
+					gtk_tree_selection_unselect_all(selection);
+					gtk_tree_selection_select_path(selection, path);
+				}
+			}
+		}
+		view_popup_menu(treeview, event,path, userdata);
+		return TRUE;
+	}
+	return FALSE;
+}
 
 void	create_list_of_objects(void)
 {

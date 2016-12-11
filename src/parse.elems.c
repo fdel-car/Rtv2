@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.elems.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/10 17:02:32 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:10:08 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_mater	load_material(char **t)
 				new.ttex = load_texture(get_after(t[n], "ttext:"));
 			if (ft_sii(t[n], "ctext:"))
 				new.ctex = load_texture(get_after(t[n], "ctext:"));
-
 		}
 	if (new.tex)
 		new.tex->tsize = tsize > 0 ? tsize : -42;

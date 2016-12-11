@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 18:26:19 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/11 17:36:19 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define QC(x) ((x) * (x) * (x) * (x))
 # define NUM_THREAD 8
 
-# include <stdlib.h>
 # include <gtk/gtk.h>
 # include <stdlib.h>
 # include <math.h>

@@ -6,13 +6,13 @@
 /*   By: bhuver <bhuver@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 01:45:38 by bhuver            #+#    #+#             */
-/*   Updated: 2016/12/08 12:24:44 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/12/11 17:01:45 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_color				get_color_img(guchar *new, int x, int y, int i, int j)
+t_color		get_color_img(guchar *new, int x, int y, int i, int j)
 {
 	t_color			color;
 	int				pos;
@@ -28,7 +28,7 @@ t_color				get_color_img(guchar *new, int x, int y, int i, int j)
 	return (color_new(0, 0, 0));
 }
 
-void				sepia_filter(void)
+void		sepia_filter(void)
 {
 	int				x;
 	int				y;
@@ -54,7 +54,7 @@ void				sepia_filter(void)
 	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);
 }
 
-t_color				greyscale(t_color c)
+t_color		greyscale(t_color c)
 {
 	t_color			new;
 
@@ -64,7 +64,7 @@ t_color				greyscale(t_color c)
 	return (new);
 }
 
-void				greyscale_filter(void)
+void		greyscale_filter(void)
 {
 	int				x;
 	int				y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/09 17:15:24 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/11 16:41:36 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ float	intersect_sphere(t_obj *obj, t_data ray)
 	c = (SQ(ray.orig.x - obj->pos.x) + SQ(ray.orig.y - obj->pos.y) +
 	SQ(ray.orig.z - obj->pos.z)) - SQ(obj->rayon);
 	quadratic_root(a, b, c, r);
-	return (texture_cutr(sphere_cut(r, ray, obj->cut_pos, obj->cut), r, obj, ray));
+	return (texture_cutr(sphere_cut(r, ray, obj->cut_pos, obj->cut),
+	r, obj, ray));
 }
 
 float	intersect_plane(t_obj *obj, t_data ray)

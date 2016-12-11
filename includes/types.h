@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/10 18:30:32 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/12/11 18:12:21 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
-
-typedef enum	{NONE, SPHERE, CYLINDER, CONE, PLANE, TRIANGLE, MESH, SPOT_L,
-				DIR_L, POINT_L, SKYBOX, OCULUS} e_type;
 
 typedef struct		s_vect
 {
@@ -94,7 +91,6 @@ typedef struct		s_mater
 	float			int_trans;
 	float			indice;
 	t_color			color;
-	// char			*text;
 	t_text			*tex;
 	t_text			*ntex;
 	t_text			*ttex;
@@ -122,7 +118,6 @@ typedef struct		s_obj
 	t_vect			v2;
 	t_vect			u;
 	t_vect			v;
-	short			type;
 	char			*name;
 	char			*src;
 	t_vect			pos;
@@ -139,6 +134,21 @@ typedef struct		s_obj
 	float			(*func)(struct s_obj *obj, t_data ray);
 	struct s_obj	*lst;
 	void			*next;
+	enum
+	{
+		NONE,
+		SPHERE,
+		CYLINDER,
+		CONE,
+		PLANE,
+		TRIANGLE,
+		MESH,
+		SPOT_L,
+		DIR_L,
+		POINT_L,
+		SKYBOX,
+		OCULUS
+	}				type;
 }					t_obj;
 
 typedef struct		s_light
@@ -151,9 +161,23 @@ typedef struct		s_light
 	float			rayon;
 	float			alpha;
 	float			intensity;
-	e_type			type;
 	float			(*func)(t_obj *obj, t_data ray);
 	void			*next;
+	enum
+	{
+		NONE,
+		SPHERE,
+		CYLINDER,
+		CONE,
+		PLANE,
+		TRIANGLE,
+		MESH,
+		SPOT_L,
+		DIR_L,
+		POINT_L,
+		SKYBOX,
+		OCULUS
+	}				type;
 }					t_light;
 
 typedef struct		s_scene
@@ -201,8 +225,8 @@ typedef struct		s_env
 	unsigned int	progress;
 	unsigned int	pixels_progress;
 	unsigned int	total;
-	unsigned int    progress_bar;
-	int	width;
+	unsigned int	progress_bar;
+	int				width;
 }					t_env;
 
 t_env g_env;

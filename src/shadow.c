@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:02:16 by vde-la-s          #+#    #+#             */
-/*   Updated: 2016/12/08 16:16:48 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/11 17:28:44 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float	get_msoft_shadow(t_light *l, t_data *ray)
 {
-	float 	r[3];
+	float	r[3];
 	t_data	sh;
 	int		nsh;
 	float	sample[2];
@@ -49,9 +49,9 @@ float	get_msoft_shadow(t_light *l, t_data *ray)
 
 float	get_shadow(t_light *l, t_data *ray)
 {
-	t_data sh;
-	t_vect tmp;
-	float coef;
+	t_data	sh;
+	t_vect	tmp;
+	float	coef;
 
 	if (g_env.scene.soft_shadow > 0)
 		return (get_msoft_shadow(l, ray));

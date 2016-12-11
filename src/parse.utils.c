@@ -6,28 +6,28 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:49:00 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 17:59:02 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:13:12 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-e_type	get_type(char *type)
+int		get_type(char *type)
 {
-	e_type	t;
+	t_obj o;
 
-	t = NONE;
-	!ft_strcmp(type, "sphere") ? t = SPHERE : 0;
-	!ft_strcmp(type, "mesh") ? t = MESH : 0;
-	!ft_strcmp(type, "triangle") ? t = TRIANGLE : 0;
-	!ft_strcmp(type, "cone") ? t = CONE : 0;
-	!ft_strcmp(type, "cylinder") ? t = CYLINDER : 0;
-	!ft_strcmp(type, "plane") ? t = PLANE : 0;
-	!ft_strcmp(type, "dir_light") ? t = DIR_L : 0;
-	!ft_strcmp(type, "point_light") ? t = POINT_L : 0;
-	!ft_strcmp(type, "spot_light") ? t = SPOT_L : 0;
-	!ft_strcmp(type, "skybox") ? t = SKYBOX : 0;
-	return (t);
+	o.type = NONE;
+	!ft_strcmp(type, "sphere") ? o.type = SPHERE : 0;
+	!ft_strcmp(type, "mesh") ? o.type = MESH : 0;
+	!ft_strcmp(type, "triangle") ? o.type = TRIANGLE : 0;
+	!ft_strcmp(type, "cone") ? o.type = CONE : 0;
+	!ft_strcmp(type, "cylinder") ? o.type = CYLINDER : 0;
+	!ft_strcmp(type, "plane") ? o.type = PLANE : 0;
+	!ft_strcmp(type, "dir_light") ? o.type = DIR_L : 0;
+	!ft_strcmp(type, "point_light") ? o.type = POINT_L : 0;
+	!ft_strcmp(type, "spot_light") ? o.type = SPOT_L : 0;
+	!ft_strcmp(type, "skybox") ? o.type = SKYBOX : 0;
+	return (o.type);
 }
 
 t_color	read_color(char *data)

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 19:02:37 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 17:26:24 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/11 17:38:09 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ void	set_signal_create_object(void)
 {
 	GtkWidget *window_popup;
 	GtkWidget *button_create_object;
-	t_gtkData *entry;
+	t_gtkdata *entry;
 
 	entry = NULL;
 	window_popup = GTK_WIDGET(gtk_builder_get_object(g_env.build,
 	"popup_create_object"));
 	button_create_object = GTK_WIDGET(gtk_builder_get_object(g_env.build,
 	"button_create"));
-	entry = malloc(sizeof(t_gtkData));
+	entry = malloc(sizeof(t_gtkdata));
 	entry->data = window_popup;
 	entry->desc = NULL;
 	entry->obj = NULL;

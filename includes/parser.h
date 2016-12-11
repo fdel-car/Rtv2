@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/10 16:29:49 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:14:16 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void		push_to_obj(t_obj *new, t_obj *mesh_node);
 void		push_lgt(t_light *new);
 void		parse_obj(t_obj *new_mesh);
 void		set_func(t_obj *o);
-e_type		get_type(char *type);
+int			get_type(char *type);
 
 #endif
