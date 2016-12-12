@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 18:14:16 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:20:08 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void		put_pixel_filter(int x, int y, t_color color);
 void		add_torus_sphere(t_obj *o);
 int			ft_limit(int v, int min, int max);
 void		read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat);
+int			check_tabsize(char *line, int v_s, int vn_s);
 void		init_gtk(void);
 void		resize_texture(t_text *tex, float coef);
 int			end_by(char *s, char *end);

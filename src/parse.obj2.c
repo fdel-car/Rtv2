@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:33:19 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:37:52 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:19:43 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,22 @@ int		get_val(char *s, int r)
 	while (s[++i] && c < r)
 		s[i] == '/' || s[i] == ' ' ? ++c : 0;
 	return (ft_atoi(&(s[i])));
+}
+
+int		check_tabsize(char *line, int v_s, int vn_s)
+{
+	char **t;
+
+	t = ft_strsplit(line, ' ');
+	if (get_val(t[1], 3) - 1 > vn_s)
+		return (0);
+	if (get_val(t[1], 1) - 1 > v_s)
+		return (0);
+	if (get_val(t[2], 1) - 1 > v_s)
+		return (0);
+	if (get_val(t[3], 1) - 1 > v_s)
+		return (0);
+	return (1);
 }
 
 void	read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)

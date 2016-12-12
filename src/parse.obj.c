@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:30:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:36:30 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:22:10 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,22 @@ void	count_values(char **file, int *v_size, int *vn_size)
 		(*vn_size)++;
 }
 
-void	load_obj(char **file, t_vect **v, int i, t_obj *o)
+void	load_obj(char **file, t_vect **v, int *i_s, t_obj *o)
 {
 	t_obj *new;
 
-	while (file[i] && !ft_sii(file[i], "f "))
-		++i;
-	while (file[i])
+	while (file[i_s[0]] && !ft_sii(file[i_s[0]], "f "))
+		++i_s[0];
+	while (file[i_s[0]])
 	{
-		new = malloc(sizeof(t_obj));
-		read_triangle(new, file[i], v, o->mater);
-		set_func(new);
-		push_to_obj(new, o);
-		++i;
+		if (check_tabsize(file[i_s[0]], i_s[1], i_s[2]))
+		{
+			new = malloc(sizeof(t_obj));
+			read_triangle(new, file[i_s[0]], v, o->mater);
+			set_func(new);
+			push_to_obj(new, o);
+		}
+		++i_s[0];
 	}
 }
 
@@ -53,6 +56,8 @@ void	fill_values(char **file, int v_s, int vn_s, t_obj *new)
 	int		in;
 
 	i = 0;
+	if (!v_s || !vn_s)
+		return ;
 	v[0] = malloc(sizeof(t_vect) * (v_s + 1));
 	v[1] = malloc(sizeof(t_vect) * (vn_s + 1));
 	while (file[i] && !ft_sii(file[i], "v "))
@@ -65,7 +70,7 @@ void	fill_values(char **file, int v_s, int vn_s, t_obj *new)
 	in = 0;
 	while (file[i] && ft_sii(file[i], "vn "))
 		v[1][in++] = read_vec(get_after(file[i++], "vn "), ' ');
-	load_obj(file, v, i, new);
+	load_obj(file, v, (int[3]){i, v_s, vn_s}, new);
 	free(v[0]);
 	free(v[1]);
 }
@@ -83,7 +88,7 @@ void	parse_obj(t_obj *new_mesh)
 	size[1] = 0;
 	if ((fd = open(new_mesh->src, O_RDONLY)) >= 0)
 	{
-		while (get_next_line(fd, &line) && (++n) > -42)
+		while (get_next_line(fd, &line) && ++n < 9999)
 			file[n] = line;
 		file[n + 1] = 0;
 		count_values(file, &size[0], &size[1]);
