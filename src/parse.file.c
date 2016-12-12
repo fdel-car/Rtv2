@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/10 14:44:59 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:30:31 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	load_file(char *scene_file)
 	int		n;
 
 	n = -1;
-	if ((fd = open(scene_file, O_RDONLY)) >= 0)
+	if (start_by(scene_file, "scenes/") &&
+	(fd = open(scene_file, O_RDONLY)) >= 0)
 	{
 		while (get_next_line(fd, &line) && (++n) > -42)
 			file[n] = line;
@@ -102,5 +103,7 @@ void	load_file(char *scene_file)
 		else
 			ft_putendl("WRONG FORMAT FOR CONFIG FILE !");
 		ctab_free(file);
+		free(line);
+		close(fd);
 	}
 }

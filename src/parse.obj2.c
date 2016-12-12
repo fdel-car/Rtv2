@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.obj2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:33:19 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/12 14:19:43 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/12/12 15:59:41 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,21 @@ int		get_val(char *s, int r)
 
 int		check_tabsize(char *line, int v_s, int vn_s)
 {
-	char **t;
+	char	**t;
+	int		r;
 
 	t = ft_strsplit(line, ' ');
+	r = 1;
 	if (get_val(t[1], 3) - 1 > vn_s)
-		return (0);
+		r = 0;
 	if (get_val(t[1], 1) - 1 > v_s)
-		return (0);
+		r = 0;
 	if (get_val(t[2], 1) - 1 > v_s)
-		return (0);
+		r = 0;
 	if (get_val(t[3], 1) - 1 > v_s)
-		return (0);
+		r = 0;
+	ctab_free(t);
+	free(t);
 	return (1);
 }
 
@@ -77,4 +81,5 @@ void	read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)
 		o->next = 0;
 	}
 	ctab_free(t);
+	free(t);
 }

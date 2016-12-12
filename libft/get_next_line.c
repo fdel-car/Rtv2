@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/09 16:42:18 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/16 22:04:16 by fdel-car         ###   ########.fr       */
+/*   Created: 2016/06/25 13:48:15 by vde-la-s          #+#    #+#             */
+/*   Updated: 2016/12/12 16:18:23 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,69 +15,46 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int	ft_poscr(char *str)
+static int	return_line(char *eol, char *s)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
-static int	ft_unload(char **line, char end[256][BUFF_SIZE], int fd)
-{
-	*line = ft_strndup(end[fd], ft_poscr(end[fd]));
-	ft_strcpy(end[fd], end[fd] + ft_poscr(end[fd]) + 1);
+	if (!(*s = 0) && !eol)
+		return (0);
+	*eol++ = 0;
+	ft_strcpy(s, eol);
 	return (1);
 }
 
-static int	ft_unload_bis(char end[256][BUFF_SIZE], int fd)
+static int	fill_line(char **line, char *buf)
 {
-	ft_bzero(end[fd], BUFF_SIZE);
-	return (1);
-}
+	char *tmp;
 
-static int	ft_unload_final(char **line, char end[256][BUFF_SIZE],
-		int fd, char buff[BUFF_SIZE])
-{
-	char *temp;
-
-	temp = ft_strndup(buff, ft_poscr(buff));
-	if (!(*line = ft_strjoin_free(*line, temp)))
-		return (-1);
-	free(temp);
-	ft_strcpy(end[fd], ft_strchr(buff, '\n') + 1);
-	return (1);
+	tmp = *line;
+	*line = ft_strjoin(*line, buf);
+	free(tmp);
+	return (*line ? 1 : -1);
 }
 
 int			get_next_line(int const fd, char **line)
 {
-	static char end[256][BUFF_SIZE];
-	char		buff[BUFF_SIZE + 1];
-	int			i;
+	static char s[256][BUFF_SIZE];
+	char		buf[BUFF_SIZE + 1];
+	char		*n;
+	int			r;
 
-	if (fd < 0 || fd > 256 || !line || BUFF_SIZE < 1)
+	if (!line || fd < 0 || fd > 255 || BUFF_SIZE < 1)
 		return (-1);
-	if (!(*line = end[fd] ? ft_strdup(end[fd]) : ft_strnew(1)))
+	if (!(*line = *s[fd] ? ft_strdup(s[fd]) : ft_strnew(1)))
 		return (-1);
-	if (ft_strchr(*line, '\n'))
-		return (ft_unload(line, end, fd));
-	while ((i = read(fd, buff, BUFF_SIZE)) > 0)
+	while ((r = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		buff[i] = '\0';
-		if (ft_strchr(buff, '\n'))
-			return (ft_unload_final(line, end, fd, buff));
-		if (!(*line = ft_strjoin_free(*line, buff)))
+		buf[r] = 0;
+		if (!fill_line(line, buf))
 			return (-1);
+		if (ft_strchr(buf, '\n'))
+			break ;
 	}
-	if (i == -1)
-		return (-1);
-	if (*line[0] != '\0')
-		return (ft_unload_bis(end, fd));
-	return (0);
+	n = ft_strchr(*line, '\n');
+	if (return_line(n, s[fd]) || ft_strlen(*line) || r > 0)
+		return (1);
+	return (!r ? 0 : -1);
 }

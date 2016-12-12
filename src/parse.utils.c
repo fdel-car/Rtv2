@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:49:00 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 18:13:12 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:28:45 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_color	read_color(char *data)
 		new.b = ft_atoi(vals[2]);
 	}
 	ctab_free(vals);
+	free(vals);
 	return (new);
 }
 
@@ -65,6 +66,7 @@ t_vect	read_vec(char *data, char op)
 		new.z = ft_atof(vals[2]);
 	}
 	ctab_free(vals);
+	free(vals);
 	return (new);
 }
 
