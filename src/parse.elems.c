@@ -78,7 +78,7 @@ void	init_obj(t_obj *obj)
 	obj->sphere_cut = 0;
 	obj->lst = NULL;
 	obj->mater = init_mater();
-	obj->name = ft_strdup("no name");
+	obj->name = NULL;
 }
 
 void	load_object(char **t)

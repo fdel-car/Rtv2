@@ -12,10 +12,6 @@
 
 #include "rt.h"
 
-void	save_scene(void)
-{
-	ft_putendl("Not available, come back later.");
-}
 
 void	open_file(char *filename)
 {
@@ -261,7 +257,7 @@ t_obj *add_object_name(t_obj *obj)
 
 	name = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_name"));
 	if (ft_strcmp("", gtk_entry_get_text(name)) == 0)
-		return (obj);
+		obj->name = ft_strdup("no name");
 	obj->name = ft_strdup(gtk_entry_get_text(name));
 	return (obj);
 }
