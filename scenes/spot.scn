@@ -3,8 +3,8 @@ scene
 	ambiant_lighting:0.3
 	anti_aliasing:0
 	iter_reflection:0
+	iter_trans:2
 	soft_shadow:0
-	name:test_scene
 	camera
 	{
 		pos:0;0;-20

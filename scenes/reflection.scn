@@ -3,7 +3,7 @@ scene
 	ambiant_lighting:0.2
 	anti_aliasing:0
 	iter_reflection:0
-	name:test_scene
+	iter_trans:2
 	camera
 	{
 		pos:0;0;-10

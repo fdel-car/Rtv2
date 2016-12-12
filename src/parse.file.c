@@ -52,9 +52,8 @@ void	parse_scene(char **t)
 		if (ft_sii(t[n], "iter_reflection:"))
 			g_env.scene.iter_refl = ft_atoi(get_after(t[n],
 			"iter_reflection:"));
-		if (ft_sii(t[n], "iter_transparence:"))
-			g_env.scene.iter_trans = ft_atoi(get_after(t[n],
-			"iter_transparence:"));
+		if (ft_sii(t[n], "iter_trans:"))
+			g_env.scene.iter_trans = ft_atoi(get_after(t[n], "iter_trans:"));
 		if (ft_sii(t[n], "camera") && t[n + 2])
 			load_camera(&(t[n + 2]));
 		if (ft_sii(t[n], "lights") && t[n + 2])

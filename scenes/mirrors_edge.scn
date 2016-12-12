@@ -3,7 +3,7 @@ scene
 	ambiant_lighting:0.2
 	anti_aliasing:0
 	iter_reflection:1
-	iter_transparence:4
+	iter_trans:4
 	camera
 	{
 		pos:1.8;0;-9.4
