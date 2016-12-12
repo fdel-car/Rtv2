@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:53:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/09 17:12:44 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:35:25 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@ t_color		get_texel(t_text tex, int i, int j)
 {
 	t_color	r;
 
-	r.r = tex.text[j *
-	(tex.tex_w * 3) + (i * 3)];
-	r.g = tex.text[j *
-	(tex.tex_w * 3) + (i * 3) + 1];
-	r.b = tex.text[j *
-	(tex.tex_w * 3) + (i * 3) + 2];
+	r = color_new(0, 0, 0);
+	if (i < 0 || j < 0)
+		return (r);
+	if (j * (tex.tex_w * 3) + (i * 3) <
+	tex.tex_h * tex.tex_w * 3)
+		r.r = tex.text[j *
+		(tex.tex_w * 3) + (i * 3)];
+	if (j * (tex.tex_w * 3) + (i * 3) + 1 <
+	tex.tex_h * tex.tex_w * 3)
+		r.g = tex.text[j *
+		(tex.tex_w * 3) + (i * 3) + 1];
+	if (j * (tex.tex_w * 3) + (i * 3) + 1 <
+	tex.tex_h * tex.tex_w * 3)
+		r.b = tex.text[j *
+		(tex.tex_w * 3) + (i * 3) + 2];
 	return (r);
 }
 
