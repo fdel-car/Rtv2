@@ -6,7 +6,7 @@
 /*   By: bhuver <bhuver@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 01:56:57 by bhuver            #+#    #+#             */
-/*   Updated: 2016/12/08 12:08:04 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/12/12 13:07:52 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,24 @@ static int			sobel_compute(int x, int y)
 
 void				sobel_filter(void)
 {
-	int				x;
-	int				y;
+	int				xy[2];
 	int				sobel;
 	t_color			res;
 
-	y = -1;
-	while (++y < HEIGHT - 1)
+	xy[1] = -1;
+	while (++xy[1] < HEIGHT - 1)
 	{
-		x = -1;
-		while (++x < WIDTH - 1)
+		xy[0] = -1;
+		while (++xy[0] < WIDTH - 1)
 		{
-			sobel = sobel_compute(x, y);
+			sobel = sobel_compute(xy[0], xy[1]);
 			sobel = 255 - sobel;
 			sobel > 255 ? sobel = 255 : sobel;
 			sobel < 150 ? sobel = 0 : sobel;
 			res = color_new(sobel, sobel, sobel);
 			if (sobel > 100)
-				res = high_sat(get_color_img(g_env.pixels, x, y, 0, 0));
-			put_pixel_filter(x, y, res);
+				res = high_sat(get_color_img(g_env.pixels, xy, 0, 0));
+			put_pixel_filter(xy[0], xy[1], res);
 		}
 	}
 	gtk_image_set_from_pixbuf(GTK_IMAGE(g_env.img), g_env.filter);

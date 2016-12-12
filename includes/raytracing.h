@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 18:26:54 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/12 13:14:44 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_color		getex_sphere(t_data ray, t_text *tex);
 t_color		getex_cyl(t_data ray, t_text *tex);
 t_color		getex_plane(t_data ray, t_text *tex);
 t_color		greyscale(t_color c);
-t_color		get_color_img(guchar *new, int x, int y, int i, int j);
+t_color		get_color_img(guchar *new, int *xy, int i, int j);
 t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c);
 t_color		specular_lighting(t_data *ray, t_light *l);
 t_color		render_ray(t_data ray);

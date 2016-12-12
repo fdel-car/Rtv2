@@ -98,7 +98,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				color:205;150;0
+				color:205;205;0
 			}
 		}
 		cylinder_2
@@ -112,7 +112,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				color:205;150;0
+				color:205;205;0
 			}
 		}
 		cylinder_3
@@ -126,7 +126,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				color:205;150;0
+				color:205;205;0
 			}
 		}
 		cylinder_4
@@ -140,7 +140,7 @@ scene
 			{
 				brillance:152
 				reflection:0.4
-				color:205;150;0
+				color:205;205;0
 			}
 		}
 	}
