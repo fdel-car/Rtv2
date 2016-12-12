@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/12 16:06:42 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:09:25 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include <fcntl.h>
 
+t_mater		load_material(char **t);
+void		load_light2(t_light *new, char *s);
+void		load_object3(t_obj *new, char *s);
+void		load_object2(t_obj *new, char *s);
+void		load_material2(t_mater *new, float *tsize, char *s);
 int			start_by(char *s, char *end);
 int			is_sim(char *t, char *s);
 int			verif_file(char **t);
