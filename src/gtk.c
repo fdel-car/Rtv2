@@ -238,7 +238,9 @@ void	init_gtk_create_widget(void)
 
 t_obj *add_object_type(char *s, t_obj *obj)
 {
-	if (ft_strcmp("Sphere",s) == 0)
+	if (!s)
+		obj->type = NONE;
+	else if (ft_strcmp("Sphere",s) == 0)
 		obj->type = SPHERE;
 	else if (ft_strcmp("Plan",s) == 0)
 		obj->type = PLANE;
@@ -466,7 +468,9 @@ void	signal_add_object(void)
 	obj->next = NULL;
 	obj->mater.tex = NULL;
 	set_func(obj);
-	if (ft_strcmp(s, "Torus") == 0)
+	if (!s)
+		;
+	else if (ft_strcmp(s, "Torus") == 0)
 		add_torus_sphere(obj);
 	else if (ft_strcmp(s, "ADN") == 0)
 		add_adn(obj);
