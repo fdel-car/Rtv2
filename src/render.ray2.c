@@ -93,7 +93,8 @@ float		transparent_map(t_data *ray)
 	return (r);
 }
 
-t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
+t_color		transparent_lighting(t_data *ray, int iter_refl, int iter_trans,
+	t_color c)
 {
 	t_data	refr;
 	float	t_coef;
@@ -102,10 +103,10 @@ t_color		transparent_lighting(t_data *ray, int iter_refl, t_color c)
 	refr.orig = ray->hit_point;
 	refr = intersect_obj(refr, FALSE, FALSE);
 	t_coef = transparent_map(ray);
-	if (refr.solut != -1)
+	if (iter_trans > 0 && refr.solut != -1)
 	{
 		return (color_add(c, color_mult(compute_light(refr,
-			iter_refl), t_coef)));
+			iter_refl, --iter_trans), t_coef)));
 	}
 	return (c);
 }

@@ -186,6 +186,7 @@ typedef struct		s_scene
 	int				anti_alia;
 	int				soft_shadow;
 	int				iter_refl;
+	int				iter_trans;
 	char			*name;
 	t_cam			cam;
 	t_light			*lgt;
