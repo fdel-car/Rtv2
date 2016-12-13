@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 18:12:21 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 20:27:35 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct		s_data
 	t_vect			norm;
 	t_vect			light;
 	t_vect			refl;
+	int				lights;
 }					t_data;
 
 typedef struct		s_obj

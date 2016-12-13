@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 15:48:35 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 20:28:12 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_color		compute_light_bis(t_data ray, int iter_refl, int iter_trans,
 	if (ray.obj_hit->mater.int_refl > 0)
 		c = color_stack(c, reflection_lighting(&ray, iter_refl, iter_trans,
 			color_new(0, 0, 0)));
+	c = color_mult(c, 1 / (float)ray.lights);
 	return (color_add(c, color_mult(get_texture(ray,
 	ray.obj_hit->mater.tex), g_env.scene.ambiant)));
 }
@@ -47,12 +48,11 @@ t_color		compute_light(t_data ray, int iter_refl, int iter_trans)
 {
 	t_color		c;
 	t_light		*l;
-	int			lights;
 	float		coef;
 
 	l = g_env.scene.lgt;
 	c = color_new(0, 0, 0);
-	lights = 0;
+	ray.lights = 0;
 	ray.hit_point = vec_add(ray.orig, vec_mult(ray.dir, ray.solut));
 	get_norm(&ray);
 	if (ray.obj_hit->type == OCULUS)
@@ -66,9 +66,8 @@ t_color		compute_light(t_data ray, int iter_refl, int iter_trans)
 		if (coef >= 0.75 && ray.obj_hit->mater.shiny != 0)
 			c = color_stack(c, color_mult(specular_lighting(&ray, l), coef));
 		l = l->next;
-		lights++;
+		ray.lights++;
 	}
-	c = color_mult(c, 1 / (float)lights);
 	return (compute_light_bis(ray, iter_refl, iter_trans, c));
 }
 

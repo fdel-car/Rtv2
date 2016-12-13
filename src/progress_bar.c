@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 17:03:31 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 17:15:27 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 20:36:54 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ t_data		oculus_view(t_data ray)
 	return (ray);
 }
 
+void		print_loading(void)
+{
+	ft_putstr(ANSI_COLOR_GREEN);
+	ft_putstr("##########################################\n");
+	ft_putstr(ANSI_COLOR_RESET);
+}
+
 void		display_progress_bar(void)
 {
 	unsigned int	i;
@@ -63,16 +70,12 @@ void		display_progress_bar(void)
 			{
 				i = -1;
 				system("clear");
-				ft_putstr(ANSI_COLOR_GREEN);
-				ft_putstr("##########################################\n");
-				ft_putstr(ANSI_COLOR_RESET);
+				print_loading();
 				ft_printf(ANSI_COLOR_GREEN"#"ANSI_COLOR_RESET);
 				while (++i <= g_env.progress / 5)
 					ft_printf(ANSI_COLOR_BLUE"--"ANSI_COLOR_RESET);
 				ft_printf(ANSI_COLOR_GREEN"#\n"ANSI_COLOR_RESET);
-				ft_putstr(ANSI_COLOR_GREEN);
-				ft_putstr("##########################################\n");
-				ft_putstr(ANSI_COLOR_RESET);
+				print_loading();
 			}
 		}
 	}

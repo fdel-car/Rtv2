@@ -1,4 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.elems2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/13 20:30:30 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/12/13 20:30:52 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
+
+void	set_func(t_obj *o)
+{
+	if (o->type == SPHERE)
+		o->func = &intersect_sphere;
+	if (o->type == SKYBOX)
+		o->func = &intersect_sphere;
+	if (o->type == PLANE)
+		o->func = &intersect_plane;
+	if (o->type == CYLINDER)
+		o->func = &intersect_cylinder;
+	if (o->type == CONE)
+		o->func = &intersect_cone;
+	if (o->type == TRIANGLE)
+		o->func = &intersect_triangle;
+}
 
 void	load_material2(t_mater *new, float *tsize, char *s)
 {
