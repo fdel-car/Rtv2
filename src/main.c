@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/20 14:35:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/12 16:32:20 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:47:15 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	pre_launch(void)
 		g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
 		g_env.scene.cam.pos));
 	}
+	if (g_env.oculus == TRUE)
+		g_env.scene.obj->pos = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, 2));
 	g_env.pixels_progress = 0;
 	g_env.progress = 0;
 	g_env.scene.cam.right = cross_pr(g_env.scene.cam.up, g_env.scene.cam.dir);

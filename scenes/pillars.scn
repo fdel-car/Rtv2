@@ -6,8 +6,8 @@ scene
 	iter_trans:4
 	camera
 	{
-		pos:0;10;-20
-		pos2:-5;10;-20
+		pos:0;0;-20
+		pos2:-5;4;-20
 		pos3:5;0;-20
 		look:0;0;0
 	}
