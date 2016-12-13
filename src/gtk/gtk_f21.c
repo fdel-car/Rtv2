@@ -1,43 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f21.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/13 18:19:07 by slgracie          #+#    #+#             */
+/*   Updated: 2016/12/13 18:28:13 by slgracie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
-void	view_popup_menu(GtkWidget *treeview, GdkEventButton *event,
+void		view_popup_menu(GtkWidget *treeview, GdkEventButton *event,
 		GtkTreePath *path, gpointer userdata)
 {
-	GtkWidget *menu, *menuitem;
+	GtkWidget	*menu;
+	GtkWidget	*menuitem;
+
 	menu = gtk_menu_new();
 	(void)userdata;
 	(void)treeview;
 	menuitem = gtk_menu_item_new_with_label("Delete");
 	g_signal_connect(menuitem, "activate",
-			(GCallback)view_popup_menu_delete_row ,path);
+			(GCallback)view_popup_menu_delete_row, path);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
 	gtk_widget_show_all(menu);
-	gtk_menu_popup_at_pointer(GTK_MENU(menu),(GdkEvent*)event);
+	gtk_menu_popup_at_pointer(GTK_MENU(menu), (GdkEvent*)event);
 }
 
-gboolean view_onButtonPressed(GtkWidget *treeview, GdkEventButton *event,
-		gpointer userdata)
+gboolean	view_onButtonPressed(GtkWidget *treeview,
+		GdkEventButton *event, gpointer userdata)
 {
-	GtkTreePath *path = NULL;
-	GtkTreeSelection *selection;
+	GtkTreePath			*path;
+	GtkTreeSelection	*selection;
 
-	if (event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
+	path = NULL;
+	if (event->type == GDK_BUTTON_PRESS && event->button == 3)
 	{
 		if (1)
 		{
 			selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
-			if (gtk_tree_selection_count_selected_rows(selection)  <= 1)
+			if (gtk_tree_selection_count_selected_rows(selection) <= 1)
 			{
 				if (gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeview),
-							(gint) event->x, (gint) event->y, &path, NULL, NULL, NULL))
+							(gint)event->x,
+							(gint)event->y, &path, NULL, NULL, NULL))
 				{
 					gtk_tree_selection_unselect_all(selection);
 					gtk_tree_selection_select_path(selection, path);
 				}
 			}
 		}
-		view_popup_menu(treeview, event,path, userdata);
-		return TRUE;
+		view_popup_menu(treeview, event, path, userdata);
+		return (TRUE);
 	}
-	return FALSE;
+	return (FALSE);
 }
