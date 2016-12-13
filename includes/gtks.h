@@ -50,5 +50,7 @@ void			green_blue_filter();
 void			add_cylindre_adn(t_obj *o, t_vect pos, t_vect pos1);
 void			add_adn(t_obj *o);
 void			add_sphere_adn(t_obj *o, t_vect pos);
+void			hide_window(void);
+
 
 #endif

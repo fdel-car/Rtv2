@@ -442,6 +442,12 @@ void	clear_entry_widget_add_object(void)
 	clear_entry_4();
 }
 
+void hide_window()
+{
+	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,
+					"popup_create_object")));
+}
+
 void	signal_add_object(void)
 {
 	char *s = NULL;
