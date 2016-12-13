@@ -43,7 +43,7 @@ void	save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data, t_vect oldpo
 	t_obj	*list;
 	float	ret;
 
-	list = ((t_obj *)data->obj)->lst;
+	list = ((t_obj*)data->obj)->lst;
 	ret = ft_atof(gtk_entry_get_text(entry));
 	while (list)
 	{
@@ -58,20 +58,20 @@ void	save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data, t_vect oldpo
 void	save_entry_transformation_object2(t_gtkdata *data, float ret)
 {
 	if(ft_strcmp(data->desc,"posx") == 0)
-		((t_obj *)data->obj)->pos.x  = ret;
+		((t_obj*)data->obj)->pos.x  = ret;
 	if(ft_strcmp(data->desc,"posy") == 0)
-		((t_obj *)data->obj)->pos.y  = ret;
+		((t_obj*)data->obj)->pos.y  = ret;
 	if(ft_strcmp(data->desc,"posz") == 0)
-		((t_obj *)data->obj)->pos.z  = ret;
+		((t_obj*)data->obj)->pos.z  = ret;
 	if(ft_strcmp(data->desc,"dirx") == 0)
-		((t_obj *)data->obj)->dir.x  = ret;
+		((t_obj*)data->obj)->dir.x  = ret;
 	if(ft_strcmp(data->desc,"diry") == 0)
-		((t_obj *)data->obj)->dir.y  = ret;
+		((t_obj*)data->obj)->dir.y  = ret;
 	if(ft_strcmp(data->desc,"dirz") == 0)
-		((t_obj *)data->obj)->dir.z  = ret;
-	((t_obj *)data->obj)->dir = vec_norm(((t_obj *)data->obj)->dir);
+		((t_obj*)data->obj)->dir.z  = ret;
+	((t_obj*)data->obj)->dir = vec_norm(((t_obj *)data->obj)->dir);
 	if(ft_strcmp(data->desc,"normx") == 0)
-		((t_obj *)data->obj)->norm.x  = ret;
+		((t_obj*)data->obj)->norm.x  = ret;
 }
 
 void	save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
