@@ -80,17 +80,17 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
 	t_vect	pos;
 
 	ret = ft_atof(gtk_entry_get_text(entry));
-	pos = ((t_obj *)data->obj)->pos;
+	pos = ((t_obj*)data->obj)->pos;
 	save_entry_transformation_object2(data, ret);
 	if (ft_strcmp(data->desc,"normy") == 0)
-		((t_obj *)data->obj)->norm.y  = ret;
+		((t_obj*)data->obj)->norm.y  = ret;
 	if (ft_strcmp(data->desc,"normz") == 0)
-		((t_obj *)data->obj)->norm.z = ret;
+		((t_obj*)data->obj)->norm.z = ret;
 	if (ft_strcmp(data->desc,"rayon") == 0)
-		((t_obj *)data->obj)->rayon  = ret;
+		((t_obj*)data->obj)->rayon  = ret;
 	if (ft_strcmp(data->desc,"alpha") == 0)
-		((t_obj *)data->obj)->alpha  = ret * M_PI / 180;
-	if (((t_obj *)data->obj)->type == MESH )
+		((t_obj*)data->obj)->alpha  = ret * M_PI / 180;
+	if (((t_obj*)data->obj)->type == MESH )
 		if (ft_strcmp(data->desc,"posx") == 0 || ft_strcmp(data->desc,"posy") ==
 				0 || ft_strcmp(data->desc,"posz") == 0)
 			save_translation_mesh_object(entry,data, pos);
