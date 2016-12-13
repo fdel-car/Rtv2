@@ -2,8 +2,6 @@
 
 void	open_file(char *filename)
 {
-	printf("%s\n",filename );
-	printf("%s\n",filename + ft_strlen(filename ) -4 );
 	if (ft_strcmp(".scn", filename + ft_strlen(filename) - 4) == 0)
 	{
 		load_file(filename);
@@ -37,26 +35,27 @@ void	switch_cam_pos()
 
 void	save_image_chooser(void)
 {
-	GtkWidget *dialog;
-	GtkFileChooser *chooser;
-	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
-	gint res;
+	GtkWidget				*dialog;
+	GtkFileChooser			*chooser;
+	GtkFileChooserAction	action;
+	gint					res;
+	char					*filename;
 
-	dialog = gtk_file_chooser_dialog_new ("Save File",GTK_WINDOW(g_env.win),
+	filename = 0;
+	action = GTK_FILE_CHOOSER_ACTION_SAVE;
+	dialog = gtk_file_chooser_dialog_new("Save File",GTK_WINDOW(g_env.win),
 	action, "_Cancel", GTK_RESPONSE_CANCEL,"_Save",GTK_RESPONSE_ACCEPT,NULL);
-	chooser = GTK_FILE_CHOOSER (dialog);
-	gtk_file_chooser_set_do_overwrite_confirmation (chooser, TRUE);
-	gtk_file_chooser_set_current_name (chooser,("Untitled document"));
-	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	chooser = GTK_FILE_CHOOSER(dialog);
+	gtk_file_chooser_set_do_overwrite_confirmation(chooser, TRUE);
+	gtk_file_chooser_set_current_name(chooser,("Untitled document"));
+	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
-		char *filename;
-
-		filename = gtk_file_chooser_get_filename (chooser);
-		save_img (filename);
-		g_free (filename);
+		filename = gtk_file_chooser_get_filename(chooser);
+		save_img(filename);
+		g_free(filename);
 	}
-	gtk_widget_destroy (dialog);
+	gtk_widget_destroy(dialog);
 }
 
 void	switch_cam(GtkWidget *entry)
@@ -86,10 +85,11 @@ void	switch_cam(GtkWidget *entry)
 
 void	open_scene()
 {
-	GtkWidget *dialog;
-	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
-	gint res;
+	GtkWidget				*dialog;
+	GtkFileChooserAction	action;
+	gint					res;
 
+	action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),
 	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
