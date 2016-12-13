@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:55:22 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 18:55:26 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:04:23 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	open_file(char *filename)
 	}
 }
 
-void	switch_cam_pos()
+void	switch_cam_pos(void)
 {
 	if (g_env.scene.cam.c_pos == 1)
 	{
@@ -57,11 +57,11 @@ void	save_image_chooser(void)
 
 	filename = 0;
 	action = GTK_FILE_CHOOSER_ACTION_SAVE;
-	dialog = gtk_file_chooser_dialog_new("Save File",GTK_WINDOW(g_env.win),
-	action, "_Cancel", GTK_RESPONSE_CANCEL,"_Save",GTK_RESPONSE_ACCEPT,NULL);
+	dialog = gtk_file_chooser_dialog_new("Save File", GTK_WINDOW(g_env.win),
+	action, "_Cancel", GTK_RESPONSE_CANCEL, "_Save", GTK_RESPONSE_ACCEPT, NULL);
 	chooser = GTK_FILE_CHOOSER(dialog);
 	gtk_file_chooser_set_do_overwrite_confirmation(chooser, TRUE);
-	gtk_file_chooser_set_current_name(chooser,("Untitled document"));
+	gtk_file_chooser_set_current_name(chooser, ("Untitled document"));
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
@@ -83,7 +83,8 @@ void	switch_cam(GtkWidget *entry)
 		else if (g_env.scene.cam.c_pos == 3)
 			g_env.scene.cam.c_pos = 2;
 	}
-	else if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_next")))
+	else if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build,
+		"cam_next")))
 	{
 		if (g_env.scene.cam.c_pos == 1)
 			g_env.scene.cam.c_pos = 2;
@@ -97,21 +98,22 @@ void	switch_cam(GtkWidget *entry)
 	launch_thread();
 }
 
-void	open_scene()
+void	open_scene(void)
 {
 	GtkWidget				*dialog;
 	GtkFileChooserAction	action;
 	gint					res;
 	char					*filename;
+	GtkFileChooser			*chooser;
 
 	filename = 0;
 	action = GTK_FILE_CHOOSER_ACTION_OPEN;
-	dialog = gtk_file_chooser_dialog_new("Open File",GTK_WINDOW(g_env.win),
-	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
+	dialog = gtk_file_chooser_dialog_new("Open File", GTK_WINDOW(g_env.win),
+	action, "_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
-		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
+		chooser = GTK_FILE_CHOOSER(dialog);
 		filename = gtk_file_chooser_get_filename(chooser);
 		open_file(filename);
 		g_free(filename);
