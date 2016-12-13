@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f7.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/13 19:38:37 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/12/13 19:38:38 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	delete_objects1(t_obj *list_obj, t_obj *current_obj)
@@ -67,7 +79,7 @@ void	delete_objects(void *obj, unsigned int n)
 	}
 }
 
-void	*find_objects(char *name ,unsigned int *n)
+void	*find_objects(char *name, unsigned int *n)
 {
 	t_light	*lights;
 	t_obj	*obj;
