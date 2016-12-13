@@ -1660,8 +1660,11 @@ void	create_list_of_objects(void)
 	gtk_list_store_clear (model);
 	while (obj)
 	{
-		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
+		if (obj->type != OCULUS)
+		{
+			gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+			gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
+		}
 		obj = obj->next;
 	}
 	while (lgt)
