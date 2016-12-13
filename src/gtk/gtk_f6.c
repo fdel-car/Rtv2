@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f6.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/13 19:32:36 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/12/13 19:32:37 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	clear_entry_3(void)
@@ -7,14 +19,14 @@ void	clear_entry_3(void)
 	GtkEntry	*normz;
 	GtkEntry	*alpha;
 
-	alpha = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_angle"));
-	normx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normx"));
-	normy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normy"));
-	normz = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normz"));
-	gtk_entry_set_text(normx,"");
-	gtk_entry_set_text(normy,"");
-	gtk_entry_set_text(normz,"");
-	gtk_entry_set_text(alpha,"");
+	alpha = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_angle"));
+	normx = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_normx"));
+	normy = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_normy"));
+	normz = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_normz"));
+	gtk_entry_set_text(normx, "");
+	gtk_entry_set_text(normy, "");
+	gtk_entry_set_text(normz, "");
+	gtk_entry_set_text(alpha, "");
 }
 
 void	clear_entry_4(void)
@@ -23,12 +35,12 @@ void	clear_entry_4(void)
 	GtkEntry	*refl;
 	GtkEntry	*trans;
 
-	trans = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_trans"));
-	refl = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_refl"));
-	shiny = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_shiny"));
-	gtk_entry_set_text(shiny,"");
-	gtk_entry_set_text(refl,"");
-	gtk_entry_set_text(trans,"");
+	trans = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_trans"));
+	refl = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_refl"));
+	shiny = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_shiny"));
+	gtk_entry_set_text(shiny, "");
+	gtk_entry_set_text(refl, "");
+	gtk_entry_set_text(trans, "");
 }
 
 void	clear_entry_widget_add_object(void)
@@ -39,10 +51,10 @@ void	clear_entry_widget_add_object(void)
 	clear_entry_4();
 }
 
-void hide_window()
+void	hide_window(void)
 {
-	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,
-					"popup_create_object")));
+	gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"popup_create_object")));
 }
 
 void	signal_add_object2(t_obj *obj, char *s)
@@ -55,8 +67,8 @@ void	signal_add_object2(t_obj *obj, char *s)
 		add_adn(obj);
 	push_obj(obj);
 	clear_entry_widget_add_object();
-	gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object(g_env.build,
-					"popup_create_object")));
+	gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(g_env.build,
+	"popup_create_object")));
 	create_list_of_objects();
 	launch_preview();
 	launch_thread();
@@ -68,11 +80,11 @@ void	signal_add_object(void)
 	t_obj	*obj;
 
 	obj = 0;
-	s = gtk_combo_box_text_get_active_text(
-	GTK_COMBO_BOX_TEXT(gtk_builder_get_object(g_env.build,"create_type")));
+	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(\
+		gtk_builder_get_object(g_env.build, "create_type")));
 	obj = malloc(sizeof(t_obj));
 	init_obj(obj);
-	add_object_type(s,obj);
+	add_object_type(s, obj);
 	obj = add_object_name(obj);
 	obj = add_object_pos(obj);
 	obj = add_object_dir(obj);

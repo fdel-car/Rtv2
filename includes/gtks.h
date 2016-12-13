@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtks.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 19:50:46 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 17:39:20 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:29:41 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct	s_gtkdata
 	char		*desc;
 }				t_gtkdata;
 
-//----------
+void	hide_window(void);
 void	open_file(char *filename);
 void	switch_cam_pos();
 void	save_image_chooser(void);
@@ -75,18 +75,17 @@ void	view_popup_menu_delete_row(GtkWidget *menuitem, gpointer userdata);
 void	view_popup_menu(GtkWidget *treeview, GdkEventButton *event,
 		GtkTreePath *path, gpointer userdata);
 void	create_list_of_objects(void);
-
-t_obj *add_object_type(char *s, t_obj *obj);
-t_obj *add_object_name(t_obj *obj);
-t_obj *add_object_pos(t_obj *obj);
-t_obj *add_object_dir(t_obj *obj);
-t_obj *add_object_norm(t_obj *obj);
-t_obj *add_object_rayon(t_obj *obj);
-t_obj *add_object_alpha(t_obj *obj);
-t_obj *add_object_mater_shiny(t_obj *obj);
-t_obj *add_object_mater_refl(t_obj *obj);
-t_obj *add_object_mater_trans(t_obj *obj);
-t_obj *add_object_mater_color(t_obj *obj);
+t_obj	*add_object_type(char *s, t_obj *obj);
+t_obj	*add_object_name(t_obj *obj);
+t_obj	*add_object_pos(t_obj *obj);
+t_obj	*add_object_dir(t_obj *obj);
+t_obj	*add_object_norm(t_obj *obj);
+t_obj	*add_object_rayon(t_obj *obj);
+t_obj	*add_object_alpha(t_obj *obj);
+t_obj	*add_object_mater_shiny(t_obj *obj);
+t_obj	*add_object_mater_refl(t_obj *obj);
+t_obj	*add_object_mater_trans(t_obj *obj);
+t_obj	*add_object_mater_color(t_obj *obj);
 
 gboolean view_onButtonPressed(GtkWidget *treeview, GdkEventButton *event,
 		gpointer userdata);
