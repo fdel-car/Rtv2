@@ -4,6 +4,7 @@ scene
 	anti_aliasing:0
 	iter_reflection:0
 	iter_trans:2
+	soft_shadow:1
 	camera
 	{
 		pos:0;0;-10
@@ -15,7 +16,8 @@ scene
 		{
 		dir:1;-1;2
 		rayon:2.0
-		type:dir_light
+		pos:10;10;10
+		type:point_light
 		color:255;255;255
 		intensity:0.5
 		blur:0

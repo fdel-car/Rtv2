@@ -1,0 +1,84 @@
+#include "rt.h"
+
+void	delete_objects(void *obj, unsigned int n)
+{
+	t_obj *list_obj;
+	t_obj *current_obj;
+	t_light *current_light;
+	t_light *list_lgt;
+	list_obj = g_env.scene.obj;
+	list_lgt = g_env.scene.lgt;
+	if (n == 1)
+	{
+		current_obj = (t_obj *)obj;
+		if (list_obj == current_obj)
+		{
+			g_env.scene.obj = list_obj->next;
+			free(current_obj->name);
+			free(current_obj);
+		}
+		else
+		{
+			while (list_obj)
+			{
+				if (list_obj->next == current_obj)
+				{
+					list_obj->next = current_obj->next;
+					free(current_obj->name);
+					free(current_obj);
+				}
+				list_obj = list_obj->next;
+			}
+		}
+	}
+	else if (n == 2)
+	{
+		current_light = (t_light *)obj;
+		if (list_lgt == current_light)
+		{
+			g_env.scene.lgt = list_lgt->next;
+			free(current_light->name);
+			free(current_light);
+		}
+		else
+		{
+			while (list_lgt)
+			{
+				if (list_lgt->next == current_light)
+				{
+					list_lgt->next = current_light->next;
+					free(current_light->name);
+					free(current_light);
+				}
+				list_lgt = list_lgt->next;
+			}
+		}
+	}
+}
+
+void	*find_objects(char *name ,unsigned int *n )
+{
+	t_light *lights;
+	t_obj *obj;
+	lights = g_env.scene.lgt;
+	obj = g_env.scene.obj;
+	while (obj)
+	{
+		if (ft_strcmp(obj->name, name) == 0)
+		{
+			*n = 1;
+			return (obj);
+		}
+		obj = obj->next;
+	}
+	while (lights)
+	{
+		if (ft_strcmp(lights->name, name) == 0)
+		{
+			*n = 2;
+			return (lights);
+		}
+		lights = lights->next;
+	}
+	return (NULL);
+}
