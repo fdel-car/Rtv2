@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_f21.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: slgracie <slgracie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:19:07 by slgracie          #+#    #+#             */
-/*   Updated: 2016/12/13 18:28:13 by slgracie         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:50:39 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		view_popup_menu(GtkWidget *treeview, GdkEventButton *event,
 	gtk_menu_popup_at_pointer(GTK_MENU(menu), (GdkEvent*)event);
 }
 
-gboolean	view_onButtonPressed(GtkWidget *treeview,
+gboolean	view_onbuttonpressed(GtkWidget *treeview,
 		GdkEventButton *event, gpointer userdata)
 {
 	GtkTreePath			*path;
