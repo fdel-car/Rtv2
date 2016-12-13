@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.obj.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:30:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/12 14:22:10 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/12/13 16:37:48 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	load_obj(char **file, t_vect **v, int *i_s, t_obj *o)
 		++i_s[0];
 	while (file[i_s[0]])
 	{
-		if (check_tabsize(file[i_s[0]], i_s[1], i_s[2]))
+		if (ft_sii(file[i_s[0]], "f ") &&
+		check_tabsize(file[i_s[0]], i_s[1], i_s[2]))
 		{
 			new = malloc(sizeof(t_obj));
 			read_triangle(new, file[i_s[0]], v, o->mater);
@@ -75,7 +76,7 @@ void	fill_values(char **file, int v_s, int vn_s, t_obj *new)
 	free(v[1]);
 }
 
-void	parse_obj(t_obj *new_mesh)
+int		parse_obj(t_obj *new_mesh)
 {
 	int		fd;
 	char	*line;
@@ -95,4 +96,5 @@ void	parse_obj(t_obj *new_mesh)
 		fill_values(file, size[0], size[1], new_mesh);
 		ctab_free(file);
 	}
+	return (1);
 }

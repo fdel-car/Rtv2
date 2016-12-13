@@ -6,7 +6,7 @@
 #    By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/28 17:56:29 by fdel-car          #+#    #+#              #
-#    Updated: 2016/12/12 17:08:44 by vde-la-s         ###   ########.fr        #
+#    Updated: 2016/12/13 16:43:22 by vde-la-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS =  src/color.c src/elems.init.c src/main.c src/parse.elems.c \
 		src/intersect2.c src/post_process.c src/post_process2.c \
 		src/parse.utils2.c src/shadow.c src/stereoscopie.c src/verif.file.c \
 		src/perlin.c src/key_event2.c src/various_func.c src/progress_bar.c\
-		src/parse.elems2.c
+		src/parse.elems2.c src/free.utils.c
 
 OBJS =	color.o elems.init.o main.o parse.elems.o push.elems.o parse.file.o \
 		parse.utils.o vector.o vector2.o vector3.o intersect.o raytracing.o \
@@ -32,7 +32,8 @@ OBJS =	color.o elems.init.o main.o parse.elems.o push.elems.o parse.file.o \
 		render.texture.o normal.mapping.o render.ray2.o render.texture2.o \
 		complex_objects.o intersect2.o post_process.o post_process2.o \
 		parse.utils2.o shadow.o stereoscopie.o verif.file.o perlin.o \
-		key_event2.o various_func.o progress_bar.o parse.elems2.o
+		key_event2.o various_func.o progress_bar.o parse.elems2.o\
+		free.utils.o
 
 CFLAGS = -Wall -Wextra -Werror
 

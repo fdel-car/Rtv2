@@ -6,11 +6,21 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:17:30 by vde-la-s          #+#    #+#             */
-/*   Updated: 2016/12/12 16:06:20 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:42:37 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+int		verif_type(t_obj *o)
+{
+	if (o->type == NONE)
+	{
+		free_objs(o);
+		return (1);
+	}
+	return (0);
+}
 
 int		count_esize(char **t)
 {

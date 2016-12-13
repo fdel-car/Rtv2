@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/12 17:16:27 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:42:20 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	load_object(char **t)
 			if (ft_sii(t[n], "materiel"))
 				new->mater = load_material(&(t[n]));
 		}
+	if (verif_type(new))
+		return ;
 	if (new->src)
 		parse_obj(new);
 	set_func(new);
