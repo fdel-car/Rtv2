@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 19:50:46 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 19:29:41 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:51:23 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,8 @@ t_obj	*add_object_mater_shiny(t_obj *obj);
 t_obj	*add_object_mater_refl(t_obj *obj);
 t_obj	*add_object_mater_trans(t_obj *obj);
 t_obj	*add_object_mater_color(t_obj *obj);
-
-gboolean view_onButtonPressed(GtkWidget *treeview, GdkEventButton *event,
-		gpointer userdata);
-
-//----------
-
+gboolean view_onbuttonpressed(GtkWidget *treeview, GdkEventButton *event,
+				gpointer userdata);
 void			left_filter(void);
 void			right_filter(void);
 void			create_list_of_objects();

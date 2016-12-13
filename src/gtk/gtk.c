@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 18:34:15 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 17:39:39 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:50:30 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	create_list_of_objects(void)
 	lgt = g_env.scene.lgt;
 	model = GTK_LIST_STORE(gtk_builder_get_object(g_env.build,"list_object"));
 	tree_view = GTK_WIDGET(gtk_builder_get_object(g_env.build,"tree_object"));
-	gtk_list_store_clear (model);
+	gtk_list_store_clear(model);
 	while (obj)
 	{
 		if (obj->type != OCULUS)
 		{
-			gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-			gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
+			gtk_list_store_append(GTK_LIST_STORE (model), &iter);
+			gtk_list_store_set(GTK_LIST_STORE (model), &iter, 0, obj->name, -1);
 		}
 		obj = obj->next;
 	}
@@ -55,5 +55,5 @@ void	create_list_of_objects(void)
 	g_signal_connect(tree_view, "row-activated",
 	(GCallback)select_current_obj, NULL);
 	g_signal_connect(tree_view, "button-press-event",
-	(GCallback)view_onButtonPressed, NULL);
+	(GCallback)view_onbuttonpressed, NULL);
 }
