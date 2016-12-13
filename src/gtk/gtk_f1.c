@@ -88,18 +88,19 @@ void	open_scene()
 	GtkWidget				*dialog;
 	GtkFileChooserAction	action;
 	gint					res;
+	char					*filename;
 
+	filename = 0;
 	action = GTK_FILE_CHOOSER_ACTION_OPEN;
-	dialog = gtk_file_chooser_dialog_new ("Open File",GTK_WINDOW(g_env.win),
+	dialog = gtk_file_chooser_dialog_new("Open File",GTK_WINDOW(g_env.win),
 	action,"_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT,NULL);
-	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	res = gtk_dialog_run(GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
-		char *filename;
-		GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
-		filename = gtk_file_chooser_get_filename (chooser);
-		open_file (filename);
-		g_free (filename);
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
+		filename = gtk_file_chooser_get_filename(chooser);
+		open_file(filename);
+		g_free(filename);
 	}
 	gtk_widget_destroy (dialog);
 }
