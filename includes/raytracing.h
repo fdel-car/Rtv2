@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:09 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 15:25:26 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:49:45 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define EPSILON 0.001
 
 int			vec_is_null(t_vect u);
-int			vec_are_equal(t_vect u, t_vect v);
 int			g_pos(guchar *new, int x, int y);
 float		sphere_cut(float *r, t_data ray, t_vect cut_pos, t_vect cut);
 float		texture_cut(float res, t_obj *o, t_data mray);

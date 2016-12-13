@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 18:11:57 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 15:23:46 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:49:34 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ float	dist_p(t_vect u, t_vect v)
 int		vec_is_null(t_vect u)
 {
 	if (u.x == 0 && u.y == 0 && u.z == 0)
-		return (1);
-	return (0);
-}
-
-int		vec_are_equal(t_vect u, t_vect v)
-{
-	if (u.x == v.x && u.y == v.y && u.z == v.z)
 		return (1);
 	return (0);
 }

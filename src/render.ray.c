@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/08 16:48:43 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:48:35 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,14 @@ t_color		render_ray(t_data ray)
 	t_color color;
 
 	if (ray.solut != -1 && ray.obj_hit)
-		color = compute_light(ray, g_env.scene.iter_refl,
-		g_env.scene.iter_trans);
+	{
+		if (ray.obj_hit->type == OCULUS)
+			color = compute_light(ray, g_env.scene.iter_refl,
+			g_env.scene.iter_trans + 2);
+		else
+			color = compute_light(ray, g_env.scene.iter_refl,
+			g_env.scene.iter_trans);
+	}
 	else
 		color = color_new(0, 0, 0);
 	return (color);
