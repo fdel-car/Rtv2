@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:53:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 17:12:16 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:32:48 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ t_color		init_ray(float x, float y, t_data ray)
 	t_vect	view_point;
 
 	view_point = vec_sub(vec_add(g_env.scene.cam.up_left,
-				vec_mult(g_env.scene.cam.right,
-					g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
-					g_env.scene.cam.y_ind * y));
+	vec_mult(g_env.scene.cam.right,
+	g_env.scene.cam.x_ind * x)), vec_mult(g_env.scene.cam.up,
+	g_env.scene.cam.y_ind * y));
 	ray.dir = vec_norm(vec_sub(view_point, g_env.scene.cam.pos));
 	if (g_env.oculus == TRUE)
 		return (render_ray(oculus_view(ray)));

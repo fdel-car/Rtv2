@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 18:34:15 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 18:41:28 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:41:31 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,23 @@ void	open_file(char *filename)
 void	switch_cam_pos()
 {
 	if (g_env.scene.cam.c_pos == 1)
+	{
 		g_env.scene.cam.pos = g_env.scene.cam.pos1;
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+	}
 	else if (g_env.scene.cam.c_pos == 2)
+	{
 		g_env.scene.cam.pos = g_env.scene.cam.pos2;
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+	}
 	else if (g_env.scene.cam.c_pos == 3)
+	{
 		g_env.scene.cam.pos = g_env.scene.cam.pos3;
+		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
+		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+	}
 }
 
 void	save_image_chooser(void)

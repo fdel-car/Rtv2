@@ -7,7 +7,8 @@ scene
 	soft_shadow:0
 	camera
 	{
-		pos:0;0;-20
+		pos:0;20;-20
+		pos2:0;0;-20
 		look:0;0;0
 	}
 	lights
