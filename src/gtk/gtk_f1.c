@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/13 18:55:22 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/12/13 18:55:26 by fdel-car         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	open_file(char *filename)
 {
 	if (ft_strcmp(".scn", filename + ft_strlen(filename) - 4) == 0)
 	{
+		free_objects(FALSE);
+		free_lights();
 		load_file(filename);
 		create_list_of_objects();
 		launch_thread();

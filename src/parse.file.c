@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 15:21:30 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:57:04 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	load_file(char *scene_file)
 	int		n;
 
 	n = -1;
-	if (start_by(scene_file, "scenes/") &&
+	if (ft_strcmp(".scn", scene_file + ft_strlen(scene_file) - 4) == 0 &&
 	(fd = open(scene_file, O_RDONLY)) >= 0)
 	{
 		while (get_next_line(fd, &line) && (++n) > -42)

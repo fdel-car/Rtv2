@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 16:42:48 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:56:10 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <fcntl.h>
 
+void		free_objs(t_obj *o);
+void		free_objects(gboolean all);
+void		free_lights(void);
 int			verif_type(t_obj *o);
 void		free_objs(t_obj *o);
 t_mater		load_material(char **t);
