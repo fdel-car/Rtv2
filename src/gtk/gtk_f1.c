@@ -102,5 +102,5 @@ void	open_scene()
 		open_file(filename);
 		g_free(filename);
 	}
-	gtk_widget_destroy (dialog);
+	gtk_widget_destroy(dialog);
 }
