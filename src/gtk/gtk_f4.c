@@ -1,11 +1,10 @@
 #include "rt.h"
 
-
-t_obj *add_object_dir(t_obj *obj)
+t_obj	*add_object_dir(t_obj *obj)
 {
-	GtkEntry *dirx;
-	GtkEntry *diry;
-	GtkEntry *dirz;
+	GtkEntry	*dirx;
+	GtkEntry	*diry;
+	GtkEntry	*dirz;
 
 	dirx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_dirx"));
 	diry = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_diry"));
@@ -17,11 +16,11 @@ t_obj *add_object_dir(t_obj *obj)
 	return (obj);
 }
 
-t_obj *add_object_norm(t_obj *obj)
+t_obj	*add_object_norm(t_obj *obj)
 {
-	GtkEntry *normx;
-	GtkEntry *normy;
-	GtkEntry *normz;
+	GtkEntry	*normx;
+	GtkEntry	*normy;
+	GtkEntry	*normz;
 
 	normx = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normx"));
 	normy = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_normy"));
@@ -33,27 +32,27 @@ t_obj *add_object_norm(t_obj *obj)
 	return (obj);
 }
 
-t_obj *add_object_rayon(t_obj *obj)
+t_obj	*add_object_rayon(t_obj *obj)
 {
-	GtkEntry *rayon;
+	GtkEntry	*rayon;
 
 	rayon = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_rayon"));
 	obj->rayon = ft_atof(gtk_entry_get_text(rayon));
 	return (obj);
 }
 
-t_obj *add_object_alpha(t_obj *obj)
+t_obj	*add_object_alpha(t_obj *obj)
 {
-	GtkEntry *alpha;
+	GtkEntry	*alpha;
 
 	alpha = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_angle"));
 	obj->alpha = ft_atof(gtk_entry_get_text(alpha)) * M_PI / 180;
 	return (obj);
 }
 
-t_obj *add_object_mater_shiny(t_obj *obj)
+t_obj	*add_object_mater_shiny(t_obj *obj)
 {
-	GtkEntry *shiny;
+	GtkEntry	*shiny;
 
 	shiny = GTK_ENTRY(gtk_builder_get_object(g_env.build,"e_shiny"));
 	obj->mater.shiny = ft_atof(gtk_entry_get_text(shiny));
