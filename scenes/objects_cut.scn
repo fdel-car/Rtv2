@@ -1,79 +1,91 @@
 scene
 {
 	ambiant_lighting:0.3
-	anti_aliasing:0
+	anti_aliasing:4
 	iter_reflection:0
 	iter_trans:2
-	soft_shadow:0
+	soft_shadow:1
 	camera
 	{
-		pos:0;20;-20
+		pos:-2;10;-20
 		pos2:0;0;-20
 		look:0;0;0
 	}
 	lights
 	{
-		light_1
+		dir_light
 		{
-		pos:-4;10;10
 		dir:1;-1;0
-		rayon:0
-		alpha:30
 		type:dir_light
 		color:255;255;255
 		intensity:0.4
 		blur:0
 		}
-		light_2
+		point_light
 		{
-		pos:6;20;10
-		dir:1;-1;0
-		rayon:0
-		alpha:30
+		pos:10;0;0
 		type:point_light
-		color:255;255;255
+		color:0;255;255
 		intensity:0.4
 		blur:0
 		}
 	}
 	objects
 	{
-		earth
+		sphere_cut
 		{
 			pos:0;0;0
 			normal:NULL
+			cut_dir:1;1;1
 			rayon:2
 			type:sphere
 			materiel
 			{
-				texture:damier
+				texture:NULL
 				brillance:102
-				reflection:1
+				reflection:0.8
 				transparence:0
-				color:0;0;121
+				color:0;0;200
 			}
 		}
-		earth2
+		cone
+		{
+			pos:8;0;2
+			dir:0;1;0.5
+			rayon:2
+			type:cone
+			min:-4
+			max:6
+			materiel
+			{
+				brillance:102
+				reflection:0
+				transparence:0
+				color:125;0;0
+			}
+		}
+		cylinder
 		{
 			pos:-5;0;0
-			normal:NULL
+			dir:0;1;0
 			rayon:2
-			type:sphere
+			type:cylinder
+			min:-2
+			max:2
 			materiel
 			{
-				texture:perlin
 				brillance:102
-				reflection:1
-				transparence:0
-				color:0;0;121
+				reflection:0
+				transparence:0.6
+				color:125;125;0
 			}
 		}
-		plan_1
+		plan
 		{
 			pos:0;-6;0
 			dir:NULL
 			normal:0;1;0
-			sphere_cut:10
+			sphere_cut:20
 			rayon:0
 			type:plane
 			materiel

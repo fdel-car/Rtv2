@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 19:47:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 19:47:08 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:19:02 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	save_entry_transformation_object2(t_gtkdata *data, float ret)
 		((t_obj *)data->obj)->dir.y = ret;
 	if (ft_strcmp(data->desc, "dirz") == 0)
 		((t_obj *)data->obj)->dir.z = ret;
-	((t_obj *)data->obj)->dir = vec_norm(((t_obj *)data->obj)->dir);
 	if (ft_strcmp(data->desc, "normx") == 0)
 		((t_obj *)data->obj)->norm.x = ret;
 }

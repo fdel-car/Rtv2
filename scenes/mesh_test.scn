@@ -14,7 +14,6 @@ scene
 		light_1
 		{
 		pos:10;5;-10
-		rayon:2.0
 		type:point_light
 		color:255;255;255
 		intensity:0.5
@@ -23,7 +22,6 @@ scene
 		light_2
 		{
 		pos:-10;5;-10
-		rayon:2.0
 		type:point_light
 		color:255;255;255
 		intensity:0.5
