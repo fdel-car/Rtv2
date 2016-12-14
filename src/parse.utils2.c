@@ -6,11 +6,18 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:17:30 by vde-la-s          #+#    #+#             */
-/*   Updated: 2016/12/13 16:42:37 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:05:49 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void	free_exit(void)
+{
+	free_objects(TRUE);
+	free_lights();
+	gtk_main_quit();
+}
 
 int		verif_type(t_obj *o)
 {

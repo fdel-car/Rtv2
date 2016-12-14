@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 14:59:59 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 17:47:27 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:05:13 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		apply_filter(int keyval)
 gboolean	key_event(GtkWidget *win, GdkEventKey *event)
 {
 	if (event->keyval == 65307)
-		gtk_main_quit();
+		free_exit();
 	if (g_env.state_prev == FALSE)
 		return (FALSE);
 	(void)win;

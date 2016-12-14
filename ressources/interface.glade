@@ -12,7 +12,7 @@
   </object>
   <object class="GtkWindow" id="win">
     <property name="can_focus">False</property>
-    <signal name="delete-event" handler="gtk_main_quit" swapped="no"/>
+    <signal name="delete-event" handler="free_exit" swapped="no"/>
     <signal name="key-press-event" handler="key_event" swapped="no"/>
     <child>
       <object class="GtkBox" id="main_box">

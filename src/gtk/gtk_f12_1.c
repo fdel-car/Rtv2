@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_f12_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: slgracie <slgracie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:46:58 by slgracie          #+#    #+#             */
-/*   Updated: 2016/12/14 12:54:17 by slgracie         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:03:40 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
 void	create_materw_object5(t_norm *me)
 {
 	g_signal_connect(me->refl_entry, "changed",
