@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:06:31 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/14 15:06:16 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 15:11:13 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,6 @@ int		fill_texture(t_text *tex, FILE *img)
 		}
 	}
 	return (1);
-}
-
-void	init_tex(t_text *tex)
-{
-	tex->tex_w = tex->size[0];
-	tex->tex_h = tex->size[1];
-	tex->tsize = -1;
 }
 
 t_text	*load_texture(char *path)

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/28 18:45:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/14 13:06:03 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 15:11:38 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <fcntl.h>
 
 void		free_exit(void);
+void		init_tex(t_text *tex);
 void		free_objs(t_obj *o);
 void		free_objects(gboolean all);
 void		free_lights(void);
