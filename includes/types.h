@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 20:27:35 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 01:48:45 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
+
+typedef struct		s_gtkdata
+{
+	GtkWidget		*data;
+	void			*obj;
+	char			*desc;
+}					t_gtkdata;
 
 typedef struct		s_vect
 {
@@ -193,6 +200,61 @@ typedef struct		s_scene
 	t_light			*lgt;
 	t_obj			*obj;
 }					t_scene;
+
+typedef struct		s_norm
+{
+	GtkWidget		*dir_entry[3];
+	GtkWidget		*label;
+	GtkWidget		*pos_entry[3];
+	GtkWidget		*shiny_label;
+	GtkWidget		*refl_label;
+	GtkWidget		*trans_label;
+	GtkWidget		*color_label;
+	GtkWidget		*text_label;
+	GtkWidget		*indice_ref_label;
+	GtkWidget		*shiny_entry;
+	GtkWidget		*refl_entry;
+	GtkWidget		*trans_entry;
+	GtkWidget		*color_r_entry;
+	GtkWidget		*color_g_entry;
+	GtkWidget		*color_b_entry;
+	GtkWidget		*text_entry;
+	GtkWidget		*btn_text;
+	GtkWidget		*ref_spin_button;
+	GtkWidget		*intensity_label;
+	GtkWidget		*blur_label;
+	GtkWidget		*intensity_entry;
+	GtkWidget		*blur_entry;
+	GtkWidget		*color_button;
+	GtkAdjustment	*adjustment;
+	GtkEntryBuffer	*buffer_dir[3];
+	GtkEntryBuffer	*buffer_pos[3];
+	GtkEntryBuffer	*intensity_buffer;
+	GtkEntryBuffer	*blur_buffer;
+	GtkEntryBuffer	*shiny_buffer;
+	GtkEntryBuffer	*refl_buffer;
+	GtkEntryBuffer	*trans_buffer;
+	GtkEntryBuffer	*color_r_buffer;
+	GtkEntryBuffer	*color_g_buffer;
+	GtkEntryBuffer	*color_b_buffer;
+	GtkEntryBuffer	*text_buffer;
+	t_gtkdata		*entry_shiny;
+	t_gtkdata		*entry_refl;
+	t_gtkdata		*entry_trans;
+	t_gtkdata		*entry_col_r;
+	t_gtkdata		*entry_col_g;
+	t_gtkdata		*entry_col_b;
+	t_gtkdata		*entry_text;
+	t_gtkdata		*entry_col;
+	t_gtkdata		*entry_intensity;
+	t_gtkdata		*entry_blur;
+	t_gtkdata		*entry_posx;
+	t_gtkdata		*entry_posy;
+	t_gtkdata		*entry_posz;
+	t_gtkdata		*entry_dirx;
+	t_gtkdata		*entry_diry;
+	t_gtkdata		*entry_dirz;
+}					t_norm;
 
 typedef struct		s_env
 {
