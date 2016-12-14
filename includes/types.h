@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:44:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/14 01:48:45 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/14 02:35:39 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,9 @@ typedef struct		s_scene
 
 typedef struct		s_norm
 {
+	GtkWidget		*mlabel[3];
+	GtkWidget		*rayon_entry;
+	GtkWidget		*norm_entry[3];
 	GtkWidget		*dir_entry[3];
 	GtkWidget		*label;
 	GtkWidget		*pos_entry[3];
@@ -227,8 +230,10 @@ typedef struct		s_norm
 	GtkWidget		*blur_entry;
 	GtkWidget		*color_button;
 	GtkAdjustment	*adjustment;
+	GtkEntryBuffer	*buffer_norm[3];
 	GtkEntryBuffer	*buffer_dir[3];
 	GtkEntryBuffer	*buffer_pos[3];
+	GtkEntryBuffer	*buffer_rayon;
 	GtkEntryBuffer	*intensity_buffer;
 	GtkEntryBuffer	*blur_buffer;
 	GtkEntryBuffer	*shiny_buffer;
@@ -254,6 +259,10 @@ typedef struct		s_norm
 	t_gtkdata		*entry_dirx;
 	t_gtkdata		*entry_diry;
 	t_gtkdata		*entry_dirz;
+	t_gtkdata		*entry_normx;
+	t_gtkdata		*entry_normy;
+	t_gtkdata		*entry_normz;
+	t_gtkdata		*entry_rayon;
 }					t_norm;
 
 typedef struct		s_env
