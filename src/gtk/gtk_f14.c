@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f14.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 12:15:12 by slgracie          #+#    #+#             */
+/*   Updated: 2016/12/14 12:15:13 by slgracie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	position_widget1(t_norm *me, char *s_entry, t_obj *current_obj)
@@ -5,11 +17,11 @@ void	position_widget1(t_norm *me, char *s_entry, t_obj *current_obj)
 	me->entry_posx = malloc(sizeof(t_gtkdata));
 	me->entry_posy = malloc(sizeof(t_gtkdata));
 	me->entry_posz = malloc(sizeof(t_gtkdata));
-	sprintf(s_entry,"%f", current_obj->pos.x);
+	sprintf(s_entry, "%f", current_obj->pos.x);
 	me->buffer_pos[0] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_obj->pos.y);
+	sprintf(s_entry, "%f", current_obj->pos.y);
 	me->buffer_pos[1] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_obj->pos.z);
+	sprintf(s_entry, "%f", current_obj->pos.z);
 	me->buffer_pos[2] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
 	me->label = gtk_label_new("    Position     ");
 	me->pos_entry[0] = gtk_entry_new_with_buffer(me->buffer_pos[0]);

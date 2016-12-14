@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 19:50:46 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/14 00:45:55 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/14 12:51:16 by slgracie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,6 @@ void			add_sphere_adn(t_obj *o, t_vect pos);
 void			hide_window(void);
 gboolean		view_onbuttonpressed(GtkWidget *treeview, GdkEventButton *event,
 				gpointer userdata);
-
+void			create_materw_object5(t_norm *me);
+void			create_materw_object6(t_norm *me);
 #endif

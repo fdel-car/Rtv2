@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f15.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 12:14:07 by slgracie          #+#    #+#             */
+/*   Updated: 2016/12/14 12:14:38 by slgracie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	direction_widget1(t_norm *me, char *s_entry, t_obj *current_obj)
@@ -5,12 +17,12 @@ void	direction_widget1(t_norm *me, char *s_entry, t_obj *current_obj)
 	me->entry_dirx = malloc(sizeof(t_gtkdata));
 	me->entry_diry = malloc(sizeof(t_gtkdata));
 	me->entry_dirz = malloc(sizeof(t_gtkdata));
-	sprintf(s_entry,"%f", current_obj->dir.x);
-	me->buffer_dir[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_obj->dir.y);
-	me->buffer_dir[1] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_obj->dir.z);
-	me->buffer_dir[2] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_obj->dir.x);
+	me->buffer_dir[0] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_obj->dir.y);
+	me->buffer_dir[1] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_obj->dir.z);
+	me->buffer_dir[2] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
 	me->label = gtk_label_new("Direction");
 	me->dir_entry[0] = gtk_entry_new_with_buffer(me->buffer_dir[0]);
 	me->dir_entry[1] = gtk_entry_new_with_buffer(me->buffer_dir[1]);

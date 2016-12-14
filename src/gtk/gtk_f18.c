@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f18.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 12:10:15 by slgracie          #+#    #+#             */
+/*   Updated: 2016/12/14 12:10:32 by slgracie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	direction_widgetl1(t_norm *me, char *s_entry, t_light *current_obj)
@@ -5,12 +17,12 @@ void	direction_widgetl1(t_norm *me, char *s_entry, t_light *current_obj)
 	me->entry_dirx = malloc(sizeof(t_gtkdata));
 	me->entry_diry = malloc(sizeof(t_gtkdata));
 	me->entry_dirz = malloc(sizeof(t_gtkdata));
-	sprintf(s_entry,"%f", current_obj->dir.x);
-	me->buffer_dir[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_obj->dir.y);
-	me->buffer_dir[1] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_obj->dir.z);
-	me->buffer_dir[2] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_obj->dir.x);
+	me->buffer_dir[0] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_obj->dir.y);
+	me->buffer_dir[1] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_obj->dir.z);
+	me->buffer_dir[2] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
 	me->label = gtk_label_new("Direction");
 	me->dir_entry[0] = gtk_entry_new_with_buffer(me->buffer_dir[0]);
 	me->dir_entry[1] = gtk_entry_new_with_buffer(me->buffer_dir[1]);
@@ -40,7 +52,8 @@ void	direction_widgetl2(t_norm *me, GtkWidget *grid, t_light *current_obj)
 	me->entry_dirz->obj = current_obj;
 }
 
-void	direction_widget_light(t_light *current_obj, GtkWidget *grid, char *s_entry)
+void	direction_widget_light(t_light *current_obj,
+		GtkWidget *grid, char *s_entry)
 {
 	t_norm	me;
 

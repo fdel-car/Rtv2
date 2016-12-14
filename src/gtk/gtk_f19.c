@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_f19.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 12:08:18 by slgracie          #+#    #+#             */
+/*   Updated: 2016/12/14 12:08:20 by slgracie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	create_transformation_wl1(t_norm *me,
@@ -7,14 +19,14 @@ char *s_entry, t_light *current_light)
 	me->entry_posy = malloc(sizeof(t_gtkdata));
 	me->entry_posz = malloc(sizeof(t_gtkdata));
 	me->entry_rayon = malloc(sizeof(t_gtkdata));
-	sprintf(s_entry,"%f", current_light->pos.x);
-	me->buffer_pos[0] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_light->pos.y);
-	me->buffer_pos[1] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_light->pos.z);
-	me->buffer_pos[2] = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
-	sprintf(s_entry,"%f", current_light->rayon);
-	me->buffer_rayon = gtk_entry_buffer_new(s_entry,ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_light->pos.x);
+	me->buffer_pos[0] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_light->pos.y);
+	me->buffer_pos[1] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_light->pos.z);
+	me->buffer_pos[2] = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
+	sprintf(s_entry, "%f", current_light->rayon);
+	me->buffer_rayon = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
 	me->mlabel[0] = gtk_label_new("    Position    ");
 	me->mlabel[2] = gtk_label_new("Rayon");
 	me->pos_entry[0] = gtk_entry_new_with_buffer(me->buffer_pos[0]);
@@ -27,20 +39,20 @@ void	create_transformation_wl2(t_norm *me,
 t_light *current_light, GtkWidget *grid, char *s_entry)
 {
 	direction_widget_light(current_light, grid, s_entry);
-	gtk_entry_set_width_chars ((GtkEntry *)me->pos_entry[0], 6);
-	gtk_entry_set_width_chars ((GtkEntry *)me->pos_entry[1], 6);
-	gtk_entry_set_width_chars ((GtkEntry *)me->pos_entry[2], 6);
-	gtk_entry_set_width_chars ((GtkEntry *)me->rayon_entry, 6);
-	gtk_entry_set_max_length ((GtkEntry *)me->pos_entry[0], 6);
-	gtk_entry_set_max_length ((GtkEntry *)me->pos_entry[1], 6);
-	gtk_entry_set_max_length ((GtkEntry *)me->pos_entry[2], 6);
-	gtk_entry_set_max_length ((GtkEntry *)me->rayon_entry, 6);
-	gtk_grid_attach (GTK_GRID (grid), me->mlabel[0], 0, 0, 1, 1);
-	gtk_grid_attach (GTK_GRID (grid), me->mlabel[2], 0, 2, 1, 1);
-	gtk_grid_attach (GTK_GRID (grid), me->pos_entry[0], 1, 0, 1, 1);
-	gtk_grid_attach (GTK_GRID (grid), me->pos_entry[1], 2, 0, 1, 1);
-	gtk_grid_attach (GTK_GRID (grid), me->pos_entry[2], 3, 0, 1, 1);
-	gtk_grid_attach (GTK_GRID (grid), me->rayon_entry, 1, 2, 1, 1);
+	gtk_entry_set_width_chars((GtkEntry *)me->pos_entry[0], 6);
+	gtk_entry_set_width_chars((GtkEntry *)me->pos_entry[1], 6);
+	gtk_entry_set_width_chars((GtkEntry *)me->pos_entry[2], 6);
+	gtk_entry_set_width_chars((GtkEntry *)me->rayon_entry, 6);
+	gtk_entry_set_max_length((GtkEntry *)me->pos_entry[0], 6);
+	gtk_entry_set_max_length((GtkEntry *)me->pos_entry[1], 6);
+	gtk_entry_set_max_length((GtkEntry *)me->pos_entry[2], 6);
+	gtk_entry_set_max_length((GtkEntry *)me->rayon_entry, 6);
+	gtk_grid_attach(GTK_GRID(grid), me->mlabel[0], 0, 0, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), me->mlabel[2], 0, 2, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), me->pos_entry[0], 1, 0, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), me->pos_entry[1], 2, 0, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), me->pos_entry[2], 3, 0, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), me->rayon_entry, 1, 2, 1, 1);
 }
 
 void	create_transformation_wl3(t_norm *me)

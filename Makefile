@@ -6,7 +6,7 @@
 #    By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/28 17:56:29 by fdel-car          #+#    #+#              #
-#    Updated: 2016/12/13 20:17:50 by fdel-car         ###   ########.fr        #
+#    Updated: 2016/12/14 12:52:49 by slgracie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS =  src/color.c src/elems.init.c src/main.c src/parse.elems.c \
 		src/gtk/gtk_f10.c src/gtk/gtk_f11.c src/gtk/gtk_f12.c src/gtk/gtk_f13.c\
 		src/gtk/gtk_f14.c src/gtk/gtk_f15.c src/gtk/gtk_f16.c src/gtk/gtk_f17.c\
 		src/gtk/gtk_f18.c src/gtk/gtk_f19.c src/gtk/gtk_f20.c src/gtk/gtk_f21.c\
+		src/gtk/gtk_f12_1.c\
 
 OBJS =	color.o elems.init.o main.o parse.elems.o push.elems.o parse.file.o \
 		parse.utils.o vector.o vector2.o vector3.o intersect.o raytracing.o \
@@ -41,7 +42,8 @@ OBJS =	color.o elems.init.o main.o parse.elems.o push.elems.o parse.file.o \
 		free.utils.o gtk_f1.o gtk_f2.o gtk_f3.o gtk_f4.o gtk_f5.o\
 		gtk_f6.o gtk_f7.o gtk_f8.o gtk_f9.o gtk_f10.o gtk_f11.o\
 		gtk_f12.o gtk_f13.o gtk_f14.o gtk_f15.o gtk_f16.o gtk_f17.o\
-		gtk_f18.o gtk_f19.o gtk_f20.o gtk_f21.o signals2.o
+		gtk_f18.o gtk_f19.o gtk_f20.o gtk_f21.o signals2.o\
+		gtk_f12_1.o
 CFLAGS = -Wall -Wextra -Werror
 
 GTK = `pkg-config --libs gtk+-3.0`

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 19:32:36 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 19:32:37 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 12:49:26 by slgracie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,6 @@ void	clear_entry_widget_add_object(void)
 	clear_entry_2();
 	clear_entry_3();
 	clear_entry_4();
-}
-
-void	hide_window(void)
-{
-	gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(g_env.build,
-	"popup_create_object")));
 }
 
 void	signal_add_object2(t_obj *obj, char *s)
