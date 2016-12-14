@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.texture2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:55:01 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:57:47 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 14:12:44 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,38 +35,49 @@ t_color	get_resize_pxl(t_text *tex, float coef, int x, int y)
 	return (c);
 }
 
+void	resize_texture_init(int xy_max[2],
+t_text *tex, unsigned char *tmp, float coef)
+{
+	xy_max[0] = tex->tex_w * coef;
+	xy_max[1] = tex->tex_h * coef;
+	tmp = (unsigned char *)malloc(sizeof(unsigned char)
+	* xy_max[0] * 3 * xy_max[1]);
+}
+
+void	resize_texture_exit(t_text *tex,
+unsigned char *tmp, int xy_max[2])
+{
+	free(tex->text);
+	tex->text = tmp;
+	tex->tex_w = xy_max[0];
+	tex->tex_h = xy_max[1];
+}
+
 void	resize_texture(t_text *tex, float coef)
 {
 	unsigned char	*tmp;
-	int				x;
-	int				x_max;
-	int				y;
-	int				y_max;
+	int				xy[2];
+	int				xy_max[2];
 	int				pos;
 	t_color			c;
 
-	if (!tex)
+	if (!(tmp = 0) && !tex)
 		return ;
-	x_max = tex->tex_w * coef;
-	y_max = tex->tex_h * coef;
-	tmp = (unsigned char *)malloc(sizeof(unsigned char) * x_max * 3 * y_max);
+	resize_texture_init(xy_max, tex, tmp, coef);
 	pos = 0;
-	y = 0;
-	while (y < y_max)
+	xy[1] = 0;
+	while (xy[1] < xy_max[1])
 	{
-		x = 0;
-		while (x < x_max)
+		xy[0] = 0;
+		while (xy[0] < xy_max[0])
 		{
-			c = get_resize_pxl(tex, coef, x, y);
+			c = get_resize_pxl(tex, coef, xy[0], xy[1]);
 			tmp[pos++] = c.r;
 			tmp[pos++] = c.g;
 			tmp[pos++] = c.b;
-			x++;
+			xy[0]++;
 		}
-		y++;
+		xy[1]++;
 	}
-	free(tex->text);
-	tex->text = tmp;
-	tex->tex_w = x_max;
-	tex->tex_h = y_max;
+	resize_texture_exit(tex, tmp, xy_max);
 }

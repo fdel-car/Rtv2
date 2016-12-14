@@ -4,6 +4,7 @@ scene
 	anti_aliasing:0
 	iter_reflection:0
 	iter_trans:4
+	soft_shadow:0
 	camera
 	{
 		pos:0;0;-20
