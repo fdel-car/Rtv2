@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:33:19 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 16:30:31 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:46:38 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		check_tabsize(char *line, int v_s, int vn_s)
 
 	t = ft_strsplit(line, ' ');
 	r = 1;
+	if (!t[0] || !t[1] || !t[2] || !t[3])
+		return (0);
 	if (get_val(t[1], 3) - 1 > vn_s)
 		r = 0;
 	if (get_val(t[1], 1) - 1 > v_s)
@@ -63,7 +65,7 @@ int		check_tabsize(char *line, int v_s, int vn_s)
 		r = 0;
 	ctab_free(t);
 	free(t);
-	return (1);
+	return (r);
 }
 
 void	read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)

@@ -6,7 +6,7 @@
 /*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:30:40 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 16:37:48 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:05:49 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,11 @@ int		parse_obj(t_obj *new_mesh)
 	size[1] = 0;
 	if ((fd = open(new_mesh->src, O_RDONLY)) >= 0)
 	{
-		while (get_next_line(fd, &line) && ++n < 9999)
+		while (get_next_line(fd, &line) && ++n < 9997)
 			file[n] = line;
 		file[n + 1] = 0;
+		if ((n + 1) == 9998)
+			return (0);
 		count_values(file, &size[0], &size[1]);
 		fill_values(file, size[0], size[1], new_mesh);
 		ctab_free(file);
