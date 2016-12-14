@@ -6,14 +6,14 @@ scene
 	iter_trans:0
 	camera
 	{
-		pos:-10;5;0
-		dir:1;-0.2;0
+		pos:2;1;4
+		look:0;0;0
 	}
 	lights
 	{
 		light_1
 		{
-		pos:10;5;-10
+		pos:-10;5;0
 		type:point_light
 		color:255;255;255
 		intensity:0.5
@@ -21,7 +21,7 @@ scene
 		}
 		light_2
 		{
-		pos:-10;5;-10
+		pos:10;5;0
 		type:point_light
 		color:255;255;255
 		intensity:0.5
@@ -49,7 +49,7 @@ scene
 		}
 		plan_1
 		{
-			pos:0;-2;0
+			pos:0;0;0
 			normal:0;1;0
 			type:plane
 			materiel
@@ -57,7 +57,7 @@ scene
 				brillance:0
 				reflection:0
 				transparence:0
-				color:100;0;100
+				color:100;100;100
 				texture:NULL
 			}
 		}
