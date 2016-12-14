@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.ray.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 19:06:28 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 20:28:12 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:23:10 by vde-la-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ t_color		compute_light_bis(t_data ray, int iter_refl, int iter_trans,
 	ray.obj_hit->mater.tex), g_env.scene.ambiant)));
 }
 
+void		compute_light2(float *coef, t_color *c, t_data *ray, t_light *l)
+{
+	*coef = get_shadow(l, ray);
+	*c = color_stack(*c, color_mult(diffuse_lighting(ray, l), *coef));
+	if (*coef >= 0.9 && ray->obj_hit->mater.shiny != 0)
+		*c = color_stack(*c, color_mult(specular_lighting(ray, l), *coef));
+	ray->lights++;
+}
+
 t_color		compute_light(t_data ray, int iter_refl, int iter_trans)
 {
 	t_color		c;
@@ -61,12 +70,9 @@ t_color		compute_light(t_data ray, int iter_refl, int iter_trans)
 		return (get_texture(ray, ray.obj_hit->mater.tex));
 	while (l)
 	{
-		coef = get_shadow(l, &ray);
-		c = color_stack(c, color_mult(diffuse_lighting(&ray, l), coef));
-		if (coef >= 0.75 && ray.obj_hit->mater.shiny != 0)
-			c = color_stack(c, color_mult(specular_lighting(&ray, l), coef));
+		if (l->intensity > 0)
+			compute_light2(&coef, &c, &ray, l);
 		l = l->next;
-		ray.lights++;
 	}
 	return (compute_light_bis(ray, iter_refl, iter_trans, c));
 }
