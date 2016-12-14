@@ -6,7 +6,7 @@
 /*   By: bhuver <bhuver@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 01:56:57 by bhuver            #+#    #+#             */
-/*   Updated: 2016/12/12 13:07:52 by bhuver           ###   ########.fr       */
+/*   Updated: 2016/12/14 15:24:45 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,22 @@ void				put_pixel_filter(int x, int y, t_color color)
 	g_env.filter_p[pos + 2] = color.b;
 }
 
-static t_color		high_sat(t_color in)
+static int			limit_color(int col)
 {
-	t_color			out;
-
-	out = color_new(in.r * 0.80, in.g * 0.80, in.b * 0.80);
-	if (in.r >= in.g && in.r >= in.b)
-		out.r = in.r * 1.20;
-	if (in.g >= in.r && in.g >= in.b)
-		out.g = in.g * 1.20;
-	if (in.b >= in.g && in.b >= in.r)
-		out.b = in.b * 1.20;
-	out.r > 255 ? out.r = 255 : 0;
-	out.g > 255 ? out.g = 255 : 0;
-	out.b > 255 ? out.b = 255 : 0;
-	return (out);
+	if (col <= 0)
+		return (0);
+	else if (col > 0 && col <= 50)
+		return (25);
+	else if (col > 50 && col <= 100)
+		return (75);
+	else if (col > 100 && col <= 200)
+		return (150);
+	else if (col > 200 && col <= 250)
+		return (225);
+	else if ((col > 250 && col <= 255) || col > 255)
+		return (255);
+	else
+		return (col);
 }
 
 static int			sobel_compute(int x, int y)
@@ -86,7 +87,11 @@ void				sobel_filter(void)
 			sobel < 150 ? sobel = 0 : sobel;
 			res = color_new(sobel, sobel, sobel);
 			if (sobel > 100)
-				res = high_sat(get_color_img(g_env.pixels, xy, 0, 0));
+			{
+				res = get_color_img(g_env.pixels, xy, 0, 0);
+				res = color_new(limit_color(res.r),
+								limit_color(res.g), limit_color(res.b));
+			}
 			put_pixel_filter(xy[0], xy[1], res);
 		}
 	}

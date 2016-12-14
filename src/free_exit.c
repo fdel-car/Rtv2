@@ -6,7 +6,7 @@
 /*   By: bhuver <bhuver@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 13:32:20 by bhuver            #+#    #+#             */
-/*   Updated: 2016/12/14 15:11:23 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 15:54:14 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		free_exit(void)
 	gtk_main_quit();
 }
 
-void	init_tex(t_text *tex)
+void		init_tex(t_text *tex)
 {
 	tex->tex_w = tex->size[0];
 	tex->tex_h = tex->size[1];
