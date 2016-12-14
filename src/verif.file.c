@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 17:28:56 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 17:29:22 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:24:56 by bhuver           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,26 @@ int		verif_elem(char **t)
 int		verif_gelem(char **t)
 {
 	int i;
-	int	se;
-	int	nb;
-	int	tmp;
+	int tab[3];
 
 	i = 1;
-	if (!t[i] || !ft_sii(t[i], "{"))
+	if (!t[i] || !ft_sii(t[i], "{") || (tab[0] = count_esize(&(t[i]))) <= 0)
 		return (0);
-	if ((se = count_esize(&(t[i]))) <= 0)
-		return (0);
-	while (t[++i] && --se > 1)
+	while (t[++i] && --tab[0] > 1)
 	{
-		nb = i;
-		while (is_blank(t[nb]))
-			nb++;
-		nb = nb - i;
-		i += nb;
-		se -= nb;
+		tab[1] = i;
+		while (is_blank(t[tab[1]]))
+			tab[1]++;
+		tab[1] = tab[1] - i;
+		i += tab[1];
+		tab[0] -= tab[1];
 		if (!verif_elem(&(t[i])))
 			return (0);
 		++i;
-		se--;
-		tmp = count_esize(&(t[i])) - 1;
-		i += tmp;
-		se -= tmp;
+		tab[0]--;
+		tab[2] = count_esize(&(t[i])) - 1;
+		i += tab[2];
+		tab[0] -= tab[2];
 	}
 	if (!t[i] || !ft_sii(t[i], "}"))
 		return (0);
