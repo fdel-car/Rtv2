@@ -109,8 +109,8 @@ scene
 			{
 				texture:damier
 				brillance:0
-				reflection:0
-				transparence:0.3
+				reflection:0.6
+				transparence:0
 				color:0;0;0
 			}
 		}
