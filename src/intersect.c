@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/21 14:33:06 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/11 16:41:36 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 19:14:07 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	intersect_triangle(t_obj *obj, t_data ray)
 
 	vc[0] = cross_pr(ray.dir, obj->v);
 	fl[0] = vec_dotp(obj->u, vc[0]);
-	if (fl[0] < 0.001 && fl[0] > -0.001)
+	if (fl[0] < 0.0001 && fl[0] > -0.0001)
 		return (-1);
 	vc[1] = vec_sub(ray.orig, obj->v0);
 	fl[1] = vec_dotp(vc[1], vc[0]) * (1 / fl[0]);
@@ -30,7 +30,7 @@ float	intersect_triangle(t_obj *obj, t_data ray)
 	if (fl[2] < 0 || (fl[1] + fl[2]) > 1)
 		return (-1);
 	fl[3] = vec_dotp(obj->v, vc[2]) * (1 / fl[0]);
-	if (fl[3] > 0.001)
+	if (fl[3] > 0.0001)
 		return (fl[3]);
 	return (-1);
 }
