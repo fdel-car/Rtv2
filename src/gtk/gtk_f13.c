@@ -6,7 +6,7 @@
 /*   By: slgracie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:16:20 by slgracie          #+#    #+#             */
-/*   Updated: 2016/12/14 12:18:42 by slgracie         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:24:29 by slgracie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 void	create_materw_light1(t_norm *me, char *s_entry, t_light *current_obj)
 {
 	me->entry_intensity = malloc(sizeof(t_gtkdata));
-	me->entry_blur = malloc(sizeof(t_gtkdata));
 	me->entry_col_r = malloc(sizeof(t_gtkdata));
 	me->entry_col_g = malloc(sizeof(t_gtkdata));
 	me->entry_col_b = malloc(sizeof(t_gtkdata));
 	me->entry_col = malloc(sizeof(t_gtkdata));
 	sprintf(s_entry, "%f", current_obj->intensity);
 	me->intensity_buffer = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
-	sprintf(s_entry, "%d", current_obj->blur);
-	me->blur_buffer = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
 	sprintf(s_entry, "%d", current_obj->color.r);
 	me->color_r_buffer = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
 	sprintf(s_entry, "%d", current_obj->color.g);
@@ -32,10 +29,8 @@ void	create_materw_light1(t_norm *me, char *s_entry, t_light *current_obj)
 	me->color_b_buffer = gtk_entry_buffer_new(s_entry, ft_strlen(s_entry));
 	free(s_entry);
 	me->intensity_label = gtk_label_new("    Intensite    ");
-	me->blur_label = gtk_label_new("Blur");
 	me->color_label = gtk_label_new("Color");
 	me->intensity_entry = gtk_entry_new_with_buffer(me->intensity_buffer);
-	me->blur_entry = gtk_entry_new_with_buffer(me->blur_buffer);
 	me->color_r_entry = gtk_entry_new_with_buffer(me->color_r_buffer);
 }
 
@@ -53,17 +48,14 @@ GtkWidget *grid, GdkRGBA *col)
 	me->entry_col->desc = ft_strdup("color");
 	me->entry_col->obj = current_obj;
 	gtk_entry_set_width_chars((GtkEntry *)me->intensity_entry, 6);
-	gtk_entry_set_width_chars((GtkEntry *)me->blur_entry, 6);
 	gtk_entry_set_width_chars((GtkEntry *)me->color_r_entry, 3);
 	gtk_entry_set_width_chars((GtkEntry *)me->color_g_entry, 3);
 	gtk_entry_set_width_chars((GtkEntry *)me->color_b_entry, 3);
 	gtk_entry_set_max_length((GtkEntry *)me->intensity_entry, 6);
-	gtk_entry_set_max_length((GtkEntry *)me->blur_entry, 6);
 	gtk_entry_set_max_length((GtkEntry *)me->color_r_entry, 3);
 	gtk_entry_set_max_length((GtkEntry *)me->color_g_entry, 3);
 	gtk_entry_set_max_length((GtkEntry *)me->color_b_entry, 3);
 	gtk_grid_attach(GTK_GRID(grid), me->intensity_label, 0, 0, 1, 1);
-	gtk_grid_attach(GTK_GRID(grid), me->blur_label, 0, 1, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), me->color_label, 0, 2, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), me->intensity_entry, 1, 0, 1, 1);
 }
@@ -71,7 +63,6 @@ GtkWidget *grid, GdkRGBA *col)
 void	create_materw_light3(t_norm *me, t_light *current_obj,
 GtkWidget *grid)
 {
-	gtk_grid_attach(GTK_GRID(grid), me->blur_entry, 1, 1, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), me->color_r_entry, 1, 2, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), me->color_g_entry, 2, 2, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), me->color_b_entry, 3, 2, 1, 1);
@@ -79,9 +70,6 @@ GtkWidget *grid)
 	me->entry_intensity->data = me->intensity_entry;
 	me->entry_intensity->desc = ft_strdup("intens");
 	me->entry_intensity->obj = current_obj;
-	me->entry_blur->data = me->blur_entry;
-	me->entry_blur->desc = ft_strdup("blur");
-	me->entry_blur->obj = current_obj;
 	me->entry_col_r->data = me->color_r_entry;
 	me->entry_col_r->desc = ft_strdup("colr");
 	me->entry_col_r->obj = current_obj;
@@ -93,8 +81,6 @@ GtkWidget *grid)
 	me->entry_col_b->obj = current_obj;
 	g_signal_connect(me->intensity_entry, "changed",
 			G_CALLBACK(save_entry_material_light), me->entry_intensity);
-	g_signal_connect(me->blur_entry, "changed",
-			G_CALLBACK(save_entry_material_light), me->entry_blur);
 }
 
 void	create_materw_light4(t_norm *me)
@@ -107,8 +93,6 @@ void	create_materw_light4(t_norm *me)
 			G_CALLBACK(save_entry_material_light), me->entry_col_b);
 	g_signal_connect(me->intensity_entry, "changed",
 			G_CALLBACK(launch_preview), me->entry_intensity);
-	g_signal_connect(me->blur_entry, "changed",
-			G_CALLBACK(launch_preview), me->entry_blur);
 	g_signal_connect(me->color_r_entry, "changed",
 			G_CALLBACK(launch_preview), me->entry_col_r);
 	g_signal_connect(me->color_g_entry, "changed",
@@ -130,7 +114,6 @@ void	create_material_widget_light(void *object, GtkWidget *grid)
 
 	col = malloc(sizeof(GdkRGBA));
 	me.entry_intensity = NULL;
-	me.entry_blur = NULL;
 	me.entry_col_r = NULL;
 	me.entry_col_g = NULL;
 	me.entry_col_b = NULL;

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 20:10:44 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 20:15:19 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:24:30 by slgracie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,7 @@ void	select_text(GtkEntry *entry, t_gtkdata *data)
 void	save_entry_material_light2(GtkEntry *entry, t_gtkdata *data,
 float *ret_f, int *ret_i)
 {
-	if (ft_strcmp(data->desc, "blur") == 0)
-	{
-		*ret_i = ft_atoi(gtk_entry_get_text(entry));
-		((t_light *)data->obj)->blur = *ret_f;
-	}
+	(void)ret_f;
 	if (ft_strcmp(data->desc, "colr") == 0)
 	{
 		*ret_i = ft_atoi(gtk_entry_get_text(entry));
