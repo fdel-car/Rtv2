@@ -1,7 +1,7 @@
 scene
 {
 	ambiant_lighting:0.5
-	anti_aliasing:16
+	anti_aliasing:4
 	iter_reflection:3
 	iter_trans:8
 	camera
@@ -18,7 +18,7 @@ scene
 			pos:0;0;10
 			type:point_light
 			color:255;255;255
-			intensity:0.4
+			intensity:0.3
 			blur:0
 		}
 	}
@@ -110,6 +110,36 @@ scene
 				brillance:0
 				reflection:0.6
 				transparence:0
+				color:0;0;0
+			}
+		}
+		sphere_metal_text
+		{
+			pos:0;4;0
+			normal:NULL
+			rayon:2
+			type:sphere
+			materiel
+			{
+				brillance:60
+				reflection:0.1
+				transparence:0
+				texture:ressources/bmp/metal.bmp
+				color:0;0;0
+			}
+		}
+		sphere_ttext
+		{
+			pos:0;-4;0
+			normal:NULL
+			rayon:2
+			type:sphere
+			materiel
+			{
+				brillance:0
+				reflection:0
+				transparence:1
+				ttext:ressources/bmp/quadri.bmp
 				color:0;0;0
 			}
 		}
