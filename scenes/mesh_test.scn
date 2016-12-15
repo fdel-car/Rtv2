@@ -2,12 +2,12 @@ scene
 {
 	ambiant_lighting:0.2
 	anti_aliasing:0
-	iter_reflection:0
+	iter_reflection:1
 	iter_trans:0
 	camera
 	{
-		pos:2;1;4
-		look:0;0;0
+		pos:-2;1;4
+		look:-1;1;0
 	}
 	lights
 	{
@@ -15,22 +15,14 @@ scene
 		{
 		pos:-10;5;0
 		type:point_light
-		color:255;255;255
-		intensity:0.5
-		blur:0
-		}
-		light_2
-		{
-		pos:10;5;0
-		type:point_light
-		color:255;255;255
-		intensity:0.5
+		color:0;0;0
+		intensity:0.1
 		blur:0
 		}
 	}
 	objects
 	{
-		tree_mesh
+		fox
 		{
 			pos:NULL
 			dir:NULL
@@ -41,24 +33,26 @@ scene
 			materiel
 			{
 				brillance:0
-				reflection:0
+				reflection:0.6
 				transparence:0
-				color:255;130;20
+				color:0;0;0
 				texture:NULL
 			}
 		}
-		plan_1
+		skybox
 		{
 			pos:0;0;0
-			normal:0;1;0
-			type:plane
+			dir:0;0;0
+			normal:NULL
+			rayon:8096
+			type:skybox
 			materiel
 			{
+				texture:ressources/bmp/skybox.bmp
 				brillance:0
 				reflection:0
 				transparence:0
-				color:100;100;100
-				texture:NULL
+				color:0;0;0
 			}
 		}
 	}
