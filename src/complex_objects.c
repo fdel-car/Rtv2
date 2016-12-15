@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 22:20:34 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/10 20:18:23 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/15 12:26:42 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_sphere(t_obj *o, t_vect pos)
 	init_obj(sp);
 	sp->next = NULL;
 	sp->src = NULL;
-	sp->name = "sphere";
+	sp->name = ft_strdup("sphere");
 	sp->cut = vec_new(0, 0, 0);
 	sp->min = 0;
 	sp->max = 0;
@@ -62,7 +62,7 @@ void	add_sphere_adn(t_obj *o, t_vect pos)
 	init_obj(sp);
 	sp->next = NULL;
 	sp->src = NULL;
-	sp->name = "sphere";
+	sp->name = ft_strdup("tic");
 	sp->cut = vec_new(0, 0, 0);
 	sp->min = 0;
 	sp->max = 0;
@@ -89,7 +89,7 @@ void	add_cylindre_adn(t_obj *o, t_vect pos, t_vect pos2)
 	init_obj(sp);
 	sp->next = NULL;
 	sp->src = NULL;
-	sp->name = "tic";
+	sp->name = ft_strdup("tac");
 	sp->cut = vec_new(0, 0, 0);
 	sp->min = -(o->rayon);
 	sp->max = o->rayon;
