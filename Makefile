@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+         #
+#    By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/28 17:56:29 by fdel-car          #+#    #+#              #
-#    Updated: 2016/12/14 13:37:09 by bhuver           ###   ########.fr        #
+#    Updated: 2016/12/15 14:01:07 by vde-la-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ GTK = `pkg-config --libs gtk+-3.0`
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	# @cd libft && make re && cd ..
+	@make re -C libft
 	@gcc  -I./includes $(GTK) -o $@ $^ ./libft/libft.a
 	@echo "\033[1;31mRT compiled successfully"
 	@echo "\033[1A\033[0;39m"
@@ -62,7 +62,7 @@ $(OBJS): $(SRCS)
 	-I./libft/includes -I./includes
 
 clean:
-	@cd libft && make clean && cd ..
+	@make clean -C libft
 	@rm -rf $(OBJS)
 
 fclean: clean
