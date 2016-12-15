@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 16:26:43 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/11/25 16:59:08 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/12/15 13:45:13 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_vect	vec_norm(t_vect u)
 	t_vect	w;
 	float	length;
 
+	if (vec_is_null(u))
+		return (u);
 	length = sqrt((u.x * u.x) + (u.y * u.y) + (u.z * u.z));
 	w.x = u.x / length;
 	w.y = u.y / length;
