@@ -98,7 +98,11 @@ void	load_file(char *scene_file)
 	(fd = open(scene_file, O_RDONLY)) >= 0)
 	{
 		while (get_next_line(fd, &line) && (++n) > -42)
+		{
 			file[n] = line;
+			free(line);
+		}
+		free(line);
 		file[n + 1] = 0;
 		if (verif_file(file))
 			load_scene(file);

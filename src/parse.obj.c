@@ -90,7 +90,11 @@ int		parse_obj(t_obj *new_mesh)
 	if ((fd = open(new_mesh->src, O_RDONLY)) >= 0)
 	{
 		while (get_next_line(fd, &line) && ++n < 9997)
+		{
 			file[n] = line;
+			free(line);
+		}
+		free(line);
 		file[n + 1] = 0;
 		if ((n + 1) == 9998)
 			return (0);
