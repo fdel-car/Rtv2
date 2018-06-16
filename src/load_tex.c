@@ -12,10 +12,10 @@
 
 #include "rt.h"
 
-void	fill_board(t_text *tex, int curs[2], t_color cl[2], int ref)
+void fill_board(t_text *tex, int curs[2], t_color cl[2], int ref)
 {
-	int		i_c;
-	t_color	r;
+	int i_c;
+	t_color r;
 
 	i_c = 0;
 	while (curs[0]++ < tex->tex_h)
@@ -35,12 +35,12 @@ void	fill_board(t_text *tex, int curs[2], t_color cl[2], int ref)
 	}
 }
 
-t_text	*create_board(void)
+t_text *create_board(void)
 {
-	t_text	*tex;
-	int		ref;
-	int		curs[2];
-	t_color	cl[2];
+	t_text *tex;
+	int ref;
+	int curs[2];
+	t_color cl[2];
 
 	if (!(tex = malloc(sizeof(t_text))))
 		return (0);
@@ -49,32 +49,32 @@ t_text	*create_board(void)
 	tex->tex_h = 10;
 	tex->tex_w = 10;
 	tex->text = (unsigned char *)malloc(sizeof(unsigned char) *
-	(tex->tex_w * 3 * tex->tex_h));
+										(tex->tex_w * 3 * tex->tex_h));
 	ref = tex->tex_w * 3 * tex->tex_h - 1;
 	curs[0] = 0;
 	fill_board(tex, curs, cl, ref);
 	return (tex);
 }
 
-t_text	*create_perlin(int resolution, float index)
+t_text *create_perlin(int resolution, float index)
 {
-	t_text	*tex;
+	t_text *tex;
 
 	if (!(tex = malloc(sizeof(t_text))))
 		return (0);
 	tex->tex_h = resolution;
 	tex->tex_w = resolution;
 	tex->text = (unsigned char *)malloc(sizeof(unsigned char) *
-	(resolution * 3 * resolution));
+										(resolution * 3 * resolution));
 	generate_perlin_tex(tex, index);
 	return (tex);
 }
 
-int		fill_texture(t_text *tex, FILE *img)
+int fill_texture(t_text *tex, FILE *img)
 {
-	int		iter;
-	int		tmp;
-	int		tmp2;
+	int iter;
+	int tmp;
+	int tmp2;
 
 	iter = 0;
 	tmp = tex->tex_w * 3 * tex->tex_h - 1;
@@ -93,16 +93,16 @@ int		fill_texture(t_text *tex, FILE *img)
 	return (1);
 }
 
-t_text	*load_texture(char *path)
+t_text *load_texture(char *path)
 {
-	FILE	*img;
-	t_text	*tex;
+	FILE *img;
+	t_text *tex;
 
 	if (!ft_strcmp(path, "damier"))
 		return (create_board());
 	if (!ft_strcmp(path, "perlin"))
 		return (create_perlin(600, 20.0));
-	if (!end_by(path, ".bmp") || (img = fopen(path, "r")) <= 0)
+	if (!end_by(path, ".bmp") || !(img = fopen(path, "r")))
 		return (0);
 	if (!(tex = malloc(sizeof(t_text))) && !fclose(img))
 		return (0);
@@ -114,7 +114,7 @@ t_text	*load_texture(char *path)
 	if (fseek(img, 122, SEEK_SET) < 0)
 		return (0);
 	tex->text = (unsigned char *)malloc(sizeof(unsigned char) *
-	(tex->tex_w * 3 * tex->tex_h));
+										(tex->tex_w * 3 * tex->tex_h));
 	if (fill_texture(tex, img) < 0 && !fclose(img))
 		return (0);
 	fclose(img);

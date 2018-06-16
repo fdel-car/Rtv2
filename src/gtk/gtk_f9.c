@@ -12,8 +12,8 @@
 
 #include "rt.h"
 
-void	save_translation_mesh_object2(t_obj *list, t_gtkdata *data,
-	t_vect oldpos)
+void save_translation_mesh_object2(t_obj *list, t_gtkdata *data,
+								   t_vect oldpos)
 {
 	if (ft_strcmp(data->desc, "posx") == 0)
 	{
@@ -35,8 +35,8 @@ void	save_translation_mesh_object2(t_obj *list, t_gtkdata *data,
 	}
 }
 
-void	save_translation_mesh_object3(t_obj *list, t_gtkdata *data,
-	t_vect oldpos)
+void save_translation_mesh_object3(t_obj *list, t_gtkdata *data,
+								   t_vect oldpos)
 {
 	if (ft_strcmp(data->desc, "posx") == 0)
 	{
@@ -52,14 +52,14 @@ void	save_translation_mesh_object3(t_obj *list, t_gtkdata *data,
 	}
 }
 
-void	save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data,
-	t_vect oldpos)
+void save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data,
+								  t_vect oldpos)
 {
-	t_obj	*list;
-	float	ret;
+	t_obj *list;
+	// float	ret;
 
 	list = ((t_obj *)data->obj)->lst;
-	ret = ft_atof(gtk_entry_get_text(entry));
+	// ret = ft_atof(gtk_entry_get_text(entry));
 	while (list)
 	{
 		if (list->type == TRIANGLE)
@@ -68,9 +68,10 @@ void	save_translation_mesh_object(GtkEntry *entry, t_gtkdata *data,
 			save_translation_mesh_object3(list, data, oldpos);
 		list = list->next;
 	}
+	(void)entry;
 }
 
-void	save_entry_transformation_object2(t_gtkdata *data, float ret)
+void save_entry_transformation_object2(t_gtkdata *data, float ret)
 {
 	if (ft_strcmp(data->desc, "posx") == 0)
 		((t_obj *)data->obj)->pos.x = ret;
@@ -90,10 +91,10 @@ void	save_entry_transformation_object2(t_gtkdata *data, float ret)
 	((t_obj *)data->obj)->norm = vec_norm(((t_obj *)data->obj)->norm);
 }
 
-void	save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
+void save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
 {
-	float	ret;
-	t_vect	pos;
+	float ret;
+	t_vect pos;
 
 	ret = ft_atof(gtk_entry_get_text(entry));
 	pos = ((t_obj *)data->obj)->pos;
@@ -107,7 +108,6 @@ void	save_entry_transformation_object(GtkEntry *entry, t_gtkdata *data)
 	if (ft_strcmp(data->desc, "alpha") == 0)
 		((t_obj *)data->obj)->alpha = ret * M_PI / 180;
 	if (((t_obj *)data->obj)->type == MESH)
-		if (ft_strcmp(data->desc, "posx") == 0 || ft_strcmp(data->desc,
-		"posy") == 0 || ft_strcmp(data->desc, "posz") == 0)
+		if (ft_strcmp(data->desc, "posx") == 0 || ft_strcmp(data->desc, "posy") == 0 || ft_strcmp(data->desc, "posz") == 0)
 			save_translation_mesh_object(entry, data, pos);
 }

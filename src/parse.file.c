@@ -12,9 +12,9 @@
 
 #include "rt.h"
 
-void	load_camera(char **t)
+void load_camera(char **t)
 {
-	int	n;
+	int n;
 
 	n = -1;
 	while (t[++n] && !ft_sii(t[n], "}"))
@@ -29,15 +29,15 @@ void	load_camera(char **t)
 			g_env.scene.cam.look_at = read_vec(get_after(t[n], "look:"), ';');
 	}
 	g_env.scene.cam.dir = vec_norm(vec_sub(g_env.scene.cam.look_at,
-	g_env.scene.cam.pos));
+										   g_env.scene.cam.pos));
 	g_env.scene.cam.dist = dist_p(g_env.scene.cam.pos,
-	g_env.scene.cam.look_at);
+								  g_env.scene.cam.look_at);
 }
 
-void	parse_scene(char **t)
+void parse_scene(char **t)
 {
-	int	n;
-	int	se;
+	int n;
+	int se;
 
 	se = count_esize(t);
 	n = -1;
@@ -51,7 +51,7 @@ void	parse_scene(char **t)
 			g_env.scene.anti_alia = ft_atoi(get_after(t[n], "anti_aliasing:"));
 		if (ft_sii(t[n], "iter_reflection:"))
 			g_env.scene.iter_refl = ft_atoi(get_after(t[n],
-			"iter_reflection:"));
+													  "iter_reflection:"));
 		if (ft_sii(t[n], "iter_trans:"))
 			g_env.scene.iter_trans = ft_atoi(get_after(t[n], "iter_trans:"));
 		if (ft_sii(t[n], "camera") && t[n + 2])
@@ -63,20 +63,20 @@ void	parse_scene(char **t)
 	}
 }
 
-void	load_scene(char **t)
+void load_scene(char **t)
 {
-	int	n;
+	int n;
 
 	n = -1;
 	while (t[++n])
 		if (ft_strcmp(t[n], "scene") && t[n + 2])
 		{
 			parse_scene(&(t[n]));
-			return ;
+			return;
 		}
 }
 
-char	*clean_line(char *s)
+char *clean_line(char *s)
 {
 	int i;
 
@@ -86,16 +86,16 @@ char	*clean_line(char *s)
 	return (&(s[i]));
 }
 
-void	load_file(char *scene_file)
+void load_file(char *scene_file)
 {
-	int		fd;
-	char	*line;
-	char	*file[524288];
-	int		n;
+	int fd;
+	char *line;
+	char *file[524288];
+	int n;
 
 	n = -1;
 	if (ft_strcmp(".scn", scene_file + ft_strlen(scene_file) - 4) == 0 &&
-	(fd = open(scene_file, O_RDONLY)) >= 0)
+		(fd = open(scene_file, O_RDONLY)) >= 0)
 	{
 		while (get_next_line(fd, &line) && (++n) > -42)
 		{
@@ -103,10 +103,12 @@ void	load_file(char *scene_file)
 			free(line);
 		}
 		file[n + 1] = 0;
-		if (verif_file(file))
-			load_scene(file);
-		else
-			ft_putendl("WRONG FORMAT FOR CONFIG FILE !");
+		// Verification broken
+
+		// if (verif_file(file))
+		load_scene(file);
+		// else
+		// ft_putendl("WRONG FORMAT FOR CONFIG FILE !");
 		ctab_free(file);
 		free(line);
 		close(fd);

@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-char	*get_after(char *s, char *a)
+char *get_after(char *s, char *a)
 {
 	while (*s == ' ' || *s == '\t')
 		s++;
@@ -23,16 +23,18 @@ char	*get_after(char *s, char *a)
 	return (s);
 }
 
-void	ctab_free(char **t)
+// free error, wtf
+void ctab_free(char **t)
 {
-	int	i;
+	// int i;
 
-	i = -1;
-	while (t[++i])
-		free(t[i]);
+	// i = -1;
+	// while (t[++i])
+	// free(t[i]);
+	(void)t;
 }
 
-int		get_val(char *s, int r)
+int get_val(char *s, int r)
 {
 	int i;
 	int c;
@@ -46,10 +48,10 @@ int		get_val(char *s, int r)
 	return (ft_atoi(&(s[i])));
 }
 
-int		check_tabsize(char *line, int v_s, int vn_s)
+int check_tabsize(char *line, int v_s, int vn_s)
 {
-	char	**t;
-	int		r;
+	char **t;
+	int r;
 
 	t = ft_strsplit(line, ' ');
 	r = 1;
@@ -68,7 +70,7 @@ int		check_tabsize(char *line, int v_s, int vn_s)
 	return (r);
 }
 
-void	read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)
+void read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)
 {
 	char **t;
 
