@@ -52,8 +52,8 @@ GTK = `pkg-config --libs gtk+-3.0`
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make re -C libft
-	@gcc  -I./includes $(GTK) -o $@ $^ ./libft/libft.a
+	@make -C libft
+	@clang -I./includes $(GTK) -o $@ $^ ./libft/libft.a -lm -pthread # -lm and -pthred could probably be removed on macOs
 	@echo "\033[1;31m$(NAME) compiled successfully"
 	@echo "\033[1A\033[0;39m"
 	@rm *.o
