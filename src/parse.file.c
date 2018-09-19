@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 18:57:04 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 19:47:25 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ void parse_scene(char **t)
 	while (t[++n] && --se > 1)
 	{
 		if (ft_sii(t[n], "ambiant_lighting:"))
-			g_env.scene.ambiant = ft_atof(get_after(t[n], "ambiant_lighting:"));
+			g_env.scene.ambiant = atof(get_after(t[n], "ambiant_lighting:"));
 		if (ft_sii(t[n], "soft_shadow:"))
-			g_env.scene.soft_shadow = ft_atoi(get_after(t[n], "soft_shadow:"));
+			g_env.scene.soft_shadow = atoi(get_after(t[n], "soft_shadow:"));
 		if (ft_sii(t[n], "anti_aliasing:"))
-			g_env.scene.anti_alia = ft_atoi(get_after(t[n], "anti_aliasing:"));
+			g_env.scene.anti_alia = atoi(get_after(t[n], "anti_aliasing:"));
 		if (ft_sii(t[n], "iter_reflection:"))
-			g_env.scene.iter_refl = ft_atoi(get_after(t[n],
-													  "iter_reflection:"));
+			g_env.scene.iter_refl = atoi(get_after(t[n],
+												   "iter_reflection:"));
 		if (ft_sii(t[n], "iter_trans:"))
-			g_env.scene.iter_trans = ft_atoi(get_after(t[n], "iter_trans:"));
+			g_env.scene.iter_trans = atoi(get_after(t[n], "iter_trans:"));
 		if (ft_sii(t[n], "camera") && t[n + 2])
 			load_camera(&(t[n + 2]));
 		if (ft_sii(t[n], "lights") && t[n + 2])
@@ -69,7 +69,7 @@ void load_scene(char **t)
 
 	n = -1;
 	while (t[++n])
-		if (ft_strcmp(t[n], "scene") && t[n + 2])
+		if (strcmp(t[n], "scene") && t[n + 2])
 		{
 			parse_scene(&(t[n]));
 			return;
@@ -94,7 +94,7 @@ void load_file(char *scene_file)
 	int n;
 
 	n = -1;
-	if (ft_strcmp(".scn", scene_file + ft_strlen(scene_file) - 4) == 0 &&
+	if (strcmp(".scn", scene_file + strlen(scene_file) - 4) == 0 &&
 		(fd = open(scene_file, O_RDONLY)) >= 0)
 	{
 		while (get_next_line(fd, &line) && (++n) > -42)
@@ -108,7 +108,7 @@ void load_file(char *scene_file)
 		// if (verif_file(file))
 		load_scene(file);
 		// else
-		// ft_putendl("WRONG FORMAT FOR CONFIG FILE !");
+		// printf("WRONG FORMAT FOR CONFIG FILE !\n");
 		ctab_free(file);
 		free(line);
 		close(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.obj2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:33:19 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/14 16:46:38 by bhuver           ###   ########.fr       */
+/*   Updated: 2018/09/19 19:46:55 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int get_val(char *s, int r)
 	c = 1;
 	while (s[++i] && c < r)
 		s[i] == '/' || s[i] == ' ' ? ++c : 0;
-	return (ft_atoi(&(s[i])));
+	return (atoi(&(s[i])));
 }
 
 int check_tabsize(char *line, int v_s, int vn_s)
@@ -77,7 +77,7 @@ void read_triangle(t_obj *o, char *line, t_vect **v, t_mater mat)
 	t = ft_strsplit(line, ' ');
 	if (t[0] && t[1] && t[2] && t[3])
 	{
-		o->name = ft_strdup("mesh_triangle");
+		o->name = strdup("mesh_triangle");
 		o->type = TRIANGLE;
 		o->norm = v[1][get_val(t[1], 3) - 1];
 		o->v0 = v[0][get_val(t[1], 1) - 1];

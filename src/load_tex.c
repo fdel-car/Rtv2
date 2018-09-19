@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:06:31 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/14 15:11:13 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 19:47:08 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ t_text *load_texture(char *path)
 	FILE *img;
 	t_text *tex;
 
-	if (!ft_strcmp(path, "damier"))
+	if (!strcmp(path, "damier"))
 		return (create_board());
-	if (!ft_strcmp(path, "perlin"))
+	if (!strcmp(path, "perlin"))
 		return (create_perlin(600, 20.0));
 	if (!end_by(path, ".bmp") || !(img = fopen(path, "r")))
 		return (0);

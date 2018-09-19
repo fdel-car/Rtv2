@@ -6,13 +6,13 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 19:38:37 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 19:38:38 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 19:47:08 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	delete_objects1(t_obj *list_obj, t_obj *current_obj)
+void delete_objects1(t_obj *list_obj, t_obj *current_obj)
 {
 	if (list_obj == current_obj)
 	{
@@ -35,7 +35,7 @@ void	delete_objects1(t_obj *list_obj, t_obj *current_obj)
 	}
 }
 
-void	delete_objects2(t_light *current_light, t_light *list_lgt)
+void delete_objects2(t_light *current_light, t_light *list_lgt)
 {
 	if (list_lgt == current_light)
 	{
@@ -58,12 +58,12 @@ void	delete_objects2(t_light *current_light, t_light *list_lgt)
 	}
 }
 
-void	delete_objects(void *obj, unsigned int n)
+void delete_objects(void *obj, unsigned int n)
 {
-	t_obj	*list_obj;
-	t_obj	*current_obj;
-	t_light	*current_light;
-	t_light	*list_lgt;
+	t_obj *list_obj;
+	t_obj *current_obj;
+	t_light *current_light;
+	t_light *list_lgt;
 
 	list_obj = g_env.scene.obj;
 	list_lgt = g_env.scene.lgt;
@@ -79,29 +79,29 @@ void	delete_objects(void *obj, unsigned int n)
 	}
 }
 
-void	*find_objects(char *name, unsigned int *n)
+void *find_objects(char *name, unsigned int *n)
 {
-	t_light	*lights;
-	t_obj	*obj;
+	t_light *lights;
+	t_obj *obj;
 
 	lights = g_env.scene.lgt;
 	obj = g_env.scene.obj;
 	while (obj)
 	{
-		if (ft_strcmp(obj->name, name) == 0)
-		{
-			*n = 1;
-			return (obj);
-		}
+		if (strcmpj->name, name) == 0)
+			{
+				*n = 1;
+				return (obj);
+			}
 		obj = obj->next;
 	}
 	while (lights)
 	{
-		if (ft_strcmp(lights->name, name) == 0)
-		{
-			*n = 2;
-			return (lights);
-		}
+		if (strcmpghts->name, name) == 0)
+			{
+				*n = 2;
+				return (lights);
+			}
 		lights = lights->next;
 	}
 	return (NULL);

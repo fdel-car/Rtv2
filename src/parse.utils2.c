@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:17:30 by vde-la-s          #+#    #+#             */
-/*   Updated: 2016/12/14 13:32:40 by bhuver           ###   ########.fr       */
+/*   Updated: 2018/09/19 19:47:08 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		verif_type(t_obj *o)
+int verif_type(t_obj *o)
 {
 	if (o->type == NONE)
 	{
@@ -22,10 +22,10 @@ int		verif_type(t_obj *o)
 	return (0);
 }
 
-int		count_esize(char **t)
+int count_esize(char **t)
 {
-	int		i;
-	int		na;
+	int i;
+	int na;
 
 	i = 0;
 	na = 0;
@@ -39,9 +39,9 @@ int		count_esize(char **t)
 	return (!na ? i : -42);
 }
 
-int		is_blank(char *l)
+int is_blank(char *l)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (l && l[++i])
@@ -50,15 +50,14 @@ int		is_blank(char *l)
 	return (1);
 }
 
-int		is_sim(char *t, char *s)
+int is_sim(char *t, char *s)
 {
-	return (!ft_strcmp(clean_line(t), clean_line(s)) ?
-	1 : 0);
+	return (!strcmp(clean_line(t), clean_line(s)) ? 1 : 0);
 }
 
-int		start_by(char *s, char *end)
+int start_by(char *s, char *end)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (s[++i] && end[i])

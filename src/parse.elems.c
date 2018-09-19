@@ -6,18 +6,18 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 20:30:43 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 19:48:10 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_mater	load_material(char **t)
+t_mater load_material(char **t)
 {
-	t_mater	new;
-	int		n;
-	int		se;
-	float	tsize;
+	t_mater new;
+	int n;
+	int se;
+	float tsize;
 
 	n = 1;
 	tsize = -42;
@@ -31,7 +31,7 @@ t_mater	load_material(char **t)
 	return (new);
 }
 
-void	init_obj(t_obj *obj)
+void init_obj(t_obj *obj)
 {
 	obj->next = NULL;
 	obj->src = NULL;
@@ -44,17 +44,17 @@ void	init_obj(t_obj *obj)
 	obj->name = NULL;
 }
 
-void	load_object(char **t)
+void load_object(char **t)
 {
-	t_obj	*new;
-	char	*name;
-	int		n;
-	int		se;
+	t_obj *new;
+	char *name;
+	int n;
+	int se;
 
 	new = malloc(sizeof(t_obj));
 	init_obj(new);
-	name = ft_strdup(*t);
-	new->name = ft_strtrim(name);
+	name = strdup(*t);
+	new->name = strtrim(name);
 	se = count_esize(&(t[1]));
 	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
@@ -66,26 +66,26 @@ void	load_object(char **t)
 				new->mater = load_material(&(t[n]));
 		}
 	if (verif_type(new))
-		return ;
+		return;
 	if (new->src)
 		parse_obj(new);
 	set_func(new);
 	push_obj(new);
 }
 
-void	load_light(char **t)
+void load_light(char **t)
 {
-	t_light	*new;
-	char	*name;
-	int		n;
-	int		se;
+	t_light *new;
+	char *name;
+	int n;
+	int se;
 
 	n = 1;
 	new = malloc(sizeof(t_light));
 	new->next = NULL;
-	name = ft_strdup(*t);
+	name = strdup(*t);
 	se = count_esize(&(t[n]));
-	new->name = ft_strtrim(name);
+	new->name = strtrim(name);
 	free(name);
 	if (ft_sii(t[n], "{"))
 		while (t[++n] && --se > 1)
@@ -93,12 +93,12 @@ void	load_light(char **t)
 	push_lgt(new);
 }
 
-void	load_elems(char **t, unsigned char type)
+void load_elems(char **t, unsigned char type)
 {
-	int	n;
-	int	se;
+	int n;
+	int se;
 	int tmp;
-	int	nb;
+	int nb;
 
 	n = 1;
 	se = count_esize(t);
@@ -110,8 +110,7 @@ void	load_elems(char **t, unsigned char type)
 		nb = nb - n;
 		n += nb;
 		se -= nb;
-		type == 'l' ?
-			load_light(&(t[n])) : load_object(&(t[n]));
+		type == 'l' ? load_light(&(t[n])) : load_object(&(t[n]));
 		++n;
 		tmp = count_esize(&(t[n]));
 		n += tmp;

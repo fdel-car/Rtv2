@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 19:02:37 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 20:17:18 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:59:47 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	switch_anti_aliasing(void)
 	int		aa;
 
 	s = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(g_env.aa_choice));
-	aa = ft_atoi(s);
+	aa = atoi(s);
 	g_env.scene.anti_alia = aa;
 	free(s);
 }

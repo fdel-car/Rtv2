@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 19:16:20 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 19:18:08 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:59:57 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_obj	*add_object_mater_refl(t_obj *obj)
 	GtkEntry	*refl;
 
 	refl = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_refl"));
-	obj->mater.int_refl = ft_atof(gtk_entry_get_text(refl));
+	obj->mater.int_refl = atof(gtk_entry_get_text(refl));
 	return (obj);
 }
 
@@ -26,7 +26,7 @@ t_obj	*add_object_mater_trans(t_obj *obj)
 	GtkEntry	*trans;
 
 	trans = GTK_ENTRY(gtk_builder_get_object(g_env.build, "e_trans"));
-	obj->mater.int_trans = ft_atof(gtk_entry_get_text(trans));
+	obj->mater.int_trans = atof(gtk_entry_get_text(trans));
 	return (obj);
 }
 

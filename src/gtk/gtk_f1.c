@@ -6,15 +6,15 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:55:22 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/13 19:04:23 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 19:47:25 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	open_file(char *filename)
+void open_file(char *filename)
 {
-	if (ft_strcmp(".scn", filename + ft_strlen(filename) - 4) == 0)
+	if (strcmp(".scn", filename + strlen(filename) - 4) == 0)
 	{
 		free_objects(FALSE);
 		free_lights();
@@ -25,40 +25,40 @@ void	open_file(char *filename)
 	}
 }
 
-void	switch_cam_pos(void)
+void switch_cam_pos(void)
 {
 	if (g_env.scene.cam.c_pos == 1)
 	{
 		g_env.scene.cam.pos = g_env.scene.cam.pos1;
 		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
-		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+										  vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
 	}
 	else if (g_env.scene.cam.c_pos == 2)
 	{
 		g_env.scene.cam.pos = g_env.scene.cam.pos2;
 		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
-		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+										  vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
 	}
 	else if (g_env.scene.cam.c_pos == 3)
 	{
 		g_env.scene.cam.pos = g_env.scene.cam.pos3;
 		g_env.scene.cam.look_at = vec_add(g_env.scene.cam.pos,
-		vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
+										  vec_mult(g_env.scene.cam.dir, g_env.scene.cam.dist));
 	}
 }
 
-void	save_image_chooser(void)
+void save_image_chooser(void)
 {
-	GtkWidget				*dialog;
-	GtkFileChooser			*chooser;
-	GtkFileChooserAction	action;
-	gint					res;
-	char					*filename;
+	GtkWidget *dialog;
+	GtkFileChooser *chooser;
+	GtkFileChooserAction action;
+	gint res;
+	char *filename;
 
 	filename = 0;
 	action = GTK_FILE_CHOOSER_ACTION_SAVE;
 	dialog = gtk_file_chooser_dialog_new("Save File", GTK_WINDOW(g_env.win),
-	action, "_Cancel", GTK_RESPONSE_CANCEL, "_Save", GTK_RESPONSE_ACCEPT, NULL);
+										 action, "_Cancel", GTK_RESPONSE_CANCEL, "_Save", GTK_RESPONSE_ACCEPT, NULL);
 	chooser = GTK_FILE_CHOOSER(dialog);
 	gtk_file_chooser_set_do_overwrite_confirmation(chooser, TRUE);
 	gtk_file_chooser_set_current_name(chooser, ("Untitled document"));
@@ -72,7 +72,7 @@ void	save_image_chooser(void)
 	gtk_widget_destroy(dialog);
 }
 
-void	switch_cam(GtkWidget *entry)
+void switch_cam(GtkWidget *entry)
 {
 	if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build, "cam_prev")))
 	{
@@ -84,7 +84,7 @@ void	switch_cam(GtkWidget *entry)
 			g_env.scene.cam.c_pos = 2;
 	}
 	else if (entry == GTK_WIDGET(gtk_builder_get_object(g_env.build,
-		"cam_next")))
+														"cam_next")))
 	{
 		if (g_env.scene.cam.c_pos == 1)
 			g_env.scene.cam.c_pos = 2;
@@ -98,18 +98,18 @@ void	switch_cam(GtkWidget *entry)
 	launch_thread();
 }
 
-void	open_scene(void)
+void open_scene(void)
 {
-	GtkWidget				*dialog;
-	GtkFileChooserAction	action;
-	gint					res;
-	char					*filename;
-	GtkFileChooser			*chooser;
+	GtkWidget *dialog;
+	GtkFileChooserAction action;
+	gint res;
+	char *filename;
+	GtkFileChooser *chooser;
 
 	filename = 0;
 	action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	dialog = gtk_file_chooser_dialog_new("Open File", GTK_WINDOW(g_env.win),
-	action, "_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
+										 action, "_Cancel", GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
