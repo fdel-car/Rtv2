@@ -30,7 +30,7 @@ $(TARGET): $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@echo "$(CLEAR_LINE)Creating object of the $(TARGET) with $^...$(MOVE_CURSOR_UP)"
-	@$(CC) $(CFLAGS) -c $^ `pkg-config --cflags gtk+-3.0` -o $@ -I./libft/includes -I./includes # MacOS
+	@$(CC) $(CFLAGS) -c $^ `pkg-config --cflags gtk+-3.0` -o $@ -I./libft/includes -I./includes
 
 lib:
 	@make -C libft
