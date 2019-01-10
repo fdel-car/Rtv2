@@ -1,48 +1,47 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/08/28 17:56:29 by fdel-car          #+#    #+#              #
-#    Updated: 2016/12/15 14:37:56 by fdel-car         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+TARGET := rtv2
+SRCS_DIR := ./srcs
+OBJS_DIR := ./objs
+CC := clang
+CFLAGS := -Wall -Wextra -Werror
+ignore-warnings : CFLAGS := -w
 
-NAME = rtv2
+# Colors
+RESET := \033[0m
+GREEN := \033[32;01m
+ERROR := \033[31;01m
+WARN := \033[33;01m
+# Formatting
+CLEAR_LINE := \033[2K
+MOVE_CURSOR_UP := \033[1A
 
-SRCS := $(shell echo src/*.c src/gtk/*.c)
+SRCS := $(shell echo $(SRCS_DIR)/*.c $(SRCS_DIR)/gtk/*.c)
+OBJS := $(patsubst $(SRCS_DIR)%.c,$(OBJS_DIR)%.o,$(SRCS))
 
-OBJS = $(SRCS:.c=.o)
+all: lib $(OBJS_DIR) $(TARGET)
 
-CFLAGS = -Wall -Wextra -Werror
+ignore-warnings: all
 
-GTK = `pkg-config --libs gtk+-3.0`
+$(OBJS_DIR):
+	@mkdir -p ./objs
 
-all: $(NAME)
+$(TARGET): $(OBJS)
+	@$(CC) $(CFLAGS) -I./includes `pkg-config --libs gtk+-3.0` -o $@ $^ ./libft/libft.a -lm -pthread # -lm and -pthread could probably be removed on MacOS
+	@echo "\n$(GREEN)The target $(TARGET) was compiled successfully!$(RESET)"
 
-$(NAME): clean lib $(OBJS) # clean not supposed to be here
-	@mv gtk*.o src/gtk && mv *.o src
-	@gcc -I./includes $(GTK) -o $@ $(OBJS) ./libft/libft.a -lm -pthread # -lm and -pthred could probably be removed on macOs
-	@echo "\n\033[2K\033[1;31m$(NAME) compiled successfully\033[0;39m"
-
-%.o: %.c
-	@echo "\033[2K\033[1;33mCreating object of the $(NAME) with $^...\033[0;39m\033[1A"
-	@gcc $(CFLAGS) -c $^ `pkg-config --cflags gtk+-3.0` \
-	-I./libft/includes -I./includes
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	@echo "$(CLEAR_LINE)Creating object of the $(TARGET) with $^...$(MOVE_CURSOR_UP)"
+	@$(CC) $(CFLAGS) -c $^ `pkg-config --cflags gtk+-3.0` -o $@ -I./libft/includes -I./includes # MacOS
 
 lib:
 	@make -C libft
 
 clean:
-	@make clean -C libft
-	@rm -rf $(OBJS)
+	@rm -rf objs/
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -f $(TARGET)
 
 re: fclean
-	make all
+	@make all
 
-.PHONY: all clean fclean re
+.PHONY: all lib clean fclean re ignore-warnings
