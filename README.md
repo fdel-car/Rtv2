@@ -5,17 +5,10 @@ Version amélioré du raytracer basique comportant plus de formes et d'effets vi
 Nous étions 4 à participer à la réalisation du projet.
 
 ### reflection
-
-![alt tag](https://github.com/fdel-car/Rtv2/blob/master/resources/saves/reflection.jpeg)
-
+![alt tag](/resources/saves/reflection.jpeg)
 ### mirrors_edge
-
-![alt tag](https://github.com/fdel-car/Rtv2/blob/master/resources/saves/mirrors_edge.jpeg)
-
+![alt tag](/resources/saves/mirrors_edge.jpeg)
 ### fox
-
-![alt tag](https://github.com/fdel-car/Rtv2/blob/master/resources/saves/fox.jpeg)
-
+![alt tag](/resources/saves/fox.jpeg)
 ### cut_objects
-
-![alt tag](https://github.com/fdel-car/Rtv2/blob/master/resources/saves/cut_objects.jpeg)
+![alt tag](/resources/saves/cut_objects.jpeg)
