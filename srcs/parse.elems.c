@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:44:04 by fdel-car          #+#    #+#             */
-/*   Updated: 2018/09/19 19:48:10 by fdel-car         ###   ########.fr       */
+/*   Updated: 2019/09/02 15:32:09 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void load_object(char **t)
 	new = malloc(sizeof(t_obj));
 	init_obj(new);
 	name = strdup(*t);
-	new->name = strtrim(name);
+	new->name = ft_strtrim(name);
 	se = count_esize(&(t[1]));
 	free(name);
 	if ((n = 1) && ft_sii(t[n], "{"))
@@ -85,7 +85,7 @@ void load_light(char **t)
 	new->next = NULL;
 	name = strdup(*t);
 	se = count_esize(&(t[n]));
-	new->name = strtrim(name);
+	new->name = ft_strtrim(name);
 	free(name);
 	if (ft_sii(t[n], "{"))
 		while (t[++n] && --se > 1)

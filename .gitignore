@@ -1,3 +1,4 @@
 *.o
 rtv2
 .DS_Store
+.vscode/

@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 16:33:19 by fdel-car          #+#    #+#             */
-/*   Updated: 2018/09/19 19:46:55 by fdel-car         ###   ########.fr       */
+/*   Updated: 2019/09/02 16:27:25 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ char *get_after(char *s, char *a)
 	return (s);
 }
 
-// free error, wtf
 void ctab_free(char **t)
 {
-	// int i;
+	int i;
 
-	// i = -1;
-	// while (t[++i])
-	// free(t[i]);
-	(void)t;
+	i = -1;
+	while (t[++i])
+		free(t[i]);
 }
 
 int get_val(char *s, int r)

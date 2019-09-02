@@ -23,9 +23,10 @@ ignore-warnings: all
 
 $(OBJS_DIR):
 	@mkdir -p ./objs
+	@mkdir -p ./objs/gtk
 
 $(TARGET): $(OBJS)
-	@$(CC) $(CFLAGS) -I./includes `pkg-config --libs gtk+-3.0` -o $@ $^ ./libft/libft.a -lm -pthread # -lm and -pthread could probably be removed on MacOS
+	@$(CC) -rdynamic $(CFLAGS) -I./includes `pkg-config --libs gtk+-3.0` -o $@ $^ ./libft/libft.a -lm -pthread # -lm and -pthread could probably be removed on MacOS
 	@echo "\n$(GREEN)The target $(TARGET) was compiled successfully!$(RESET)"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c

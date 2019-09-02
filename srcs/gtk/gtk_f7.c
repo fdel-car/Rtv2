@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 19:38:37 by fdel-car          #+#    #+#             */
-/*   Updated: 2018/09/19 19:47:08 by fdel-car         ###   ########.fr       */
+/*   Updated: 2019/09/02 15:16:35 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,28 +81,28 @@ void delete_objects(void *obj, unsigned int n)
 
 void *find_objects(char *name, unsigned int *n)
 {
-	t_light *lights;
+	t_light *light;
 	t_obj *obj;
 
-	lights = g_env.scene.lgt;
+	light = g_env.scene.lgt;
 	obj = g_env.scene.obj;
 	while (obj)
 	{
-		if (strcmpj->name, name) == 0)
+		if (strcmp(obj->name, name) == 0)
 			{
 				*n = 1;
 				return (obj);
 			}
 		obj = obj->next;
 	}
-	while (lights)
+	while (light)
 	{
-		if (strcmpghts->name, name) == 0)
+		if (strcmp(light->name, name) == 0)
 			{
 				*n = 2;
-				return (lights);
+				return (light);
 			}
-		lights = lights->next;
+		light = light->next;
 	}
 	return (NULL);
 }

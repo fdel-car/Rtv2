@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:08:18 by slgracie          #+#    #+#             */
-/*   Updated: 2018/09/19 19:47:25 by fdel-car         ###   ########.fr       */
+/*   Updated: 2019/09/02 15:34:24 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ void create_transformation_widget_light(void *object, GtkWidget *grid)
 	create_transformation_wl1(&me, s_entry, current_light);
 	create_transformation_wl2(&me, current_light, grid, s_entry);
 	me.entry_posx->data = me.pos_entry[0];
-	me.entry_posx->desc = strdup "); 
-						  me.entry_posx->obj = current_light;
+	me.entry_posx->desc = strdup("posx");
+	me.entry_posx->obj = current_light;
 	me.entry_posy->data = me.pos_entry[1];
-	me.entry_posy->desc = strduy "); 
-						  me.entry_posy->obj = current_light;
+	me.entry_posy->desc = strdup("posy");
+	me.entry_posy->obj = current_light;
 	me.entry_posz->data = me.pos_entry[2];
-	me.entry_posz->desc = strduz "); 
-						  me.entry_posz->obj = current_light;
+	me.entry_posz->desc = strdup("posz");
+	me.entry_posz->obj = current_light;
 	me.entry_rayon->data = me.rayon_entry;
-	me.entry_rayon->desc = strdupn "); 
-						   me.entry_rayon->obj = current_light;
+	me.entry_rayon->desc = strdup("rayon");
+	me.entry_rayon->obj = current_light;
 	create_transformation_wl3(&me);
 }

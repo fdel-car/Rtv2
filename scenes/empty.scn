@@ -1,7 +1,7 @@
 scene
 {
 	ambiant_lighting:0.2
-	anti_aliasing:2
+	anti_aliasing:1
 	iter_reflection:1
 	iter_trans:2
 	soft_shadow:0
@@ -36,7 +36,7 @@ scene
 				reflection:0
 				transparence:0
 				color:100;100;100
-				texture:ressources/bmp/wood.bmp
+				texture:resources/bmp/wood.bmp
 			}
 		}
 		sphere

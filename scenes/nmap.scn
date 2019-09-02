@@ -46,7 +46,7 @@ scene
 				reflection:0.8
 				transparence:0
 				color:100;100;100
-				ntext:ressources/bmp/nmap.bmp
+				ntext:resources/bmp/nmap.bmp
 			}
 		}
 		sphere
@@ -71,7 +71,7 @@ scene
 			type:skybox
 			materiel
 			{
-				texture:ressources/bmp/forest.bmp
+				texture:resources/bmp/forest.bmp
 				brillance:0
 				reflection:0.5
 				transparence:0.6

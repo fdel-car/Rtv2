@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems.init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-la-s <vde-la-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:39:03 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/12/09 15:25:03 by vde-la-s         ###   ########.fr       */
+/*   Updated: 2019/09/02 15:17:36 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		init_gtk_bis(void)
 
 void		init_gtk(void)
 {
-	g_env.build = gtk_builder_new_from_file("ressources/interface.glade");
+	g_env.build = gtk_builder_new_from_file("resources/interface.glade");
 	g_env.win = GTK_WIDGET(gtk_builder_get_object(g_env.build, "win"));
 	g_env.pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);
 	g_env.filter = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, WIDTH, HEIGHT);

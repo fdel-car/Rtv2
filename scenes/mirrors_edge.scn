@@ -36,7 +36,7 @@ scene
 				reflection:0.5
 				transparence:0
 				color:0;0;0
-				ctext:ressources/bmp/quadri.bmp
+				ctext:resources/bmp/quadri.bmp
 			}
 		}
 		sphere_refrac1
@@ -124,7 +124,7 @@ scene
 				brillance:60
 				reflection:0.1
 				transparence:0
-				texture:ressources/bmp/metal.bmp
+				texture:resources/bmp/metal.bmp
 				color:0;0;0
 			}
 		}
@@ -139,7 +139,7 @@ scene
 				brillance:0
 				reflection:0
 				transparence:1
-				ttext:ressources/bmp/quadri.bmp
+				ttext:resources/bmp/quadri.bmp
 				color:0;0;0
 			}
 		}
@@ -152,7 +152,7 @@ scene
 			type:skybox
 			materiel
 			{
-				texture:ressources/bmp/mirrors_edge.bmp
+				texture:resources/bmp/mirrors_edge.bmp
 				brillance:0
 				reflection:0.5
 				transparence:0.6

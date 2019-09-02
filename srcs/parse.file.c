@@ -6,7 +6,7 @@
 /*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 17:45:27 by fdel-car          #+#    #+#             */
-/*   Updated: 2018/09/19 19:47:25 by fdel-car         ###   ########.fr       */
+/*   Updated: 2019/09/02 16:28:28 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,13 @@ void load_file(char *scene_file)
 		while (get_next_line(fd, &line) && (++n) > -42)
 		{
 			file[n] = line;
-			free(line);
 		}
 		file[n + 1] = 0;
-		// Verification broken
-
-		// if (verif_file(file))
-		load_scene(file);
-		// else
-		// printf("WRONG FORMAT FOR CONFIG FILE !\n");
+		if (verif_file(file))
+			load_scene(file);
+		else
+			printf("WRONG FORMAT FOR CONFIG FILE!\n");
 		ctab_free(file);
-		free(line);
 		close(fd);
 	}
 }
