@@ -1,4 +1,4 @@
-# Rtv2
+# Rt v2
 
 Version amélioré du raytracer basique comportant plus de formes et d'effets visuels. Un interface permettant des modifications en live a aussi été ajouté grâce à GTK.
 
